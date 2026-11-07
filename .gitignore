@@ -1,0 +1,23 @@
+# Dependencies and builds
+node_modules
+dist
+coverage
+
+# Secrets: real values never go in Git
+.env
+.env.*
+!.env.example
+
+# Supabase local files
+supabase/.temp
+supabase/.branches
+
+# Test output
+test-results
+playwright-report
+blob-report
+
+# Editors and OS
+.DS_Store
+Thumbs.db
+*.log

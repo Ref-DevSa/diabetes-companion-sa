@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screen S8 “Glucose Diary” - All States (360px Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #F0F2F5;
+      color: #1C1E21;
+      margin: 0;
+      padding: 32px 16px 64px 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Strict Style Guide Design Tokens */
+    :root {
+      --primary-blue: #1A6BD1;
+      --dark-blue: #1565C0;
+      --light-blue-tint: #E7F0FD;
+      --page-bg: #F0F2F5;
+      --card-surface: #FFFFFF;
+      --main-text: #1C1E21;
+      --secondary-text: #65676B;
+      --warning-orange: #B45309;
+      --warning-bg: #FEF3C7;
+      --error-red: #B91C1C;
+      --error-bg: #FEE2E2;
+      --success-green: #15803D;
+      --success-bg: #DCFCE7;
+      --disabled-grey: #D0D5DD;
+      --loading-grey: #E4E6EB;
+    }
+
+    /* 360px Mobile Frame Container */
+    .mobile-frame {
+      width: 360px;
+      min-width: 360px;
+      max-width: 360px;
+      background-color: #F0F2F5;
+      border-radius: 36px;
+      border: 8px solid #1C1E21;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0,0,0,0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .status-bar {
+      height: 28px;
+      padding: 0 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      background-color: #FFFFFF;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      z-index: 40;
+    }
+
+    /* 56px Header */
+    .app-header {
+      height: 56px;
+      background-color: #FFFFFF;
+      border-bottom: 1px solid #E4E6EB;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+
+    /* 56px Bottom Tab Bar */
+    .tab-bar {
+      height: 56px;
+      background-color: #FFFFFF;
+      border-top: 1px solid #E4E6EB;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      align-items: center;
+      position: sticky;
+      bottom: 0;
+      z-index: 30;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.04);
+    }
+
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 600;
+      color: #65676B;
+      text-decoration: none;
+      height: 100%;
+    }
+
+    .tab-item.active {
+      color: #1A6BD1;
+    }
+
+    /* Sticky Bottom Button Container above Tab Bar */
+    .sticky-add-bar {
+      position: sticky;
+      bottom: 56px;
+      background: linear-gradient(180deg, rgba(240, 242, 245, 0) 0%, rgba(240, 242, 245, 0.95) 25%, #F0F2F5 100%);
+      padding: 10px 16px 12px 16px;
+      z-index: 25;
+    }
+
+    /* Custom Toast container */
+    .toast-container {
+      position: sticky;
+      bottom: 60px;
+      margin: 0 16px 12px 16px;
+      background: #1C1E21;
+      color: #FFFFFF;
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      z-index: 35;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+
+    .skeleton {
+      background-color: #E4E6EB;
+      animation: pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+</head>
+<body class="bg-[#F0F2F5] min-h-screen">
+
+  <!-- Overview Header -->
+  <div class="max-w-[1720px] mx-auto mb-8 px-4">
+    <div class="flex flex-wrap items-center gap-2 mb-3">
+      <span class="bg-[#1A6BD1]/10 text-[#1A6BD1] font-semibold text-xs px-2.5 py-1 rounded-full">Screen Specification • S8 “Glucose Diary”</span>
+      <span class="bg-[#15803D]/10 text-[#15803D] font-semibold text-xs px-2.5 py-1 rounded-full">User Only (Logged-in Thabo)</span>
+      <span class="bg-[#1A6BD1]/10 text-[#1A6BD1] font-semibold text-xs px-2.5 py-1 rounded-full">Active Tab: Diary</span>
+      <span class="bg-purple-100 text-purple-700 font-semibold text-xs px-2.5 py-1 rounded-full">360 px Viewport • WCAG AAA Tokens</span>
+    </div>
+    <h1 class="text-2xl md:text-3xl font-bold text-[#1C1E21] tracking-tight">Screen S8 “Glucose Diary” — Diabetes Companion SA</h1>
+    <p class="text-sm text-[#65676B] mt-2 max-w-4xl">
+      <strong>Purpose:</strong> View, record, edit, and delete glucose readings (newest first). Reserved exclusively for logged-in Users. Formatted strictly for a 360 px wide Android viewport with 16 px screen margins, 48 px high buttons/inputs, 44×44 px minimum touch targets, medical safety flags (Low & Very High), sticky "Add reading" CTA above the active Diary tab bar, and all required operational states.
+    </p>
+
+    <!-- State Anchors -->
+    <div class="flex flex-wrap gap-2 mt-4 text-xs font-medium">
+      <span class="px-2.5 py-1 bg-white border border-gray-200 rounded-lg text-gray-700">State 1: Normal (5 Readings + Sticky CTA)</span>
+      <span class="px-2.5 py-1 bg-white border border-gray-200 rounded-lg text-gray-700">State 2: Empty ("No readings yet")</span>
+      <span class="px-2.5 py-1 bg-white border border-gray-200 rounded-lg text-gray-700">State 3: Loading (Grey Skeletons)</span>
+      <span class="px-2.5 py-1 bg-white border border-gray-200 rounded-lg text-gray-700">State 4: Error ("We couldn't load your Diary")</span>
+      <span class="px-2.5 py-1 bg-white border border-gray-200 rounded-lg text-gray-700">State 5: Offline (Banner + Disabled Actions)</span>
+      <span class="px-2.5 py-1 bg-white border border-gray-200 rounded-lg text-gray-700">State 6: Success 1 ("High five! Reading saved.")</span>
+      <span class="px-2.5 py-1 bg-white border border-gray-200 rounded-lg text-gray-700">State 7: Success 2 ("Reading updated.")</span>
+      <span class="px-2.5 py-1 bg-white border border-gray-200 rounded-lg text-gray-700">State 8: Success 3 ("Reading deleted.")</span>
+    </div>
+  </div>
+
+  <!-- Row 1: Primary Operational States (1 - 4) -->
+  <div class="max-w-[1720px] mx-auto px-4 mb-16">
+    <div class="text-xs font-bold text-[#65676B] uppercase tracking-wider mb-4">Core Operational States</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 items-start">
+
+      <!-- ========================================== -->
+      <!-- STATE 1: NORMAL STATE (Full Readings) -->
+      <!-- ========================================== -->
+      <div class="flex flex-col items-center">
+        <div class="text-center mb-3">
+          <span class="inline-block bg-[#1A6BD1] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">State 1: Normal</span>
+          <p class="text-xs text-[#65676B] mt-1 font-medium">5 Sample Readings (Newest first) • Flags & Notes</p>
+        </div>
+
+        <div class="mobile-frame">
+          <!-- Status Bar -->
+          <div class="status-bar text-[#1C1E21]">
+            <span>09:41</span>
+            <div class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25A10.957 10.957 0 0 1 1 12C1 5.92 5.92 1 12 1s11 4.92 11 11c0 2.3-.71 4.43-1.92 6.2l-.62-.62C21.37 16.07 22 14.12 22 12c0-4.97-4.03-9-9-9z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span>98%</span>
+            </div>
+          </div>
+
+          <!-- Header (Logged in -> Profile icon, Warning signs, Globe, Logo) -->
+          <header class="app-header">
+            <div class="flex items-center gap-2">
+              <!-- App Logo (Rounded blue square with water drop + tick) -->
+              <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white shadow-sm flex-shrink-0" aria-label="Diabetes Companion SA Logo">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                  <polyline points="9 12 11 14 15 10"></polyline>
+                </svg>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <!-- Language Selector -->
+              <button class="h-9 px-2 bg-transparent text-[#1C1E21] border border-[#E4E6EB] rounded-lg text-xs font-semibold flex items-center gap-1 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1A6BD1]">
+                <svg class="w-3.5 h-3.5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span>EN</span>
+                <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </button>
+
+              <!-- Warning signs button -->
+              <button class="h-9 px-2.5 bg-[#B91C1C] text-white rounded-lg text-xs font-semibold flex items-center gap-1 hover:bg-[#991B1B] focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#B91C1C]">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span>Warning signs</span>
+              </button>
+
+              <!-- Profile Icon (Logged-in User indicator) -->
+              <button class="w-9 h-9 rounded-lg border border-[#E4E6EB] bg-white flex items-center justify-center text-[#1C1E21] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1A6BD1]" aria-label="User Profile (Thabo)">
+                <svg class="w-5 h-5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </button>
+            </div>
+          </header>
+
+          <!-- Main Scrollable Body -->
+          <main class="flex-1 p-4 pb-2 space-y-3.5 overflow-y-auto" style="max-height: 520px;">
+            <!-- Title -->
+            <div class="pt-1 pb-0.5">
+              <h2 class="text-[24px] font-bold text-[#1C1E21] leading-tight">My Diary</h2>
+              <p class="text-xs text-[#65676B] mt-0.5">Your glucose readings, newest first.</p>
+            </div>
+
+            <!-- Reading 1: 27 Oct 2026, 07:10 (6.8 mmol/L, Fasting, no flag) -->
+            <article class="bg-white rounded-xl p-3.5 border border-[#E4E6EB] shadow-sm">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-[20px] font-bold text-[#1C1E21] leading-none">6.8</span>
+                    <span class="text-xs font-semibold text-[#65676B]">mmol/L</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 mt-1 text-xs text-[#65676B]">
+                    <span class="font-medium text-[#1C1E21]">Fasting</span>
+                    <span>•</span>
+                    <span>27 Oct 2026, 07:10</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action buttons -->
+              <div class="flex items-center justify-end gap-2 mt-3 pt-2.5 border-t border-[#F0F2F5]">
+                <button class="h-9 min-w-[70px] px-3 text-xs font-semibold text-[#1A6BD1] border border-[#1A6BD1] rounded-lg bg-white hover:bg-[#E7F0FD] focus:outline-none focus:ring-2 focus:ring-[#1A6BD1]">
+                  Edit
+                </button>
+                <button class="h-9 min-w-[70px] px-3 text-xs font-semibold text-[#B91C1C] border border-[#E4E6EB] rounded-lg bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]">
+                  Delete
+                </button>
+              </div>
+            </article>
+
+            <!-- Reading 2: 26 Oct 2026, 21:30 (3.6 mmol/L, Bedtime, Low, Note) -->
+            <article class="bg-white rounded-xl p-3.5 border-2 border-[#B45309]/30 shadow-sm">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-[20px] font-bold text-[#1C1E21] leading-none">3.6</span>
+                    <span class="text-xs font-semibold text-[#65676B]">mmol/L</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 mt-1 text-xs text-[#65676B]">
+                    <span class="font-medium text-[#1C1E21]">Bedtime</span>
+                    <span>•</span>
+                    <span>26 Oct 2026, 21:30</span>
+                  </div>
+                </div>
+
+                <!-- Flag Badge: Low -->
+                <div class="inline-flex items-center gap-1 px-2.5 py-1 bg-[#FEF3C7] text-[#B45309] rounded-md text-xs font-bold border border-[#B45309]/30">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="7 13 12 18 17 13"/><line x1="12" y1="6" x2="12" y2="18"/></svg>
+                  <span>Low</span>
+                </div>
+              </div>
+
+              <!-- Flag Alert Message -->
+              <div class="mt-2.5 p-2 bg-[#FEF3C7] border-l-4 border-[#B45309] rounded-r-md text-[13px] text-[#B45309] leading-snug">
+                Your reading is low. Follow your care plan and talk to your clinic.
+              </div>
+
+              <!-- Note -->
+              <div class="mt-2.5 text-xs text-[#1C1E21] bg-[#F0F2F5] px-2.5 py-2 rounded-lg flex items-start gap-1.5">
+                <span class="font-semibold text-[#65676B] flex-shrink-0">Note:</span>
+                <span class="italic text-[#1C1E21]">“Skipped supper”</span>
+              </div>
+
+              <!-- Action buttons -->
+              <div class="flex items-center justify-end gap-2 mt-3 pt-2.5 border-t border-[#F0F2F5]">
+                <button class="h-9 min-w-[70px] px-3 text-xs font-semibold text-[#1A6BD1] border border-[#1A6BD1] rounded-lg bg-white hover:bg-[#E7F0FD] focus:outline-none focus:ring-2 focus:ring-[#1A6BD1]">
+                  Edit
+                </button>
+                <button class="h-9 min-w-[70px] px-3 text-xs font-semibold text-[#B91C1C] border border-[#E4E6EB] rounded-lg bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]">
+                  Delete
+                </button>
+              </div>
+            </article>
+
+            <!-- Reading 3: 26 Oct 2026, 19:45 (9.4 mmol/L, After a meal, no flag) -->
+            <article class="bg-white rounded-xl p-3.5 border border-[#E4E6EB] shadow-sm">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-[20px] font-bold text-[#1C1E21] leading-none">9.4</span>
+                    <span class="text-xs font-semibold text-[#65676B]">mmol/L</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 mt-1 text-xs text-[#65676B]">
+                    <span class="font-medium text-[#1C1E21]">After a meal</span>
+                    <span>•</span>
+                    <span>26 Oct 2026, 19:45</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action buttons -->
+              <div class="flex items-center justify-end gap-2 mt-3 pt-2.5 border-t border-[#F0F2F5]">
+                <button class="h-9 min-w-[70px] px-3 text-xs font-semibold text-[#1A6BD1] border border-[#1A6BD1] rounded-lg bg-white hover:bg-[#E7F0FD] focus:outline-none focus:ring-2 focus:ring-[#1A6BD1]">
+                  Edit
+                </button>
+                <button class="h-9 min-w-[70px] px-3 text-xs font-semibold text-[#B91C1C] border border-[#E4E6EB] rounded-lg bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]">
+                  Delete
+                </button>
+              </div>
+            </article>
+
+            <!-- Reading 4: 26 Oct 2026, 07:20 (14.6 mmol/L, Fasting, Very high, Note) -->
+            <article class="bg-white rounded-xl p-3.5 border-2 border-[#B91C1C]/30 shadow-sm">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-[20px] font-bold text-[#1C1E21] leading-none">14.6</span>
+                    <span class="text-xs font-semibold text-[#65676B]">mmol/L</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 mt-1 text-xs text-[#65676B]">
+                    <span class="font-medium text-[#1C1E21]">Fasting</span>
+                    <span>•</span>
+                    <span>26 Oct 2026, 07:20</span>
+                  </div>
+                </div>
+
+                <!-- Flag Badge: Very High -->
+                <div class="inline-flex items-center gap-1 px-2.5 py-1 bg-[#FEE2E2] text-[#B91C1C] rounded-md text-xs font-bold border border-[#B91C1C]/30">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="17 11 12 6 7 11"/><line x1="12" y1="18" x2="12" y2="6"/></svg>
+                  <span>Very high</span>
+                </div>
+              </div>
+
+              <!-- Flag Alert Message -->
+              <div class="mt-2.5 p-2 bg-[#FEE2E2] border-l-4 border-[#B91C1C] rounded-r-md text-[13px] text-[#B91C1C] leading-snug">
+                Your reading is very high. Talk to your clinic today.
+              </div>
+
+              <!-- Note -->
+              <div class="mt-2.5 text-xs text-[#1C1E21] bg-[#F0F2F5] px-2.5 py-2 rounded-lg flex items-start gap-1.5">
+                <span class="font-semibold text-[#65676B] flex-shrink-0">Note:</span>
+                <span class="italic text-[#1C1E21]">“Felt very thirsty”</span>
+              </div>
+
+              <!-- Action buttons -->
+              <div class="flex items-center justify-end gap-2 mt-3 pt-2.5 border-t border-[#F0F2F5]">
+                <button class="h-9 min-w-[70px] px-3 text-xs font-semibold text-[#1A6BD1] border border-[#1A6BD1] rounded-lg bg-white hover:bg-[#E7F0FD] focus:outline-none focus:ring-2 focus:ring-[#1A6BD1]">
+                  Edit
+                </button>
+                <button class="h-9 min-w-[70px] px-3 text-xs font-semibold text-[#B91C1C] border border-[#E4E6EB] rounded-lg bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]">
+                  Delete
+                </button>
+              </div>
+            </article>
+
+            <!-- Reading 5: 25 Oct 2026, 12:40 (7.2 mmol/L, Before a meal, no flag) -->
+            <article class="bg-white rounded-xl p-3.5 border border-[#E4E6EB] shadow-sm">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-[20px] font-bold text-[#1C1E21] leading-none">7.2</span>
+                    <span class="text-xs font-semibold text-[#65676B]">mmol/L</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 mt-1 text-xs text-[#65676B]">
+                    <span class="font-medium text-[#1C1E21]">Before a meal</span>
+                    <span>•</span>
+                    <span>25 Oct 2026, 12:40</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action buttons -->
+              <div class="flex items-center justify-end gap-2 mt-3 pt-2.5 border-t border-[#F0F2F5]">
+                <button class="h-9 min-w-[70px] px-3 text-xs font-semibold text-[#1A6BD1] border border-[#1A6BD1] rounded-lg bg-white hover:bg-[#E7F0FD] focus:outline-none focus:ring-2 focus:ring-[#1A6BD1]">
+                  Edit
+                </button>
+                <button class="h-9 min-w-[70px] px-3 text-xs font-semibold text-[#B91C1C] border border-[#E4E6EB] rounded-lg bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-[#B91C1C]">
+                  Delete
+                </button>
+              </div>
+            </article>
+
+            <!-- Load more button (shown when there are more than 20 readings) -->
+            <div class="pt-1 pb-1">
+              <button class="w-full h-11 bg-white border border-[#E4E6EB] text-[#1565C0] font-semibold text-xs rounded-xl hover:bg-gray-50 flex items-center justify-center gap-1.5">
+                <svg class="w-4 h-4 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+                <span>Load older readings (20+)</span>
+              </button>
+            </div>
+          </main>
+
+          <!-- 5. Sticky Primary Button “Add reading” above the tab bar -->
+          <div class="sticky-add-bar">
+            <button class="w-full h-12 bg-[#1A6BD1] text-white font-semibold text-base rounded-xl shadow-md flex items-center justify-center gap-2 hover:bg-[#1565C0] focus:outline-none focus:ring-4 focus:ring-[#1A6BD1]/30">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>Add reading</span>
+            </button>
+          </div>
+
+          <!-- 6. Tab bar with Diary active -->
+          <nav class="tab-bar" aria-label="Main Navigation">
+            <a href="#" class="tab-item">
+              <svg class="w-5 h-5 mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              <span>Home</span>
+            </a>
+            <a href="#" class="tab-item">
+              <svg class="w-5 h-5 mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              <span>Learn</span>
+            </a>
+            <a href="#" class="tab-item active" aria-current="page">
+              <svg class="w-5 h-5 mb-0.5 text-[#1A6BD1]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <span class="text-[#1A6BD1] font-bold">Diary</span>
+            </a>
+            <a href="#" class="tab-item">
+              <svg class="w-5 h-5 mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              <span>Checklist</span>
+            </a>
+            <a href="#" class="tab-item">
+              <svg class="w-5 h-5 mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              <span>Dashboard</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+
+
+      <!-- ========================================== -->
+      <!-- STATE 2: EMPTY STATE -->
+      <!-- ========================================== -->
+      <div class="flex flex-col items-center">
+        <div class="text-center mb-3">
+          <span class="inline-block bg-[#65676B] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">State 2: Empty</span>
+          <p class="text-xs text-[#65676B] mt-1 font-medium">“No readings yet. Tap Add reading to save...”</p>
+        </div>
+
+        <div class="mobile-frame">
+          <div class="status-bar text-[#1C1E21]">
+            <span>09:41</span>
+            <div class="flex items-center gap-1.5">
+              <span>98%</span>
+            </div>
+          </div>
+
+          <header class="app-header">
+            <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="h-9 px-2 text-[#1C1E21] border border-[#E4E6EB] rounded-lg text-xs font-semibold flex items-center gap-1"><span>EN</span></button>
+              <button class="h-9 px-2.5 bg-[#B91C1C] text-white rounded-lg text-xs font-semibold flex items-center gap-1"><span>Warning signs</span></button>
+              <div class="w-9 h-9 rounded-lg border border-[#E4E6EB] bg-white flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+            </div>
+          </header>
+
+          <main class="flex-1 p-4 flex flex-col justify-between" style="min-height: 480px;">
+            <div>
+              <h2 class="text-[24px] font-bold text-[#1C1E21]">My Diary</h2>
+            </div>
+
+            <!-- Empty State Card -->
+            <div class="my-auto py-10 px-4 bg-white rounded-2xl border border-[#E4E6EB] text-center shadow-sm">
+              <div class="w-14 h-14 mx-auto mb-3.5 bg-[#E7F0FD] rounded-full flex items-center justify-center text-[#1A6BD1]">
+                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+              </div>
+              <h3 class="text-base font-bold text-[#1C1E21] mb-1.5">No readings yet.</h3>
+              <p class="text-sm text-[#65676B] mb-5 leading-relaxed">Tap “Add reading” to save your first one.</p>
+              <button class="w-full h-12 bg-[#1A6BD1] text-white font-semibold text-base rounded-xl hover:bg-[#1565C0] shadow-sm flex items-center justify-center gap-2">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Add reading</span>
+              </button>
+            </div>
+
+            <div class="text-center text-xs text-[#65676B] py-2">
+              All records are stored securely on your account.
+            </div>
+          </main>
+
+          <nav class="tab-bar">
+            <a href="#" class="tab-item"><span>Home</span></a>
+            <a href="#" class="tab-item"><span>Learn</span></a>
+            <a href="#" class="tab-item active"><span class="text-[#1A6BD1] font-bold">Diary</span></a>
+            <a href="#" class="tab-item"><span>Checklist</span></a>
+            <a href="#" class="tab-item"><span>Dashboard</span></a>
+          </nav>
+        </div>
+      </div>
+
+
+      <!-- ========================================== -->
+      <!-- STATE 3: LOADING STATE -->
+      <!-- ========================================== -->
+      <div class="flex flex-col items-center">
+        <div class="text-center mb-3">
+          <span class="inline-block bg-[#1565C0] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">State 3: Loading</span>
+          <p class="text-xs text-[#65676B] mt-1 font-medium">Three Grey Card Placeholders (#E4E6EB)</p>
+        </div>
+
+        <div class="mobile-frame">
+          <div class="status-bar text-[#1C1E21]">
+            <span>09:41</span>
+            <span>98%</span>
+          </div>
+
+          <header class="app-header">
+            <div class="w-8 h-8 rounded-lg skeleton"></div>
+            <div class="flex items-center gap-2">
+              <div class="w-12 h-9 rounded-lg skeleton"></div>
+              <div class="w-24 h-9 rounded-lg skeleton"></div>
+              <div class="w-9 h-9 rounded-lg skeleton"></div>
+            </div>
+          </header>
+
+          <main class="flex-1 p-4 space-y-3.5" style="min-height: 480px;">
+            <div class="w-32 h-7 rounded-md skeleton mb-2"></div>
+
+            <!-- Skeleton 1 -->
+            <div class="bg-white rounded-xl p-3.5 border border-[#E4E6EB] space-y-3">
+              <div class="flex justify-between items-center">
+                <div class="w-24 h-6 rounded skeleton"></div>
+                <div class="w-16 h-5 rounded skeleton"></div>
+              </div>
+              <div class="w-40 h-3 rounded skeleton"></div>
+              <div class="w-full h-8 rounded-lg skeleton mt-2"></div>
+            </div>
+
+            <!-- Skeleton 2 -->
+            <div class="bg-white rounded-xl p-3.5 border border-[#E4E6EB] space-y-3">
+              <div class="flex justify-between items-center">
+                <div class="w-20 h-6 rounded skeleton"></div>
+                <div class="w-20 h-5 rounded skeleton"></div>
+              </div>
+              <div class="w-32 h-3 rounded skeleton"></div>
+              <div class="w-full h-12 rounded-lg skeleton mt-2"></div>
+              <div class="w-full h-8 rounded-lg skeleton mt-2"></div>
+            </div>
+
+            <!-- Skeleton 3 -->
+            <div class="bg-white rounded-xl p-3.5 border border-[#E4E6EB] space-y-3">
+              <div class="flex justify-between items-center">
+                <div class="w-24 h-6 rounded skeleton"></div>
+                <div class="w-16 h-5 rounded skeleton"></div>
+              </div>
+              <div class="w-44 h-3 rounded skeleton"></div>
+              <div class="w-full h-8 rounded-lg skeleton mt-2"></div>
+            </div>
+          </main>
+
+          <div class="p-3 bg-white border-t border-[#E4E6EB]">
+            <div class="w-full h-12 rounded-xl skeleton"></div>
+          </div>
+
+          <nav class="tab-bar">
+            <a href="#" class="tab-item"><span>Home</span></a>
+            <a href="#" class="tab-item"><span>Learn</span></a>
+            <a href="#" class="tab-item active"><span class="text-[#1A6BD1] font-bold">Diary</span></a>
+            <a href="#" class="tab-item"><span>Checklist</span></a>
+            <a href="#" class="tab-item"><span>Dashboard</span></a>
+          </nav>
+        </div>
+      </div>
+
+
+      <!-- ========================================== -->
+      <!-- STATE 4: ERROR STATE -->
+      <!-- ========================================== -->
+      <div class="flex flex-col items-center">
+        <div class="text-center mb-3">
+          <span class="inline-block bg-[#B91C1C] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">State 4: Error</span>
+          <p class="text-xs text-[#65676B] mt-1 font-medium">“We couldn't load your Diary. Please try again.”</p>
+        </div>
+
+        <div class="mobile-frame">
+          <div class="status-bar text-[#1C1E21]">
+            <span>09:41</span>
+            <span>98%</span>
+          </div>
+
+          <header class="app-header">
+            <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="h-9 px-2 text-[#1C1E21] border border-[#E4E6EB] rounded-lg text-xs font-semibold flex items-center gap-1"><span>EN</span></button>
+              <button class="h-9 px-2.5 bg-[#B91C1C] text-white rounded-lg text-xs font-semibold flex items-center gap-1"><span>Warning signs</span></button>
+              <div class="w-9 h-9 rounded-lg border border-[#E4E6EB] bg-white flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+            </div>
+          </header>
+
+          <main class="flex-1 p-4 flex flex-col justify-between" style="min-height: 480px;">
+            <div>
+              <h2 class="text-[24px] font-bold text-[#1C1E21]">My Diary</h2>
+            </div>
+
+            <!-- Error Box Card -->
+            <div class="my-auto p-5 bg-white rounded-2xl border-2 border-[#B91C1C]/40 text-center shadow-sm">
+              <div class="w-12 h-12 mx-auto mb-3 bg-[#FEE2E2] rounded-full flex items-center justify-center text-[#B91C1C]">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <h3 class="text-base font-bold text-[#1C1E21] mb-2">We couldn’t load your Diary.</h3>
+              <p class="text-sm text-[#65676B] mb-5">Please check your network and try again.</p>
+              <button class="w-full h-12 bg-[#1A6BD1] text-white font-semibold text-base rounded-xl hover:bg-[#1565C0] shadow-sm flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                <span>Try again</span>
+              </button>
+            </div>
+
+            <div class="text-center text-xs text-[#65676B] py-2">
+              If the problem continues, call your clinic helpline.
+            </div>
+          </main>
+
+          <nav class="tab-bar">
+            <a href="#" class="tab-item"><span>Home</span></a>
+            <a href="#" class="tab-item"><span>Learn</span></a>
+            <a href="#" class="tab-item active"><span class="text-[#1A6BD1] font-bold">Diary</span></a>
+            <a href="#" class="tab-item"><span>Checklist</span></a>
+            <a href="#" class="tab-item"><span>Dashboard</span></a>
+          </nav>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Row 2: Operational States (5 - 8: Offline & Toasts) -->
+  <div class="max-w-[1720px] mx-auto px-4">
+    <div class="text-xs font-bold text-[#65676B] uppercase tracking-wider mb-4">Offline & Success Toast Feedback States</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 items-start">
+
+      <!-- ========================================== -->
+      <!-- STATE 5: OFFLINE STATE -->
+      <!-- ========================================== -->
+      <div class="flex flex-col items-center">
+        <div class="text-center mb-3">
+          <span class="inline-block bg-[#1C1E21] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">State 5: Offline</span>
+          <p class="text-xs text-[#65676B] mt-1 font-medium">Dark Banner • Disabled Add, Edit & Delete</p>
+        </div>
+
+        <div class="mobile-frame">
+          <div class="status-bar text-[#1C1E21]">
+            <span>09:41</span>
+            <div class="flex items-center gap-1 text-[10px] text-amber-700 font-bold bg-amber-50 px-1.5 rounded">
+              <span>OFFLINE</span>
+            </div>
+          </div>
+
+          <!-- Sticky Offline Banner (#1C1E21) -->
+          <div class="bg-[#1C1E21] text-white px-3.5 py-2 text-xs flex items-center gap-2 z-40 border-b border-black">
+            <svg class="w-4 h-4 text-amber-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.58 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+            <span class="leading-tight">You’re offline. Some things may not work until you reconnect.</span>
+          </div>
+
+          <header class="app-header">
+            <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="h-9 px-2 text-[#1C1E21] border border-[#E4E6EB] rounded-lg text-xs font-semibold"><span>EN</span></button>
+              <button class="h-9 px-2.5 bg-[#B91C1C] text-white rounded-lg text-xs font-semibold"><span>Warning signs</span></button>
+              <div class="w-9 h-9 rounded-lg border border-[#E4E6EB] bg-white flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+            </div>
+          </header>
+
+          <main class="flex-1 p-4 pb-2 space-y-3 opacity-95">
+            <div class="pt-1">
+              <h2 class="text-[24px] font-bold text-[#1C1E21]">My Diary</h2>
+              <p class="text-xs text-[#65676B]">Showing cached readings from your device.</p>
+            </div>
+
+            <!-- Cached Reading Card 1 (Disabled buttons) -->
+            <article class="bg-white rounded-xl p-3.5 border border-[#E4E6EB]">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-[20px] font-bold text-[#1C1E21]">6.8</span>
+                    <span class="text-xs font-semibold text-[#65676B]">mmol/L</span>
+                  </div>
+                  <div class="text-xs text-[#65676B] mt-0.5">Fasting • 27 Oct 2026, 07:10</div>
+                </div>
+              </div>
+              <!-- Disabled actions -->
+              <div class="flex items-center justify-end gap-2 mt-3 pt-2.5 border-t border-[#F0F2F5]">
+                <button disabled class="h-9 min-w-[70px] px-3 text-xs font-medium text-[#65676B] border border-[#D0D5DD] bg-gray-100 rounded-lg cursor-not-allowed">
+                  Edit
+                </button>
+                <button disabled class="h-9 min-w-[70px] px-3 text-xs font-medium text-[#65676B] border border-[#D0D5DD] bg-gray-100 rounded-lg cursor-not-allowed">
+                  Delete
+                </button>
+              </div>
+            </article>
+
+            <!-- Cached Reading Card 2 (Low Flag) -->
+            <article class="bg-white rounded-xl p-3.5 border border-[#E4E6EB]">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-[20px] font-bold text-[#1C1E21]">3.6</span>
+                    <span class="text-xs font-semibold text-[#65676B]">mmol/L</span>
+                  </div>
+                  <div class="text-xs text-[#65676B] mt-0.5">Bedtime • 26 Oct 2026, 21:30</div>
+                </div>
+                <div class="inline-flex items-center gap-1 px-2 py-0.5 bg-[#FEF3C7] text-[#B45309] rounded text-xs font-bold">
+                  <span>Low</span>
+                </div>
+              </div>
+              <div class="mt-2 text-xs text-[#1C1E21] bg-[#F0F2F5] px-2 py-1.5 rounded">
+                Note: “Skipped supper”
+              </div>
+              <!-- Disabled actions -->
+              <div class="flex items-center justify-end gap-2 mt-3 pt-2.5 border-t border-[#F0F2F5]">
+                <button disabled class="h-9 min-w-[70px] px-3 text-xs font-medium text-[#65676B] border border-[#D0D5DD] bg-gray-100 rounded-lg cursor-not-allowed">
+                  Edit
+                </button>
+                <button disabled class="h-9 min-w-[70px] px-3 text-xs font-medium text-[#65676B] border border-[#D0D5DD] bg-gray-100 rounded-lg cursor-not-allowed">
+                  Delete
+                </button>
+              </div>
+            </article>
+          </main>
+
+          <!-- Disabled "Add reading" CTA in Offline -->
+          <div class="sticky-add-bar">
+            <button disabled class="w-full h-12 bg-[#D0D5DD] text-[#65676B] font-semibold text-base rounded-xl cursor-not-allowed flex items-center justify-center gap-2">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>Add reading (Offline)</span>
+            </button>
+          </div>
+
+          <nav class="tab-bar">
+            <a href="#" class="tab-item"><span>Home</span></a>
+            <a href="#" class="tab-item"><span>Learn</span></a>
+            <a href="#" class="tab-item active"><span class="text-[#1A6BD1] font-bold">Diary</span></a>
+            <a href="#" class="tab-item"><span>Checklist</span></a>
+            <a href="#" class="tab-item"><span>Dashboard</span></a>
+          </nav>
+        </div>
+      </div>
+
+
+      <!-- ========================================== -->
+      <!-- STATE 6: SUCCESS TOAST 1 (SAVED) -->
+      <!-- ========================================== -->
+      <div class="flex flex-col items-center">
+        <div class="text-center mb-3">
+          <span class="inline-block bg-[#15803D] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">State 6: Toast - Saved</span>
+          <p class="text-xs text-[#65676B] mt-1 font-medium">“High five! Reading saved.”</p>
+        </div>
+
+        <div class="mobile-frame">
+          <div class="status-bar text-[#1C1E21]">
+            <span>09:41</span>
+            <span>98%</span>
+          </div>
+
+          <header class="app-header">
+            <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="h-9 px-2 text-[#1C1E21] border border-[#E4E6EB] rounded-lg text-xs font-semibold"><span>EN</span></button>
+              <button class="h-9 px-2.5 bg-[#B91C1C] text-white rounded-lg text-xs font-semibold"><span>Warning signs</span></button>
+              <div class="w-9 h-9 rounded-lg border border-[#E4E6EB] bg-white flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+            </div>
+          </header>
+
+          <main class="flex-1 p-4 pb-2 space-y-3.5">
+            <h2 class="text-[24px] font-bold text-[#1C1E21]">My Diary</h2>
+
+            <!-- Newly added Reading Card on top -->
+            <article class="bg-[#E7F0FD]/60 rounded-xl p-3.5 border-2 border-[#1A6BD1] shadow-sm">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-[20px] font-bold text-[#1C1E21]">6.8</span>
+                    <span class="text-xs font-semibold text-[#65676B]">mmol/L</span>
+                  </div>
+                  <div class="text-xs text-[#1C1E21] font-medium mt-0.5">Fasting • Just now</div>
+                </div>
+                <span class="text-[11px] font-bold text-[#15803D] bg-green-100 px-2 py-0.5 rounded-full">New</span>
+              </div>
+              <div class="flex items-center justify-end gap-2 mt-3 pt-2.5 border-t border-[#E4E6EB]">
+                <button class="h-9 px-3 text-xs font-semibold text-[#1A6BD1] border border-[#1A6BD1] rounded-lg bg-white">Edit</button>
+                <button class="h-9 px-3 text-xs font-semibold text-[#B91C1C] border border-[#E4E6EB] rounded-lg bg-white">Delete</button>
+              </div>
+            </article>
+
+            <!-- Previous Reading -->
+            <article class="bg-white rounded-xl p-3.5 border border-[#E4E6EB]">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-[20px] font-bold text-[#1C1E21]">3.6</span>
+                    <span class="text-xs font-semibold text-[#65676B]">mmol/L</span>
+                  </div>
+                  <div class="text-xs text-[#65676B] mt-0.5">Bedtime • 26 Oct 2026, 21:30</div>
+                </div>
+                <div class="inline-flex items-center gap-1 px-2 py-0.5 bg-[#FEF3C7] text-[#B45309] rounded text-xs font-bold">
+                  <span>Low</span>
+                </div>
+              </div>
+            </article>
+          </main>
+
+          <!-- Toast Notification: High five! Reading saved. -->
+          <div class="toast-container">
+            <div class="w-6 h-6 rounded-full bg-[#15803D] flex items-center justify-center flex-shrink-0 text-white">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="text-sm font-semibold tracking-wide">High five! Reading saved.</span>
+          </div>
+
+          <nav class="tab-bar">
+            <a href="#" class="tab-item"><span>Home</span></a>
+            <a href="#" class="tab-item"><span>Learn</span></a>
+            <a href="#" class="tab-item active"><span class="text-[#1A6BD1] font-bold">Diary</span></a>
+            <a href="#" class="tab-item"><span>Checklist</span></a>
+            <a href="#" class="tab-item"><span>Dashboard</span></a>
+          </nav>
+        </div>
+      </div>
+
+
+      <!-- ========================================== -->
+      <!-- STATE 7: SUCCESS TOAST 2 (UPDATED) -->
+      <!-- ========================================== -->
+      <div class="flex flex-col items-center">
+        <div class="text-center mb-3">
+          <span class="inline-block bg-[#15803D] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">State 7: Toast - Updated</span>
+          <p class="text-xs text-[#65676B] mt-1 font-medium">“Reading updated.”</p>
+        </div>
+
+        <div class="mobile-frame">
+          <div class="status-bar text-[#1C1E21]">
+            <span>09:41</span>
+            <span>98%</span>
+          </div>
+
+          <header class="app-header">
+            <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="h-9 px-2 text-[#1C1E21] border border-[#E4E6EB] rounded-lg text-xs font-semibold"><span>EN</span></button>
+              <button class="h-9 px-2.5 bg-[#B91C1C] text-white rounded-lg text-xs font-semibold"><span>Warning signs</span></button>
+              <div class="w-9 h-9 rounded-lg border border-[#E4E6EB] bg-white flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+            </div>
+          </header>
+
+          <main class="flex-1 p-4 pb-2 space-y-3.5">
+            <h2 class="text-[24px] font-bold text-[#1C1E21]">My Diary</h2>
+
+            <!-- Updated card -->
+            <article class="bg-white rounded-xl p-3.5 border-2 border-[#15803D]/40 shadow-sm">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-[20px] font-bold text-[#1C1E21]">7.2</span>
+                    <span class="text-xs font-semibold text-[#65676B]">mmol/L</span>
+                  </div>
+                  <div class="text-xs text-[#65676B] mt-0.5">Before a meal • 25 Oct 2026, 12:40</div>
+                </div>
+                <span class="text-[11px] font-bold text-[#15803D] bg-green-50 px-2 py-0.5 rounded border border-green-200">Updated</span>
+              </div>
+              <div class="flex items-center justify-end gap-2 mt-3 pt-2.5 border-t border-[#F0F2F5]">
+                <button class="h-9 px-3 text-xs font-semibold text-[#1A6BD1] border border-[#1A6BD1] rounded-lg bg-white">Edit</button>
+                <button class="h-9 px-3 text-xs font-semibold text-[#B91C1C] border border-[#E4E6EB] rounded-lg bg-white">Delete</button>
+              </div>
+            </article>
+
+            <article class="bg-white rounded-xl p-3.5 border border-[#E4E6EB]">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-[20px] font-bold text-[#1C1E21]">9.4</span>
+                    <span class="text-xs font-semibold text-[#65676B]">mmol/L</span>
+                  </div>
+                  <div class="text-xs text-[#65676B] mt-0.5">After a meal • 26 Oct 2026, 19:45</div>
+                </div>
+              </div>
+            </article>
+          </main>
+
+          <!-- Toast Notification: Reading updated. -->
+          <div class="toast-container">
+            <div class="w-6 h-6 rounded-full bg-[#15803D] flex items-center justify-center flex-shrink-0 text-white">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="text-sm font-semibold tracking-wide">Reading updated.</span>
+          </div>
+
+          <nav class="tab-bar">
+            <a href="#" class="tab-item"><span>Home</span></a>
+            <a href="#" class="tab-item"><span>Learn</span></a>
+            <a href="#" class="tab-item active"><span class="text-[#1A6BD1] font-bold">Diary</span></a>
+            <a href="#" class="tab-item"><span>Checklist</span></a>
+            <a href="#" class="tab-item"><span>Dashboard</span></a>
+          </nav>
+        </div>
+      </div>
+
+
+      <!-- ========================================== -->
+      <!-- STATE 8: SUCCESS TOAST 3 (DELETED) -->
+      <!-- ========================================== -->
+      <div class="flex flex-col items-center">
+        <div class="text-center mb-3">
+          <span class="inline-block bg-[#15803D] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">State 8: Toast - Deleted</span>
+          <p class="text-xs text-[#65676B] mt-1 font-medium">“Reading deleted.”</p>
+        </div>
+
+        <div class="mobile-frame">
+          <div class="status-bar text-[#1C1E21]">
+            <span>09:41</span>
+            <span>98%</span>
+          </div>
+
+          <header class="app-header">
+            <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="h-9 px-2 text-[#1C1E21] border border-[#E4E6EB] rounded-lg text-xs font-semibold"><span>EN</span></button>
+              <button class="h-9 px-2.5 bg-[#B91C1C] text-white rounded-lg text-xs font-semibold"><span>Warning signs</span></button>
+              <div class="w-9 h-9 rounded-lg border border-[#E4E6EB] bg-white flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+            </div>
+          </header>
+
+          <main class="flex-1 p-4 pb-2 space-y-3.5">
+            <h2 class="text-[24px] font-bold text-[#1C1E21]">My Diary</h2>
+
+            <article class="bg-white rounded-xl p-3.5 border border-[#E4E6EB]">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-[20px] font-bold text-[#1C1E21]">6.8</span>
+                    <span class="text-xs font-semibold text-[#65676B]">mmol/L</span>
+                  </div>
+                  <div class="text-xs text-[#65676B] mt-0.5">Fasting • 27 Oct 2026, 07:10</div>
+                </div>
+              </div>
+              <div class="flex items-center justify-end gap-2 mt-3 pt-2.5 border-t border-[#F0F2F5]">
+                <button class="h-9 px-3 text-xs font-semibold text-[#1A6BD1] border border-[#1A6BD1] rounded-lg bg-white">Edit</button>
+                <button class="h-9 px-3 text-xs font-semibold text-[#B91C1C] border border-[#E4E6EB] rounded-lg bg-white">Delete</button>
+              </div>
+            </article>
+
+            <article class="bg-white rounded-xl p-3.5 border border-[#E4E6EB]">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-[20px] font-bold text-[#1C1E21]">9.4</span>
+                    <span class="text-xs font-semibold text-[#65676B]">mmol/L</span>
+                  </div>
+                  <div class="text-xs text-[#65676B] mt-0.5">After a meal • 26 Oct 2026, 19:45</div>
+                </div>
+              </div>
+              <div class="flex items-center justify-end gap-2 mt-3 pt-2.5 border-t border-[#F0F2F5]">
+                <button class="h-9 px-3 text-xs font-semibold text-[#1A6BD1] border border-[#1A6BD1] rounded-lg bg-white">Edit</button>
+                <button class="h-9 px-3 text-xs font-semibold text-[#B91C1C] border border-[#E4E6EB] rounded-lg bg-white">Delete</button>
+              </div>
+            </article>
+          </main>
+
+          <!-- Toast Notification: Reading deleted. -->
+          <div class="toast-container">
+            <div class="w-6 h-6 rounded-full bg-[#15803D] flex items-center justify-center flex-shrink-0 text-white">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="text-sm font-semibold tracking-wide">Reading deleted.</span>
+          </div>
+
+          <nav class="tab-bar">
+            <a href="#" class="tab-item"><span>Home</span></a>
+            <a href="#" class="tab-item"><span>Learn</span></a>
+            <a href="#" class="tab-item active"><span class="text-[#1A6BD1] font-bold">Diary</span></a>
+            <a href="#" class="tab-item"><span>Checklist</span></a>
+            <a href="#" class="tab-item"><span>Dashboard</span></a>
+          </nav>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

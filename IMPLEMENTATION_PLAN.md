@@ -9,10 +9,10 @@
 |App name|Diabetes Companion SA|
 |Built from PRD version|v0.4 (the version in `docs/PRD.md`; v0.4 adds the privacy, admin, retention, consent, content-review, language and offline decisions confirmed on 03 Nov 2026)|
 |Screen designs|Google Stitch export `stitch\_diabetes\_companion\_style\_guide` (folder in the repository at `docs/design/stitch/`). Where a Stitch screen disagrees with the PRD, the PRD wins: see the correction table in Section 7.3|
-|Plan version|v1.1|
+|Plan version|v1.2|
 |Repository|https://github.com/Ref-DevSa/ (repository name to be added; see Section 18, launch gate L3)|
 |Status|Ready to build (Phases 1 to 8 can run on a local Supabase; the hosted Supabase project is set up later, in Phase 9)|
-|Last updated|04 Nov 2026|
+|Last updated|07 Nov 2026|
 
 \---
 
@@ -153,20 +153,22 @@ Diabetes Companion SA is a free web app that helps South African adults with Typ
 |End-to-end tests|Playwright + `@axe-core/playwright`|latest stable at setup|Whole flows and accessibility checks|
 |Lint and type check|ESLint (with `typescript-eslint`, `eslint-plugin-react-hooks`) and the TypeScript compiler (`tsc --noEmit`)|latest stable at setup|Code quality|
 |Local Supabase|Docker Desktop + `supabase start`|Supabase CLI|Local database, Auth and email catcher|
-|Scripts runtime|Node.js 22 LTS + npm|22 LTS|Vite, tests and `scripts/\*.mjs` (plain JavaScript)|
+|Scripts runtime|Node.js 22 or 24 LTS + npm|22 or 24 LTS (decision of 07 Nov 2026, question 23)|Vite, tests and `scripts/\*.mjs` (plain JavaScript)|
 |Email (production)|Brevo free plan, custom SMTP|n/a|The two system emails (PRD 4.5). Set up in Phase 9|
 |Build and hosting|Vercel (free plan), deploys from GitHub|n/a|The website|
 |Version control|Git + GitHub|n/a|Source and history|
+
+Note on supporting packages (07 Nov 2026): the listed tools need `@vitejs/plugin-react` (major 5, the last one that supports Vite 7), `@types/react`, `@types/react-dom`, `@types/node` and `@eslint/js`; they are part of the React, TypeScript and ESLint entries above and are on the T-SETUP-1 list. Nothing else was added.
 
 Note on the language choice: the PRD (11.1) says TypeScript, so the app and tests are TypeScript. The helper scripts in `scripts/` are plain JavaScript (Node.js).
 
 ### 4.2 Prerequisites on the computer
 
-* \[ ] Node.js 22 LTS and npm (`node -v` shows v22)
-* \[ ] Git, with a GitHub account (https://github.com/Ref-DevSa/)
-* \[ ] Docker Desktop, running (needed for the local Supabase)
-* \[ ] Supabase CLI (installed as a dev dependency in Phase 1, or globally; `npx supabase --version` works)
-* \[ ] Playwright browsers (`npx playwright install chromium`, run in Phase 1)
+* \[x] Node.js 22 or 24 LTS and npm (`node -v` shows v22 or v24; this computer has v24.14.0)
+* \[x] Git, with a GitHub account (https://github.com/Ref-DevSa/)
+* \[x] Docker Desktop, running (needed for the local Supabase)
+* \[x] Supabase CLI (installed as a dev dependency in Phase 1, or globally; `npx supabase --version` works)
+* \[x] Playwright browsers (`npx playwright install chromium`, run in Phase 1)
 * \[ ] Google Antigravity, with this repository opened as the workspace
 * \[ ] Accounts needed later (Phase 9, not before): Supabase (Frankfurt region), Vercel, Brevo. **Not needed for Phases 1 to 8.**
 
@@ -353,7 +355,7 @@ Contrast pairs that must be checked by a unit test (T-NFR-7): text on page, seco
 
 ### 7.3 Screens
 
-**Design folders** are inside `docs/design/stitch/stitch\_diabetes\_companion\_style\_guide/`. Each folder has `code.html` (and a `screen.png`, which in the export we received is an empty placeholder: see Section 18, question 12). Phone only (360 px); there are no tablet or desktop designs.
+**Design folders** are inside `docs/design/stitch/stitch\_diabetes\_companion\_style\_guide/`. Each folder has `code.html` and a `screen.png` picture of every state (checked 07 Nov 2026: the pictures are real; an earlier listing misread their size, see Section 18, question 12). Phone only (360 px); there are no tablet or desktop designs.
 
 |ID|Screen|Route / file|Design (folder)|Who can open it (else redirect to)|Tab bar|Required states|Phase|
 |-|-|-|-|-|-|-|-|
@@ -395,7 +397,7 @@ Style guide design: `diabetes\_companion\_sa\_mobile\_style\_guide\_component\_s
 |D11|Error and empty texts written differently from the PRD|The exact PRD text for every message (Section 2, rule 9)|PRD 6.2, 8.2, 12.2|
 |D12|S5 and S6 have no disclaimer|Add the notice card "This app gives general information only. It does not diagnose or replace your clinic." to S5 and S6 (as on S1)|Decision of 03 Nov 2026 (PRD v0.4)|
 |D13|Device chrome in the pictures (status bar "09:41", battery "98%") and state captions|Ignore. Not part of the app|Mock-up decoration|
-|D14|Screen pictures (`screen.png`) are empty placeholders|Build from the PRD text and the `code.html` layout; the human will re-export the pictures (Section 18, question 12)|Export problem|
+|D14|(Withdrawn 07 Nov 2026) The `screen.png` pictures were thought to be empty placeholders; they are real pictures|Use `screen.png` and `code.html` together for layout and look; the PRD text still wins (D1 to D13)|Corrected in Section 18, question 12|
 |D15|Pages load Tailwind from an online CDN|Do not copy the CDN script. Use the installed Tailwind with the tokens in 7.1|Rule 13 and offline builds|
 
 \---
@@ -837,7 +839,7 @@ The same ID may be used at two levels when both prove the same criterion, e.g. T
 
 |Test ID|Level|File|What it checks|
 |-|-|-|-|
-|T-SETUP-1|Unit|`tests/unit/setup.test.ts`|Given the project, then Node is 22 and `package.json` lists only libraries named in Section 4.1|
+|T-SETUP-1|Unit|`tests/unit/setup.test.ts`|Given the project, then Node is 22 or 24 and `package.json` lists only libraries named in Section 4.1|
 |T-SETUP-2|Unit|`tests/unit/tokens.test.ts`|Given `src/lib/tokens.ts`, then every token in Section 7.1 exists with the exact value|
 |T-SETUP-3|Unit|`tests/unit/env.test.ts`|Given `.env.example`, then it lists every variable in Section 6 and `.gitignore` contains `.env`|
 |T-SETUP-4|Unit|`tests/unit/example.test.ts`|Given a trivial function, then it returns the right answer (proves Vitest runs)|
@@ -871,45 +873,45 @@ The same ID may be used at two levels when both prove the same criterion, e.g. T
 |T-BR17-1|Unit|`tests/unit/i18n.test.ts`|Given a key missing in `zu.json`, then the English text is returned|
 |T-BR21-1|Unit|`tests/unit/languages.test.ts`|Given `languages.ts`, then `enabledLanguages` is `\['en']` at the start and lists a language only after its review is recorded in `CONTENT\_REVIEW\_LOG.md` (the test reads a `reviewed` flag in `languages.ts`)|
 
-* \[ ] All tests above are written, run, and fail for the expected reason.
+* \[x] All tests above are written, run, and fail for the expected reason.
 
 **Step 2: Backend (Green)**
 
-* \[ ] `npm install`; create the project files and folders in Section 5 (only the ones this phase needs, plus empty folders marked in Section 5).
-* \[ ] `npx supabase init`; edit `supabase/config.toml`: Auth `enable\_confirmations = true`, `minimum\_password\_length = 8`, `otp\_expiry = 3600`, `site\_url = "http://localhost:5173"`, `additional\_redirect\_urls` including `http://localhost:5173/\*\*`; email templates pointing to `supabase/templates/confirm.html` and `recover.html` with the **exact** PRD 4.5 subject and body text; sign-ups enabled; no other login methods.
-* \[ ] `supabase/tests/database/000\_example.test.sql` (pgTAP) and `scripts/scan-secrets.mjs`.
-* \[ ] `src/lib/supabase.ts` creates the client from `VITE\_SUPABASE\_URL` and `VITE\_SUPABASE\_PUBLISHABLE\_KEY`; `.env.example` as in Section 6.
-* \[ ] `package.json` scripts exactly as in Section 4.3, including `check`.
+* \[x] `npm install`; create the project files and folders in Section 5 (only the ones this phase needs, plus empty folders marked in Section 5).
+* \[x] `npx supabase init`; edit `supabase/config.toml`: Auth `enable\_confirmations = true`, `minimum\_password\_length = 8`, `otp\_expiry = 3600`, `site\_url = "http://localhost:5173"`, `additional\_redirect\_urls` including `http://localhost:5173/\*\*`; email templates pointing to `supabase/templates/confirm.html` and `recover.html` with the **exact** PRD 4.5 subject and body text; sign-ups enabled; no other login methods.
+* \[x] `supabase/tests/database/000\_example.test.sql` (pgTAP) and `scripts/scan-secrets.mjs`.
+* \[x] `src/lib/supabase.ts` creates the client from `VITE\_SUPABASE\_URL` and `VITE\_SUPABASE\_PUBLISHABLE\_KEY`; `.env.example` as in Section 6.
+* \[x] `package.json` scripts exactly as in Section 4.3, including `check`.
 
 **Step 3: Frontend (Green)**
 
-* \[ ] Tailwind 4 theme from Section 7.1 in `src/styles/index.css`; `src/lib/tokens.ts`; self-hosted Inter.
-* \[ ] `src/i18n/` with `en.json` (all S1 text and shared strings), `zu.json` and `tn.json` as empty files that fall back to English, `languages.ts` with `enabledLanguages = \['en']` and the `reviewed` flags (Section 18, question 6).
-* \[ ] Components T-C-1 to T-C-15 and T-C-22 (Section 7.2), built to the design in `components` of the style guide folder with the corrections in 7.3.
-* \[ ] `AuthProvider` that exposes the session (no login screens yet), and `useOnline()`.
-* \[ ] Router with all routes in Section 7.3; screens not yet built render the development-only placeholder (removed in Phase 7 for S7; others are replaced in their phase).
-* \[ ] S1 Home to its design (Visitor and User views; Loading; Error; Offline).
-* \[ ] `docs/PRD.md` and `docs/design/stitch/` copied into the repository; `README.md` with setup and commands; `AGENTS.md` as described in Section 18.3, item 4; `docs/PRIVACY\_AND\_ADMIN.md`, `docs/ADMIN\_ACCESS\_LOG.md`, `docs/CONTENT\_REVIEW\_LOG.md` and `docs/LAUNCH\_GATES.md` created from Sections 9.2, 18.2 and the templates they describe.
+* \[x] Tailwind 4 theme from Section 7.1 in `src/styles/index.css`; `src/lib/tokens.ts`; self-hosted Inter.
+* \[x] `src/i18n/` with `en.json` (all S1 text and shared strings), `zu.json` and `tn.json` as empty files that fall back to English, `languages.ts` with `enabledLanguages = \['en']` and the `reviewed` flags (Section 18, question 6).
+* \[x] Components T-C-1 to T-C-15 and T-C-22 (Section 7.2), built to the design in `components` of the style guide folder with the corrections in 7.3.
+* \[x] `AuthProvider` that exposes the session (no login screens yet), and `useOnline()`.
+* \[x] Router with all routes in Section 7.3; screens not yet built render the development-only placeholder (removed in Phase 7 for S7; others are replaced in their phase).
+* \[x] S1 Home to its design (Visitor and User views; Loading; Error; Offline).
+* \[x] `docs/PRD.md` and `docs/design/stitch/` copied into the repository; `README.md` with setup and commands; `AGENTS.md` as described in Section 18.3, item 4; `docs/PRIVACY\_AND\_ADMIN.md`, `docs/ADMIN\_ACCESS\_LOG.md`, `docs/CONTENT\_REVIEW\_LOG.md` and `docs/LAUNCH\_GATES.md` created from Sections 9.2, 18.2 and the templates they describe.
 
 **Step 4: Refactor and full check**
 
-* \[ ] Code cleaned up; no duplicated logic; names use PRD key terms.
-* \[ ] Local backend running; `npm run check` passes (lint, type check, secret scan, every automated test from every phase so far).
-* \[ ] Exact installed versions recorded in the Progress log (Section 17).
+* \[x] Code cleaned up; no duplicated logic; names use PRD key terms.
+* \[x] Local backend running; `npm run check` passes (lint, type check, secret scan, every automated test from every phase so far).
+* \[x] Exact installed versions recorded in the Progress log (Section 17).
 
 **Step 5: Manual checks (human)**
 
-* \[ ] `npm run dev` opens S1 in Chrome; narrow the window to 360 px.
-* \[ ] On a real Android phone (computer's Wi-Fi address, see Section 6), S1 looks right and the "Warning signs" button is easy to tap.
-* \[ ] S1 matches its design side by side: layout, text, colours, spacing (with the corrections in 7.3).
+* \[x] `npm run dev` opens S1 in Chrome; narrow the window to 360 px.
+* \[x] On a real Android phone (computer's Wi-Fi address, see Section 6), S1 looks right and the "Warning signs" button is easy to tap.
+* \[x] S1 matches its design side by side: layout, text, colours, spacing (with the corrections in 7.3).
 
 **Definition of Done**
 
-* \[ ] Every test in Step 1 passes.
-* \[ ] All earlier tests still pass.
-* \[ ] S1 shows all its required states.
-* \[ ] Manual checks are ticked by the human.
-* \[ ] Progress log updated (Section 17).
+* \[x] Every test in Step 1 passes.
+* \[x] All earlier tests still pass.
+* \[x] S1 shows all its required states.
+* \[x] Manual checks are ticked by the human.
+* \[x] Progress log updated (Section 17).
 
 **Commit message:** `Phase 1: Foundation`
 
@@ -1664,7 +1666,7 @@ The agent ticks each item only when its test passes. The human ticks the ones ma
 
 ### 15.6 Database, integration, navigation and set-up tests
 
-* \[ ] T-SETUP-1 to T-SETUP-10 (automated)
+* \[x] T-SETUP-1 to T-SETUP-10 (automated)
 * \[ ] T-DB-1 to T-DB-8 (automated)
 * \[ ] T-INT-1 to T-INT-8 (automated)
 * \[ ] T-NAV-1 to T-NAV-9 (automated)
@@ -1733,7 +1735,7 @@ The agent ticks each item only when its test passes. The human ticks the ones ma
 
 |Phase|Date|Status|Automated tests (passed / total)|Commit|Notes|
 |-|-|-|-|-|-|
-|1 Foundation|not started|Not started|not run|none yet|Record exact versions installed here|
+|1 Foundation|07 Nov 2026|Done: automated checks pass; manual checks (Chrome 360 px, Android phone, side by side with the design) confirmed by the human on 07 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 23 / 23, component 72 / 72, database 1 / 1, integration 3 / 3, end-to-end 2 / 2 (101 / 101); lint, type check, secret scan, build: pass. Docker Engine 29.9.2 (WSL 2 installed 07 Nov 2026); local Postgres 17|none yet|Node 24.14.0, npm 11.9.0. Versions: react 19.3.1, react-router 7.18.5, typescript 5.9.3, vite 7.3.7, @vitejs/plugin-react 5.2.0, tailwindcss 4.3.5, lucide-react 1.70.0, @fontsource-variable/inter 5.3.0, i18next 26.7.2, react-i18next 17.1.13, @supabase/supabase-js 2.119.0, vitest 5.1.0, @testing-library/react 16.3.3, jsdom 29.1.1, @playwright/test 1.65.0, @axe-core/playwright 4.14.0, eslint 10.14.0, typescript-eslint 8.72.1, supabase CLI 3.0.0. First load: JS 109 KB + CSS 5 KB gzip|
 |2 Data and security|not started|Not started|not run|none yet||
 |3 Account and sign-in|not started|Not started|not run|none yet||
 |4 Safety Guide and Learning Centre|not started|Not started|not run|none yet||
@@ -1764,7 +1766,7 @@ Every answer below is also written into PRD v0.4 and its change log.
 |9|Delete inactive accounts automatically?|Section 9.2; BR25|No automatic deletion in v1. Reviewed 12 months after launch.|Answered|
 |10|Admin roles?|Section 9.2; PRD 2.5|One admin (Information Officer) using the Supabase dashboard; no admin screens or admin role in the app; content work uses the four content tables only.|Answered|
 |11|What happens to backups after deletion?|Section 9.2|Live data is deleted immediately. Supabase backups expire on their own schedule; the real number of days is checked and written in M2 at launch (L6).|Answered|
-|12|The Stitch `screen.png` files are empty placeholders ("image failed to fetch")|Section 7.3 D14|Build from the PRD text and `code.html`; the human re-exports the pictures from Stitch when convenient. This does not block any phase.|Answered|
+|12|The Stitch `screen.png` files are empty placeholders ("image failed to fetch")|Section 7.3 D14|Corrected 07 Nov 2026: the export in `docs/design/stitch/` has a real picture for all 17 designs. Build from the PRD text, using `screen.png` and `code.html` for layout and look.|Answered|
 |13|Offline behaviour?|BR23; PRD 12.1|No offline mode. Show the clear message; never say "saved" unless the database confirmed it; keep typed text; allow retry.|Answered|
 |14|Consent record?|`users` columns; BR18|Both tick boxes required; times and Privacy Notice version stored; the database refuses an account without them.|Answered|
 |15|Medical disclaimer?|S1, S5, S6; D12|"This app gives general information only. It does not diagnose or replace your clinic." on S1, S5 and S6; the S7 and S9 notes stay.|Answered|
@@ -1775,6 +1777,9 @@ Every answer below is also written into PRD v0.4 and its change log.
 |20|Ticks only for today?|SEC13, SEC15; BR12|Yes: ticks can be added or removed only for today (SAST). This tightens PRD 11.4 and matches BR12 ("older ticks are kept but not shown").|Answered|
 |21|TypeScript or JavaScript?|Section 4.1|App and tests in TypeScript (PRD 11.1); scripts in plain JavaScript (Node.js).|Answered|
 |22|Where do Supabase and the other accounts get set up?|Phase 9|Later, in Phase 9. Phases 1 to 8 use the local Supabase only.|Answered|
+|23|Node.js version: the computer has Node 24, the plan said 22|Sections 4.1, 4.2; T-SETUP-1|Accept Node 22 or 24 LTS (human, 07 Nov 2026).|Answered|
+|24|Wording the PRD does not give: the button text in the two system emails, and screen-reader labels for icon-only controls|`supabase/templates/*.html`; `src/i18n/en.json` (`password.show`, `password.hide`, `header.language`, `header.profile`)|Chosen in Phase 1 and confirmed by the human on 07 Nov 2026: email buttons "Confirm your email" and "Choose a new password"; toggle labels "Show password" / "Hide password"; language button label "Language" (S11 wording); profile icon label "My profile" (S11 title). The S1 hero illustration is decorative (`alt=""`).|Answered|
+|25|The test-only password from PRD 10.4 in `docs/PRD.md`|`docs/PRD.md` 10.4; Section 8.7|Left out of the Markdown copy of the PRD so the secret scan stays clean; it is read from the PRD PDF into `.env` only.|Answered|
 
 **Note on Phase 3 size (mentor feedback, 04 Nov 2026):** Phase 3 covers 5 stories, 6 screens and modals and many tests. It is kept as one phase so the phase numbers, test IDs and traceability stay unchanged. If it is too large for one session, the human may tell the agent to build it in two halves inside the same phase and stop between them: first S2, S3, S4 (sign-up, log-in, reset: US1 to US3), then S11, M2, M3 (profile, language, delete account: US4, US5). The Definition of Done still applies to the whole phase.
 
@@ -1832,6 +1837,7 @@ If anything is unclear, add a row to Section 18 and ask. Never guess.
 
 |Plan version|Date|What changed|Why|
 |-|-|-|-|
+|v1.2|07 Nov 2026|Node 22 or 24 accepted (4.1, 4.2, T-SETUP-1; question 23); supporting packages noted under 4.1; D14 and question 12 corrected (the Stitch pictures are real); questions 24 and 25 added; Phase 1 progress recorded|Phase 1 set-up with the human|
 |v1.1|04 Nov 2026|Tutor feedback: readings.value is now plain numeric with check value = round(value, 1) so 6.85 is rejected (8.1); navigation map confirmed in Section 11; every T-US test has its own row with Given/When/Then (Phases 3 to 7); one T-SEC row per table (Phase 2); Phase overview matches the phase tables; lockout weakness recorded as accepted risk (question 17)|Feedback from the Melsoft mentor; Phase 3 split not done (see Section 18.1 note)|
 |v1.0|03 Nov 2026|First version|Generated from PRD v0.4 and the Stitch screen export; Supabase (PostgreSQL, Auth, Row-Level Security) architecture; privacy, admin, retention, consent, content-review, language and offline decisions of 03 Nov 2026|
 

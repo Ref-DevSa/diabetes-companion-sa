@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screen S3 "Log in" - All States (360px Mobile) - Diabetes Companion SA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #E2E8F0;
+      color: #1C1E21;
+      margin: 0;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Device Frame 360px specification */
+    .mobile-frame {
+      width: 360px;
+      min-width: 360px;
+      max-width: 360px;
+      height: 740px;
+      background-color: #F0F2F5;
+      border-radius: 28px;
+      border: 6px solid #1E293B;
+      box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.25), 0 10px 15px -3px rgba(15, 23, 42, 0.1);
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Scrollbar styling */
+    .mobile-frame::-webkit-scrollbar {
+      width: 4px;
+    }
+    .mobile-frame::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+
+    .card-shadow {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Style Guide Tokens */
+    .bg-page { background-color: #F0F2F5; }
+    .bg-primary { background-color: #1A6BD1; }
+    .bg-dark-blue { background-color: #1565C0; }
+    .bg-tint { background-color: #E7F0FD; }
+    .text-main { color: #1C1E21; }
+    .text-secondary { color: #65676B; }
+    .text-primary-blue { color: #1A6BD1; }
+    .text-dark-blue { color: #1565C0; }
+    .border-primary { border-color: #1A6BD1; }
+    .border-dark-blue { border-color: #1565C0; }
+    .border-error { border-color: #B91C1C; }
+    .text-error { color: #B91C1C; }
+    .bg-error-red { background-color: #B91C1C; }
+    .bg-disabled { background-color: #D0D5DD; }
+    .text-disabled { color: #475467; }
+    .bg-dark-banner { background-color: #1C1E21; }
+  </style>
+</head>
+<body class="p-4 md:p-8">
+
+  <!-- Document / Spec Header -->
+  <div class="max-w-[1280px] mx-auto mb-8 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+    <div class="flex flex-wrap items-center gap-2 mb-2">
+      <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-700">Screen Specification • S3 "Log in" (360 px Mobile)</span>
+      <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-800">Visitor Only (Logged-out)</span>
+      <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-slate-100 text-slate-700">No Tab Bar</span>
+      <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-800">Strict Design Tokens</span>
+    </div>
+    <h1 class="text-2xl md:text-3xl font-bold text-[#1C1E21] tracking-tight mb-2">Screen S3 “Log in” — Diabetes Companion SA</h1>
+    <p class="text-sm md:text-base text-[#65676B] leading-relaxed max-w-4xl">
+      Purpose: Log in to an existing account. Strictly designed for a 360 px wide Android viewport with 16 px margins, 48 px inputs & buttons, 44×44 px minimum touch targets, and Inter typography. Showing all required operational states and variations.
+    </p>
+
+    <!-- State Quick Links / Badges -->
+    <div class="flex flex-wrap gap-2 mt-4 text-xs font-semibold">
+      <span class="px-3 py-1.5 rounded-lg bg-[#1A6BD1] text-white">1. Normal (Empty Form)</span>
+      <span class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200">2. Normal + Info Banner</span>
+      <span class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200">3. Session Ended Banner</span>
+      <span class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200">4. Field Validation Errors</span>
+      <span class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700">5. Loading ("Logging in...")</span>
+      <span class="px-3 py-1.5 rounded-lg bg-rose-50 text-rose-700 border border-rose-200">6. Error: Credentials</span>
+      <span class="px-3 py-1.5 rounded-lg bg-rose-50 text-rose-700 border border-rose-200">7. Error: Rate Limit (Disabled)</span>
+      <span class="px-3 py-1.5 rounded-lg bg-rose-50 text-rose-700 border border-rose-200">8. Error: Unconfirmed Email + Toast</span>
+      <span class="px-3 py-1.5 rounded-lg bg-zinc-800 text-white">9. Offline Banner</span>
+    </div>
+  </div>
+
+  <!-- State Frames Grid -->
+  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+
+    <!-- ==========================================
+         STATE 1: NORMAL (EMPTY FORM)
+         ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="text-xs font-semibold tracking-wide uppercase px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800">State 1: Normal</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">Empty Form (Default Visitor View)</h3>
+      </div>
+
+      <div class="mobile-frame">
+        <!-- Android Status Bar -->
+        <div class="h-6 w-full flex items-center justify-between px-4 pt-1 text-[11px] font-medium text-[#1C1E21] select-none shrink-0">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- 56px Sticky Header (Visitor: No tab bar below, Icon-only logo, Language Selector, Red Warning Signs, Sign up/Log in context) -->
+        <header class="h-14 min-h-[56px] w-full px-4 flex items-center justify-between bg-white border-b border-[#E4E6EB] shrink-0 z-20">
+          <!-- Logo: Icon only (<400px) -->
+          <div class="flex items-center">
+            <div class="w-9 h-9 rounded-xl bg-[#1A6BD1] flex items-center justify-center shadow-sm" aria-label="Diabetes Companion SA Logo">
+              <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                <!-- Centered small tick inside drop -->
+                <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Header Right Actions: Language Selector + Red Warning Signs + Sign up link/button -->
+          <div class="flex items-center gap-2">
+            <!-- Language Selector -->
+            <button class="h-9 px-2 flex items-center gap-1 text-xs font-semibold text-[#1C1E21] rounded-lg border border-[#E4E6EB] bg-white active:bg-slate-100">
+              <svg class="w-3.5 h-3.5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+
+            <!-- Warning signs button (Red #B91C1C, min 44px touch area) -->
+            <button class="h-11 px-2.5 rounded-xl bg-[#B91C1C] active:bg-[#991B1B] text-white flex items-center gap-1.5 shadow-sm min-h-[44px]">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span class="text-xs font-bold whitespace-nowrap">Warning signs</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Main Form Body (Top to Bottom) -->
+        <main class="flex-1 px-4 py-6 flex flex-col justify-start">
+          <!-- 3. Title: "Welcome back" (24px Bold Inter) -->
+          <h2 class="text-2xl font-bold text-[#1C1E21] mb-6 tracking-tight">Welcome back</h2>
+
+          <!-- Form Fields Container -->
+          <div class="space-y-4">
+            <!-- 4. Email field -->
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Email address</label>
+              <div class="relative">
+                <input type="email" placeholder="you@example.co.za" class="w-full h-12 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#1C1E21] text-base placeholder-[#65676B] focus:outline-none focus:border-[#1565C0] focus:ring-2 focus:ring-[#1565C0]/20 transition-all" />
+              </div>
+            </div>
+
+            <!-- 5. Password field with show/hide toggle -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="block text-sm font-semibold text-[#1C1E21]">Password</label>
+              </div>
+              <div class="relative">
+                <input type="password" placeholder="Enter your password" class="w-full h-12 pl-3.5 pr-12 rounded-xl bg-white border border-[#CBD5E1] text-[#1C1E21] text-base placeholder-[#65676B] focus:outline-none focus:border-[#1565C0] focus:ring-2 focus:ring-[#1565C0]/20 transition-all" />
+                <button type="button" aria-label="Toggle password visibility" class="absolute right-1 top-1 w-11 h-11 flex items-center justify-center text-[#65676B] active:text-[#1C1E21]">
+                  <!-- Lucide Eye outline -->
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- 6. Primary Button "Log in" (48px high, #1A6BD1 fill, 12px corners, 16px semi-bold) -->
+            <div class="pt-2">
+              <button class="w-full h-12 rounded-xl bg-[#1A6BD1] hover:bg-[#1565C0] active:bg-[#1565C0] text-white text-base font-semibold transition-colors flex items-center justify-center shadow-sm">
+                Log in
+              </button>
+            </div>
+
+            <!-- 7. Links: "Forgot password?" and "Create an account" (At least 44px touch targets) -->
+            <div class="pt-3 space-y-2 text-center">
+              <div>
+                <a href="#forgot" class="inline-flex items-center justify-center min-h-[44px] px-2 text-sm font-semibold text-[#1A6BD1] hover:underline">
+                  Forgot password?
+                </a>
+              </div>
+              <div class="pt-1">
+                <span class="text-sm text-[#65676B]">Don't have an account?</span>
+                <a href="#signup" class="inline-flex items-center justify-center min-h-[44px] px-1 text-sm font-semibold text-[#1A6BD1] hover:underline">
+                  Create an account
+                </a>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Footer Notice: General Information Disclaimer (Style Guide) -->
+        <footer class="p-4 text-center shrink-0">
+          <p class="text-xs text-[#65676B]">Protected by Diabetes Companion SA</p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STATE 2: NORMAL + INFO BANNER (PROTECTED SCREEN REDIRECT)
+         ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="text-xs font-semibold tracking-wide uppercase px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800">State 2: Info Banner</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">Redirected from Protected Screen</h3>
+      </div>
+
+      <div class="mobile-frame">
+        <!-- Android Status Bar -->
+        <div class="h-6 w-full flex items-center justify-between px-4 pt-1 text-[11px] font-medium text-[#1C1E21] select-none shrink-0">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- 56px Header -->
+        <header class="h-14 min-h-[56px] w-full px-4 flex items-center justify-between bg-white border-b border-[#E4E6EB] shrink-0">
+          <div class="w-9 h-9 rounded-xl bg-[#1A6BD1] flex items-center justify-center shadow-sm">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+              <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="h-9 px-2 flex items-center gap-1 text-xs font-semibold text-[#1C1E21] rounded-lg border border-[#E4E6EB] bg-white">
+              <svg class="w-3.5 h-3.5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <button class="h-11 px-2.5 rounded-xl bg-[#B91C1C] text-white flex items-center gap-1.5 shadow-sm min-h-[44px]">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span class="text-xs font-bold">Warning signs</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- 2. Info Banner: "Log in to use this part of the app." (Light blue tint #E7F0FD, text #1565C0) -->
+        <div class="px-4 pt-4">
+          <div class="p-3.5 rounded-xl bg-[#E7F0FD] border border-[#1565C0]/20 flex items-start gap-2.5">
+            <svg class="w-5 h-5 text-[#1565C0] shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <p class="text-sm font-semibold text-[#1565C0] leading-snug">Log in to use this part of the app.</p>
+          </div>
+        </div>
+
+        <!-- Form Body -->
+        <main class="flex-1 px-4 py-4 flex flex-col justify-start">
+          <h2 class="text-2xl font-bold text-[#1C1E21] mb-6 tracking-tight">Welcome back</h2>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Email address</label>
+              <input type="email" value="thabo.test@example.co.za" class="w-full h-12 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#1C1E21] text-base focus:outline-none focus:border-[#1565C0]" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Password</label>
+              <div class="relative">
+                <input type="password" placeholder="Enter your password" class="w-full h-12 pl-3.5 pr-12 rounded-xl bg-white border border-[#CBD5E1] text-[#1C1E21] text-base focus:outline-none focus:border-[#1565C0]" />
+                <button type="button" aria-label="Toggle password visibility" class="absolute right-1 top-1 w-11 h-11 flex items-center justify-center text-[#65676B]">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button class="w-full h-12 rounded-xl bg-[#1A6BD1] active:bg-[#1565C0] text-white text-base font-semibold flex items-center justify-center shadow-sm">
+                Log in
+              </button>
+            </div>
+
+            <div class="pt-3 space-y-2 text-center">
+              <div>
+                <a href="#forgot" class="inline-flex items-center justify-center min-h-[44px] px-2 text-sm font-semibold text-[#1A6BD1]">
+                  Forgot password?
+                </a>
+              </div>
+              <div class="pt-1">
+                <span class="text-sm text-[#65676B]">Don't have an account?</span>
+                <a href="#signup" class="inline-flex items-center justify-center min-h-[44px] px-1 text-sm font-semibold text-[#1A6BD1]">
+                  Create an account
+                </a>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <footer class="p-4 text-center shrink-0">
+          <p class="text-xs text-[#65676B]">Protected by Diabetes Companion SA</p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STATE 3: SESSION ENDED BANNER
+         ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="text-xs font-semibold tracking-wide uppercase px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800">State 3: Info Banner</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">Session Expired Notice</h3>
+      </div>
+
+      <div class="mobile-frame">
+        <!-- Status Bar -->
+        <div class="h-6 w-full flex items-center justify-between px-4 pt-1 text-[11px] font-medium text-[#1C1E21] select-none shrink-0">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-14 min-h-[56px] w-full px-4 flex items-center justify-between bg-white border-b border-[#E4E6EB] shrink-0">
+          <div class="w-9 h-9 rounded-xl bg-[#1A6BD1] flex items-center justify-center shadow-sm">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+              <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="h-9 px-2 flex items-center gap-1 text-xs font-semibold text-[#1C1E21] rounded-lg border border-[#E4E6EB] bg-white">
+              <svg class="w-3.5 h-3.5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <button class="h-11 px-2.5 rounded-xl bg-[#B91C1C] text-white flex items-center gap-1.5 shadow-sm min-h-[44px]">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span class="text-xs font-bold">Warning signs</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- 2. Info Banner: "Your session has ended. Please log in again." -->
+        <div class="px-4 pt-4">
+          <div class="p-3.5 rounded-xl bg-[#E7F0FD] border border-[#1565C0]/20 flex items-start gap-2.5">
+            <svg class="w-5 h-5 text-[#1565C0] shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <p class="text-sm font-semibold text-[#1565C0] leading-snug">Your session has ended. Please log in again.</p>
+          </div>
+        </div>
+
+        <!-- Form Body -->
+        <main class="flex-1 px-4 py-4 flex flex-col justify-start">
+          <h2 class="text-2xl font-bold text-[#1C1E21] mb-6 tracking-tight">Welcome back</h2>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Email address</label>
+              <input type="email" value="thabo.test@example.co.za" class="w-full h-12 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#1C1E21] text-base focus:outline-none focus:border-[#1565C0]" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Password</label>
+              <div class="relative">
+                <input type="password" placeholder="Enter your password" class="w-full h-12 pl-3.5 pr-12 rounded-xl bg-white border border-[#CBD5E1] text-[#1C1E21] text-base focus:outline-none focus:border-[#1565C0]" />
+                <button type="button" aria-label="Toggle password visibility" class="absolute right-1 top-1 w-11 h-11 flex items-center justify-center text-[#65676B]">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button class="w-full h-12 rounded-xl bg-[#1A6BD1] active:bg-[#1565C0] text-white text-base font-semibold flex items-center justify-center shadow-sm">
+                Log in
+              </button>
+            </div>
+
+            <div class="pt-3 space-y-2 text-center">
+              <div>
+                <a href="#forgot" class="inline-flex items-center justify-center min-h-[44px] px-2 text-sm font-semibold text-[#1A6BD1]">
+                  Forgot password?
+                </a>
+              </div>
+              <div class="pt-1">
+                <span class="text-sm text-[#65676B]">Don't have an account?</span>
+                <a href="#signup" class="inline-flex items-center justify-center min-h-[44px] px-1 text-sm font-semibold text-[#1A6BD1]">
+                  Create an account
+                </a>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <footer class="p-4 text-center shrink-0">
+          <p class="text-xs text-[#65676B]">Protected by Diabetes Companion SA</p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STATE 4: FIELD VALIDATION ERRORS
+         ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="text-xs font-semibold tracking-wide uppercase px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800">State 4: Field Errors</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">Validation: Email & Password Required</h3>
+      </div>
+
+      <div class="mobile-frame">
+        <!-- Status Bar -->
+        <div class="h-6 w-full flex items-center justify-between px-4 pt-1 text-[11px] font-medium text-[#1C1E21] select-none shrink-0">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-14 min-h-[56px] w-full px-4 flex items-center justify-between bg-white border-b border-[#E4E6EB] shrink-0">
+          <div class="w-9 h-9 rounded-xl bg-[#1A6BD1] flex items-center justify-center shadow-sm">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+              <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="h-9 px-2 flex items-center gap-1 text-xs font-semibold text-[#1C1E21] rounded-lg border border-[#E4E6EB] bg-white">
+              <svg class="w-3.5 h-3.5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <button class="h-11 px-2.5 rounded-xl bg-[#B91C1C] text-white flex items-center gap-1.5 shadow-sm min-h-[44px]">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span class="text-xs font-bold">Warning signs</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Form Body -->
+        <main class="flex-1 px-4 py-6 flex flex-col justify-start">
+          <h2 class="text-2xl font-bold text-[#1C1E21] mb-6 tracking-tight">Welcome back</h2>
+
+          <div class="space-y-4">
+            <!-- Email Field with Error (Never color alone: red border + alert icon + message) -->
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Email address</label>
+              <div class="relative">
+                <input type="email" value="invalid-email" class="w-full h-12 pl-3.5 pr-11 rounded-xl bg-white border-2 border-[#B91C1C] text-[#1C1E21] text-base focus:outline-none" />
+                <div class="absolute right-3.5 top-3.5 text-[#B91C1C]">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                </div>
+              </div>
+              <!-- Field error copy: "Enter a valid email address." -->
+              <div class="flex items-center gap-1.5 mt-1.5 text-xs font-semibold text-[#B91C1C]">
+                <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                <span>Enter a valid email address.</span>
+              </div>
+            </div>
+
+            <!-- Password Field with Error -->
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Password</label>
+              <div class="relative">
+                <input type="password" value="" placeholder="Enter your password" class="w-full h-12 pl-3.5 pr-12 rounded-xl bg-white border-2 border-[#B91C1C] text-[#1C1E21] text-base focus:outline-none" />
+                <button type="button" aria-label="Toggle password visibility" class="absolute right-1 top-1 w-11 h-11 flex items-center justify-center text-[#65676B]">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </div>
+              <!-- Field error copy: "Enter your password." -->
+              <div class="flex items-center gap-1.5 mt-1.5 text-xs font-semibold text-[#B91C1C]">
+                <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                <span>Enter your password.</span>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button class="w-full h-12 rounded-xl bg-[#1A6BD1] text-white text-base font-semibold flex items-center justify-center shadow-sm">
+                Log in
+              </button>
+            </div>
+
+            <div class="pt-3 space-y-2 text-center">
+              <div>
+                <a href="#forgot" class="inline-flex items-center justify-center min-h-[44px] px-2 text-sm font-semibold text-[#1A6BD1]">
+                  Forgot password?
+                </a>
+              </div>
+              <div class="pt-1">
+                <span class="text-sm text-[#65676B]">Don't have an account?</span>
+                <a href="#signup" class="inline-flex items-center justify-center min-h-[44px] px-1 text-sm font-semibold text-[#1A6BD1]">
+                  Create an account
+                </a>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <footer class="p-4 text-center shrink-0">
+          <p class="text-xs text-[#65676B]">Protected by Diabetes Companion SA</p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STATE 5: LOADING ("LOGGING IN...")
+         ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="text-xs font-semibold tracking-wide uppercase px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800">State 5: Loading</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">Button Disabled: "Logging in..."</h3>
+      </div>
+
+      <div class="mobile-frame">
+        <!-- Status Bar -->
+        <div class="h-6 w-full flex items-center justify-between px-4 pt-1 text-[11px] font-medium text-[#1C1E21] select-none shrink-0">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-14 min-h-[56px] w-full px-4 flex items-center justify-between bg-white border-b border-[#E4E6EB] shrink-0">
+          <div class="w-9 h-9 rounded-xl bg-[#1A6BD1] flex items-center justify-center shadow-sm">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+              <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="h-9 px-2 flex items-center gap-1 text-xs font-semibold text-[#1C1E21] rounded-lg border border-[#E4E6EB] bg-white opacity-60 cursor-not-allowed">
+              <svg class="w-3.5 h-3.5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <button class="h-11 px-2.5 rounded-xl bg-[#B91C1C] text-white flex items-center gap-1.5 shadow-sm min-h-[44px]">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span class="text-xs font-bold">Warning signs</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Form Body -->
+        <main class="flex-1 px-4 py-6 flex flex-col justify-start">
+          <h2 class="text-2xl font-bold text-[#1C1E21] mb-6 tracking-tight">Welcome back</h2>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Email address</label>
+              <input type="email" value="thabo.test@example.co.za" disabled class="w-full h-12 px-3.5 rounded-xl bg-[#F0F2F5] border border-[#CBD5E1] text-[#65676B] text-base cursor-not-allowed" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Password</label>
+              <div class="relative">
+                <input type="password" value="••••••••••••" disabled class="w-full h-12 pl-3.5 pr-12 rounded-xl bg-[#F0F2F5] border border-[#CBD5E1] text-[#65676B] text-base tracking-widest cursor-not-allowed" />
+                <button type="button" disabled class="absolute right-1 top-1 w-11 h-11 flex items-center justify-center text-[#94A3B8] cursor-not-allowed">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Disabled Loading Button: #D0D5DD with dark grey text, animated spinner -->
+            <div class="pt-2">
+              <button disabled class="w-full h-12 rounded-xl bg-[#D0D5DD] text-[#475467] text-base font-semibold flex items-center justify-center gap-2 cursor-wait">
+                <svg class="w-5 h-5 animate-spin text-[#475467]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+                </svg>
+                <span>Logging in…</span>
+              </button>
+            </div>
+
+            <div class="pt-3 space-y-2 text-center opacity-60 pointer-events-none">
+              <div>
+                <span class="inline-flex items-center justify-center min-h-[44px] px-2 text-sm font-semibold text-[#1A6BD1]">
+                  Forgot password?
+                </span>
+              </div>
+              <div class="pt-1">
+                <span class="text-sm text-[#65676B]">Don't have an account?</span>
+                <span class="inline-flex items-center justify-center min-h-[44px] px-1 text-sm font-semibold text-[#1A6BD1]">
+                  Create an account
+                </span>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <footer class="p-4 text-center shrink-0">
+          <p class="text-xs text-[#65676B]">Protected by Diabetes Companion SA</p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STATE 6: ERROR BANNER 1 (CREDENTIALS)
+         ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="text-xs font-semibold tracking-wide uppercase px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800">State 6: Error Banner 1</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">"Email or password is incorrect."</h3>
+      </div>
+
+      <div class="mobile-frame">
+        <!-- Status Bar -->
+        <div class="h-6 w-full flex items-center justify-between px-4 pt-1 text-[11px] font-medium text-[#1C1E21] select-none shrink-0">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-14 min-h-[56px] w-full px-4 flex items-center justify-between bg-white border-b border-[#E4E6EB] shrink-0">
+          <div class="w-9 h-9 rounded-xl bg-[#1A6BD1] flex items-center justify-center shadow-sm">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+              <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="h-9 px-2 flex items-center gap-1 text-xs font-semibold text-[#1C1E21] rounded-lg border border-[#E4E6EB] bg-white">
+              <svg class="w-3.5 h-3.5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <button class="h-11 px-2.5 rounded-xl bg-[#B91C1C] text-white flex items-center gap-1.5 shadow-sm min-h-[44px]">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span class="text-xs font-bold">Warning signs</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- 2. Error Banner: White Card with Red border and icon (Style guide: error sits on white card) -->
+        <div class="px-4 pt-4">
+          <div class="p-3.5 rounded-xl bg-white border border-[#B91C1C] card-shadow flex items-start gap-2.5">
+            <svg class="w-5 h-5 text-[#B91C1C] shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <p class="text-sm font-semibold text-[#B91C1C] leading-snug">Email or password is incorrect.</p>
+          </div>
+        </div>
+
+        <!-- Form Body -->
+        <main class="flex-1 px-4 py-4 flex flex-col justify-start">
+          <h2 class="text-2xl font-bold text-[#1C1E21] mb-6 tracking-tight">Welcome back</h2>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Email address</label>
+              <input type="email" value="thabo.test@example.co.za" class="w-full h-12 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#1C1E21] text-base focus:outline-none focus:border-[#1565C0]" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Password</label>
+              <div class="relative">
+                <input type="password" value="wrongpassword" class="w-full h-12 pl-3.5 pr-12 rounded-xl bg-white border border-[#CBD5E1] text-[#1C1E21] text-base focus:outline-none focus:border-[#1565C0]" />
+                <button type="button" aria-label="Toggle password visibility" class="absolute right-1 top-1 w-11 h-11 flex items-center justify-center text-[#65676B]">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button class="w-full h-12 rounded-xl bg-[#1A6BD1] active:bg-[#1565C0] text-white text-base font-semibold flex items-center justify-center shadow-sm">
+                Log in
+              </button>
+            </div>
+
+            <div class="pt-3 space-y-2 text-center">
+              <div>
+                <a href="#forgot" class="inline-flex items-center justify-center min-h-[44px] px-2 text-sm font-semibold text-[#1A6BD1]">
+                  Forgot password?
+                </a>
+              </div>
+              <div class="pt-1">
+                <span class="text-sm text-[#65676B]">Don't have an account?</span>
+                <a href="#signup" class="inline-flex items-center justify-center min-h-[44px] px-1 text-sm font-semibold text-[#1A6BD1]">
+                  Create an account
+                </a>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <footer class="p-4 text-center shrink-0">
+          <p class="text-xs text-[#65676B]">Protected by Diabetes Companion SA</p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STATE 7: ERROR BANNER 2 (RATE LIMIT / TOO MANY TRIES)
+         ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="text-xs font-semibold tracking-wide uppercase px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800">State 7: Error Banner 2</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">Rate Limited: "Too many tries..." (Disabled)</h3>
+      </div>
+
+      <div class="mobile-frame">
+        <!-- Status Bar -->
+        <div class="h-6 w-full flex items-center justify-between px-4 pt-1 text-[11px] font-medium text-[#1C1E21] select-none shrink-0">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-14 min-h-[56px] w-full px-4 flex items-center justify-between bg-white border-b border-[#E4E6EB] shrink-0">
+          <div class="w-9 h-9 rounded-xl bg-[#1A6BD1] flex items-center justify-center shadow-sm">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+              <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="h-9 px-2 flex items-center gap-1 text-xs font-semibold text-[#1C1E21] rounded-lg border border-[#E4E6EB] bg-white">
+              <svg class="w-3.5 h-3.5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <button class="h-11 px-2.5 rounded-xl bg-[#B91C1C] text-white flex items-center gap-1.5 shadow-sm min-h-[44px]">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span class="text-xs font-bold">Warning signs</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- 2. Error Banner: "Too many tries. Please wait 15 minutes and try again." -->
+        <div class="px-4 pt-4">
+          <div class="p-3.5 rounded-xl bg-white border border-[#B91C1C] card-shadow flex items-start gap-2.5">
+            <svg class="w-5 h-5 text-[#B91C1C] shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <p class="text-sm font-semibold text-[#B91C1C] leading-snug">Too many tries. Please wait 15 minutes and try again.</p>
+          </div>
+        </div>
+
+        <!-- Form Body -->
+        <main class="flex-1 px-4 py-4 flex flex-col justify-start">
+          <h2 class="text-2xl font-bold text-[#1C1E21] mb-6 tracking-tight">Welcome back</h2>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Email address</label>
+              <input type="email" value="thabo.test@example.co.za" class="w-full h-12 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#1C1E21] text-base focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Password</label>
+              <div class="relative">
+                <input type="password" value="••••••••••••" class="w-full h-12 pl-3.5 pr-12 rounded-xl bg-white border border-[#CBD5E1] text-[#1C1E21] text-base tracking-widest focus:outline-none" />
+                <button type="button" aria-label="Toggle password visibility" class="absolute right-1 top-1 w-11 h-11 flex items-center justify-center text-[#65676B]">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Requirement: The "Log in" button is disabled -->
+            <div class="pt-2">
+              <button disabled class="w-full h-12 rounded-xl bg-[#D0D5DD] text-[#475467] text-base font-semibold flex items-center justify-center cursor-not-allowed">
+                Log in
+              </button>
+            </div>
+
+            <div class="pt-3 space-y-2 text-center">
+              <div>
+                <a href="#forgot" class="inline-flex items-center justify-center min-h-[44px] px-2 text-sm font-semibold text-[#1A6BD1]">
+                  Forgot password?
+                </a>
+              </div>
+              <div class="pt-1">
+                <span class="text-sm text-[#65676B]">Don't have an account?</span>
+                <a href="#signup" class="inline-flex items-center justify-center min-h-[44px] px-1 text-sm font-semibold text-[#1A6BD1]">
+                  Create an account
+                </a>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <footer class="p-4 text-center shrink-0">
+          <p class="text-xs text-[#65676B]">Protected by Diabetes Companion SA</p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STATE 8: ERROR BANNER 3 (UNCONFIRMED EMAIL + "SEND EMAIL AGAIN" + TOAST)
+         ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="text-xs font-semibold tracking-wide uppercase px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800">State 8: Error Banner 3</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">Unconfirmed Email + Resend + Toast</h3>
+      </div>
+
+      <div class="mobile-frame">
+        <!-- Status Bar -->
+        <div class="h-6 w-full flex items-center justify-between px-4 pt-1 text-[11px] font-medium text-[#1C1E21] select-none shrink-0">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-14 min-h-[56px] w-full px-4 flex items-center justify-between bg-white border-b border-[#E4E6EB] shrink-0">
+          <div class="w-9 h-9 rounded-xl bg-[#1A6BD1] flex items-center justify-center shadow-sm">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+              <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="h-9 px-2 flex items-center gap-1 text-xs font-semibold text-[#1C1E21] rounded-lg border border-[#E4E6EB] bg-white">
+              <svg class="w-3.5 h-3.5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <button class="h-11 px-2.5 rounded-xl bg-[#B91C1C] text-white flex items-center gap-1.5 shadow-sm min-h-[44px]">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span class="text-xs font-bold">Warning signs</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- 2. Error Banner: "Please confirm your email first. Check your inbox." with "Send the email again" link (8) -->
+        <div class="px-4 pt-4">
+          <div class="p-3.5 rounded-xl bg-white border border-[#B91C1C] card-shadow">
+            <div class="flex items-start gap-2.5">
+              <svg class="w-5 h-5 text-[#B91C1C] shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              <div>
+                <p class="text-sm font-semibold text-[#B91C1C] leading-snug">Please confirm your email first. Check your inbox.</p>
+                <!-- 8. Link "Send the email again", shown only after unconfirmed email message -->
+                <div class="mt-2">
+                  <a href="#resend" class="inline-flex items-center min-h-[44px] py-1 text-sm font-semibold text-[#1A6BD1] hover:underline">
+                    Send the email again
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Body -->
+        <main class="flex-1 px-4 py-4 flex flex-col justify-start">
+          <h2 class="text-2xl font-bold text-[#1C1E21] mb-6 tracking-tight">Welcome back</h2>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Email address</label>
+              <input type="email" value="thabo.test@example.co.za" class="w-full h-12 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#1C1E21] text-base focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Password</label>
+              <div class="relative">
+                <input type="password" value="••••••••••••" class="w-full h-12 pl-3.5 pr-12 rounded-xl bg-white border border-[#CBD5E1] text-[#1C1E21] text-base tracking-widest focus:outline-none" />
+                <button type="button" aria-label="Toggle password visibility" class="absolute right-1 top-1 w-11 h-11 flex items-center justify-center text-[#65676B]">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button class="w-full h-12 rounded-xl bg-[#1A6BD1] active:bg-[#1565C0] text-white text-base font-semibold flex items-center justify-center shadow-sm">
+                Log in
+              </button>
+            </div>
+
+            <div class="pt-3 space-y-2 text-center">
+              <div>
+                <a href="#forgot" class="inline-flex items-center justify-center min-h-[44px] px-2 text-sm font-semibold text-[#1A6BD1]">
+                  Forgot password?
+                </a>
+              </div>
+              <div class="pt-1">
+                <span class="text-sm text-[#65676B]">Don't have an account?</span>
+                <a href="#signup" class="inline-flex items-center justify-center min-h-[44px] px-1 text-sm font-semibold text-[#1A6BD1]">
+                  Create an account
+                </a>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Toast Notification: Component 13 from Style Guide (#1C1E21 background, white text, 12px corners, green tick for success) -->
+        <!-- "Toast after 'Send the email again': 'We’ve sent a new email.'" -->
+        <div class="px-4 pb-3 pt-1 shrink-0">
+          <div class="w-full p-3 bg-[#1C1E21] text-white rounded-xl shadow-lg flex items-center gap-2.5 border border-slate-700">
+            <!-- Green tick icon #15803D -->
+            <div class="w-5 h-5 rounded-full bg-[#15803D] flex items-center justify-center shrink-0">
+              <svg class="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <p class="text-sm font-medium text-white leading-tight">We’ve sent a new email.</p>
+          </div>
+        </div>
+
+        <footer class="p-3 text-center shrink-0">
+          <p class="text-xs text-[#65676B]">Protected by Diabetes Companion SA</p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STATE 9: OFFLINE BANNER + DISABLED BUTTON
+         ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="text-xs font-semibold tracking-wide uppercase px-2.5 py-0.5 rounded-full bg-zinc-800 text-white">State 9: Offline</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">#1C1E21 Banner + Disabled CTA</h3>
+      </div>
+
+      <div class="mobile-frame">
+        <!-- Status Bar with Offline Indicator -->
+        <div class="h-6 w-full flex items-center justify-between px-4 pt-1 text-[11px] font-medium text-[#1C1E21] select-none shrink-0">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-[#B45309]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path><path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            <span class="text-[10px] text-[#65676B]">Offline</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-14 min-h-[56px] w-full px-4 flex items-center justify-between bg-white border-b border-[#E4E6EB] shrink-0">
+          <div class="w-9 h-9 rounded-xl bg-[#1A6BD1] flex items-center justify-center shadow-sm">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+              <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="h-9 px-2 flex items-center gap-1 text-xs font-semibold text-[#1C1E21] rounded-lg border border-[#E4E6EB] bg-white">
+              <svg class="w-3.5 h-3.5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <button class="h-11 px-2.5 rounded-xl bg-[#B91C1C] text-white flex items-center gap-1.5 shadow-sm min-h-[44px]">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span class="text-xs font-bold">Warning signs</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Offline Banner (Component 18: under the header, #1C1E21 background, white text) -->
+        <div class="w-full bg-[#1C1E21] px-4 py-2.5 flex items-center gap-2.5 shrink-0">
+          <svg class="w-4 h-4 text-[#B45309] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path><path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+          <p class="text-xs font-normal text-white leading-snug">You’re offline. Some things may not work until you reconnect.</p>
+        </div>
+
+        <!-- Form Body -->
+        <main class="flex-1 px-4 py-6 flex flex-col justify-start">
+          <h2 class="text-2xl font-bold text-[#1C1E21] mb-6 tracking-tight">Welcome back</h2>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Email address</label>
+              <input type="email" value="thabo.test@example.co.za" class="w-full h-12 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#1C1E21] text-base focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-[#1C1E21] mb-1.5">Password</label>
+              <div class="relative">
+                <input type="password" value="••••••••••••" class="w-full h-12 pl-3.5 pr-12 rounded-xl bg-white border border-[#CBD5E1] text-[#1C1E21] text-base tracking-widest focus:outline-none" />
+                <button type="button" aria-label="Toggle password visibility" class="absolute right-1 top-1 w-11 h-11 flex items-center justify-center text-[#65676B]">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Requirement: The "Log in" button is disabled in Offline state -->
+            <div class="pt-2">
+              <button disabled class="w-full h-12 rounded-xl bg-[#D0D5DD] text-[#475467] text-base font-semibold flex items-center justify-center cursor-not-allowed">
+                Log in (Offline)
+              </button>
+              <p class="text-center text-xs text-[#65676B] mt-1.5">An internet connection is required to log in.</p>
+            </div>
+
+            <div class="pt-2 space-y-2 text-center">
+              <div>
+                <a href="#forgot" class="inline-flex items-center justify-center min-h-[44px] px-2 text-sm font-semibold text-[#1A6BD1]">
+                  Forgot password?
+                </a>
+              </div>
+              <div class="pt-1">
+                <span class="text-sm text-[#65676B]">Don't have an account?</span>
+                <a href="#signup" class="inline-flex items-center justify-center min-h-[44px] px-1 text-sm font-semibold text-[#1A6BD1]">
+                  Create an account
+                </a>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <footer class="p-4 text-center shrink-0">
+          <p class="text-xs text-[#65676B]">Protected by Diabetes Companion SA</p>
+        </footer>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

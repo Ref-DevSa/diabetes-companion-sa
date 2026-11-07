@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screen S4 "Forgot password" - All States (360px Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #E2E8F0;
+      color: #1C1E21;
+      margin: 0;
+      padding: 32px 24px;
+    }
+
+    /* Strict token definitions */
+    :root {
+      --primary-blue: #1A6BD1;
+      --dark-blue: #1565C0;
+      --light-blue-tint: #E7F0FD;
+      --page-bg: #F0F2F5;
+      --card-surface: #FFFFFF;
+      --main-text: #1C1E21;
+      --secondary-text: #65676B;
+      --low-flag-orange: #B45309;
+      --danger-red: #B91C1C;
+      --success-green: #15803D;
+      --disabled-fill: #D0D5DD;
+      --loading-grey: #E4E6EB;
+      --dark-surface: #1C1E21;
+    }
+
+    .phone-frame {
+      width: 360px;
+      min-width: 360px;
+      max-width: 360px;
+      height: 720px;
+      background-color: #F0F2F5;
+      border-radius: 36px;
+      border: 8px solid #1E293B;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-screen-content {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .soft-shadow {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Custom scrollbar */
+    .app-screen-content::-webkit-scrollbar {
+      width: 4px;
+    }
+    .app-screen-content::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Document Header -->
+  <div class="max-w-[1520px] mx-auto mb-8 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+    <div class="flex flex-wrap items-center gap-3 mb-2">
+      <span class="px-2.5 py-1 rounded text-xs font-semibold bg-blue-100 text-[#1565C0]">Screen Specification • S4 "Forgot password" (360 px Mobile)</span>
+      <span class="px-2.5 py-1 rounded text-xs font-semibold bg-amber-100 text-[#B45309]">Visitor Only (Logged-out)</span>
+      <span class="px-2.5 py-1 rounded text-xs font-semibold bg-slate-100 text-slate-700">No Tab Bar</span>
+      <span class="px-2.5 py-1 rounded text-xs font-semibold bg-emerald-100 text-[#15803D]">Strict Tokens &amp; Inter Font</span>
+    </div>
+    <h1 class="text-2xl font-bold text-[#1C1E21] mb-2">Screen S4 “Forgot password” — Diabetes Companion SA</h1>
+    <p class="text-sm text-[#65676B] max-w-4xl leading-relaxed">
+      Purpose: Ask for a reset link (Step 1) and set a new password (Step 2). Only logged-out visitors see this screen. Strictly designed for a 360 px wide Android viewport with 16 px screen margins, 48 px high inputs and buttons, minimum 44×44 px touch targets, and full validation/system states.
+    </p>
+
+    <!-- Navigation jump anchors -->
+    <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100 text-xs">
+      <span class="font-bold text-slate-500 py-1">Quick Jump:</span>
+      <a href="#step1-section" class="px-2.5 py-1 rounded bg-[#E7F0FD] text-[#1565C0] font-semibold hover:bg-blue-200 transition">Step 1: Request Reset Link (5 States)</a>
+      <a href="#step2-section" class="px-2.5 py-1 rounded bg-[#E7F0FD] text-[#1565C0] font-semibold hover:bg-blue-200 transition">Step 2: Choose New Password (6 States)</a>
+    </div>
+  </div>
+
+  <main class="max-w-[1520px] mx-auto space-y-12">
+
+    <!-- ========================================== -->
+    <!-- SECTION 1: STEP 1 (REQUEST RESET LINK)     -->
+    <!-- ========================================== -->
+    <section id="step1-section">
+      <div class="mb-4 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#1A6BD1] bg-blue-50 px-2 py-0.5 rounded">Part 1</span>
+          <h2 class="text-xl font-bold text-[#1C1E21] mt-1">Step 1 — Request Reset Link</h2>
+          <p class="text-xs text-[#65676B]">Email input, primary action, back link, error validation, loading, offline, and success states.</p>
+        </div>
+      </div>
+
+      <!-- Grid of Frames for Step 1 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+
+        <!-- Frame 1.1: Step 1 Normal (Empty) -->
+        <div class="flex flex-col items-center">
+          <div class="mb-2 text-center">
+            <span class="text-[11px] font-bold text-[#1A6BD1] uppercase tracking-wide">State 1: Normal</span>
+            <p class="text-xs font-semibold text-[#1C1E21]">Step 1 Empty Form</p>
+          </div>
+          <div class="phone-frame">
+            <!-- Status Bar -->
+            <div class="h-6 bg-white px-4 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-slate-50 flex-shrink-0">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#1C1E21]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <span class="text-[10px]">98%</span>
+              </div>
+            </div>
+
+            <!-- Sticky Header (56px) -->
+            <header class="h-14 bg-white border-b border-slate-100 px-4 flex items-center justify-between flex-shrink-0">
+              <div class="flex items-center gap-2">
+                <!-- App Icon (Wordmark hidden < 400px) -->
+                <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center shadow-xs">
+                  <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+                    <path d="M9 12l2 2 4-4" stroke="#1A6BD1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <!-- Language Selector -->
+                <div class="h-8 px-2 flex items-center gap-1 text-xs font-medium text-[#1C1E21] rounded border border-slate-200">
+                  <svg class="w-3.5 h-3.5 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span>EN</span>
+                  <svg class="w-3 h-3 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+
+                <!-- Warning signs button -->
+                <button class="h-11 px-2.5 bg-[#B91C1C] hover:bg-red-800 text-white rounded-lg flex items-center gap-1 text-xs font-semibold shadow-xs">
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span>Warning signs</span>
+                </button>
+              </div>
+            </header>
+
+            <!-- Screen Content -->
+            <div class="app-screen-content p-4">
+              <h2 class="text-[24px] font-bold text-[#1C1E21] leading-tight mb-2">Forgot your password?</h2>
+              <p class="text-[16px] text-[#65676B] leading-normal mb-6">Enter your email and we’ll send you a link to choose a new one.</p>
+
+              <!-- Email Field -->
+              <div class="mb-6">
+                <label for="s1-email" class="block text-sm font-semibold text-[#1C1E21] mb-2">Email address</label>
+                <input id="s1-email" type="email" placeholder="you@example.co.za" class="w-full h-12 px-3 text-[16px] bg-white text-[#1C1E21] rounded-xl border border-slate-300 focus:outline-none focus:border-[#1565C0] focus:ring-2 focus:ring-[#1565C0] transition placeholder:text-slate-400">
+              </div>
+
+              <!-- Primary Button -->
+              <button class="w-full h-12 bg-[#1A6BD1] hover:bg-[#1565C0] active:bg-[#1565C0] text-white text-[16px] font-semibold rounded-xl transition flex items-center justify-center mb-6 shadow-sm">
+                Send reset link
+              </button>
+
+              <!-- Link back to login -->
+              <div class="text-center mt-auto pb-4">
+                <a href="#s3-login" class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] text-[16px] font-semibold text-[#1A6BD1] hover:text-[#1565C0] hover:underline">
+                  Back to log in
+                </a>
+              </div>
+            </div>
+
+            <!-- Footer brand tagline -->
+            <div class="py-3 text-center border-t border-slate-100 bg-[#F0F2F5]">
+              <span class="text-[11px] text-[#65676B]">Protected by Diabetes Companion SA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frame 1.2: Step 1 Field Error -->
+        <div class="flex flex-col items-center">
+          <div class="mb-2 text-center">
+            <span class="text-[11px] font-bold text-[#B91C1C] uppercase tracking-wide">State 2: Validation</span>
+            <p class="text-xs font-semibold text-[#1C1E21]">Step 1 Email Error</p>
+          </div>
+          <div class="phone-frame">
+            <div class="h-6 bg-white px-4 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-slate-50 flex-shrink-0">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#1C1E21]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <span class="text-[10px]">98%</span>
+              </div>
+            </div>
+
+            <header class="h-14 bg-white border-b border-slate-100 px-4 flex items-center justify-between flex-shrink-0">
+              <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center shadow-xs">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+                  <path d="M9 12l2 2 4-4" stroke="#1A6BD1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="h-8 px-2 flex items-center gap-1 text-xs font-medium text-[#1C1E21] rounded border border-slate-200">
+                  <svg class="w-3.5 h-3.5 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span>EN</span>
+                  <svg class="w-3 h-3 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <button class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1 text-xs font-semibold shadow-xs">
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span>Warning signs</span>
+                </button>
+              </div>
+            </header>
+
+            <div class="app-screen-content p-4">
+              <h2 class="text-[24px] font-bold text-[#1C1E21] leading-tight mb-2">Forgot your password?</h2>
+              <p class="text-[16px] text-[#65676B] leading-normal mb-6">Enter your email and we’ll send you a link to choose a new one.</p>
+
+              <!-- Email Field with Error -->
+              <div class="mb-6">
+                <label for="s1-err-email" class="block text-sm font-semibold text-[#1C1E21] mb-2">Email address</label>
+                <div class="relative">
+                  <input id="s1-err-email" type="text" value="invalid-email" class="w-full h-12 px-3 pr-10 text-[16px] bg-white text-[#1C1E21] rounded-xl border-2 border-[#B91C1C] focus:outline-none focus:ring-1 focus:ring-[#B91C1C]">
+                  <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <svg class="w-5 h-5 text-[#B91C1C]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  </div>
+                </div>
+                <!-- Error message with icon (never colour alone) -->
+                <div class="flex items-center gap-1.5 mt-2 text-xs font-semibold text-[#B91C1C]">
+                  <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <span>Enter a valid email address.</span>
+                </div>
+              </div>
+
+              <button class="w-full h-12 bg-[#1A6BD1] hover:bg-[#1565C0] text-white text-[16px] font-semibold rounded-xl flex items-center justify-center mb-6 shadow-sm">
+                Send reset link
+              </button>
+
+              <div class="text-center mt-auto pb-4">
+                <a href="#s3-login" class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] text-[16px] font-semibold text-[#1A6BD1]">
+                  Back to log in
+                </a>
+              </div>
+            </div>
+
+            <div class="py-3 text-center border-t border-slate-100 bg-[#F0F2F5]">
+              <span class="text-[11px] text-[#65676B]">Protected by Diabetes Companion SA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frame 1.3: Step 1 Loading -->
+        <div class="flex flex-col items-center">
+          <div class="mb-2 text-center">
+            <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">State 3: Loading</span>
+            <p class="text-xs font-semibold text-[#1C1E21]">Step 1 "Sending…" (Disabled)</p>
+          </div>
+          <div class="phone-frame">
+            <div class="h-6 bg-white px-4 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-slate-50 flex-shrink-0">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#1C1E21]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <span class="text-[10px]">98%</span>
+              </div>
+            </div>
+
+            <header class="h-14 bg-white border-b border-slate-100 px-4 flex items-center justify-between flex-shrink-0">
+              <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center shadow-xs">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+                  <path d="M9 12l2 2 4-4" stroke="#1A6BD1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="h-8 px-2 flex items-center gap-1 text-xs font-medium text-[#1C1E21] rounded border border-slate-200">
+                  <svg class="w-3.5 h-3.5 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span>EN</span>
+                  <svg class="w-3 h-3 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <button class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1 text-xs font-semibold shadow-xs">
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span>Warning signs</span>
+                </button>
+              </div>
+            </header>
+
+            <div class="app-screen-content p-4">
+              <h2 class="text-[24px] font-bold text-[#1C1E21] leading-tight mb-2">Forgot your password?</h2>
+              <p class="text-[16px] text-[#65676B] leading-normal mb-6">Enter your email and we’ll send you a link to choose a new one.</p>
+
+              <!-- Email Field with Sample Content Disabled -->
+              <div class="mb-6">
+                <label class="block text-sm font-semibold text-[#1C1E21] mb-2">Email address</label>
+                <input type="email" value="nomsa.test@example.co.za" disabled class="w-full h-12 px-3 text-[16px] bg-slate-100 text-[#1C1E21] rounded-xl border border-slate-300 opacity-80 cursor-not-allowed">
+              </div>
+
+              <!-- Primary Button Loading (Disabled #D0D5DD with dark grey text) -->
+              <button disabled class="w-full h-12 bg-[#D0D5DD] text-[#1C1E21] text-[16px] font-semibold rounded-xl flex items-center justify-center gap-2 mb-6 cursor-not-allowed">
+                <svg class="animate-spin h-5 w-5 text-[#1C1E21]" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+                <span>Sending…</span>
+              </button>
+
+              <div class="text-center mt-auto pb-4">
+                <span class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] text-[16px] font-semibold text-slate-400 cursor-not-allowed">
+                  Back to log in
+                </span>
+              </div>
+            </div>
+
+            <div class="py-3 text-center border-t border-slate-100 bg-[#F0F2F5]">
+              <span class="text-[11px] text-[#65676B]">Protected by Diabetes Companion SA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frame 1.4: Step 1 Offline -->
+        <div class="flex flex-col items-center">
+          <div class="mb-2 text-center">
+            <span class="text-[11px] font-bold text-slate-800 uppercase tracking-wide">State 4: Offline</span>
+            <p class="text-xs font-semibold text-[#1C1E21]">#1C1E21 Banner + Disabled CTA</p>
+          </div>
+          <div class="phone-frame">
+            <div class="h-6 bg-white px-4 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-slate-50 flex-shrink-0">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5 text-slate-500">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.56 9.2"/><path d="M1.42 9A15.91 15.91 0 0 1 4.7 5.69"/></svg>
+                <span class="text-[10px]">Offline</span>
+              </div>
+            </div>
+
+            <header class="h-14 bg-white border-b border-slate-100 px-4 flex items-center justify-between flex-shrink-0">
+              <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center shadow-xs">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+                  <path d="M9 12l2 2 4-4" stroke="#1A6BD1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="h-8 px-2 flex items-center gap-1 text-xs font-medium text-[#1C1E21] rounded border border-slate-200">
+                  <svg class="w-3.5 h-3.5 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span>EN</span>
+                  <svg class="w-3 h-3 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <button class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1 text-xs font-semibold shadow-xs">
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span>Warning signs</span>
+                </button>
+              </div>
+            </header>
+
+            <!-- Offline Banner (Fixed under header, #1C1E21 background, white text) -->
+            <div class="bg-[#1C1E21] text-white px-4 py-2.5 flex items-start gap-2.5 text-xs flex-shrink-0">
+              <svg class="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.56 9.2"/><path d="M1.42 9A15.91 15.91 0 0 1 4.7 5.69"/></svg>
+              <span class="leading-snug">You’re offline. Some things may not work until you reconnect.</span>
+            </div>
+
+            <div class="app-screen-content p-4">
+              <h2 class="text-[24px] font-bold text-[#1C1E21] leading-tight mb-2">Forgot your password?</h2>
+              <p class="text-[16px] text-[#65676B] leading-normal mb-6">Enter your email and we’ll send you a link to choose a new one.</p>
+
+              <div class="mb-6">
+                <label class="block text-sm font-semibold text-[#1C1E21] mb-2">Email address</label>
+                <input type="email" value="nomsa.test@example.co.za" class="w-full h-12 px-3 text-[16px] bg-white text-[#1C1E21] rounded-xl border border-slate-300">
+              </div>
+
+              <!-- Disabled button in Offline State -->
+              <button disabled class="w-full h-12 bg-[#D0D5DD] text-[#1C1E21] text-[16px] font-semibold rounded-xl flex items-center justify-center mb-2 cursor-not-allowed">
+                Send reset link (Offline)
+              </button>
+              <p class="text-xs text-center text-[#65676B] mb-6">An internet connection is required to request a reset link.</p>
+
+              <div class="text-center mt-auto pb-4">
+                <a href="#s3-login" class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] text-[16px] font-semibold text-[#1A6BD1]">
+                  Back to log in
+                </a>
+              </div>
+            </div>
+
+            <div class="py-3 text-center border-t border-slate-100 bg-[#F0F2F5]">
+              <span class="text-[11px] text-[#65676B]">Protected by Diabetes Companion SA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frame 1.5: Step 1 Success -->
+        <div class="flex flex-col items-center">
+          <div class="mb-2 text-center">
+            <span class="text-[11px] font-bold text-[#15803D] uppercase tracking-wide">State 5: Success</span>
+            <p class="text-xs font-semibold text-[#1C1E21]">Step 1 Confirmation Card</p>
+          </div>
+          <div class="phone-frame">
+            <div class="h-6 bg-white px-4 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-slate-50 flex-shrink-0">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#1C1E21]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <span class="text-[10px]">98%</span>
+              </div>
+            </div>
+
+            <header class="h-14 bg-white border-b border-slate-100 px-4 flex items-center justify-between flex-shrink-0">
+              <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center shadow-xs">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+                  <path d="M9 12l2 2 4-4" stroke="#1A6BD1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="h-8 px-2 flex items-center gap-1 text-xs font-medium text-[#1C1E21] rounded border border-slate-200">
+                  <svg class="w-3.5 h-3.5 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span>EN</span>
+                  <svg class="w-3 h-3 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <button class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1 text-xs font-semibold shadow-xs">
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span>Warning signs</span>
+                </button>
+              </div>
+            </header>
+
+            <div class="app-screen-content p-4 flex flex-col justify-center">
+              <!-- Success Confirmation Card on White Background -->
+              <div class="bg-white rounded-xl p-5 soft-shadow border border-slate-100 text-center">
+                <div class="w-12 h-12 bg-green-50 text-[#15803D] rounded-full flex items-center justify-center mx-auto mb-4 border border-green-200">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+
+                <h2 class="text-[20px] font-bold text-[#1C1E21] mb-2">Check your email</h2>
+                <p class="text-[16px] text-[#1C1E21] leading-relaxed mb-4">
+                  If this email is registered, we’ve sent a reset link.
+                </p>
+                <div class="p-3 bg-[#E7F0FD] rounded-lg text-xs font-semibold text-[#1565C0] mb-6">
+                  nomsa.test@example.co.za
+                </div>
+
+                <a href="#s3-login" class="w-full h-12 bg-[#1A6BD1] hover:bg-[#1565C0] text-white text-[16px] font-semibold rounded-xl flex items-center justify-center shadow-sm transition">
+                  Back to log in
+                </a>
+              </div>
+            </div>
+
+            <div class="py-3 text-center border-t border-slate-100 bg-[#F0F2F5]">
+              <span class="text-[11px] text-[#65676B]">Protected by Diabetes Companion SA</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 2: STEP 2 (CHOOSE NEW PASSWORD)   -->
+    <!-- ========================================== -->
+    <section id="step2-section" class="pt-6 border-t border-slate-300">
+      <div class="mb-4 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#1565C0] bg-blue-50 px-2 py-0.5 rounded">Part 2</span>
+          <h2 class="text-xl font-bold text-[#1C1E21] mt-1">Step 2 — Choose a New Password</h2>
+          <p class="text-xs text-[#65676B]">Opened from email link: new password, confirm password, field errors, loading, token expired, server error, and success.</p>
+        </div>
+      </div>
+
+      <!-- Grid of Frames for Step 2 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
+
+        <!-- Frame 2.1: Step 2 Normal (Empty) -->
+        <div class="flex flex-col items-center">
+          <div class="mb-2 text-center">
+            <span class="text-[11px] font-bold text-[#1A6BD1] uppercase tracking-wide">State 6: Normal</span>
+            <p class="text-xs font-semibold text-[#1C1E21]">Step 2 Empty Form</p>
+          </div>
+          <div class="phone-frame">
+            <div class="h-6 bg-white px-4 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-slate-50 flex-shrink-0">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#1C1E21]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <span class="text-[10px]">98%</span>
+              </div>
+            </div>
+
+            <header class="h-14 bg-white border-b border-slate-100 px-4 flex items-center justify-between flex-shrink-0">
+              <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center shadow-xs">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+                  <path d="M9 12l2 2 4-4" stroke="#1A6BD1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="h-8 px-2 flex items-center gap-1 text-xs font-medium text-[#1C1E21] rounded border border-slate-200">
+                  <svg class="w-3.5 h-3.5 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span>EN</span>
+                  <svg class="w-3 h-3 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <button class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1 text-xs font-semibold shadow-xs">
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span>Warning signs</span>
+                </button>
+              </div>
+            </header>
+
+            <div class="app-screen-content p-4">
+              <h2 class="text-[24px] font-bold text-[#1C1E21] leading-tight mb-6">Choose a new password</h2>
+
+              <!-- New Password Field -->
+              <div class="mb-4">
+                <label for="s2-newpass" class="block text-sm font-semibold text-[#1C1E21] mb-2">New password</label>
+                <div class="relative">
+                  <input id="s2-newpass" type="password" placeholder="At least 8 characters and 1 number" class="w-full h-12 pl-3 pr-12 text-[16px] bg-white text-[#1C1E21] rounded-xl border border-slate-300 focus:outline-none focus:border-[#1565C0] focus:ring-2 focus:ring-[#1565C0] placeholder:text-slate-400">
+                  <button type="button" aria-label="Show password" class="absolute inset-y-0 right-0 w-12 h-12 flex items-center justify-center text-[#65676B] hover:text-[#1C1E21]">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Confirm New Password Field -->
+              <div class="mb-6">
+                <label for="s2-confpass" class="block text-sm font-semibold text-[#1C1E21] mb-2">Confirm new password</label>
+                <div class="relative">
+                  <input id="s2-confpass" type="password" placeholder="Re-enter your new password" class="w-full h-12 pl-3 pr-12 text-[16px] bg-white text-[#1C1E21] rounded-xl border border-slate-300 focus:outline-none focus:border-[#1565C0] focus:ring-2 focus:ring-[#1565C0] placeholder:text-slate-400">
+                  <button type="button" aria-label="Show password" class="absolute inset-y-0 right-0 w-12 h-12 flex items-center justify-center text-[#65676B] hover:text-[#1C1E21]">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Primary Button -->
+              <button class="w-full h-12 bg-[#1A6BD1] hover:bg-[#1565C0] text-white text-[16px] font-semibold rounded-xl transition flex items-center justify-center shadow-sm">
+                Save new password
+              </button>
+            </div>
+
+            <div class="py-3 text-center border-t border-slate-100 bg-[#F0F2F5]">
+              <span class="text-[11px] text-[#65676B]">Protected by Diabetes Companion SA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frame 2.2: Step 2 Validation Errors -->
+        <div class="flex flex-col items-center">
+          <div class="mb-2 text-center">
+            <span class="text-[11px] font-bold text-[#B91C1C] uppercase tracking-wide">State 7: Validation</span>
+            <p class="text-xs font-semibold text-[#1C1E21]">Step 2 Password Field Errors</p>
+          </div>
+          <div class="phone-frame">
+            <div class="h-6 bg-white px-4 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-slate-50 flex-shrink-0">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#1C1E21]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <span class="text-[10px]">98%</span>
+              </div>
+            </div>
+
+            <header class="h-14 bg-white border-b border-slate-100 px-4 flex items-center justify-between flex-shrink-0">
+              <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center shadow-xs">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+                  <path d="M9 12l2 2 4-4" stroke="#1A6BD1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="h-8 px-2 flex items-center gap-1 text-xs font-medium text-[#1C1E21] rounded border border-slate-200">
+                  <svg class="w-3.5 h-3.5 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span>EN</span>
+                  <svg class="w-3 h-3 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <button class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1 text-xs font-semibold shadow-xs">
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span>Warning signs</span>
+                </button>
+              </div>
+            </header>
+
+            <div class="app-screen-content p-4">
+              <h2 class="text-[24px] font-bold text-[#1C1E21] leading-tight mb-4">Choose a new password</h2>
+
+              <!-- New Password Error -->
+              <div class="mb-4">
+                <label for="s2-err1" class="block text-sm font-semibold text-[#1C1E21] mb-2">New password</label>
+                <div class="relative">
+                  <input id="s2-err1" type="text" value="short" class="w-full h-12 pl-3 pr-12 text-[16px] bg-white text-[#1C1E21] rounded-xl border-2 border-[#B91C1C]">
+                  <button type="button" class="absolute inset-y-0 right-0 w-12 h-12 flex items-center justify-center text-[#B91C1C]">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+                <!-- Error message -->
+                <div class="flex items-start gap-1.5 mt-2 text-xs font-semibold text-[#B91C1C]">
+                  <svg class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <span>Password must be at least 8 characters and include a number.</span>
+                </div>
+              </div>
+
+              <!-- Confirm Password Error -->
+              <div class="mb-6">
+                <label for="s2-err2" class="block text-sm font-semibold text-[#1C1E21] mb-2">Confirm new password</label>
+                <div class="relative">
+                  <input id="s2-err2" type="text" value="different" class="w-full h-12 pl-3 pr-12 text-[16px] bg-white text-[#1C1E21] rounded-xl border-2 border-[#B91C1C]">
+                  <button type="button" class="absolute inset-y-0 right-0 w-12 h-12 flex items-center justify-center text-[#B91C1C]">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+                <!-- Error message -->
+                <div class="flex items-center gap-1.5 mt-2 text-xs font-semibold text-[#B91C1C]">
+                  <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <span>Passwords don’t match.</span>
+                </div>
+              </div>
+
+              <button class="w-full h-12 bg-[#1A6BD1] hover:bg-[#1565C0] text-white text-[16px] font-semibold rounded-xl flex items-center justify-center shadow-sm">
+                Save new password
+              </button>
+            </div>
+
+            <div class="py-3 text-center border-t border-slate-100 bg-[#F0F2F5]">
+              <span class="text-[11px] text-[#65676B]">Protected by Diabetes Companion SA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frame 2.3: Step 2 Loading -->
+        <div class="flex flex-col items-center">
+          <div class="mb-2 text-center">
+            <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">State 8: Loading</span>
+            <p class="text-xs font-semibold text-[#1C1E21]">Step 2 "Saving…" (Disabled)</p>
+          </div>
+          <div class="phone-frame">
+            <div class="h-6 bg-white px-4 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-slate-50 flex-shrink-0">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#1C1E21]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <span class="text-[10px]">98%</span>
+              </div>
+            </div>
+
+            <header class="h-14 bg-white border-b border-slate-100 px-4 flex items-center justify-between flex-shrink-0">
+              <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center shadow-xs">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+                  <path d="M9 12l2 2 4-4" stroke="#1A6BD1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="h-8 px-2 flex items-center gap-1 text-xs font-medium text-[#1C1E21] rounded border border-slate-200">
+                  <svg class="w-3.5 h-3.5 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span>EN</span>
+                  <svg class="w-3 h-3 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <button class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1 text-xs font-semibold shadow-xs">
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span>Warning signs</span>
+                </button>
+              </div>
+            </header>
+
+            <div class="app-screen-content p-4">
+              <h2 class="text-[24px] font-bold text-[#1C1E21] leading-tight mb-6">Choose a new password</h2>
+
+              <div class="mb-4">
+                <label class="block text-sm font-semibold text-[#1C1E21] mb-2">New password</label>
+                <input type="text" value="••••••••••••" disabled class="w-full h-12 px-3 text-[16px] bg-slate-100 text-[#1C1E21] rounded-xl border border-slate-300 opacity-80 cursor-not-allowed">
+              </div>
+
+              <div class="mb-6">
+                <label class="block text-sm font-semibold text-[#1C1E21] mb-2">Confirm new password</label>
+                <input type="text" value="••••••••••••" disabled class="w-full h-12 px-3 text-[16px] bg-slate-100 text-[#1C1E21] rounded-xl border border-slate-300 opacity-80 cursor-not-allowed">
+              </div>
+
+              <!-- Button in Loading Disabled state (#D0D5DD with dark grey text) -->
+              <button disabled class="w-full h-12 bg-[#D0D5DD] text-[#1C1E21] text-[16px] font-semibold rounded-xl flex items-center justify-center gap-2 cursor-not-allowed">
+                <svg class="animate-spin h-5 w-5 text-[#1C1E21]" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+                <span>Saving…</span>
+              </button>
+            </div>
+
+            <div class="py-3 text-center border-t border-slate-100 bg-[#F0F2F5]">
+              <span class="text-[11px] text-[#65676B]">Protected by Diabetes Companion SA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frame 2.4: Step 2 Error: Expired Link -->
+        <div class="flex flex-col items-center">
+          <div class="mb-2 text-center">
+            <span class="text-[11px] font-bold text-[#B91C1C] uppercase tracking-wide">State 9: Link Expired</span>
+            <p class="text-xs font-semibold text-[#1C1E21]">Expired Link Banner &amp; Action</p>
+          </div>
+          <div class="phone-frame">
+            <div class="h-6 bg-white px-4 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-slate-50 flex-shrink-0">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#1C1E21]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <span class="text-[10px]">98%</span>
+              </div>
+            </div>
+
+            <header class="h-14 bg-white border-b border-slate-100 px-4 flex items-center justify-between flex-shrink-0">
+              <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center shadow-xs">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+                  <path d="M9 12l2 2 4-4" stroke="#1A6BD1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="h-8 px-2 flex items-center gap-1 text-xs font-medium text-[#1C1E21] rounded border border-slate-200">
+                  <svg class="w-3.5 h-3.5 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span>EN</span>
+                  <svg class="w-3 h-3 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <button class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1 text-xs font-semibold shadow-xs">
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span>Warning signs</span>
+                </button>
+              </div>
+            </header>
+
+            <div class="app-screen-content p-4 flex flex-col justify-center">
+              <!-- Error Card for Expired Link (Rule: sits on white card surface) -->
+              <div class="bg-white rounded-xl p-5 soft-shadow border-2 border-[#B91C1C] text-center">
+                <div class="w-12 h-12 bg-red-50 text-[#B91C1C] rounded-full flex items-center justify-center mx-auto mb-4 border border-red-200">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+
+                <h2 class="text-[20px] font-bold text-[#1C1E21] mb-2">Link expired</h2>
+                <p class="text-[16px] text-[#1C1E21] leading-relaxed mb-6">
+                  This link has expired. Ask for a new one.
+                </p>
+
+                <!-- Button "Send a new link" -->
+                <button class="w-full h-12 bg-[#1A6BD1] hover:bg-[#1565C0] text-white text-[16px] font-semibold rounded-xl flex items-center justify-center shadow-sm transition mb-3">
+                  Send a new link
+                </button>
+
+                <a href="#s3-login" class="inline-flex items-center justify-center min-h-[44px] text-sm font-semibold text-[#1A6BD1]">
+                  Back to log in
+                </a>
+              </div>
+            </div>
+
+            <div class="py-3 text-center border-t border-slate-100 bg-[#F0F2F5]">
+              <span class="text-[11px] text-[#65676B]">Protected by Diabetes Companion SA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frame 2.5: Step 2 Error: Server Problem -->
+        <div class="flex flex-col items-center">
+          <div class="mb-2 text-center">
+            <span class="text-[11px] font-bold text-[#B91C1C] uppercase tracking-wide">State 10: Server Error</span>
+            <p class="text-xs font-semibold text-[#1C1E21]">"Something went wrong…"</p>
+          </div>
+          <div class="phone-frame">
+            <div class="h-6 bg-white px-4 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-slate-50 flex-shrink-0">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#1C1E21]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <span class="text-[10px]">98%</span>
+              </div>
+            </div>
+
+            <header class="h-14 bg-white border-b border-slate-100 px-4 flex items-center justify-between flex-shrink-0">
+              <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center shadow-xs">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+                  <path d="M9 12l2 2 4-4" stroke="#1A6BD1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="h-8 px-2 flex items-center gap-1 text-xs font-medium text-[#1C1E21] rounded border border-slate-200">
+                  <svg class="w-3.5 h-3.5 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span>EN</span>
+                  <svg class="w-3 h-3 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <button class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1 text-xs font-semibold shadow-xs">
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span>Warning signs</span>
+                </button>
+              </div>
+            </header>
+
+            <div class="app-screen-content p-4 flex flex-col justify-center">
+              <div class="bg-white rounded-xl p-6 soft-shadow border border-slate-200 text-center">
+                <div class="w-12 h-12 bg-red-50 text-[#B91C1C] rounded-full flex items-center justify-center mx-auto mb-4 border border-red-200">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </div>
+
+                <h2 class="text-[20px] font-bold text-[#1C1E21] mb-2">Something went wrong</h2>
+                <p class="text-[16px] text-[#65676B] leading-relaxed mb-6">
+                  Something went wrong on our side. Please try again.
+                </p>
+
+                <!-- Primary CTA Try again -->
+                <button class="w-full h-12 bg-[#1A6BD1] hover:bg-[#1565C0] text-white text-[16px] font-semibold rounded-xl flex items-center justify-center gap-2 shadow-sm transition">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+                  <span>Try again</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="py-3 text-center border-t border-slate-100 bg-[#F0F2F5]">
+              <span class="text-[11px] text-[#65676B]">Protected by Diabetes Companion SA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frame 2.6: Step 2 Success -->
+        <div class="flex flex-col items-center">
+          <div class="mb-2 text-center">
+            <span class="text-[11px] font-bold text-[#15803D] uppercase tracking-wide">State 11: Success</span>
+            <p class="text-xs font-semibold text-[#1C1E21]">Step 2 Success &amp; Log In CTA</p>
+          </div>
+          <div class="phone-frame">
+            <div class="h-6 bg-white px-4 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-slate-50 flex-shrink-0">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#1C1E21]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <span class="text-[10px]">98%</span>
+              </div>
+            </div>
+
+            <header class="h-14 bg-white border-b border-slate-100 px-4 flex items-center justify-between flex-shrink-0">
+              <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center shadow-xs">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+                  <path d="M9 12l2 2 4-4" stroke="#1A6BD1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="h-8 px-2 flex items-center gap-1 text-xs font-medium text-[#1C1E21] rounded border border-slate-200">
+                  <svg class="w-3.5 h-3.5 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span>EN</span>
+                  <svg class="w-3 h-3 text-[#65676B]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </div>
+                <button class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1 text-xs font-semibold shadow-xs">
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span>Warning signs</span>
+                </button>
+              </div>
+            </header>
+
+            <div class="app-screen-content p-4 flex flex-col justify-center">
+              <div class="bg-white rounded-xl p-6 soft-shadow border border-slate-100 text-center">
+                <div class="w-12 h-12 bg-green-50 text-[#15803D] rounded-full flex items-center justify-center mx-auto mb-4 border border-green-200">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+
+                <h2 class="text-[20px] font-bold text-[#1C1E21] mb-2">Password changed</h2>
+                <p class="text-[16px] text-[#1C1E21] leading-relaxed mb-6">
+                  Password changed. Please log in.
+                </p>
+
+                <!-- Primary CTA "Log in" -->
+                <a href="#s3-login" class="w-full h-12 bg-[#1A6BD1] hover:bg-[#1565C0] text-white text-[16px] font-semibold rounded-xl flex items-center justify-center shadow-sm transition">
+                  Log in
+                </a>
+              </div>
+            </div>
+
+            <div class="py-3 text-center border-t border-slate-100 bg-[#F0F2F5]">
+              <span class="text-[11px] text-[#65676B]">Protected by Diabetes Companion SA</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

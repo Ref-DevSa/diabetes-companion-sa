@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pop-up M3 “Delete account confirmation” - Diabetes Companion SA</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #0F172A;
+    color: #1E293B;
+  }
+  .touch-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+</style>
+</head>
+<body class="p-6 md:p-10 min-h-screen text-slate-800">
+
+  <!-- Overview Header Spec -->
+  <header class="max-w-7xl mx-auto mb-10 bg-slate-800/80 backdrop-blur rounded-2xl p-6 border border-slate-700 shadow-xl">
+    <div class="flex flex-wrap items-center gap-2 mb-3">
+      <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-md bg-blue-500/20 text-blue-400 border border-blue-500/30">Modal Spec • M3 “Delete Account Confirmation”</span>
+      <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-md bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Logged-in Users (Thabo)</span>
+      <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-md bg-red-500/20 text-red-400 border border-red-500/30">High Consequence Destructive Action</span>
+      <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-md bg-amber-500/20 text-amber-400 border border-amber-500/30">360 px Viewport • WCAG AAA Tokens</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-2">Pop-up M3 “Delete account confirmation” — Diabetes Companion SA</h1>
+    <p class="text-slate-300 text-sm md:text-base leading-relaxed max-w-4xl">
+      <strong>Purpose:</strong> Provide an explicit, accessible confirmation dialog before permanently destroying health records and personal accounts under POPIA. Presented as a centered confirmation pop-up (up to 328 px wide, 16 px margin on 360 px viewport) with high-contrast danger styling over the dimmed Profile screen, followed by navigation to Screen S1 (Home) with confirmation toast.
+    </p>
+
+    <div class="mt-4 flex flex-wrap gap-2 text-xs text-slate-300">
+      <span class="bg-slate-700/60 px-2.5 py-1 rounded">Frame 1: Normal State</span>
+      <span class="bg-slate-700/60 px-2.5 py-1 rounded">Frame 2: Loading (“Deleting…”)</span>
+      <span class="bg-slate-700/60 px-2.5 py-1 rounded">Frame 3: Error Feedback</span>
+      <span class="bg-slate-700/60 px-2.5 py-1 rounded">Frame 4: Offline State</span>
+      <span class="bg-slate-700/60 px-2.5 py-1 rounded">Frame 5: Post-Success on Home Screen (Toast)</span>
+    </div>
+  </header>
+
+  <!-- States Showcase Grid -->
+  <main class="max-w-7xl mx-auto space-y-12">
+
+    <!-- Row 1: Core Modal Interactive States -->
+    <section>
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></span>
+        <h2 class="text-xl font-bold text-white tracking-wide">POP-UP M3 CONFIRMATION STATES (CENTERED MODAL OVER SCREEN S11 PROFILE)</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <!-- STATE 1: NORMAL -->
+        <div class="flex flex-col items-center">
+          <div class="mb-3 text-center">
+            <span class="inline-block bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-1">State 1: Normal</span>
+            <p class="text-xs text-slate-400">Modal centered over dimmed Profile screen</p>
+          </div>
+
+          <!-- Mobile Frame 360px -->
+          <div class="w-[360px] h-[720px] rounded-[36px] bg-slate-900 border-[6px] border-slate-700 shadow-2xl relative overflow-hidden flex flex-col">
+            <!-- Simulated Android Status Bar -->
+            <div class="h-6 bg-slate-900 text-slate-300 text-[11px] px-5 flex items-center justify-between font-semibold select-none z-30">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <span>98%</span>
+              </div>
+            </div>
+
+            <!-- Profile Screen Background (Dimmed under overlay) -->
+            <div class="flex-1 bg-[#F8FAFC] flex flex-col filter blur-[1px] opacity-40 pointer-events-none select-none">
+              <!-- Sticky Header -->
+              <div class="h-14 bg-white border-b border-slate-200 px-4 flex items-center justify-between">
+                <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white font-bold text-sm">💧</div>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-semibold px-2 py-1 bg-slate-100 rounded border">TN</span>
+                  <span class="text-xs font-bold px-2 py-1 bg-red-700 text-white rounded">Warning signs</span>
+                  <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">T</div>
+                </div>
+              </div>
+              <!-- Profile Body -->
+              <div class="p-4 space-y-4">
+                <h2 class="text-xl font-bold text-slate-900">My profile</h2>
+                <div class="bg-white p-3.5 rounded-xl border border-slate-200">
+                  <div class="text-[11px] text-slate-500 font-bold uppercase tracking-wider">Email</div>
+                  <div class="text-sm font-semibold text-slate-900">thabo.test@example.co.za</div>
+                  <div class="text-[11px] text-slate-400 mt-0.5">🔒 Read only</div>
+                </div>
+                <div class="bg-white p-3.5 rounded-xl border border-slate-200 space-y-2">
+                  <div class="text-[11px] text-slate-500 font-bold uppercase">Language</div>
+                  <div class="text-xs text-slate-600">English</div>
+                  <div class="text-xs text-slate-600">isiZulu</div>
+                  <div class="text-xs font-bold text-blue-700">● Setswana</div>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center text-xs font-medium">
+                  <span>Privacy Notice</span>
+                  <span>›</span>
+                </div>
+                <div class="space-y-2 pt-2">
+                  <button class="w-full h-11 border-2 border-blue-600 text-blue-700 font-bold rounded-xl text-xs">Log out</button>
+                  <button class="w-full h-11 border-2 border-red-600 text-red-600 font-bold rounded-xl text-xs">Delete account</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dimmed Overlay (Accessible Dark Scrim) -->
+            <div class="absolute inset-0 bg-black/60 backdrop-blur-[2px] z-40 flex items-center justify-center p-4">
+              <!-- Pop-up M3 Dialog Box (up to 328px wide) -->
+              <div class="w-full max-w-[328px] bg-white rounded-2xl shadow-2xl p-5 border border-slate-100 z-50 animate-in fade-in zoom-in-95 duration-150">
+                <!-- Warning Shield Graphic Header -->
+                <div class="w-12 h-12 rounded-full bg-red-50 text-red-600 mx-auto flex items-center justify-center mb-3.5">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                  </svg>
+                </div>
+
+                <!-- Title verbatim -->
+                <h3 class="text-xl font-bold text-center text-slate-900 tracking-tight mb-2">Delete your account?</h3>
+
+                <!-- Text verbatim -->
+                <p class="text-sm text-center text-slate-600 leading-snug mb-6">
+                  This will permanently delete your account, all your readings and your checklist. This cannot be undone.
+                </p>
+
+                <!-- Actions -->
+                <div class="space-y-2.5">
+                  <!-- Danger button -->
+                  <button class="w-full h-12 rounded-xl bg-[#B91C1C] hover:bg-[#991B1B] active:bg-[#7F1D1D] text-white font-bold text-sm flex items-center justify-center shadow-md shadow-red-900/10 touch-target focus:outline-none focus:ring-4 focus:ring-red-200">
+                    Yes, delete everything
+                  </button>
+
+                  <!-- Secondary button -->
+                  <button class="w-full h-12 rounded-xl bg-white border-2 border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-sm flex items-center justify-center touch-target focus:outline-none focus:ring-4 focus:ring-slate-100">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab bar (Under scrim) -->
+            <div class="h-14 bg-white border-t border-slate-200 flex items-center justify-around text-[10px] text-slate-400 select-none z-20">
+              <div class="flex flex-col items-center"><span>Home</span></div>
+              <div class="flex flex-col items-center"><span>Learn</span></div>
+              <div class="flex flex-col items-center"><span>Diary</span></div>
+              <div class="flex flex-col items-center"><span>Checklist</span></div>
+              <div class="flex flex-col items-center"><span>Dashboard</span></div>
+            </div>
+          </div>
+          <span class="text-slate-400 text-xs mt-2 font-mono">Frame 1: 360 × 720 px</span>
+        </div>
+
+
+        <!-- STATE 2: LOADING -->
+        <div class="flex flex-col items-center">
+          <div class="mb-3 text-center">
+            <span class="inline-block bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-1">State 2: Loading</span>
+            <p class="text-xs text-slate-400">Danger button shows “Deleting…” & disabled</p>
+          </div>
+
+          <!-- Mobile Frame 360px -->
+          <div class="w-[360px] h-[720px] rounded-[36px] bg-slate-900 border-[6px] border-slate-700 shadow-2xl relative overflow-hidden flex flex-col">
+            <!-- Android Status Bar -->
+            <div class="h-6 bg-slate-900 text-slate-300 text-[11px] px-5 flex items-center justify-between font-semibold select-none z-30">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <span>98%</span>
+              </div>
+            </div>
+
+            <!-- Profile Screen Background (Dimmed) -->
+            <div class="flex-1 bg-[#F8FAFC] flex flex-col filter blur-[1px] opacity-40 pointer-events-none select-none">
+              <div class="h-14 bg-white border-b border-slate-200 px-4 flex items-center justify-between">
+                <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white font-bold text-sm">💧</div>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-semibold px-2 py-1 bg-slate-100 rounded border">TN</span>
+                  <span class="text-xs font-bold px-2 py-1 bg-red-700 text-white rounded">Warning signs</span>
+                  <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">T</div>
+                </div>
+              </div>
+              <div class="p-4 space-y-4">
+                <h2 class="text-xl font-bold text-slate-900">My profile</h2>
+                <div class="bg-white p-3.5 rounded-xl border border-slate-200">
+                  <div class="text-[11px] text-slate-500 font-bold uppercase">Email</div>
+                  <div class="text-sm font-semibold text-slate-900">thabo.test@example.co.za</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dimmed Overlay -->
+            <div class="absolute inset-0 bg-black/60 backdrop-blur-[2px] z-40 flex items-center justify-center p-4">
+              <!-- Pop-up M3 Dialog Box -->
+              <div class="w-full max-w-[328px] bg-white rounded-2xl shadow-2xl p-5 border border-slate-100 z-50">
+                <!-- Graphic Header -->
+                <div class="w-12 h-12 rounded-full bg-red-50 text-red-600 mx-auto flex items-center justify-center mb-3.5">
+                  <svg class="w-6 h-6 animate-spin text-red-600" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                </div>
+
+                <!-- Title verbatim -->
+                <h3 class="text-xl font-bold text-center text-slate-900 tracking-tight mb-2">Delete your account?</h3>
+
+                <!-- Text verbatim -->
+                <p class="text-sm text-center text-slate-600 leading-snug mb-6">
+                  This will permanently delete your account, all your readings and your checklist. This cannot be undone.
+                </p>
+
+                <!-- Actions in Loading State -->
+                <div class="space-y-2.5">
+                  <!-- Disabled Loading Danger button -->
+                  <button disabled class="w-full h-12 rounded-xl bg-[#B91C1C]/60 text-white font-bold text-sm flex items-center justify-center gap-2 cursor-not-allowed opacity-90 touch-target">
+                    <svg class="w-4 h-4 animate-spin text-white" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Deleting…</span>
+                  </button>
+
+                  <!-- Disabled Secondary button -->
+                  <button disabled class="w-full h-12 rounded-xl bg-slate-100 border border-slate-200 text-slate-400 font-bold text-sm flex items-center justify-center cursor-not-allowed touch-target">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab bar -->
+            <div class="h-14 bg-white border-t border-slate-200 flex items-center justify-around text-[10px] text-slate-400 select-none z-20">
+              <span>Home</span><span>Learn</span><span>Diary</span><span>Checklist</span><span>Dashboard</span>
+            </div>
+          </div>
+          <span class="text-slate-400 text-xs mt-2 font-mono">Frame 2: 360 × 720 px</span>
+        </div>
+
+
+        <!-- STATE 3: ERROR -->
+        <div class="flex flex-col items-center">
+          <div class="mb-3 text-center">
+            <span class="inline-block bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-1">State 3: Error</span>
+            <p class="text-xs text-slate-400">Exact error message & connection guidance</p>
+          </div>
+
+          <!-- Mobile Frame 360px -->
+          <div class="w-[360px] h-[720px] rounded-[36px] bg-slate-900 border-[6px] border-slate-700 shadow-2xl relative overflow-hidden flex flex-col">
+            <!-- Android Status Bar -->
+            <div class="h-6 bg-slate-900 text-slate-300 text-[11px] px-5 flex items-center justify-between font-semibold select-none z-30">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <span>98%</span>
+              </div>
+            </div>
+
+            <!-- Profile Screen Background (Dimmed) -->
+            <div class="flex-1 bg-[#F8FAFC] flex flex-col filter blur-[1px] opacity-40 pointer-events-none select-none">
+              <div class="h-14 bg-white border-b border-slate-200 px-4 flex items-center justify-between">
+                <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white font-bold text-sm">💧</div>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-semibold px-2 py-1 bg-slate-100 rounded border">TN</span>
+                  <span class="text-xs font-bold px-2 py-1 bg-red-700 text-white rounded">Warning signs</span>
+                  <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">T</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dimmed Overlay -->
+            <div class="absolute inset-0 bg-black/60 backdrop-blur-[2px] z-40 flex items-center justify-center p-4">
+              <!-- Pop-up M3 Dialog Box with Error Feedback -->
+              <div class="w-full max-w-[328px] bg-white rounded-2xl shadow-2xl p-5 border border-red-200 z-50">
+                <!-- Icon Header -->
+                <div class="w-12 h-12 rounded-full bg-red-100 text-red-700 mx-auto flex items-center justify-center mb-3">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+
+                <!-- Title verbatim -->
+                <h3 class="text-xl font-bold text-center text-slate-900 tracking-tight mb-2">Delete your account?</h3>
+
+                <!-- Error Notice Banner (Verbatim copy) -->
+                <div class="mb-3.5 p-3 rounded-xl bg-red-50 border border-red-200 text-left flex items-start gap-2.5">
+                  <svg class="w-4 h-4 text-red-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                  </svg>
+                  <p class="text-xs font-semibold text-red-800 leading-snug">
+                    Couldn’t delete your account. Check your connection and try again.
+                  </p>
+                </div>
+
+                <!-- Text verbatim -->
+                <p class="text-xs text-center text-slate-600 leading-snug mb-5">
+                  This will permanently delete your account, all your readings and your checklist. This cannot be undone.
+                </p>
+
+                <!-- Actions -->
+                <div class="space-y-2.5">
+                  <!-- Danger button (re-enabled for retry) -->
+                  <button class="w-full h-12 rounded-xl bg-[#B91C1C] hover:bg-[#991B1B] text-white font-bold text-sm flex items-center justify-center touch-target focus:outline-none focus:ring-4 focus:ring-red-200">
+                    Yes, delete everything
+                  </button>
+
+                  <!-- Secondary button -->
+                  <button class="w-full h-12 rounded-xl bg-white border-2 border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-sm flex items-center justify-center touch-target">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab bar -->
+            <div class="h-14 bg-white border-t border-slate-200 flex items-center justify-around text-[10px] text-slate-400 select-none z-20">
+              <span>Home</span><span>Learn</span><span>Diary</span><span>Checklist</span><span>Dashboard</span>
+            </div>
+          </div>
+          <span class="text-slate-400 text-xs mt-2 font-mono">Frame 3: 360 × 720 px</span>
+        </div>
+
+
+        <!-- STATE 4: OFFLINE -->
+        <div class="flex flex-col items-center">
+          <div class="mb-3 text-center">
+            <span class="inline-block bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-1">State 4: Offline</span>
+            <p class="text-xs text-slate-400">Offline banner + identical error copy</p>
+          </div>
+
+          <!-- Mobile Frame 360px -->
+          <div class="w-[360px] h-[720px] rounded-[36px] bg-slate-900 border-[6px] border-slate-700 shadow-2xl relative overflow-hidden flex flex-col">
+            <!-- Android Status Bar with OFFLINE badge -->
+            <div class="h-6 bg-slate-900 text-slate-300 text-[11px] px-5 flex items-center justify-between font-semibold select-none z-30">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <span class="bg-amber-600 text-black text-[9px] font-extrabold px-1.5 py-0.2 rounded">OFFLINE</span>
+                <span>98%</span>
+              </div>
+            </div>
+
+            <!-- Dark Offline Banner -->
+            <div class="bg-[#1C1E21] text-white px-3.5 py-2 flex items-center gap-2 text-xs border-b border-slate-700 z-30 select-none">
+              <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728m-3.536-3.536a4.5 4.5 0 010-6.364M9.172 9.172a4.5 4.5 0 000 6.364m-3.536 3.536a9 9 0 010-12.728M12 12h.01"/>
+              </svg>
+              <span class="text-[11px] text-slate-200 font-medium">You’re offline. Reconnect to delete account.</span>
+            </div>
+
+            <!-- Profile Screen Background (Dimmed) -->
+            <div class="flex-1 bg-[#F8FAFC] flex flex-col filter blur-[1px] opacity-40 pointer-events-none select-none">
+              <div class="h-14 bg-white border-b border-slate-200 px-4 flex items-center justify-between">
+                <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white font-bold text-sm">💧</div>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-semibold px-2 py-1 bg-slate-100 rounded border">TN</span>
+                  <span class="text-xs font-bold px-2 py-1 bg-red-700 text-white rounded">Warning signs</span>
+                  <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">T</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dimmed Overlay -->
+            <div class="absolute inset-0 bg-black/60 backdrop-blur-[2px] z-40 flex items-center justify-center p-4">
+              <!-- Pop-up M3 Dialog Box (Offline message matches Error) -->
+              <div class="w-full max-w-[328px] bg-white rounded-2xl shadow-2xl p-5 border border-amber-200 z-50">
+                <!-- Icon Header -->
+                <div class="w-12 h-12 rounded-full bg-amber-50 text-amber-700 mx-auto flex items-center justify-center mb-3">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+
+                <!-- Title verbatim -->
+                <h3 class="text-xl font-bold text-center text-slate-900 tracking-tight mb-2">Delete your account?</h3>
+
+                <!-- Offline Error Notice Banner (Exact required copy identical to Error state) -->
+                <div class="mb-3.5 p-3 rounded-xl bg-amber-50 border border-amber-200 text-left flex items-start gap-2.5">
+                  <svg class="w-4 h-4 text-amber-700 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                  </svg>
+                  <p class="text-xs font-semibold text-amber-900 leading-snug">
+                    Couldn’t delete your account. Check your connection and try again.
+                  </p>
+                </div>
+
+                <!-- Text verbatim -->
+                <p class="text-xs text-center text-slate-600 leading-snug mb-5">
+                  This will permanently delete your account, all your readings and your checklist. This cannot be undone.
+                </p>
+
+                <!-- Actions -->
+                <div class="space-y-2.5">
+                  <!-- Danger button (Disabled or prompt reconnect) -->
+                  <button disabled class="w-full h-12 rounded-xl bg-slate-200 text-slate-400 font-bold text-sm flex items-center justify-center cursor-not-allowed touch-target">
+                    Yes, delete everything
+                  </button>
+
+                  <!-- Secondary button -->
+                  <button class="w-full h-12 rounded-xl bg-white border-2 border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-sm flex items-center justify-center touch-target">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab bar -->
+            <div class="h-14 bg-white border-t border-slate-200 flex items-center justify-around text-[10px] text-slate-400 select-none z-20">
+              <span>Home</span><span>Learn</span><span>Diary</span><span>Checklist</span><span>Dashboard</span>
+            </div>
+          </div>
+          <span class="text-slate-400 text-xs mt-2 font-mono">Frame 4: 360 × 720 px</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Row 2: Post-Success Flow on Screen S1 Home -->
+    <section class="border-t border-slate-800 pt-8">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+        <h2 class="text-xl font-bold text-white tracking-wide">POST-SUCCESS DESTINATION: HOME SCREEN S1 WITH CONFIRMATION TOAST</h2>
+      </div>
+
+      <div class="flex flex-col lg:flex-row items-center lg:items-start gap-8 bg-slate-800/40 p-6 rounded-2xl border border-slate-700">
+        <!-- Explanatory note -->
+        <div class="lg:w-1/3 text-slate-300 text-sm space-y-3">
+          <div class="inline-block bg-emerald-500/20 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-emerald-500/30">
+            Success Behavior Spec
+          </div>
+          <h3 class="text-lg font-bold text-white">Redirect to Home & Clean Session Termination</h3>
+          <p>
+            As specified, <strong>no success state is shown inside the pop-up modal</strong>.
+          </p>
+          <p>
+            Upon successful deletion:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-xs text-slate-300">
+            <li>The pop-up closes and authenticated session tokens are immediately revoked.</li>
+            <li>The user is redirected to <strong>Screen S1 (Home)</strong> in logged-out unauthenticated state.</li>
+            <li>A high-contrast dark toast appears above the bottom bar with the exact copy: <strong class="text-white">“Your account and data have been deleted.”</strong></li>
+            <li>The header switches back to unauthenticated controls (Log in / Sign up) and the bottom tab bar reflects guest access.</li>
+          </ul>
+        </div>
+
+        <!-- Frame 5: Screen S1 Home with Toast -->
+        <div class="flex flex-col items-center">
+          <div class="w-[360px] h-[720px] rounded-[36px] bg-slate-900 border-[6px] border-slate-700 shadow-2xl relative overflow-hidden flex flex-col">
+            <!-- Android Status Bar -->
+            <div class="h-6 bg-slate-900 text-slate-300 text-[11px] px-5 flex items-center justify-between font-semibold select-none z-30">
+              <span>09:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <span>98%</span>
+              </div>
+            </div>
+
+            <!-- Screen S1 Home Unauthenticated Header -->
+            <div class="h-14 bg-white border-b border-slate-200 px-4 flex items-center justify-between z-20">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white font-bold text-sm shadow-sm">💧</div>
+                <span class="font-bold text-sm text-slate-900">Diabetes Companion</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button class="text-xs font-semibold px-2 py-1 bg-slate-100 rounded border border-slate-200 text-slate-700">EN</button>
+                <button class="text-xs font-bold px-2 py-1 bg-red-700 text-white rounded">Warning signs</button>
+              </div>
+            </div>
+
+            <!-- Home Screen Content -->
+            <div class="flex-1 bg-[#F8FAFC] p-4 overflow-y-auto space-y-4">
+              <!-- Welcome Hero Card -->
+              <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                <h2 class="text-lg font-bold text-slate-900">Welcome to Diabetes Companion</h2>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  A simple, free tool to track blood sugar, learn healthy habits, and stay safe with your clinic care plan.
+                </p>
+                <div class="pt-2 flex gap-2">
+                  <button class="flex-1 h-10 bg-[#1A6BD1] text-white font-bold text-xs rounded-xl flex items-center justify-center">Sign up</button>
+                  <button class="flex-1 h-10 bg-white border border-slate-300 text-slate-700 font-bold text-xs rounded-xl flex items-center justify-center">Log in</button>
+                </div>
+              </div>
+
+              <!-- Quick Learning Topics Preview -->
+              <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-2.5">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Popular Guides</span>
+                  <span class="text-xs font-semibold text-blue-600">See all</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">
+                  <div class="text-xs font-semibold text-slate-800">Understanding Blood Sugar</div>
+                  <span class="text-[10px] text-slate-400">4 min</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">
+                  <div class="text-xs font-semibold text-slate-800">Healthy Eating on a Budget</div>
+                  <span class="text-[10px] text-slate-400">5 min</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- SUCCESS TOAST NOTIFICATION PINNED ABOVE TAB BAR -->
+            <div class="px-3 pb-2 z-30">
+              <div class="bg-[#1C1E21] text-white rounded-xl p-3.5 shadow-2xl flex items-center gap-3 border border-slate-700 animate-in slide-in-from-bottom-3 duration-200">
+                <div class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <!-- Verbatim Toast Copy -->
+                <p class="text-xs font-semibold leading-tight text-slate-100">
+                  Your account and data have been deleted.
+                </p>
+              </div>
+            </div>
+
+            <!-- Tab bar -->
+            <div class="h-14 bg-white border-t border-slate-200 flex items-center justify-around text-[10px] text-slate-500 select-none z-20">
+              <div class="flex flex-col items-center text-blue-600 font-bold">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                <span>Home</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <svg class="w-5 h-5 fill-none stroke-currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                <span>Learn</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <svg class="w-5 h-5 fill-none stroke-currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <span>Diary</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <svg class="w-5 h-5 fill-none stroke-currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                <span>Checklist</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <svg class="w-5 h-5 fill-none stroke-currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                <span>Dashboard</span>
+              </div>
+            </div>
+          </div>
+          <span class="text-slate-400 text-xs mt-2 font-mono">Frame 5: 360 × 720 px</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Specification & Compliance Matrix -->
+    <section class="bg-slate-800/60 rounded-2xl p-6 border border-slate-700 text-xs text-slate-300 space-y-4">
+      <h3 class="text-base font-bold text-white flex items-center gap-2">
+        <svg class="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        POPIA & Clinical Guardrails Compliance Verification
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-700/60">
+          <strong class="text-white block mb-1">Strict Form Factor & Dimensional Safety</strong>
+          <p>Dialog box width is capped at 328 px, allowing 16 px margin on standard 360 px viewports. 48 px high interactive controls satisfy strict motor accessibility guidelines.</p>
+        </div>
+        <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-700/60">
+          <strong class="text-white block mb-1">Irreversible Data Erasure Notice</strong>
+          <p>Verbatim POPIA disclosure explicitly cautions the user that personal accounts, glucose diary readings, and daily checklist care logs cannot be recovered.</p>
+        </div>
+        <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-700/60">
+          <strong class="text-white block mb-1">Robust Network Resilience</strong>
+          <p>Prevents state desynchronization with explicit connectivity checks and offline warnings, ensuring deletion requests only execute under verified connectivity.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

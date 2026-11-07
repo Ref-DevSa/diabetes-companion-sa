@@ -1,0 +1,49 @@
+{
+  "app": {
+    "name": "Diabetes Companion SA"
+  },
+  "header": {
+    "warningSigns": "Warning signs",
+    "logIn": "Log in",
+    "profile": "My profile",
+    "language": "Language"
+  },
+  "tabs": {
+    "home": "Home",
+    "learn": "Learn",
+    "diary": "Diary",
+    "checklist": "Checklist",
+    "dashboard": "Dashboard"
+  },
+  "offline": {
+    "banner": "You're offline. Some things may not work until you reconnect."
+  },
+  "common": {
+    "tryAgain": "Try again",
+    "serverError": "Something went wrong on our side. Please try again."
+  },
+  "password": {
+    "show": "Show password",
+    "hide": "Hide password"
+  },
+  "home": {
+    "heroTitle": "Understand diabetes. Track your day.",
+    "heroText": "Short, simple help for people living with diabetes in South Africa.",
+    "createAccount": "Create free account",
+    "logIn": "Log in",
+    "welcomeBack": "Welcome back!",
+    "addReading": "Add a reading",
+    "featuresHeading": "What would you like to do?",
+    "cardLearnTitle": "Learn about diabetes",
+    "cardLearnText": "Short, plain-language Topics",
+    "cardSafetyTitle": "Check warning signs",
+    "cardSafetyText": "Know when to get urgent help",
+    "cardFamilyTitle": "Help for family",
+    "cardFamilyText": "Tips and trusted links",
+    "cardTrackTitle": "Track my day",
+    "cardTrackText": "Diary and Checklist"
+  },
+  "notice": {
+    "disclaimer": "This app gives general information only. It does not diagnose or replace your clinic."
+  }
+}

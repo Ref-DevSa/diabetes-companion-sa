@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diabetes Companion SA — Style Guide & Component Set</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* STRICT DESIGN SYSTEM TOKENS */
+    :root {
+      --primary-blue: #1A6BD1;
+      --dark-blue: #1565C0;
+      --light-blue-tint: #E7F0FD;
+      --page-bg: #F0F2F5;
+      --card-surface: #FFFFFF;
+      --main-text: #1C1E21;
+      --secondary-text: #65676B;
+      --warning-orange: #B45309;
+      --danger-red: #B91C1C;
+      --success-green: #15803D;
+      --disabled-fill: #D0D5DD;
+      --loading-placeholder: #E4E6EB;
+      --dark-toast-bg: #1C1E21;
+      --radius: 12px;
+      --font-family: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-family);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--page-bg);
+      color: var(--main-text);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+
+    /* Layout Wrapper */
+    .catalog-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* Header Bar of Catalog */
+    .guide-banner {
+      background: var(--card-surface);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      margin-bottom: 24px;
+      border-left: 6px solid var(--primary-blue);
+    }
+
+    .guide-banner h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--dark-blue);
+      margin-bottom: 8px;
+    }
+
+    .guide-banner p {
+      font-size: 16px;
+      color: var(--secondary-text);
+    }
+
+    .preview-toggle-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+      align-items: center;
+    }
+
+    .device-pill {
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--light-blue-tint);
+      color: var(--dark-blue);
+      padding: 6px 12px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Section Styling */
+    .section-block {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark-blue);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 2px solid #E4E6EB;
+      padding-bottom: 8px;
+    }
+
+    /* Cards & Grids */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    .doc-card {
+      background: var(--card-surface);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .doc-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--dark-blue);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .badge-label {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--secondary-text);
+      background: var(--page-bg);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* Color Swatches */
+    .swatches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 12px;
+    }
+
+    .swatch-item {
+      background: var(--card-surface);
+      border-radius: var(--radius);
+      padding: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      border: 1px solid #E4E6EB;
+    }
+
+    .swatch-color {
+      height: 48px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .swatch-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--main-text);
+    }
+
+    .swatch-hex {
+      font-size: 12px;
+      color: var(--secondary-text);
+    }
+
+    /* Typography Showcase */
+    .type-row {
+      padding: 12px 0;
+      border-bottom: 1px solid #E4E6EB;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .type-row:last-child {
+      border-bottom: none;
+    }
+    .type-spec {
+      font-size: 12px;
+      color: var(--secondary-text);
+    }
+
+    /* 360px Phone Frame */
+    .phone-showcase-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .phone-frame {
+      width: 360px;
+      min-height: 720px;
+      background: var(--page-bg);
+      border: 8px solid #1C1E21;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-status-bar {
+      height: 24px;
+      background: var(--card-surface);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--main-text);
+      border-bottom: 1px solid #E4E6EB;
+    }
+
+    /* 1. Header Component (56px high) */
+    .app-header {
+      height: 56px;
+      background: var(--card-surface);
+      border-bottom: 1px solid #E4E6EB;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .header-logo-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* App Icon */
+    .app-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-blue);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      flex-shrink: 0;
+    }
+
+    .app-wordmark {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--main-text);
+      white-space: nowrap;
+    }
+    .app-wordmark .sa-accent {
+      color: var(--primary-blue);
+    }
+
+    /* Responsive rule: below 400px hide wordmark */
+    @media (max-width: 400px) {
+      .app-wordmark {
+        display: none !important;
+      }
+    }
+    .phone-frame .app-wordmark {
+      display: none; /* Emulating 360px viewport explicitly */
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 2. Language Selector */
+    .lang-selector-btn {
+      min-width: 44px;
+      height: 44px;
+      padding: 0 8px;
+      background: transparent;
+      border: 1px solid #E4E6EB;
+      border-radius: var(--radius);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--main-text);
+      cursor: pointer;
+    }
+
+    .lang-menu-dropdown {
+      position: absolute;
+      top: 56px;
+      right: 70px;
+      background: var(--card-surface);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      border: 1px solid #E4E6EB;
+      width: 140px;
+      z-index: 50;
+      display: none;
+      overflow: hidden;
+    }
+    .lang-menu-dropdown.open {
+      display: block;
+    }
+    .lang-option {
+      padding: 10px 16px;
+      font-size: 12px;
+      color: var(--main-text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      border-bottom: 1px solid #F0F2F5;
+    }
+    .lang-option:last-child {
+      border-bottom: none;
+    }
+    .lang-option:hover {
+      background: var(--light-blue-tint);
+      color: var(--dark-blue);
+    }
+
+    /* 3. Warning Signs Button */
+    .btn-warning-signs {
+      min-height: 44px;
+      background-color: var(--danger-red);
+      color: #FFFFFF;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .user-profile-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius);
+      border: 1px solid #E4E6EB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      color: var(--main-text);
+      cursor: pointer;
+    }
+
+    /* 18. Offline Banner (under header) */
+    .offline-banner {
+      background: var(--dark-toast-bg);
+      color: #FFFFFF;
+      padding: 8px 16px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Main Scrollable Content inside phone */
+    .phone-content {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+    }
+
+    /* Highlight panel */
+    .highlight-panel {
+      background-color: var(--light-blue-tint);
+      color: var(--dark-blue);
+      padding: 16px;
+      border-radius: var(--radius);
+      font-size: 16px;
+      border: 1px solid rgba(26, 107, 209, 0.15);
+    }
+
+    /* 4. Tab Bar (Phone - bottom, 56px high) */
+    .bottom-tab-bar {
+      height: 56px;
+      background: var(--card-surface);
+      border-top: 1px solid #E4E6EB;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      position: sticky;
+      bottom: 0;
+      z-index: 40;
+    }
+
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      height: 44px;
+      color: var(--secondary-text);
+      text-decoration: none;
+      font-size: 12px;
+      gap: 2px;
+      cursor: pointer;
+    }
+
+    .tab-item.active {
+      color: var(--primary-blue);
+      font-weight: 600;
+    }
+
+    /* Tablet/Desktop Top Navigation */
+    .desktop-nav-menu {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .desktop-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      font-size: 16px;
+      color: var(--secondary-text);
+      text-decoration: none;
+      border-radius: var(--radius);
+      min-height: 44px;
+    }
+    .desktop-nav-item.active {
+      color: var(--primary-blue);
+      background: var(--light-blue-tint);
+      font-weight: 600;
+    }
+
+    /* 5, 6, 7. BUTTON STYLES (48px high, 12px corners, 16px semi-bold) */
+    .btn {
+      height: 48px;
+      min-width: 44px;
+      border-radius: var(--radius);
+      font-size: 16px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+      text-align: center;
+      border: none;
+      box-sizing: border-box;
+      gap: 8px;
+    }
+
+    /* Primary button */
+    .btn-primary {
+      background-color: var(--primary-blue);
+      color: #FFFFFF;
+    }
+    .btn-primary:active, .btn-primary.state-pressed {
+      background-color: var(--dark-blue);
+    }
+    .btn-primary:focus-visible {
+      outline: 2px solid var(--dark-blue);
+      outline-offset: 2px;
+    }
+    .btn-primary:disabled, .btn-primary.state-disabled {
+      background-color: var(--disabled-fill);
+      color: #4B5563;
+      cursor: not-allowed;
+    }
+
+    /* Secondary button */
+    .btn-secondary {
+      background-color: var(--card-surface);
+      border: 2px solid var(--primary-blue);
+      color: var(--dark-blue);
+    }
+    .btn-secondary:active, .btn-secondary.state-pressed {
+      background-color: var(--light-blue-tint);
+    }
+    .btn-secondary:focus-visible {
+      outline: 2px solid var(--dark-blue);
+      outline-offset: 2px;
+    }
+    .btn-secondary:disabled, .btn-secondary.state-disabled {
+      border-color: var(--disabled-fill);
+      color: var(--secondary-text);
+      cursor: not-allowed;
+    }
+
+    /* Danger button */
+    .btn-danger {
+      background-color: var(--danger-red);
+      color: #FFFFFF;
+    }
+    .btn-danger:active, .btn-danger.state-pressed {
+      background-color: #991B1B;
+    }
+
+    /* 8. Text Field */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--main-text);
+    }
+
+    .form-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-input {
+      width: 100%;
+      height: 48px;
+      padding: 0 16px;
+      border-radius: var(--radius);
+      border: 1px solid #D0D5DD;
+      background: var(--card-surface);
+      font-size: 16px;
+      color: var(--main-text);
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .form-input:focus, .form-input.state-focus {
+      border: 2px solid var(--dark-blue);
+      padding: 0 15px; /* adjust for border */
+    }
+
+    .form-input.state-error {
+      border: 2px solid var(--danger-red);
+      padding: 0 15px;
+    }
+
+    .form-message {
+      font-size: 12px;
+      color: var(--secondary-text);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .form-message.error {
+      color: var(--danger-red);
+      font-weight: 600;
+    }
+
+    /* 9. Card */
+    .ui-card {
+      background: var(--card-surface);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    /* 10. Reading Card */
+    .reading-card {
+      background: var(--card-surface);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .reading-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .reading-value-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .reading-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--main-text);
+    }
+    .reading-unit {
+      font-size: 12px;
+      color: var(--secondary-text);
+    }
+
+    .reading-meta-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+      color: var(--secondary-text);
+    }
+    .reading-when-tag {
+      font-weight: 600;
+      color: var(--main-text);
+    }
+
+    .reading-note {
+      font-size: 16px;
+      color: var(--main-text);
+      background: var(--page-bg);
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .reading-actions {
+      display: flex;
+      gap: 8px;
+      border-top: 1px solid #F0F2F5;
+      padding-top: 12px;
+    }
+    .btn-reading-action {
+      background: transparent;
+      border: 1px solid #D0D5DD;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--secondary-text);
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    /* 11. Flag Badge */
+    .flag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .flag-low {
+      background-color: #FEF3C7;
+      color: var(--warning-orange);
+      border: 1px solid var(--warning-orange);
+    }
+
+    .flag-very-high {
+      background-color: #FEE2E2;
+      color: var(--danger-red);
+      border: 1px solid var(--danger-red);
+    }
+
+    .flag-in-range {
+      background-color: #DCFCE7;
+      color: var(--success-green);
+      border: 1px solid var(--success-green);
+    }
+
+    /* 12. Progress Ring (64px) */
+    .progress-ring-container {
+      width: 64px;
+      height: 64px;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .progress-ring-svg {
+      width: 64px;
+      height: 64px;
+      transform: rotate(-90deg);
+    }
+
+    .progress-ring-circle-bg {
+      stroke: #E4E6EB;
+      stroke-width: 6;
+      fill: transparent;
+    }
+
+    .progress-ring-circle-fg {
+      stroke: var(--primary-blue);
+      stroke-width: 6;
+      fill: transparent;
+      stroke-linecap: round;
+      stroke-dasharray: 163.36; /* 2 * PI * 26 */
+      stroke-dashoffset: 98; /* (1 - 2/5) * 163.36 */
+      transition: stroke-dashoffset 0.5s ease;
+    }
+
+    .progress-ring-text {
+      position: absolute;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--main-text);
+      text-align: center;
+    }
+
+    /* 13. Toast */
+    .app-toast {
+      background-color: var(--dark-toast-bg);
+      color: #FFFFFF;
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .toast-icon-success {
+      color: #22C55E; /* Vibrant display icon inside dark toast */
+    }
+
+    /* 14. Bottom Sheet */
+    .sheet-backdrop-mock {
+      background: rgba(28, 30, 33, 0.45);
+      border-radius: 12px;
+      padding: 16px 8px 8px 8px;
+      position: relative;
+    }
+    .bottom-sheet {
+      background: var(--card-surface);
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+    }
+    .sheet-handle {
+      width: 36px;
+      height: 4px;
+      background: #D0D5DD;
+      border-radius: 2px;
+      margin: 0 auto 4px auto;
+    }
+
+    /* 15. Confirmation Pop-up */
+    .popup-dialog {
+      max-width: 328px;
+      width: 100%;
+      background: var(--card-surface);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .popup-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .popup-actions .btn {
+      flex: 1;
+    }
+
+    /* 16. Empty State Block */
+    .empty-state-block {
+      background: var(--card-surface);
+      border-radius: var(--radius);
+      padding: 24px 16px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .empty-state-icon-circle {
+      width: 56px;
+      height: 56px;
+      background: var(--light-blue-tint);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-blue);
+    }
+
+    /* 17. Loading Placeholder */
+    .skeleton-block {
+      background-color: var(--loading-placeholder);
+      border-radius: 8px;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+
+    /* 19. Topic Card */
+    .topic-card {
+      background: var(--card-surface);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .topic-card:hover {
+      border-color: var(--primary-blue);
+    }
+    .topic-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .topic-icon-wrap {
+      width: 40px;
+      height: 40px;
+      background: var(--light-blue-tint);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark-blue);
+      flex-shrink: 0;
+    }
+    .topic-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark-blue);
+      line-height: 1.25;
+    }
+    .topic-summary {
+      font-size: 16px;
+      color: var(--main-text);
+      line-height: 1.4;
+    }
+    .topic-meta {
+      font-size: 12px;
+      color: var(--secondary-text);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* State Matrix Display Table */
+    .state-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    .state-table th, .state-table td {
+      border: 1px solid #E4E6EB;
+      padding: 12px;
+      vertical-align: middle;
+    }
+    .state-table th {
+      background: #F8FAFC;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--secondary-text);
+      text-align: left;
+    }
+
+    /* Checklist row */
+    .checklist-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #F0F2F5;
+    }
+    .checklist-checkbox {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      border: 2px solid var(--primary-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: var(--card-surface);
+      color: #FFFFFF;
+    }
+    .checklist-checkbox.checked {
+      background: var(--primary-blue);
+    }
+
+    /* Responsive Views */
+    @media (min-width: 640px) and (max-width: 1024px) {
+      .catalog-container {
+        max-width: 720px;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .catalog-container {
+        max-width: 1200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="catalog-container">
+    <!-- Top System Header -->
+    <header class="guide-banner">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+        <!-- App Logo Icon -->
+        <div class="app-icon" title="Diabetes Companion SA Logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="rgba(255,255,255,0.2)"/>
+            <polyline points="9 13 11 15 15 11" stroke-width="2.5" />
+          </svg>
+        </div>
+        <div>
+          <span style="font-size: 24px; font-weight: 700; color: var(--main-text);">Diabetes Companion <span style="color: var(--primary-blue);">SA</span></span>
+          <p style="font-size: 12px; color: var(--secondary-text); margin-top: 2px;">Official Design System & Mobile Component Specification</p>
+        </div>
+      </div>
+      <p style="margin-top: 8px;">
+        A calm, clear, and reassuring mobile-first interface designed for adults in South Africa. Formatted for 360 px width Android phones, scaling seamlessly to tablet and desktop.
+      </p>
+      
+      <div class="preview-toggle-bar">
+        <span class="device-pill"><i data-lucide="smartphone" style="width:14px;height:14px;"></i> Mobile Target: 360 px</span>
+        <span class="device-pill"><i data-lucide="tablet" style="width:14px;height:14px;"></i> Tablet (640–1024 px)</span>
+        <span class="device-pill"><i data-lucide="monitor" style="width:14px;height:14px;"></i> Desktop (>1024 px)</span>
+        <span class="device-pill"><i data-lucide="check-circle" style="width:14px;height:14px;"></i> Inter Font Only</span>
+        <span class="device-pill"><i data-lucide="eye" style="width:14px;height:14px;"></i> 4.5:1+ Contrast</span>
+        <span class="device-pill"><i data-lucide="touchpad" style="width:14px;height:14px;"></i> Min 44×44 px Touch Targets</span>
+      </div>
+    </header>
+
+    <!-- SECTION: DESIGN TOKENS -->
+    <section class="section-block">
+      <h2 class="section-title"><i data-lucide="palette"></i> 1. Design Tokens & Visual Language</h2>
+      
+      <div class="cards-grid">
+        <!-- Palette Swatches -->
+        <div class="doc-card">
+          <div class="doc-card-title">
+            <span>Color Palette (Strict Values Only)</span>
+            <span class="badge-label">WCAG AAA / AA</span>
+          </div>
+          <div class="swatches-grid">
+            <div class="swatch-item">
+              <div class="swatch-color" style="background:#1A6BD1; color:#FFF;">5.16:1</div>
+              <div class="swatch-name">Primary Blue</div>
+              <div class="swatch-hex">#1A6BD1</div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background:#1565C0; color:#FFF;">7.0:1</div>
+              <div class="swatch-name">Dark Blue</div>
+              <div class="swatch-hex">#1565C0</div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background:#E7F0FD; color:#1565C0; border:1px solid #1A6BD1;">Tint</div>
+              <div class="swatch-name">Light Blue Tint</div>
+              <div class="swatch-hex">#E7F0FD</div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background:#F0F2F5; color:#1C1E21;">Bg</div>
+              <div class="swatch-name">Page Background</div>
+              <div class="swatch-hex">#F0F2F5</div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background:#FFFFFF; color:#1C1E21; border:1px solid #D0D5DD;">Surface</div>
+              <div class="swatch-name">Card Surface</div>
+              <div class="swatch-hex">#FFFFFF</div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background:#1C1E21; color:#FFF;">Main</div>
+              <div class="swatch-name">Main Text</div>
+              <div class="swatch-hex">#1C1E21</div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background:#65676B; color:#FFF;">Sub</div>
+              <div class="swatch-name">Secondary Text</div>
+              <div class="swatch-hex">#65676B</div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background:#B45309; color:#FFF;">Low Flag</div>
+              <div class="swatch-name">Warning Orange</div>
+              <div class="swatch-hex">#B45309</div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background:#B91C1C; color:#FFF;">High Flag</div>
+              <div class="swatch-name">Error / Warning Red</div>
+              <div class="swatch-hex">#B91C1C</div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background:#15803D; color:#FFF;">Success</div>
+              <div class="swatch-name">Success Green</div>
+              <div class="swatch-hex">#15803D</div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background:#D0D5DD; color:#1C1E21;">Fill</div>
+              <div class="swatch-name">Disabled Button</div>
+              <div class="swatch-hex">#D0D5DD</div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background:#E4E6EB; color:#65676B;">Grey</div>
+              <div class="swatch-name">Loading Grey</div>
+              <div class="swatch-hex">#E4E6EB</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Typography & Spacing -->
+        <div class="doc-card">
+          <div class="doc-card-title">
+            <span>Typography (Inter) & Spacing System</span>
+            <span class="badge-label">8px Grid</span>
+          </div>
+          
+          <div class="type-row">
+            <div style="font-size: 24px; font-weight: 700; color: var(--main-text);">Title 24 px Bold</div>
+            <div class="type-spec">Weight 700 • Primary Page & Screen Titles</div>
+          </div>
+          <div class="type-row">
+            <div style="font-size: 20px; font-weight: 700; color: var(--dark-blue);">Heading 20 px Bold</div>
+            <div class="type-spec">Weight 700 • Section Headings (#1565C0)</div>
+          </div>
+          <div class="type-row">
+            <div style="font-size: 16px; font-weight: 600; color: var(--primary-blue);">Button Text 16 px Semi-Bold</div>
+            <div class="type-spec">Weight 600 • Interactive Buttons & Links</div>
+          </div>
+          <div class="type-row">
+            <div style="font-size: 16px; font-weight: 400; color: var(--main-text);">Body 16 px Regular</div>
+            <div class="type-spec">Weight 400 • Content reading, inputs, descriptions</div>
+          </div>
+          <div class="type-row">
+            <div style="font-size: 12px; font-weight: 400; color: var(--secondary-text);">Small text 12 px Regular (never smaller)</div>
+            <div class="type-spec">Weight 400 • Timestamp, labels, metadata, helper text</div>
+          </div>
+
+          <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #E4E6EB; font-size: 12px; color: var(--secondary-text);">
+            <strong>Shapes & Margins:</strong> 12 px corner radius (cards, inputs, buttons) • 16 px screen side margin • 8 px spacing unit (4, 8, 16, 24, 32 px) • Soft shadows on cards only.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: 360px PHONE FIRST COMPLETE VIEW -->
+    <section class="section-block">
+      <h2 class="section-title"><i data-lucide="smartphone"></i> 2. 360 px Mobile Android Prototype (Live Component Layout)</h2>
+      <p style="font-size: 16px; color: var(--secondary-text); margin-bottom: 16px;">
+        Experience all key components in their exact 360 px Android layout with the 56 px header, offline status, content cards, toast, and 56 px bottom tab bar.
+      </p>
+
+      <div class="phone-showcase-wrapper">
+        <div class="phone-frame" id="phonePreview">
+          
+          <!-- Status Bar -->
+          <div class="phone-status-bar">
+            <span>09:41</span>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <i data-lucide="wifi" style="width:12px;height:12px;"></i>
+              <i data-lucide="battery" style="width:14px;height:14px;"></i>
+            </div>
+          </div>
+
+          <!-- 1. Header (56px high) -->
+          <header class="app-header">
+            <!-- Logo Icon (wordmark hidden on <400px width) -->
+            <div class="header-logo-group">
+              <div class="app-icon" title="Diabetes Companion SA">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="rgba(255,255,255,0.25)"/>
+                  <polyline points="9 13 11 15 15 11" stroke-width="2.5" />
+                </svg>
+              </div>
+              <!-- Hidden on phone below 400px as requested -->
+              <span class="app-wordmark">Diabetes Companion <span class="sa-accent">SA</span></span>
+            </div>
+
+            <div class="header-actions">
+              <!-- 2. Language Selector Button -->
+              <button class="lang-selector-btn" id="langBtn" onclick="toggleLanguageMenu()" aria-label="Change language">
+                <i data-lucide="globe" style="width:16px;height:16px;"></i>
+                <span id="currentLangLabel">EN</span>
+              </button>
+
+              <!-- Language Menu Dropdown -->
+              <div class="lang-menu-dropdown" id="langMenu">
+                <div class="lang-option" onclick="selectLang('EN', 'English')">English <strong>EN</strong></div>
+                <div class="lang-option" onclick="selectLang('ZU', 'isiZulu')">isiZulu <strong>ZU</strong></div>
+                <div class="lang-option" onclick="selectLang('TN', 'Setswana')">Setswana <strong>TN</strong></div>
+              </div>
+
+              <!-- 3. Warning Signs Button -->
+              <button class="btn-warning-signs" onclick="showWarningModal()" aria-label="Warning signs information">
+                <i data-lucide="triangle-alert" style="width:16px;height:16px;"></i>
+                <span>Warning signs</span>
+              </button>
+
+              <!-- Profile icon (User) -->
+              <button class="user-profile-btn" aria-label="User profile">
+                <i data-lucide="user" style="width:18px;height:18px;"></i>
+              </button>
+            </div>
+          </header>
+
+          <!-- 18. Offline Banner (demonstrated toggleable) -->
+          <div class="offline-banner" id="offlineBanner">
+            <i data-lucide="wifi-off" style="width:16px;height:16px;flex-shrink:0;"></i>
+            <span>You’re offline. Some things may not work until you reconnect.</span>
+          </div>
+
+          <!-- Phone Scrollable Body -->
+          <div class="phone-content">
+            
+            <!-- Greeting & Highlight Panel -->
+            <div class="highlight-panel">
+              <div style="font-size: 16px; font-weight: 700; color: var(--dark-blue); margin-bottom: 4px;">Welcome back, Thabo</div>
+              <div style="font-size: 12px; color: var(--dark-blue);">Here is your gentle diabetes care plan for today.</div>
+            </div>
+
+            <!-- Daily Care Progress & Checklist -->
+            <div class="ui-card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <div>
+                  <h3 style="font-size: 20px; font-weight: 700; color: var(--dark-blue);">Daily Checklist</h3>
+                  <p style="font-size: 12px; color: var(--secondary-text);">Tick as you complete</p>
+                </div>
+                <!-- 12. Progress Ring -->
+                <div class="progress-ring-container" title="2 of 5 care tasks done">
+                  <svg class="progress-ring-svg">
+                    <circle class="progress-ring-circle-bg" cx="32" cy="32" r="26"></circle>
+                    <circle class="progress-ring-circle-fg" id="liveRing" cx="32" cy="32" r="26"></circle>
+                  </svg>
+                  <div class="progress-ring-text" id="ringText">2 of 5</div>
+                </div>
+              </div>
+
+              <!-- Checklist Items -->
+              <div class="checklist-row">
+                <div class="checklist-checkbox checked" onclick="toggleTask(this)">
+                  <i data-lucide="check" style="width:14px;height:14px;"></i>
+                </div>
+                <div style="font-size: 16px; color: var(--main-text);">Morning blood glucose check</div>
+              </div>
+              <div class="checklist-row">
+                <div class="checklist-checkbox checked" onclick="toggleTask(this)">
+                  <i data-lucide="check" style="width:14px;height:14px;"></i>
+                </div>
+                <div style="font-size: 16px; color: var(--main-text);">Take morning medicine</div>
+              </div>
+              <div class="checklist-row">
+                <div class="checklist-checkbox" onclick="toggleTask(this)">
+                </div>
+                <div style="font-size: 16px; color: var(--main-text);">Drink 2 glasses of water</div>
+              </div>
+              <div class="checklist-row">
+                <div class="checklist-checkbox" onclick="toggleTask(this)">
+                </div>
+                <div style="font-size: 16px; color: var(--main-text);">Check both feet for sores</div>
+              </div>
+            </div>
+
+            <!-- 10. Reading Card Component Demo -->
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <h3 style="font-size: 20px; font-weight: 700; color: var(--dark-blue);">Latest Glucose</h3>
+                <span style="font-size: 12px; color: var(--secondary-text);">Diary entry</span>
+              </div>
+
+              <div class="reading-card">
+                <div class="reading-card-header">
+                  <div>
+                    <div class="reading-value-wrap">
+                      <span class="reading-value">3.8</span>
+                      <span class="reading-unit">mmol/L</span>
+                    </div>
+                    <div class="reading-meta-row" style="margin-top: 4px;">
+                      <span class="reading-when-tag">Before breakfast</span>
+                      <span>•</span>
+                      <span>Today, 07:15</span>
+                    </div>
+                  </div>
+                  <!-- 11. Flag badge: Low (orange, down-arrow, word) -->
+                  <div class="flag-badge flag-low">
+                    <i data-lucide="arrow-down" style="width:14px;height:14px;"></i>
+                    <span>Low</span>
+                  </div>
+                </div>
+
+                <div class="reading-note">
+                  "Felt a bit shaky before tea. Had half a glass of juice."
+                </div>
+
+                <div class="reading-actions">
+                  <button class="btn-reading-action" onclick="showToast('Entry opened for editing')">
+                    <i data-lucide="pencil" style="width:14px;height:14px;"></i>
+                    <span>Edit</span>
+                  </button>
+                  <button class="btn-reading-action" style="color: var(--danger-red);" onclick="openDeleteConfirm()">
+                    <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
+                    <span>Delete</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- High Flag Reading Card Demo -->
+            <div class="reading-card">
+              <div class="reading-card-header">
+                <div>
+                  <div class="reading-value-wrap">
+                    <span class="reading-value">14.6</span>
+                    <span class="reading-unit">mmol/L</span>
+                  </div>
+                  <div class="reading-meta-row" style="margin-top: 4px;">
+                    <span class="reading-when-tag">2h After lunch</span>
+                    <span>•</span>
+                    <span>Yesterday, 14:30</span>
+                  </div>
+                </div>
+                <!-- 11. Flag badge: Very high (red, up-arrow, word) -->
+                <div class="flag-badge flag-very-high">
+                  <i data-lucide="arrow-up" style="width:14px;height:14px;"></i>
+                  <span>Very high</span>
+                </div>
+              </div>
+
+              <div class="reading-note">
+                "Sunday family meal with pap and stew."
+              </div>
+
+              <div class="reading-actions">
+                <button class="btn-reading-action" onclick="showToast('Entry opened for editing')">
+                  <i data-lucide="pencil" style="width:14px;height:14px;"></i>
+                  <span>Edit</span>
+                </button>
+                <button class="btn-reading-action" style="color: var(--danger-red);" onclick="openDeleteConfirm()">
+                  <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
+                  <span>Delete</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 19. Topic Card Component -->
+            <div>
+              <h3 style="font-size: 20px; font-weight: 700; color: var(--dark-blue); margin-bottom: 8px;">Learning Centre</h3>
+              
+              <div class="topic-card" onclick="showToast('Opening topic...')">
+                <div class="topic-header">
+                  <div class="topic-icon-wrap">
+                    <i data-lucide="apple" style="width:20px;height:20px;"></i>
+                  </div>
+                  <div>
+                    <h4 class="topic-title">Healthy food choices</h4>
+                  </div>
+                </div>
+                <p class="topic-summary">Simple tips on balancing carbs, vegetables, and beans in daily meals.</p>
+                <div class="topic-meta">
+                  <i data-lucide="clock" style="width:12px;height:12px;"></i>
+                  <span>3 min read</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Action Button -->
+            <button class="btn btn-primary" style="width: 100%;" onclick="openAddReadingSheet()">
+              <i data-lucide="plus" style="width:18px;height:18px;"></i>
+              <span>Save new reading</span>
+            </button>
+
+            <!-- 13. Toast Component (Shown Above Tab Bar) -->
+            <div class="app-toast" id="liveToast">
+              <i data-lucide="check-circle" class="toast-icon-success" style="width:18px;height:18px;"></i>
+              <span id="toastMessage">Reading saved successfully.</span>
+            </div>
+
+          </div>
+
+          <!-- 4. Tab Bar (Bottom of phone, 56px high) -->
+          <nav class="bottom-tab-bar">
+            <div class="tab-item active" onclick="setTab(this, 'Home')">
+              <i data-lucide="home" style="width:20px;height:20px;"></i>
+              <span>Home</span>
+            </div>
+            <div class="tab-item" onclick="setTab(this, 'Learn')">
+              <i data-lucide="book-open" style="width:20px;height:20px;"></i>
+              <span>Learn</span>
+            </div>
+            <div class="tab-item" onclick="setTab(this, 'Diary')">
+              <i data-lucide="calendar" style="width:20px;height:20px;"></i>
+              <span>Diary</span>
+            </div>
+            <div class="tab-item" onclick="setTab(this, 'Checklist')">
+              <i data-lucide="check-square" style="width:20px;height:20px;"></i>
+              <span>Checklist</span>
+            </div>
+            <div class="tab-item" onclick="setTab(this, 'Dashboard')">
+              <i data-lucide="bar-chart-2" style="width:20px;height:20px;"></i>
+              <span>Dashboard</span>
+            </div>
+          </nav>
+
+          <!-- 14. Bottom Sheet Modal (Over Phone) -->
+          <div id="bottomSheetOverlay" style="display:none; position:absolute; inset:0; background:rgba(28,30,33,0.5); z-index:100; flex-direction:column; justify-content:flex-end;">
+            <div class="bottom-sheet">
+              <div class="sheet-handle"></div>
+              <h3 style="font-size: 20px; font-weight: 700; color: var(--dark-blue);">Save Glucose Reading</h3>
+              
+              <!-- 8. Text Field Form inside Bottom Sheet -->
+              <div class="form-group">
+                <label class="form-label">Blood Glucose Value (mmol/L)</label>
+                <div class="form-input-wrapper">
+                  <input type="number" step="0.1" class="form-input" placeholder="e.g. 6.4" value="6.4">
+                </div>
+                <div class="form-message">Measured with your finger-prick meter</div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">When was this taken?</label>
+                <div class="form-input-wrapper">
+                  <input type="text" class="form-input" value="Before breakfast">
+                </div>
+              </div>
+
+              <div style="display:flex; gap:8px; margin-top:8px;">
+                <button class="btn btn-secondary" style="flex:1;" onclick="closeAddReadingSheet()">Cancel</button>
+                <button class="btn btn-primary" style="flex:1;" onclick="submitReading()">Save reading</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 15. Confirmation Pop-up Modal (Over Phone) -->
+          <div id="confirmPopupOverlay" style="display:none; position:absolute; inset:0; background:rgba(28,30,33,0.5); z-index:110; align-items:center; justify-content:center; padding:16px;">
+            <div class="popup-dialog">
+              <h3 style="font-size: 20px; font-weight: 700; color: var(--dark-blue);">Delete Reading?</h3>
+              <p style="font-size: 16px; color: var(--main-text);">Are you sure you want to remove this 3.8 mmol/L reading from your diary?</p>
+              
+              <div class="popup-actions">
+                <button class="btn btn-secondary" onclick="closeDeleteConfirm()">Cancel</button>
+                <button class="btn btn-danger" onclick="confirmDeleteReading()">Delete</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Warning Signs Bottom Sheet Modal -->
+          <div id="warningSignsOverlay" style="display:none; position:absolute; inset:0; background:rgba(28,30,33,0.5); z-index:110; flex-direction:column; justify-content:flex-end;">
+            <div class="bottom-sheet">
+              <div class="sheet-handle"></div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <i data-lucide="triangle-alert" style="color:var(--danger-red); width:24px; height:24px;"></i>
+                <h3 style="font-size: 20px; font-weight: 700; color: var(--danger-red);">Warning Signs</h3>
+              </div>
+              <p style="font-size: 16px; color: var(--main-text);">
+                Call your clinic or seek emergency medical help right away if you have:
+              </p>
+              <ul style="font-size: 16px; color: var(--main-text); padding-left: 20px; display: flex; flex-direction: column; gap: 6px;">
+                <li>Very sweet or fruity-smelling breath</li>
+                <li>Confusion or trouble staying awake</li>
+                <li>Persistent vomiting for more than 4 hours</li>
+                <li>Blood glucose remaining over 15 mmol/L with dizziness</li>
+              </ul>
+              <button class="btn btn-secondary" style="width:100%; margin-top:8px;" onclick="hideWarningModal()">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: COMPONENT INVENTORY & ALL REQUIRED STATES (1 TO 19) -->
+    <section class="section-block">
+      <h2 class="section-title"><i data-lucide="layers"></i> 3. Comprehensive Component Set & Interactive States</h2>
+      <p style="font-size: 16px; color: var(--secondary-text); margin-bottom: 20px;">
+        Each requested component (1–19) shown with all mandatory visual states, interaction behaviors, and accessibility constraints.
+      </p>
+
+      <div class="cards-grid">
+
+        <!-- 1, 2, 3: Header & Navigation States -->
+        <div class="doc-card" style="grid-column: 1 / -1;">
+          <div class="doc-card-title">
+            <span>Components 1, 2, 3: Header, Language Selector & Warning Signs Button</span>
+            <span class="badge-label">56 px Height • Min 44×44 px Tappable</span>
+          </div>
+          
+          <p style="font-size: 14px; color: var(--secondary-text); margin-bottom: 12px;">
+            Header shown with visitor state ("Log in" button) and logged-in user state, plus open language menu and 44 px red warning signs action.
+          </p>
+
+          <table class="state-table">
+            <thead>
+              <tr>
+                <th style="width: 180px;">Component / State</th>
+                <th>Rendered Interactive Preview</th>
+                <th style="width: 280px;">Design Rules</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Header (Visitor State)</strong><br><span style="font-size: 12px; color: var(--secondary-text);">Unauthenticated</span></td>
+                <td>
+                  <div style="background: var(--card-surface); border: 1px solid #E4E6EB; height: 56px; border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; padding: 0 16px;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                      <div class="app-icon" style="width:32px; height:32px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2.2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><polyline points="9 13 11 15 15 11"/></svg>
+                      </div>
+                      <span class="app-wordmark" style="font-size: 16px; font-weight: 700;">Diabetes Companion <span style="color:var(--primary-blue);">SA</span></span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                      <button class="btn-warning-signs"><i data-lucide="triangle-alert" style="width:14px;height:14px;"></i> Warning signs</button>
+                      <button class="btn btn-secondary" style="height:44px; padding:0 14px; font-size:14px;">Log in</button>
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size: 12px; color: var(--secondary-text);">56 px fixed height. Wordmark hidden when screen &lt; 400 px. Features secondary "Log in" button for visitor.</td>
+              </tr>
+              <tr>
+                <td><strong>Header (Logged-in User)</strong><br><span style="font-size: 12px; color: var(--secondary-text);">Authenticated</span></td>
+                <td>
+                  <div style="background: var(--card-surface); border: 1px solid #E4E6EB; height: 56px; border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; padding: 0 16px;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                      <div class="app-icon" style="width:32px; height:32px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2.2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><polyline points="9 13 11 15 15 11"/></svg>
+                      </div>
+                      <span class="app-wordmark" style="font-size: 16px; font-weight: 700;">Diabetes Companion <span style="color:var(--primary-blue);">SA</span></span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                      <button class="lang-selector-btn"><i data-lucide="globe" style="width:14px;height:14px;"></i> EN</button>
+                      <button class="btn-warning-signs"><i data-lucide="triangle-alert" style="width:14px;height:14px;"></i> Warning signs</button>
+                      <button class="user-profile-btn"><i data-lucide="user" style="width:16px;height:16px;"></i></button>
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size: 12px; color: var(--secondary-text);">Replaces "Log in" with user profile icon button (44×44 px touch area).</td>
+              </tr>
+              <tr>
+                <td><strong>Language Selector Menu</strong><br><span style="font-size: 12px; color: var(--secondary-text);">English, isiZulu, Setswana</span></td>
+                <td>
+                  <div style="display: inline-block; background: var(--card-surface); border: 1px solid #E4E6EB; border-radius: var(--radius); box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 180px;">
+                    <div style="padding: 10px 16px; font-size: 12px; font-weight: 700; border-bottom: 1px solid #F0F2F5; color: var(--primary-blue); display:flex; justify-content:space-between;">
+                      English <i data-lucide="check" style="width:14px;height:14px;"></i>
+                    </div>
+                    <div style="padding: 10px 16px; font-size: 12px; border-bottom: 1px solid #F0F2F5; color: var(--main-text);">
+                      isiZulu (ZU)
+                    </div>
+                    <div style="padding: 10px 16px; font-size: 12px; color: var(--main-text);">
+                      Setswana (TN)
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size: 12px; color: var(--secondary-text);">Opens small menu with EN, ZU, and TN. Always has text label and globe icon.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 4: Tab Bar & Responsive Menu -->
+        <div class="doc-card" style="grid-column: 1 / -1;">
+          <div class="doc-card-title">
+            <span>Component 4: Tab Bar (Phone) & Top Menu (Tablet / Desktop)</span>
+            <span class="badge-label">56 px Height • Active #1A6BD1</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div>
+              <div style="font-size: 12px; font-weight: 700; color: var(--secondary-text); margin-bottom: 6px;">PHONE VERSION (&lt;640 px): Fixed at bottom, 56 px high</div>
+              <div style="max-width: 360px; background: var(--card-surface); border: 1px solid #E4E6EB; border-radius: var(--radius); height: 56px; display: flex; justify-content: space-around; align-items: center;">
+                <div class="tab-item active"><i data-lucide="home" style="width:18px;height:18px;"></i><span>Home</span></div>
+                <div class="tab-item"><i data-lucide="book-open" style="width:18px;height:18px;"></i><span>Learn</span></div>
+                <div class="tab-item"><i data-lucide="calendar" style="width:18px;height:18px;"></i><span>Diary</span></div>
+                <div class="tab-item"><i data-lucide="check-square" style="width:18px;height:18px;"></i><span>Checklist</span></div>
+                <div class="tab-item"><i data-lucide="bar-chart-2" style="width:18px;height:18px;"></i><span>Dashboard</span></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size: 12px; font-weight: 700; color: var(--secondary-text); margin-bottom: 6px;">TABLET / DESKTOP VERSION (≥640 px): Transforms to Top Menu</div>
+              <div style="background: var(--card-surface); border: 1px solid #E4E6EB; border-radius: var(--radius); padding: 8px 16px; display: flex; gap: 12px; align-items: center;">
+                <a href="#" class="desktop-nav-item active"><i data-lucide="home" style="width:18px;height:18px;"></i><span>Home</span></a>
+                <a href="#" class="desktop-nav-item"><i data-lucide="book-open" style="width:18px;height:18px;"></i><span>Learn</span></a>
+                <a href="#" class="desktop-nav-item"><i data-lucide="calendar" style="width:18px;height:18px;"></i><span>Diary</span></a>
+                <a href="#" class="desktop-nav-item"><i data-lucide="check-square" style="width:18px;height:18px;"></i><span>Checklist</span></a>
+                <a href="#" class="desktop-nav-item"><i data-lucide="bar-chart-2" style="width:18px;height:18px;"></i><span>Dashboard</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5, 6, 7: Buttons and States -->
+        <div class="doc-card" style="grid-column: 1 / -1;">
+          <div class="doc-card-title">
+            <span>Components 5, 6, 7: Primary, Secondary & Danger Buttons</span>
+            <span class="badge-label">48 px Height • 12 px Corners • 16 px Semi-Bold</span>
+          </div>
+
+          <table class="state-table">
+            <thead>
+              <tr>
+                <th>Button Type</th>
+                <th>Default State</th>
+                <th>Pressed State</th>
+                <th>Focus Outline State</th>
+                <th>Disabled State</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>5. Primary Button</strong><br><span style="font-size:12px;color:var(--secondary-text);">Blue #1A6BD1</span></td>
+                <td>
+                  <button class="btn btn-primary">Save reading</button>
+                </td>
+                <td>
+                  <button class="btn btn-primary state-pressed">Pressed #1565C0</button>
+                </td>
+                <td>
+                  <button class="btn btn-primary" style="outline: 2px solid var(--dark-blue); outline-offset: 2px;">Keyboard Focus</button>
+                </td>
+                <td>
+                  <button class="btn btn-primary state-disabled" disabled>Disabled #D0D5DD</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>6. Secondary Button</strong><br><span style="font-size:12px;color:var(--secondary-text);">White, 2px border, #1565C0</span></td>
+                <td>
+                  <button class="btn btn-secondary">Learn more</button>
+                </td>
+                <td>
+                  <button class="btn btn-secondary state-pressed">Pressed Tint</button>
+                </td>
+                <td>
+                  <button class="btn btn-secondary" style="outline: 2px solid var(--dark-blue); outline-offset: 2px;">Keyboard Focus</button>
+                </td>
+                <td>
+                  <button class="btn btn-secondary state-disabled" disabled>Disabled State</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>7. Danger Button</strong><br><span style="font-size:12px;color:var(--secondary-text);">Red #B91C1C (always paired with Cancel)</span></td>
+                <td colspan="4">
+                  <div style="display: flex; gap: 12px; align-items: center;">
+                    <button class="btn btn-secondary">Cancel</button>
+                    <button class="btn btn-danger"><i data-lucide="trash-2" style="width:16px;height:16px;"></i> Delete entry</button>
+                    <span style="font-size: 12px; color: var(--secondary-text);">Rule: Danger buttons are always explicitly paired with a "Cancel" button.</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 8: Text Field and States -->
+        <div class="doc-card">
+          <div class="doc-card-title">
+            <span>Component 8: Text Field & States</span>
+            <span class="badge-label">48 px Input • 12 px Corners</span>
+          </div>
+
+          <!-- Normal State -->
+          <div class="form-group">
+            <label class="form-label">Default State</label>
+            <div class="form-input-wrapper">
+              <input type="text" class="form-input" placeholder="Enter blood glucose reading">
+            </div>
+            <div class="form-message">Helper text sits below in 12 px regular</div>
+          </div>
+
+          <!-- Focused State -->
+          <div class="form-group">
+            <label class="form-label">Focused State (2 px #1565C0 outline)</label>
+            <div class="form-input-wrapper">
+              <input type="text" class="form-input state-focus" value="6.5">
+            </div>
+            <div class="form-message">Active cursor and distinct focus border</div>
+          </div>
+
+          <!-- Error State -->
+          <div class="form-group">
+            <label class="form-label">Error State (Red border + icon + message)</label>
+            <div class="form-input-wrapper">
+              <input type="text" class="form-input state-error" value="99.0">
+            </div>
+            <div class="form-message error">
+              <i data-lucide="circle-alert" style="width:14px;height:14px;"></i>
+              <span>Value must be between 1.0 and 33.0 mmol/L</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9, 10, 11: Cards, Reading Card & Flag Badges -->
+        <div class="doc-card">
+          <div class="doc-card-title">
+            <span>Components 9, 10, 11: Cards & Flag Badges</span>
+            <span class="badge-label">Never Colour Alone</span>
+          </div>
+
+          <!-- Flag Badges Showcase -->
+          <div style="margin-bottom: 16px;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--secondary-text); margin-bottom: 8px;">11. Flag Badges (Icon + Word + Color on White Card)</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <span class="flag-badge flag-low">
+                <i data-lucide="arrow-down" style="width:14px;height:14px;"></i>
+                <span>Low (&lt; 4.0)</span>
+              </span>
+              <span class="flag-badge flag-very-high">
+                <i data-lucide="arrow-up" style="width:14px;height:14px;"></i>
+                <span>Very high (&gt; 11.0)</span>
+              </span>
+              <span class="flag-badge flag-in-range">
+                <i data-lucide="check" style="width:14px;height:14px;"></i>
+                <span>In range</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Standard White Card (9) -->
+          <div class="ui-card" style="margin-bottom: 12px;">
+            <div style="font-size: 16px; font-weight: 700; color: var(--main-text); margin-bottom: 4px;">9. Base Card Surface</div>
+            <p style="font-size: 12px; color: var(--secondary-text);">#FFFFFF background, 16 px padding, 12 px corner radius, soft shadow.</p>
+          </div>
+
+          <!-- Reading Card Breakdown (10) -->
+          <div class="reading-card">
+            <div class="reading-card-header">
+              <div>
+                <div class="reading-value-wrap">
+                  <span class="reading-value">5.6</span>
+                  <span class="reading-unit">mmol/L</span>
+                </div>
+                <div class="reading-meta-row">
+                  <span class="reading-when-tag">Before lunch</span>
+                  <span>•</span>
+                  <span>Today, 12:40</span>
+                </div>
+              </div>
+              <div class="flag-badge flag-in-range">
+                <i data-lucide="check" style="width:14px;height:14px;"></i>
+                <span>In range</span>
+              </div>
+            </div>
+            <div class="reading-note">"Walked 20 minutes around the garden."</div>
+            <div class="reading-actions">
+              <button class="btn-reading-action"><i data-lucide="pencil" style="width:14px;height:14px;"></i> Edit</button>
+              <button class="btn-reading-action" style="color:var(--danger-red);"><i data-lucide="trash-2" style="width:14px;height:14px;"></i> Delete</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12, 13: Progress Ring & Toast -->
+        <div class="doc-card">
+          <div class="doc-card-title">
+            <span>Components 12 & 13: Progress Ring & Toast</span>
+            <span class="badge-label">Clockwise Fill</span>
+          </div>
+
+          <!-- Progress Ring Demo -->
+          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+            <div class="progress-ring-container">
+              <svg class="progress-ring-svg">
+                <circle class="progress-ring-circle-bg" cx="32" cy="32" r="26"></circle>
+                <circle class="progress-ring-circle-fg" cx="32" cy="32" r="26" style="stroke-dashoffset: 32;"></circle>
+              </svg>
+              <div class="progress-ring-text">4 of 5</div>
+            </div>
+            <div>
+              <div style="font-size: 16px; font-weight: 700; color: var(--dark-blue);">12. Progress Ring (64 px)</div>
+              <p style="font-size: 12px; color: var(--secondary-text);">Circular stroke fills clockwise with #1A6BD1. Centre displays clear text ("4 of 5").</p>
+            </div>
+          </div>
+
+          <!-- Toast Breakdown -->
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: var(--secondary-text); margin-bottom: 8px;">13. Toast Notification (#1C1E21, 12px corners, above tab bar)</div>
+            
+            <div class="app-toast" style="margin-bottom: 8px;">
+              <i data-lucide="check-circle" class="toast-icon-success" style="width:18px;height:18px;"></i>
+              <span>Success toast: Glucose log saved with green tick.</span>
+            </div>
+
+            <div class="app-toast">
+              <i data-lucide="info" style="color:#60A5FA; width:18px;height:18px;"></i>
+              <span>Information toast: Reminder set for 18:00 evening check.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14, 15: Bottom Sheet & Confirmation Pop-up -->
+        <div class="doc-card">
+          <div class="doc-card-title">
+            <span>Components 14 & 15: Bottom Sheet & Confirmation Pop-up</span>
+            <span class="badge-label">Dimmed Backdrop</span>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--secondary-text); margin-bottom: 6px;">14. Bottom Sheet (White, slides up, has Cancel button)</div>
+            <div class="sheet-backdrop-mock">
+              <div class="bottom-sheet">
+                <div class="sheet-handle"></div>
+                <div style="font-size: 16px; font-weight: 700; color: var(--dark-blue);">Quick Notes Sheet</div>
+                <p style="font-size: 12px; color: var(--secondary-text);">Dimmed backdrop behind sheet ensures focus.</p>
+                <button class="btn btn-secondary" style="width: 100%;">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: var(--secondary-text); margin-bottom: 6px;">15. Confirmation Pop-up (Max 328 px wide, centred, title + two buttons)</div>
+            <div class="popup-dialog" style="box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #E4E6EB;">
+              <h4 style="font-size: 20px; font-weight: 700; color: var(--dark-blue);">Discard changes?</h4>
+              <p style="font-size: 16px; color: var(--main-text);">Any unsaved notes for this glucose reading will be lost.</p>
+              <div class="popup-actions">
+                <button class="btn btn-secondary">Keep editing</button>
+                <button class="btn btn-danger">Discard</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16, 17: Empty State Block & Loading Placeholder -->
+        <div class="doc-card">
+          <div class="doc-card-title">
+            <span>Components 16 & 17: Empty State & Loading Placeholders</span>
+            <span class="badge-label">Shaped Skeletons</span>
+          </div>
+
+          <!-- Empty State (16) -->
+          <div class="empty-state-block" style="margin-bottom: 16px;">
+            <div class="empty-state-icon-circle">
+              <i data-lucide="clipboard-list" style="width:28px;height:28px;"></i>
+            </div>
+            <div>
+              <div style="font-size: 16px; font-weight: 700; color: var(--main-text);">No readings recorded yet</div>
+              <p style="font-size: 12px; color: var(--secondary-text); margin-top: 4px;">Tap below to record your first blood glucose check for today.</p>
+            </div>
+            <button class="btn btn-primary" style="height: 44px; padding: 0 16px; font-size: 14px;">
+              <i data-lucide="plus" style="width:16px;height:16px;"></i>
+              <span>Add glucose reading</span>
+            </button>
+          </div>
+
+          <!-- Loading Placeholders (17) -->
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: var(--secondary-text); margin-bottom: 8px;">17. Loading Placeholder (#E4E6EB shaped blocks)</div>
+            <div class="ui-card" style="display:flex; flex-direction:column; gap:10px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div class="skeleton-block" style="width: 80px; height: 28px;"></div>
+                <div class="skeleton-block" style="width: 60px; height: 20px; border-radius:999px;"></div>
+              </div>
+              <div class="skeleton-block" style="width: 140px; height: 14px;"></div>
+              <div class="skeleton-block" style="width: 100%; height: 36px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 18, 19: Offline Banner & Topic Card -->
+        <div class="doc-card">
+          <div class="doc-card-title">
+            <span>Components 18 & 19: Offline Banner & Topic Card</span>
+            <span class="badge-label">20 px Title • 12 px Meta</span>
+          </div>
+
+          <!-- Offline Banner (18) -->
+          <div style="margin-bottom: 16px;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--secondary-text); margin-bottom: 6px;">18. Offline Banner (Fixed under header, #1C1E21, white text)</div>
+            <div class="offline-banner" style="border-radius: var(--radius);">
+              <i data-lucide="wifi-off" style="width:16px;height:16px; flex-shrink:0;"></i>
+              <span>You’re offline. Some things may not work until you reconnect.</span>
+            </div>
+          </div>
+
+          <!-- Topic Card (19) -->
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: var(--secondary-text); margin-bottom: 6px;">19. Topic Card (Icon, 20 px title, summary, 12 px reading time)</div>
+            <div class="topic-card">
+              <div class="topic-header">
+                <div class="topic-icon-wrap">
+                  <i data-lucide="footprints" style="width:20px;height:20px;"></i>
+                </div>
+                <h4 class="topic-title">Caring for your feet</h4>
+              </div>
+              <p class="topic-summary">How to wash, dry, and inspect your feet daily to prevent sores and infections.</p>
+              <div class="topic-meta">
+                <i data-lucide="clock" style="width:12px;height:12px;"></i>
+                <span>4 min read</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: ACCESSIBILITY, RULES & RESPONSIVE BEHAVIOR CHECKLIST -->
+    <section class="section-block">
+      <h2 class="section-title"><i data-lucide="shield-check"></i> 4. Accessibility & Rule Conformance Matrix</h2>
+      <div class="cards-grid">
+        <div class="doc-card">
+          <div class="doc-card-title">
+            <span>Strict Rule Compliance</span>
+            <span class="badge-label">Audited</span>
+          </div>
+          <ul style="font-size: 14px; line-height: 1.8; color: var(--main-text); list-style-type: none;">
+            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--success-green);display:inline;vertical-align:middle;margin-right:6px;"></i><strong>Values Only:</strong> Strict adherence to provided HEX palette, dimensions, and Inter typography.</li>
+            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--success-green);display:inline;vertical-align:middle;margin-right:6px;"></i><strong>No Color Alone:</strong> Flags, errors, and badges all incorporate Lucide outline icons and explicit text words.</li>
+            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--success-green);display:inline;vertical-align:middle;margin-right:6px;"></i><strong>Contrast Ratio:</strong> Primary blue #1A6BD1 white text is 5.16:1 (passes &gt; 4.5:1). Dark blue headings are 7:1+.</li>
+            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--success-green);display:inline;vertical-align:middle;margin-right:6px;"></i><strong>Touch Target Size:</strong> Every tappable element is at least 44 × 44 px (buttons are 48 px high).</li>
+            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--success-green);display:inline;vertical-align:middle;margin-right:6px;"></i><strong>Surfaces:</strong> Flags, errors, and success text strictly sit on white card surfaces (#FFFFFF).</li>
+            <li><i data-lucide="check" style="width:16px;height:16px;color:var(--success-green);display:inline;vertical-align:middle;margin-right:6px;"></i><strong>Imagery:</strong> No photos of people, no profile pictures. Flat, simple vector icons and illustrations only.</li>
+          </ul>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-card-title">
+            <span>Responsive Breakpoints</span>
+            <span class="badge-label">Fluid Architecture</span>
+          </div>
+          <div style="font-size: 14px; line-height: 1.7; color: var(--main-text);">
+            <div style="margin-bottom: 8px;">
+              <strong>Phone (&lt; 640 px):</strong> Single column layout with 16 px screen margin, fixed 56 px bottom tab bar, and header hiding wordmark below 400 px.
+            </div>
+            <div style="margin-bottom: 8px;">
+              <strong>Tablet (640 to 1024 px):</strong> One centered column capped at 720 px max width, bottom tab bar transitions to a top navigation bar.
+            </div>
+            <div>
+              <strong>Desktop (&gt; 1024 px):</strong> Top navigation bar with content comfortably scaling up to 1200 px max width.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Language Selector Menu Toggle
+    function toggleLanguageMenu() {
+      const menu = document.getElementById('langMenu');
+      menu.classList.toggle('open');
+    }
+
+    function selectLang(code, name) {
+      document.getElementById('currentLangLabel').innerText = code;
+      document.getElementById('langMenu').classList.remove('open');
+      showToast('Language changed to ' + name + ' (' + code + ')');
+    }
+
+    // Warning Signs Modal
+    function showWarningModal() {
+      document.getElementById('warningSignsOverlay').style.display = 'flex';
+      lucide.createIcons();
+    }
+    function hideWarningModal() {
+      document.getElementById('warningSignsOverlay').style.display = 'none';
+    }
+
+    // Toast Interaction
+    let toastTimeout;
+    function showToast(msg) {
+      const toast = document.getElementById('liveToast');
+      document.getElementById('toastMessage').innerText = msg;
+      toast.style.display = 'flex';
+      toast.style.opacity = '1';
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3500);
+    }
+
+    // Bottom Sheet
+    function openAddReadingSheet() {
+      document.getElementById('bottomSheetOverlay').style.display = 'flex';
+    }
+    function closeAddReadingSheet() {
+      document.getElementById('bottomSheetOverlay').style.display = 'none';
+    }
+    function submitReading() {
+      closeAddReadingSheet();
+      showToast('Reading saved: 6.4 mmol/L (Before breakfast)');
+    }
+
+    // Confirmation Popup
+    function openDeleteConfirm() {
+      document.getElementById('confirmPopupOverlay').style.display = 'flex';
+    }
+    function closeDeleteConfirm() {
+      document.getElementById('confirmPopupOverlay').style.display = 'none';
+    }
+    function confirmDeleteReading() {
+      closeDeleteConfirm();
+      showToast('Glucose reading removed.');
+    }
+
+    // Checklist toggling
+    function toggleTask(el) {
+      el.classList.toggle('checked');
+      if (el.classList.contains('checked')) {
+        el.innerHTML = '<i data-lucide="check" style="width:14px;height:14px;"></i>';
+      } else {
+        el.innerHTML = '';
+      }
+      lucide.createIcons();
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const total = 4;
+      const checked = document.querySelectorAll('.checklist-checkbox.checked').length;
+      document.getElementById('ringText').innerText = checked + ' of ' + total;
+      
+      const circumference = 163.36;
+      const offset = circumference - (checked / total) * circumference;
+      document.getElementById('liveRing').style.strokeDashoffset = offset;
+    }
+
+    // Tab Switching
+    function setTab(el, name) {
+      document.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
+      el.classList.add('active');
+      showToast('Switched to ' + name + ' screen');
+    }
+
+    // Close overlays on outside click
+    window.addEventListener('click', function(e) {
+      const langBtn = document.getElementById('langBtn');
+      const langMenu = document.getElementById('langMenu');
+      if (langBtn && langMenu && !langBtn.contains(e.target) && !langMenu.contains(e.target)) {
+        langMenu.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>

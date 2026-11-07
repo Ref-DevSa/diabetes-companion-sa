@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screen S11 “Profile and settings” - All States (360px Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    :root {
+      --primary: #1A6BD1;
+      --primary-dark: #1565C0;
+      --tint: #E7F0FD;
+      --bg: #F0F2F5;
+      --surface: #FFFFFF;
+      --text-main: #1C1E21;
+      --text-secondary: #65676B;
+      --warning: #B45309;
+      --warning-bg: #FEF3C7;
+      --danger: #B91C1C;
+      --danger-bg: #FEE2E2;
+      --success: #15803D;
+      --success-bg: #DCFCE7;
+      --border: #E4E6EB;
+      --border-focus: #1565C0;
+      --disabled: #D0D5DD;
+      --skeleton: #E4E6EB;
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #E2E8F0;
+      color: var(--text-main);
+      padding: 32px 20px 80px 20px;
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+    }
+    .spec-header {
+      max-width: 1960px;
+      margin: 0 auto 32px auto;
+      background: #FFFFFF;
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid #CBD5E1;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    .spec-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .badge {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+    .badge-blue { background: #E7F0FD; color: #1565C0; }
+    .badge-green { background: #DCFCE7; color: #15803D; }
+    .badge-purple { background: #F3E8FF; color: #7E22CE; }
+    .badge-amber { background: #FEF3C7; color: #B45309; }
+    .spec-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1C1E21;
+      margin-bottom: 8px;
+    }
+    .spec-desc {
+      font-size: 14px;
+      color: #475569;
+      max-width: 1200px;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .spec-states-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .state-pill {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #F1F5F9;
+      color: #334155;
+      font-weight: 500;
+      border: 1px solid #E2E8F0;
+    }
+
+    /* Grid of phone frames */
+    .frames-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: flex-start;
+      max-width: 1960px;
+      margin: 0 auto;
+    }
+    .frame-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .frame-tag {
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .frame-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .frame-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .pill-blue { background: #E7F0FD; color: #1565C0; }
+    .pill-blue .frame-pill-dot { background: #1A6BD1; }
+    .pill-purple { background: #F3E8FF; color: #7E22CE; }
+    .pill-purple .frame-pill-dot { background: #9333EA; }
+    .pill-red { background: #FEE2E2; color: #991B1B; }
+    .pill-red .frame-pill-dot { background: #DC2626; }
+    .pill-amber { background: #FEF3C7; color: #92400E; }
+    .pill-amber .frame-pill-dot { background: #D97706; }
+    .pill-green { background: #DCFCE7; color: #166534; }
+    .pill-green .frame-pill-dot { background: #16A34A; }
+    .frame-subtitle {
+      font-size: 12px;
+      color: #64748B;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* 360px Phone Device Frame */
+    .phone-mockup {
+      width: 360px;
+      background: var(--bg);
+      border-radius: 36px;
+      border: 8px solid #1E293B;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 780px; /* consistent realistic mobile height */
+    }
+
+    /* System Status Bar */
+    .status-bar {
+      height: 28px;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-main);
+      background: var(--surface);
+      z-index: 20;
+    }
+    .status-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Header (56px) */
+    .app-header {
+      height: 56px;
+      background: var(--surface);
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      z-index: 20;
+      flex-shrink: 0;
+    }
+    .header-logo {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      flex-shrink: 0;
+    }
+    .header-logo svg {
+      width: 22px;
+      height: 22px;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lang-btn {
+      height: 36px;
+      padding: 0 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #FFFFFF;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .warning-signs-btn {
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 8px;
+      background: var(--danger);
+      color: #FFFFFF;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .profile-avatar-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--tint);
+      border: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-dark);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* Offline Banner (56px) */
+    .offline-banner {
+      background: #1C1E21;
+      color: #FFFFFF;
+      padding: 10px 16px;
+      font-size: 12px;
+      line-height: 1.35;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      z-index: 15;
+    }
+    .offline-banner svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: #F59E0B;
+    }
+
+    /* Scrollable Screen Content */
+    .screen-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+    }
+    .screen-content::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Typography */
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.25;
+    }
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .card-email-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .card-email-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+      word-break: break-all;
+    }
+    .card-readonly-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--bg);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 8px;
+    }
+
+    /* Language List */
+    .language-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .language-list-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .lang-item {
+      min-height: 52px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      background: var(--surface);
+      transition: background 0.15s ease;
+    }
+    .lang-item:last-child {
+      border-bottom: none;
+    }
+    .lang-item-name {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+    .lang-item.selected {
+      background: #F8FAFD;
+    }
+    .lang-item.selected .lang-item-name {
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    .radio-circle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .lang-item.selected .radio-circle {
+      border-color: var(--primary);
+      background: var(--primary);
+    }
+    .radio-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #FFFFFF;
+    }
+
+    /* Privacy Notice Row */
+    .nav-row-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      min-height: 52px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .nav-row-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-row-icon {
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-row-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .nav-row-chevron {
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+    }
+
+    /* Action Buttons (48px high) */
+    .actions-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+    .btn-secondary {
+      height: 48px;
+      width: 100%;
+      background: var(--surface);
+      border: 2px solid var(--primary-dark);
+      color: var(--primary-dark);
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .btn-danger {
+      height: 48px;
+      width: 100%;
+      background: var(--surface);
+      border: 2px solid var(--danger);
+      color: var(--danger);
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    /* Tab Bar (56px) - No tab active */
+    .tab-bar {
+      height: 56px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 20;
+      flex-shrink: 0;
+    }
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      color: var(--text-secondary); /* No tab active */
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      width: 56px;
+      height: 100%;
+    }
+    .tab-item svg {
+      width: 20px;
+      height: 20px;
+      color: var(--text-secondary);
+    }
+
+    /* Toast Notification (Pinned above tab bar) */
+    .toast-container {
+      position: absolute;
+      bottom: 64px; /* just above 56px tab bar */
+      left: 16px;
+      right: 16px;
+      background: #1C1E21;
+      color: #FFFFFF;
+      padding: 12px 16px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      z-index: 50;
+      animation: toastIn 0.25s ease-out;
+    }
+    .toast-icon {
+      color: #22C55E;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .toast-text {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    /* Offline Toast / Warning message in Offline frame */
+    .toast-offline {
+      background: #1C1E21;
+      color: #FFFFFF;
+      border-left: 4px solid #F59E0B;
+    }
+    .toast-offline .toast-icon {
+      color: #F59E0B;
+    }
+
+    /* Error Card Component */
+    .error-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--danger-bg);
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+      margin-top: 20px;
+    }
+    .error-icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--danger-bg);
+      color: var(--danger);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .error-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+    .btn-retry {
+      height: 48px;
+      width: 100%;
+      background: var(--primary);
+      border: none;
+      color: #FFFFFF;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    /* Loading Skeletons */
+    .skeleton-block {
+      background: linear-gradient(90deg, #E4E6EB 25%, #F0F2F5 50%, #E4E6EB 75%);
+      background-size: 200% 100%;
+      animation: pulse 1.5s infinite ease-in-out;
+      border-radius: 8px;
+    }
+    @keyframes pulse {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .skeleton-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 16px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .skeleton-line {
+      height: 16px;
+    }
+    .skeleton-line-sm {
+      height: 12px;
+      width: 40%;
+    }
+    .skeleton-line-md {
+      height: 20px;
+      width: 75%;
+    }
+    .skeleton-row {
+      height: 52px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen Specification Header -->
+  <header class="spec-header">
+    <div class="spec-badges">
+      <span class="badge badge-blue">Screen Specification • S11 “Profile and settings”</span>
+      <span class="badge badge-green">Logged-in User (Thabo)</span>
+      <span class="badge badge-purple">No Active Tab (Modal/Settings Level)</span>
+      <span class="badge badge-amber">360 px Viewport • WCAG AAA Tokens</span>
+    </div>
+    <h1 class="spec-title">Screen S11 “Profile and settings” — Diabetes Companion SA</h1>
+    <p class="spec-desc">
+      <strong>Purpose:</strong> Change language, read the Privacy Notice, log out, or delete account. Only logged-in Users see it. Strictly formatted for a 360 px wide phone with 16 px screen margins, 48 px high CTA buttons, 44×44 px minimum touch targets, read-only email card, 3-option language selector (English, isiZulu, Setswana), and authentic operational states.
+    </p>
+    <div class="spec-states-list">
+      <span class="state-pill">State 1: Normal (Setswana selected, Email, Privacy row, Buttons)</span>
+      <span class="state-pill">State 2: Loading (Grey placeholders for card & language list)</span>
+      <span class="state-pill">State 3: Error (“We couldn’t load your profile.” + Try again)</span>
+      <span class="state-pill">State 4: Offline (Dark Offline Banner + Tap feedback Toast)</span>
+      <span class="state-pill">State 5: Success (“Language changed.” Toast)</span>
+    </div>
+  </header>
+
+  <!-- Frames Grid -->
+  <main class="frames-container">
+
+    <!-- ========================================== -->
+    <!-- STATE 1: NORMAL                            -->
+    <!-- ========================================== -->
+    <div class="frame-wrapper">
+      <div class="frame-tag">
+        <span class="frame-pill pill-blue">
+          <span class="frame-pill-dot"></span>
+          State 1: Normal
+        </span>
+        <div class="frame-subtitle">Sample Content: Setswana marked, Thabo's email</div>
+      </div>
+
+      <div class="phone-mockup">
+        <!-- Status Bar -->
+        <div class="status-bar">
+          <span>09:41</span>
+          <div class="status-right">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- 1. Header (profile icon) -->
+        <div class="app-header">
+          <div class="header-logo" title="Diabetes Companion SA">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+              <polyline points="9 13 11 15 15 10"></polyline>
+            </svg>
+          </div>
+          <div class="header-actions">
+            <button class="lang-btn" aria-label="Change language">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>TN</span>
+            </button>
+            <button class="warning-signs-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span>Warning signs</span>
+            </button>
+            <div class="profile-avatar-btn" title="Logged in as Thabo (active screen)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scrollable Content -->
+        <div class="screen-content">
+          <!-- 2. Title -->
+          <h2 class="page-title">My profile</h2>
+
+          <!-- 3. Card with label "Email" and person's email (read only) -->
+          <div class="card">
+            <div class="card-email-label">Email</div>
+            <div class="card-email-value">thabo.test@example.co.za</div>
+            <div class="card-readonly-tag">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span>Read only</span>
+            </div>
+          </div>
+
+          <!-- 4. A "Language" list with three choices: English, isiZulu, Setswana -->
+          <div class="language-section">
+            <div class="section-label">Language</div>
+            <div class="language-list-card">
+              <div class="lang-item">
+                <span class="lang-item-name">English</span>
+                <div class="radio-circle"></div>
+              </div>
+              <div class="lang-item">
+                <span class="lang-item-name">isiZulu</span>
+                <div class="radio-circle"></div>
+              </div>
+              <div class="lang-item selected">
+                <span class="lang-item-name">Setswana</span>
+                <div class="radio-circle">
+                  <div class="radio-dot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. A row "Privacy Notice" -->
+          <div class="nav-row-card" role="button" tabindex="0">
+            <div class="nav-row-left">
+              <div class="nav-row-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <span class="nav-row-title">Privacy Notice</span>
+            </div>
+            <div class="nav-row-chevron">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- 6. Secondary button "Log out" & 7. Danger button "Delete account" -->
+          <div class="actions-stack">
+            <button class="btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              <span>Log out</span>
+            </button>
+            <button class="btn-danger">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+              <span>Delete account</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 8. Tab bar shown, with no tab active -->
+        <nav class="tab-bar">
+          <div class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span>Home</span>
+          </div>
+          <div class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            <span>Learn</span>
+          </div>
+          <div class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span>Diary</span>
+          </div>
+          <div class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+            <span>Checklist</span>
+          </div>
+          <div class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+            <span>Dashboard</span>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- STATE 2: LOADING                           -->
+    <!-- ========================================== -->
+    <div class="frame-wrapper">
+      <div class="frame-tag">
+        <span class="frame-pill pill-purple">
+          <span class="frame-pill-dot"></span>
+          State 2: Loading
+        </span>
+        <div class="frame-subtitle">Grey placeholders for card & language list</div>
+      </div>
+
+      <div class="phone-mockup">
+        <!-- Status Bar -->
+        <div class="status-bar">
+          <span>09:41</span>
+          <div class="status-right">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <div class="app-header">
+          <div class="header-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+              <polyline points="9 13 11 15 15 10"></polyline>
+            </svg>
+          </div>
+          <div class="header-actions">
+            <div class="skeleton-block" style="width: 54px; height: 36px; border-radius: 8px;"></div>
+            <div class="skeleton-block" style="width: 110px; height: 36px; border-radius: 8px;"></div>
+            <div class="skeleton-block" style="width: 36px; height: 36px; border-radius: 50%;"></div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="screen-content">
+          <div class="skeleton-block" style="width: 140px; height: 28px; border-radius: 6px;"></div>
+
+          <!-- Placeholder for Email Card -->
+          <div class="skeleton-card">
+            <div class="skeleton-block skeleton-line skeleton-line-sm"></div>
+            <div class="skeleton-block skeleton-line skeleton-line-md"></div>
+          </div>
+
+          <!-- Placeholder for Language Section -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="skeleton-block skeleton-line skeleton-line-sm"></div>
+            <div class="skeleton-card" style="padding: 0; overflow: hidden;">
+              <div style="height: 52px; border-bottom: 1px solid var(--border); padding: 16px;" class="skeleton-block"></div>
+              <div style="height: 52px; border-bottom: 1px solid var(--border); padding: 16px;" class="skeleton-block"></div>
+              <div style="height: 52px; padding: 16px;" class="skeleton-block"></div>
+            </div>
+          </div>
+
+          <!-- Placeholder for Privacy Notice Row -->
+          <div class="skeleton-row">
+            <div class="skeleton-block" style="width: 120px; height: 18px;"></div>
+            <div class="skeleton-block" style="width: 16px; height: 16px; border-radius: 4px;"></div>
+          </div>
+
+          <!-- Action Buttons Placeholder -->
+          <div class="actions-stack">
+            <div class="skeleton-block" style="height: 48px; border-radius: 12px;"></div>
+            <div class="skeleton-block" style="height: 48px; border-radius: 12px;"></div>
+          </div>
+        </div>
+
+        <!-- Tab Bar -->
+        <nav class="tab-bar">
+          <div class="tab-item"><div class="skeleton-block" style="width: 20px; height: 20px; border-radius: 4px;"></div></div>
+          <div class="tab-item"><div class="skeleton-block" style="width: 20px; height: 20px; border-radius: 4px;"></div></div>
+          <div class="tab-item"><div class="skeleton-block" style="width: 20px; height: 20px; border-radius: 4px;"></div></div>
+          <div class="tab-item"><div class="skeleton-block" style="width: 20px; height: 20px; border-radius: 4px;"></div></div>
+          <div class="tab-item"><div class="skeleton-block" style="width: 20px; height: 20px; border-radius: 4px;"></div></div>
+        </nav>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- STATE 3: ERROR                             -->
+    <!-- ========================================== -->
+    <div class="frame-wrapper">
+      <div class="frame-tag">
+        <span class="frame-pill pill-red">
+          <span class="frame-pill-dot"></span>
+          State 3: Error
+        </span>
+        <div class="frame-subtitle">“We couldn’t load your profile.” + Try again</div>
+      </div>
+
+      <div class="phone-mockup">
+        <!-- Status Bar -->
+        <div class="status-bar">
+          <span>09:41</span>
+          <div class="status-right">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <div class="app-header">
+          <div class="header-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+              <polyline points="9 13 11 15 15 10"></polyline>
+            </svg>
+          </div>
+          <div class="header-actions">
+            <button class="lang-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>TN</span>
+            </button>
+            <button class="warning-signs-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span>Warning signs</span>
+            </button>
+            <div class="profile-avatar-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="screen-content">
+          <h2 class="page-title">My profile</h2>
+
+          <div class="error-card">
+            <div class="error-icon-box">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            </div>
+            <div class="error-title">We couldn’t load your profile. Please try again.</div>
+            <button class="btn-retry">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              <span>Try again</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab Bar -->
+        <nav class="tab-bar">
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span>Home</span></div>
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path></svg><span>Learn</span></div>
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg><span>Diary</span></div>
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path></svg><span>Checklist</span></div>
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect></svg><span>Dashboard</span></div>
+        </nav>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- STATE 4: OFFLINE                           -->
+    <!-- ========================================== -->
+    <div class="frame-wrapper">
+      <div class="frame-tag">
+        <span class="frame-pill pill-amber">
+          <span class="frame-pill-dot"></span>
+          State 4: Offline
+        </span>
+        <div class="frame-subtitle">Offline banner + "Reconnect and try again" toast</div>
+      </div>
+
+      <div class="phone-mockup">
+        <!-- Status Bar -->
+        <div class="status-bar">
+          <span>09:41</span>
+          <div class="status-right">
+            <span style="font-size: 11px; font-weight: 700; color: #B45309;">OFFLINE</span>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Offline Banner (Standard Design Token) -->
+        <div class="offline-banner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path><path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+          <div>You’re offline. Some things may not work until you reconnect.</div>
+        </div>
+
+        <!-- Header -->
+        <div class="app-header">
+          <div class="header-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+              <polyline points="9 13 11 15 15 10"></polyline>
+            </svg>
+          </div>
+          <div class="header-actions">
+            <button class="lang-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>TN</span>
+            </button>
+            <button class="warning-signs-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span>Warning signs</span>
+            </button>
+            <div class="profile-avatar-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="screen-content">
+          <h2 class="page-title">My profile</h2>
+
+          <div class="card">
+            <div class="card-email-label">Email</div>
+            <div class="card-email-value">thabo.test@example.co.za</div>
+            <div class="card-readonly-tag">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span>Read only</span>
+            </div>
+          </div>
+
+          <!-- Language list still shows -->
+          <div class="language-section">
+            <div class="section-label">Language</div>
+            <div class="language-list-card">
+              <div class="lang-item">
+                <span class="lang-item-name">English</span>
+                <div class="radio-circle"></div>
+              </div>
+              <div class="lang-item">
+                <span class="lang-item-name">isiZulu</span>
+                <div class="radio-circle"></div>
+              </div>
+              <div class="lang-item selected">
+                <span class="lang-item-name">Setswana</span>
+                <div class="radio-circle"><div class="radio-dot"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav-row-card">
+            <div class="nav-row-left">
+              <div class="nav-row-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <span class="nav-row-title">Privacy Notice</span>
+            </div>
+            <div class="nav-row-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+          </div>
+
+          <!-- Log out and Delete account still show -->
+          <div class="actions-stack">
+            <button class="btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              <span>Log out</span>
+            </button>
+            <button class="btn-danger">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+              <span>Delete account</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Toast: Offline feedback when tapping language -->
+        <div class="toast-container toast-offline">
+          <div class="toast-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          </div>
+          <div class="toast-text">You’re offline. Reconnect and try again.</div>
+        </div>
+
+        <!-- Tab Bar -->
+        <nav class="tab-bar">
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span>Home</span></div>
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path></svg><span>Learn</span></div>
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg><span>Diary</span></div>
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path></svg><span>Checklist</span></div>
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect></svg><span>Dashboard</span></div>
+        </nav>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- STATE 5: SUCCESS TOAST                     -->
+    <!-- ========================================== -->
+    <div class="frame-wrapper">
+      <div class="frame-tag">
+        <span class="frame-pill pill-green">
+          <span class="frame-pill-dot"></span>
+          State 5: Success
+        </span>
+        <div class="frame-subtitle">Toast: “Language changed.”</div>
+      </div>
+
+      <div class="phone-mockup">
+        <!-- Status Bar -->
+        <div class="status-bar">
+          <span>09:41</span>
+          <div class="status-right">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <div class="app-header">
+          <div class="header-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+              <polyline points="9 13 11 15 15 10"></polyline>
+            </svg>
+          </div>
+          <div class="header-actions">
+            <button class="lang-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>ZU</span>
+            </button>
+            <button class="warning-signs-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span>Warning signs</span>
+            </button>
+            <div class="profile-avatar-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="screen-content">
+          <h2 class="page-title">My profile</h2>
+
+          <div class="card">
+            <div class="card-email-label">Email</div>
+            <div class="card-email-value">thabo.test@example.co.za</div>
+            <div class="card-readonly-tag">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span>Read only</span>
+            </div>
+          </div>
+
+          <div class="language-section">
+            <div class="section-label">Language</div>
+            <div class="language-list-card">
+              <div class="lang-item">
+                <span class="lang-item-name">English</span>
+                <div class="radio-circle"></div>
+              </div>
+              <div class="lang-item selected">
+                <span class="lang-item-name">isiZulu</span>
+                <div class="radio-circle"><div class="radio-dot"></div></div>
+              </div>
+              <div class="lang-item">
+                <span class="lang-item-name">Setswana</span>
+                <div class="radio-circle"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav-row-card">
+            <div class="nav-row-left">
+              <div class="nav-row-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <span class="nav-row-title">Privacy Notice</span>
+            </div>
+            <div class="nav-row-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+          </div>
+
+          <div class="actions-stack">
+            <button class="btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              <span>Log out</span>
+            </button>
+            <button class="btn-danger">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+              <span>Delete account</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Success Toast Pinned Above Tab Bar -->
+        <div class="toast-container">
+          <div class="toast-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="toast-text">Language changed.</div>
+        </div>
+
+        <!-- Tab Bar -->
+        <nav class="tab-bar">
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span>Home</span></div>
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path></svg><span>Learn</span></div>
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg><span>Diary</span></div>
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path></svg><span>Checklist</span></div>
+          <div class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect></svg><span>Dashboard</span></div>
+        </nav>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

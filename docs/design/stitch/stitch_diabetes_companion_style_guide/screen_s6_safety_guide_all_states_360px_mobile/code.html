@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screen S6 “Safety Guide” - All States (360px Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Base System */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #F0F2F5;
+      color: #1C1E21;
+      padding: 32px 24px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Screen Canvas & Overview Banner */
+    .overview-header {
+      max-width: 1400px;
+      margin: 0 auto 36px;
+      background: #FFFFFF;
+      padding: 24px 28px;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      border: 1px solid #E4E6EB;
+    }
+
+    .overview-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 999px;
+    }
+    .badge-blue { background: #E7F0FD; color: #1565C0; }
+    .badge-amber { background: #FEF3C7; color: #92400E; }
+    .badge-red { background: #FEE2E2; color: #B91C1C; }
+    .badge-gray { background: #F3F4F6; color: #374151; }
+
+    .overview-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1C1E21;
+      margin-bottom: 8px;
+    }
+
+    .overview-desc {
+      font-size: 14px;
+      color: #65676B;
+      max-width: 900px;
+      line-height: 1.5;
+    }
+
+    .quick-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid #F0F2F5;
+    }
+
+    .quick-pill {
+      font-size: 12px;
+      font-weight: 600;
+      color: #1565C0;
+      background: #FFFFFF;
+      border: 1px solid #E7F0FD;
+      padding: 5px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    /* Grid Layout for the States */
+    .states-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 360px));
+      justify-content: center;
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .state-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .state-label-bar {
+      width: 360px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .state-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 4px;
+    }
+    .tag-blue { background: #E7F0FD; color: #1565C0; }
+    .tag-amber { background: #FEF3C7; color: #92400E; }
+    .tag-red { background: #FEE2E2; color: #B91C1C; }
+    .tag-dark { background: #1C1E21; color: #FFFFFF; }
+
+    .state-subtext {
+      font-size: 12px;
+      color: #65676B;
+    }
+
+    /* Device Container: strictly 360px width */
+    .device-frame {
+      width: 360px;
+      background-color: #F0F2F5;
+      border-radius: 28px;
+      border: 4px solid #1C1E21;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Status Bar */
+    .status-bar {
+      height: 28px;
+      padding: 0 16px;
+      background: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #1C1E21;
+      border-bottom: 1px solid #F0F2F5;
+    }
+
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Header Component (56px) */
+    .app-header {
+      height: 56px;
+      padding: 0 16px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #E4E6EB;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: #1A6BD1;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-btn {
+      height: 36px;
+      padding: 0 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border: 1px solid #D0D5DD;
+      background: #FFFFFF;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1C1E21;
+      cursor: pointer;
+    }
+
+    /* Red Warning signs button */
+    .btn-warning-signs {
+      height: 36px;
+      min-width: 44px;
+      padding: 0 10px;
+      background-color: #B91C1C;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-warning-signs:focus {
+      outline: 3px solid #FCA5A5;
+    }
+
+    /* User Profile or Visitor Log in */
+    .header-user-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid #D0D5DD;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #FFFFFF;
+      color: #1565C0;
+    }
+
+    .header-login-btn {
+      height: 36px;
+      padding: 0 10px;
+      border: 1px solid #1565C0;
+      border-radius: 8px;
+      background: #FFFFFF;
+      color: #1565C0;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    /* Offline Banner (Component 18) */
+    .offline-banner {
+      background: #1C1E21;
+      color: #FFFFFF;
+      padding: 10px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* Scrollable Page Content */
+    .screen-content {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 600px;
+    }
+
+    /* Card Component (Component 9) */
+    .card-surface {
+      background: #FFFFFF;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    }
+
+    /* 1. Emergency Box (White card, red border, warning icon) */
+    .emergency-box {
+      background: #FFFFFF;
+      border: 2px solid #B91C1C;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(185, 28, 28, 0.08);
+    }
+
+    .emergency-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .emergency-icon-wrap {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      border-radius: 6px;
+      background: #FEE2E2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #B91C1C;
+      margin-top: 1px;
+    }
+
+    .emergency-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #B91C1C;
+      line-height: 1.3;
+    }
+
+    .emergency-text {
+      font-size: 15px;
+      font-weight: 500;
+      color: #1C1E21;
+      line-height: 1.45;
+    }
+
+    .emergency-highlight {
+      font-weight: 700;
+      color: #B91C1C;
+    }
+
+    /* 2. Note Card (Symptoms alone cannot confirm...) */
+    .note-card {
+      background: #FFFFFF;
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border: 1px solid #E4E6EB;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+
+    .note-icon {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      color: #1565C0;
+      margin-top: 1px;
+    }
+
+    .note-text {
+      font-size: 14px;
+      color: #1C1E21;
+      line-height: 1.4;
+    }
+
+    /* List Cards */
+    .list-card {
+      background: #FFFFFF;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border: 1px solid #E4E6EB;
+    }
+
+    .list-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1C1E21;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .list-title-urgent {
+      color: #B91C1C;
+    }
+
+    .list-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      color: #1C1E21;
+      line-height: 1.4;
+    }
+
+    .bullet-point {
+      width: 6px;
+      height: 6px;
+      min-width: 6px;
+      border-radius: 50%;
+      background: #65676B;
+      margin-top: 8px;
+    }
+
+    .bullet-urgent {
+      background: #B91C1C;
+    }
+
+    /* Primary Button (48px high, 12px radius, Inter 16px semi-bold) */
+    .btn-primary {
+      width: 100%;
+      height: 48px;
+      background: #1A6BD1;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(26, 107, 209, 0.2);
+    }
+    .btn-primary:active {
+      background: #1565C0;
+    }
+
+    /* Secondary / Try Again Button */
+    .btn-retry {
+      height: 48px;
+      padding: 0 20px;
+      background: #1A6BD1;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    /* Tab Bar Component (56px) - No Tab Active */
+    .tab-bar {
+      height: 56px;
+      background: #FFFFFF;
+      border-top: 1px solid #E4E6EB;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      position: sticky;
+      bottom: 0;
+      z-index: 20;
+    }
+
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 52px;
+      height: 48px;
+      text-decoration: none;
+      color: #65676B; /* Inactive tone for all tabs */
+      gap: 3px;
+    }
+
+    .tab-item svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+    }
+
+    .tab-label {
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    /* Operational States Visualizations */
+
+    /* Empty state card */
+    .state-message-card {
+      background: #FFFFFF;
+      border-radius: 12px;
+      padding: 24px 16px;
+      text-align: center;
+      border: 1px solid #E4E6EB;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .state-icon-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #F0F2F5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #65676B;
+    }
+
+    .state-icon-circle-red {
+      background: #FEE2E2;
+      color: #B91C1C;
+    }
+
+    .state-msg-text {
+      font-size: 15px;
+      font-weight: 500;
+      color: #1C1E21;
+      line-height: 1.45;
+    }
+
+    /* Loading Skeletons */
+    .skeleton-card {
+      background: #FFFFFF;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #E4E6EB;
+    }
+
+    .skeleton-box {
+      background: #E4E6EB;
+      border-radius: 6px;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .skeleton-title {
+      height: 20px;
+      width: 60%;
+      margin-bottom: 16px;
+    }
+
+    .skeleton-line {
+      height: 14px;
+      margin-bottom: 10px;
+    }
+    .skeleton-line:last-child {
+      margin-bottom: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+
+    /* Offline note card under emergency */
+    .offline-notice-box {
+      background: #FFFFFF;
+      border-radius: 12px;
+      padding: 20px 16px;
+      border: 1px solid #E4E6EB;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-guard {
+      padding: 6px 16px 12px;
+      text-align: center;
+      font-size: 11px;
+      color: #65676B;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen Specification Header -->
+  <header class="overview-header">
+    <div class="overview-badges">
+      <span class="badge badge-blue">Screen Specification • S6 "Safety Guide" (360 px Mobile)</span>
+      <span class="badge badge-red">Emergency & Warning Signs</span>
+      <span class="badge badge-gray">Tab Bar: No Active Tab</span>
+      <span class="badge badge-amber">Strict Tokens & No Humour</span>
+    </div>
+    <h1 class="overview-title">Screen S6 “Safety Guide” — Diabetes Companion SA</h1>
+    <p class="overview-desc">
+      <strong>Purpose:</strong> Show critical warning signs and urgent emergency guidance. Accessible by everyone via the red “Warning signs” header button. Formatted strictly for a 360 px Android mobile viewport with 16 px margins, 48 px high primary touch targets, and authentic operational states (Normal, Empty, Loading, Error, and Offline).
+    </p>
+    <nav class="quick-nav">
+      <a href="#state-normal" class="quick-pill">State 1: Normal (Complete Guide)</a>
+      <a href="#state-empty" class="quick-pill">State 2: Empty ("Safety information is being updated...")</a>
+      <a href="#state-loading" class="quick-pill">State 3: Loading (3 Grey Skeletons + Immediate Emergency Box)</a>
+      <a href="#state-error" class="quick-pill">State 4: Error ("We couldn't load the lists" + Try Again)</a>
+      <a href="#state-offline" class="quick-pill">State 5: Offline (Offline Banner + Cached Numbers Work)</a>
+    </nav>
+  </header>
+
+  <!-- States Grid -->
+  <main class="states-grid">
+
+    <!-- ==========================================
+         STATE 1: NORMAL
+         ========================================== -->
+    <section class="state-column" id="state-normal">
+      <div class="state-label-bar">
+        <span class="state-tag tag-blue">State 1: Normal</span>
+        <p class="state-subtext">Complete Safety Guide with All 3 Lists & Button</p>
+      </div>
+
+      <div class="device-frame" role="region" aria-label="Screen S6 Safety Guide - Normal State">
+        <!-- Status Bar -->
+        <div class="status-bar">
+          <span>09:41</span>
+          <div class="status-icons">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><circle cx="12" cy="20" r="1"></circle></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Sticky Header (56px) -->
+        <header class="app-header">
+          <a href="#" class="header-logo" aria-label="Diabetes Companion SA Home">
+            <div class="logo-icon">
+              <!-- Water drop with checkmark -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            </div>
+          </a>
+
+          <div class="header-actions">
+            <button class="lang-btn" aria-label="Language selector">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>EN</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+
+            <!-- Red Warning Signs Button -->
+            <button class="btn-warning-signs" aria-label="Warning signs active">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span>Warning signs</span>
+            </button>
+
+            <!-- Visitor Log in -->
+            <a href="#" class="header-login-btn">Log in</a>
+          </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="screen-content">
+          <!-- 1. Emergency Box -->
+          <div class="emergency-box">
+            <div class="emergency-header">
+              <div class="emergency-icon-wrap" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+              <h2 class="emergency-title">In an emergency, get help now</h2>
+            </div>
+            <p class="emergency-text">
+              Call <span class="emergency-highlight">112</span> from a cell phone or <span class="emergency-highlight">10177</span> for an ambulance, or go to the nearest hospital. Do not wait for this app.
+            </p>
+          </div>
+
+          <!-- 2. Note Card -->
+          <div class="note-card">
+            <svg class="note-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <p class="note-text">
+              Symptoms alone cannot confirm diabetes. Only a test at a clinic can.
+            </p>
+          </div>
+
+          <!-- 3. List: Signs of low blood sugar -->
+          <div class="list-card">
+            <h3 class="list-title">Signs of low blood sugar</h3>
+            <ul class="list-items">
+              <li class="list-item">
+                <span class="bullet-point"></span>
+                <span>Shaking or feeling jittery</span>
+              </li>
+              <li class="list-item">
+                <span class="bullet-point"></span>
+                <span>Sweating</span>
+              </li>
+              <li class="list-item">
+                <span class="bullet-point"></span>
+                <span>Sudden hunger</span>
+              </li>
+              <li class="list-item">
+                <span class="bullet-point"></span>
+                <span>Feeling dizzy or confused</span>
+              </li>
+              <li class="list-item">
+                <span class="bullet-point"></span>
+                <span>A fast heartbeat</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 4. List: Signs of high blood sugar -->
+          <div class="list-card">
+            <h3 class="list-title">Signs of high blood sugar</h3>
+            <ul class="list-items">
+              <li class="list-item">
+                <span class="bullet-point"></span>
+                <span>Feeling very thirsty</span>
+              </li>
+              <li class="list-item">
+                <span class="bullet-point"></span>
+                <span>Passing urine more often</span>
+              </li>
+              <li class="list-item">
+                <span class="bullet-point"></span>
+                <span>Blurred eyesight</span>
+              </li>
+              <li class="list-item">
+                <span class="bullet-point"></span>
+                <span>Feeling very tired</span>
+              </li>
+              <li class="list-item">
+                <span class="bullet-point"></span>
+                <span>Feeling sick (nausea)</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 5. List: Get urgent medical help if… -->
+          <div class="list-card" style="border-left: 4px solid #B91C1C;">
+            <h3 class="list-title list-title-urgent">Get urgent medical help if…</h3>
+            <ul class="list-items">
+              <li class="list-item">
+                <span class="bullet-point bullet-urgent"></span>
+                <span>The person is unconscious or cannot be woken</span>
+              </li>
+              <li class="list-item">
+                <span class="bullet-point bullet-urgent"></span>
+                <span>They are very confused or cannot speak clearly</span>
+              </li>
+              <li class="list-item">
+                <span class="bullet-point bullet-urgent"></span>
+                <span>They have a fit (seizure)</span>
+              </li>
+              <li class="list-item">
+                <span class="bullet-point bullet-urgent"></span>
+                <span>They breathe fast and deeply, or keep vomiting</span>
+              </li>
+              <li class="list-item">
+                <span class="bullet-point bullet-urgent"></span>
+                <span>You are not sure. It is always safer to call.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 6. Primary Button -->
+          <button class="btn-primary" type="button">
+            <span>Find help and trusted links</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+
+        <div class="footer-guard">
+          Protected by Diabetes Companion SA
+        </div>
+
+        <!-- 7. Tab Bar: NO TAB ACTIVE -->
+        <nav class="tab-bar" aria-label="Main Navigation">
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span class="tab-label">Home</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            <span class="tab-label">Learn</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span class="tab-label">Diary</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+            <span class="tab-label">Checklist</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg>
+            <span class="tab-label">Dashboard</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         STATE 2: EMPTY
+         ========================================== -->
+    <section class="state-column" id="state-empty">
+      <div class="state-label-bar">
+        <span class="state-tag tag-amber">State 2: Empty</span>
+        <p class="state-subtext">Emergency Box Visible + Update Notice</p>
+      </div>
+
+      <div class="device-frame" role="region" aria-label="Screen S6 Safety Guide - Empty State">
+        <!-- Status Bar -->
+        <div class="status-bar">
+          <span>09:41</span>
+          <div class="status-icons">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><circle cx="12" cy="20" r="1"></circle></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Sticky Header (56px) -->
+        <header class="app-header">
+          <a href="#" class="header-logo" aria-label="Diabetes Companion SA Home">
+            <div class="logo-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            </div>
+          </a>
+
+          <div class="header-actions">
+            <button class="lang-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>EN</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+
+            <button class="btn-warning-signs">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span>Warning signs</span>
+            </button>
+
+            <!-- Logged-in profile icon option shown for continuity -->
+            <button class="header-user-btn" aria-label="Account Profile">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="screen-content">
+          <!-- 1. Emergency Box (always visible) -->
+          <div class="emergency-box">
+            <div class="emergency-header">
+              <div class="emergency-icon-wrap" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+              <h2 class="emergency-title">In an emergency, get help now</h2>
+            </div>
+            <p class="emergency-text">
+              Call <span class="emergency-highlight">112</span> from a cell phone or <span class="emergency-highlight">10177</span> for an ambulance, or go to the nearest hospital. Do not wait for this app.
+            </p>
+          </div>
+
+          <!-- Empty State Message -->
+          <div class="state-message-card">
+            <div class="state-icon-circle">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <p class="state-msg-text">
+              Safety information is being updated. If you are worried, call 112 or 10177.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-guard">
+          Protected by Diabetes Companion SA
+        </div>
+
+        <!-- Tab Bar: NO TAB ACTIVE -->
+        <nav class="tab-bar" aria-label="Main Navigation">
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span class="tab-label">Home</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            <span class="tab-label">Learn</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span class="tab-label">Diary</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+            <span class="tab-label">Checklist</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg>
+            <span class="tab-label">Dashboard</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         STATE 3: LOADING
+         ========================================== -->
+    <section class="state-column" id="state-loading">
+      <div class="state-label-bar">
+        <span class="state-tag tag-gray">State 3: Loading</span>
+        <p class="state-subtext">Immediate Emergency Box + 3 Grey Skeletons</p>
+      </div>
+
+      <div class="device-frame" role="region" aria-label="Screen S6 Safety Guide - Loading State">
+        <!-- Status Bar -->
+        <div class="status-bar">
+          <span>09:41</span>
+          <div class="status-icons">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><circle cx="12" cy="20" r="1"></circle></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Sticky Header (56px) -->
+        <header class="app-header">
+          <a href="#" class="header-logo" aria-label="Diabetes Companion SA Home">
+            <div class="logo-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            </div>
+          </a>
+
+          <div class="header-actions">
+            <button class="lang-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>EN</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+
+            <button class="btn-warning-signs">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span>Warning signs</span>
+            </button>
+
+            <a href="#" class="header-login-btn">Log in</a>
+          </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="screen-content">
+          <!-- 1. Emergency Box: shows at once even during loading -->
+          <div class="emergency-box">
+            <div class="emergency-header">
+              <div class="emergency-icon-wrap" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+              <h2 class="emergency-title">In an emergency, get help now</h2>
+            </div>
+            <p class="emergency-text">
+              Call <span class="emergency-highlight">112</span> from a cell phone or <span class="emergency-highlight">10177</span> for an ambulance, or go to the nearest hospital. Do not wait for this app.
+            </p>
+          </div>
+
+          <!-- Grey Placeholder 1 (Signs of low blood sugar) -->
+          <div class="skeleton-card">
+            <div class="skeleton-box skeleton-title"></div>
+            <div class="skeleton-box skeleton-line" style="width: 85%;"></div>
+            <div class="skeleton-box skeleton-line" style="width: 45%;"></div>
+            <div class="skeleton-box skeleton-line" style="width: 60%;"></div>
+            <div class="skeleton-box skeleton-line" style="width: 75%;"></div>
+            <div class="skeleton-box skeleton-line" style="width: 50%;"></div>
+          </div>
+
+          <!-- Grey Placeholder 2 (Signs of high blood sugar) -->
+          <div class="skeleton-card">
+            <div class="skeleton-box skeleton-title" style="width: 65%;"></div>
+            <div class="skeleton-box skeleton-line" style="width: 70%;"></div>
+            <div class="skeleton-box skeleton-line" style="width: 80%;"></div>
+            <div class="skeleton-box skeleton-line" style="width: 55%;"></div>
+            <div class="skeleton-box skeleton-line" style="width: 65%;"></div>
+            <div class="skeleton-box skeleton-line" style="width: 70%;"></div>
+          </div>
+
+          <!-- Grey Placeholder 3 (Urgent medical help) -->
+          <div class="skeleton-card">
+            <div class="skeleton-box skeleton-title" style="width: 70%; background: #FEE2E2;"></div>
+            <div class="skeleton-box skeleton-line" style="width: 90%;"></div>
+            <div class="skeleton-box skeleton-line" style="width: 85%;"></div>
+            <div class="skeleton-box skeleton-line" style="width: 65%;"></div>
+            <div class="skeleton-box skeleton-line" style="width: 80%;"></div>
+            <div class="skeleton-box skeleton-line" style="width: 75%;"></div>
+          </div>
+        </div>
+
+        <div class="footer-guard">
+          Protected by Diabetes Companion SA
+        </div>
+
+        <!-- Tab Bar: NO TAB ACTIVE -->
+        <nav class="tab-bar" aria-label="Main Navigation">
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span class="tab-label">Home</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            <span class="tab-label">Learn</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span class="tab-label">Diary</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+            <span class="tab-label">Checklist</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg>
+            <span class="tab-label">Dashboard</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         STATE 4: ERROR
+         ========================================== -->
+    <section class="state-column" id="state-error">
+      <div class="state-label-bar">
+        <span class="state-tag tag-red">State 4: Error</span>
+        <p class="state-subtext">Emergency Box + "We couldn't load the lists"</p>
+      </div>
+
+      <div class="device-frame" role="region" aria-label="Screen S6 Safety Guide - Error State">
+        <!-- Status Bar -->
+        <div class="status-bar">
+          <span>09:41</span>
+          <div class="status-icons">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><circle cx="12" cy="20" r="1"></circle></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Sticky Header (56px) -->
+        <header class="app-header">
+          <a href="#" class="header-logo" aria-label="Diabetes Companion SA Home">
+            <div class="logo-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            </div>
+          </a>
+
+          <div class="header-actions">
+            <button class="lang-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>EN</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+
+            <button class="btn-warning-signs">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span>Warning signs</span>
+            </button>
+
+            <a href="#" class="header-login-btn">Log in</a>
+          </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="screen-content">
+          <!-- 1. Emergency Box: always intact -->
+          <div class="emergency-box">
+            <div class="emergency-header">
+              <div class="emergency-icon-wrap" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+              <h2 class="emergency-title">In an emergency, get help now</h2>
+            </div>
+            <p class="emergency-text">
+              Call <span class="emergency-highlight">112</span> from a cell phone or <span class="emergency-highlight">10177</span> for an ambulance, or go to the nearest hospital. Do not wait for this app.
+            </p>
+          </div>
+
+          <!-- Error State Message below emergency box -->
+          <div class="state-message-card">
+            <div class="state-icon-circle-red">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            </div>
+            <p class="state-msg-text">
+              We couldn’t load the lists. Please try again.
+            </p>
+            <button class="btn-retry" type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+              <span>Try again</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="footer-guard">
+          Protected by Diabetes Companion SA
+        </div>
+
+        <!-- Tab Bar: NO TAB ACTIVE -->
+        <nav class="tab-bar" aria-label="Main Navigation">
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span class="tab-label">Home</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            <span class="tab-label">Learn</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span class="tab-label">Diary</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+            <span class="tab-label">Checklist</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg>
+            <span class="tab-label">Dashboard</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         STATE 5: OFFLINE
+         ========================================== -->
+    <section class="state-column" id="state-offline">
+      <div class="state-label-bar">
+        <span class="state-tag tag-dark">State 5: Offline</span>
+        <p class="state-subtext">#1C1E21 Banner + Numbers Still Work Notice</p>
+      </div>
+
+      <div class="device-frame" role="region" aria-label="Screen S6 Safety Guide - Offline State">
+        <!-- Status Bar with Offline indicator -->
+        <div class="status-bar">
+          <span>09:41</span>
+          <div class="status-icons">
+            <span style="font-size: 11px; font-weight: 700; color: #65676B; margin-right: 4px;">Offline</span>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Sticky Header (56px) -->
+        <header class="app-header">
+          <a href="#" class="header-logo" aria-label="Diabetes Companion SA Home">
+            <div class="logo-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            </div>
+          </a>
+
+          <div class="header-actions">
+            <button class="lang-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>EN</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+
+            <button class="btn-warning-signs">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span>Warning signs</span>
+            </button>
+
+            <a href="#" class="header-login-btn">Log in</a>
+          </div>
+        </header>
+
+        <!-- Offline Banner (Component 18: #1C1E21 Dark Banner) -->
+        <div class="offline-banner">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" style="min-width: 18px; margin-top: 1px;"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path><path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+          <span>You’re offline. Some things may not work until you reconnect.</span>
+        </div>
+
+        <!-- Page Content -->
+        <div class="screen-content">
+          <!-- 1. Emergency Box: still shows prominently offline -->
+          <div class="emergency-box">
+            <div class="emergency-header">
+              <div class="emergency-icon-wrap" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+              <h2 class="emergency-title">In an emergency, get help now</h2>
+            </div>
+            <p class="emergency-text">
+              Call <span class="emergency-highlight">112</span> from a cell phone or <span class="emergency-highlight">10177</span> for an ambulance, or go to the nearest hospital. Do not wait for this app.
+            </p>
+          </div>
+
+          <!-- Unloaded lists offline card -->
+          <div class="offline-notice-box">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#65676B" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path><path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            <p class="state-msg-text" style="margin-top: 4px;">
+              You’re offline. The emergency numbers above still work.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-guard">
+          Protected by Diabetes Companion SA
+        </div>
+
+        <!-- Tab Bar: NO TAB ACTIVE -->
+        <nav class="tab-bar" aria-label="Main Navigation">
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span class="tab-label">Home</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            <span class="tab-label">Learn</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span class="tab-label">Diary</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+            <span class="tab-label">Checklist</span>
+          </a>
+          <a href="#" class="tab-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg>
+            <span class="tab-label">Dashboard</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

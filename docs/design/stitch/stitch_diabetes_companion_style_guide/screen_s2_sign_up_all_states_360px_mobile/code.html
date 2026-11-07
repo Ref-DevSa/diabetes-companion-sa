@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screen S2 "Sign up" — Diabetes Companion SA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              primary: '#1A6BD1',
+              dark: '#1565C0',
+              tint: '#E7F0FD',
+              bg: '#F0F2F5',
+              surface: '#FFFFFF',
+              mainText: '#1C1E21',
+              secondaryText: '#65676B',
+              warningOrange: '#B45309',
+              errorRed: '#B91C1C',
+              successGreen: '#15803D',
+              disabledFill: '#D0D5DD',
+              loadingGrey: '#E4E6EB',
+              darkBanner: '#1C1E21',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #E2E8F0;
+      color: #1C1E21;
+      margin: 0;
+      padding: 0;
+    }
+    .custom-shadow {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    /* Hide scrollbar for clean presentation */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="p-6 md:p-8 min-h-screen">
+
+  <!-- Header banner in canvas review container -->
+  <div class="max-w-[1720px] mx-auto mb-8 bg-white p-6 rounded-2xl custom-shadow border border-slate-200">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-xs font-semibold px-2.5 py-1 bg-blue-50 text-[#1565C0] rounded-full border border-blue-200">Screen Specification • S2 "Sign up" (360 px Mobile)</span>
+          <span class="text-xs font-semibold px-2.5 py-1 bg-amber-50 text-[#B45309] rounded-full border border-amber-200">Visitor Only (Logged-out)</span>
+          <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-700 rounded-full border border-slate-300">No Tab Bar</span>
+        </div>
+        <h1 class="text-2xl font-bold text-[#1C1E21] tracking-tight">Screen S2 “Sign up” — Diabetes Companion SA</h1>
+        <p class="text-sm text-[#65676B] mt-1 max-w-3xl">
+          Designed strictly to the 360 px Android mobile specifications and style guide tokens. Displaying all operational and validation states: Normal (Empty Form), Form With Field Errors, Loading (Creating account...), Server Error, Offline Banner State, and Account Created Success State.
+        </p>
+      </div>
+
+      <!-- Quick Jump / State Tags -->
+      <div class="flex flex-wrap items-center gap-2">
+        <a href="#state-normal" class="px-3 py-1.5 bg-[#1A6BD1] text-white text-xs font-semibold rounded-lg hover:bg-[#1565C0] transition-colors">1. Normal (Empty)</a>
+        <a href="#state-errors" class="px-3 py-1.5 bg-white text-[#B91C1C] border border-[#B91C1C] text-xs font-semibold rounded-lg hover:bg-red-50 transition-colors">2. Field Errors</a>
+        <a href="#state-loading" class="px-3 py-1.5 bg-slate-100 text-slate-700 border border-slate-300 text-xs font-semibold rounded-lg hover:bg-slate-200 transition-colors">3. Loading</a>
+        <a href="#state-error" class="px-3 py-1.5 bg-slate-100 text-slate-700 border border-slate-300 text-xs font-semibold rounded-lg hover:bg-slate-200 transition-colors">4. Server Error</a>
+        <a href="#state-offline" class="px-3 py-1.5 bg-slate-100 text-slate-700 border border-slate-300 text-xs font-semibold rounded-lg hover:bg-slate-200 transition-colors">5. Offline</a>
+        <a href="#state-success" class="px-3 py-1.5 bg-emerald-50 text-[#15803D] border border-[#15803D] text-xs font-semibold rounded-lg hover:bg-emerald-100 transition-colors">6. Success</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Presentation Grid: 6 Mobile Device Frames (360px wide) -->
+  <div class="max-w-[1720px] mx-auto flex flex-wrap justify-center gap-8 items-start pb-12">
+
+    <!-- ========================================== -->
+    <!-- STATE 1: NORMAL (EMPTY FORM) -->
+    <!-- ========================================== -->
+    <div id="state-normal" class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="inline-block px-3 py-1 bg-blue-100 text-[#1565C0] text-xs font-bold rounded-full tracking-wide uppercase">State 1: Normal</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">Empty Form (Default Visitor View)</h3>
+      </div>
+
+      <!-- 360px Mobile Frame -->
+      <div class="w-[360px] min-h-[760px] bg-[#F0F2F5] text-[#1C1E21] rounded-[28px] overflow-hidden shadow-2xl border-[4px] border-slate-800 flex flex-col relative">
+        
+        <!-- Android Status Bar (360px) -->
+        <div class="w-full h-6 bg-transparent px-4 flex justify-between items-center text-xs font-medium text-[#1C1E21] select-none pt-1">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+            <span class="text-[10px]">98%</span>
+          </div>
+        </div>
+
+        <!-- Component 1: Header (56px high, Visitor mode, no wordmark < 400px) -->
+        <header class="h-[56px] px-4 flex items-center justify-between border-b border-slate-200 bg-white sticky top-0 z-20">
+          <div class="flex items-center gap-2">
+            <!-- Logo Icon: Rounded-square in #1A6BD1 with white water-drop & small tick inside -->
+            <a href="#" class="w-9 h-9 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white flex-shrink-0" aria-label="Diabetes Companion Home">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <!-- Droplet with cutout or overlay tick -->
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+
+            <!-- Language Selector: Globe icon and EN (44px min touch target) -->
+            <button type="button" class="h-11 px-2.5 rounded-lg flex items-center gap-1.5 text-[#1C1E21] hover:bg-slate-100 transition-colors" aria-label="Change language">
+              <svg class="w-4 h-4 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span class="text-xs font-semibold">EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-1.5">
+            <!-- Warning Signs Button: red #B91C1C with triangle-alert and white text (at least 44px) -->
+            <button type="button" class="h-11 px-2.5 bg-[#B91C1C] hover:bg-red-800 text-white rounded-lg flex items-center gap-1.5 text-xs font-semibold transition-colors" aria-label="Warning signs">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Warning signs</span>
+            </button>
+
+            <!-- Visitor Log in Header Button (44px touch) -->
+            <button type="button" class="h-11 px-2.5 bg-white border border-[#1A6BD1] text-[#1565C0] rounded-lg text-xs font-semibold hover:bg-blue-50 transition-colors">
+              Log in
+            </button>
+          </div>
+        </header>
+
+        <!-- Main Scrollable Screen Content (16px screen margins) -->
+        <main class="flex-1 p-4 flex flex-col justify-between">
+          <div>
+            <!-- Form Card in white with 12px corners & soft shadow -->
+            <div class="bg-white rounded-[12px] p-4 custom-shadow">
+              
+              <!-- 2. Title: 24 px bold Inter -->
+              <h2 class="text-[24px] leading-tight font-bold text-[#1C1E21] mb-5">
+                Create your free account
+              </h2>
+
+              <form class="space-y-4" onsubmit="return false;">
+                <!-- 3. Email field -->
+                <div>
+                  <label for="s1-email" class="block text-xs font-semibold text-[#1C1E21] mb-1.5">
+                    Email address
+                  </label>
+                  <input
+                    type="email"
+                    id="s1-email"
+                    placeholder="you@example.co.za"
+                    class="w-full h-[48px] px-3.5 bg-white text-[#1C1E21] text-base placeholder-[#65676B] border border-slate-300 rounded-[12px] focus:outline-none focus:border-[#1565C0] focus:ring-2 focus:ring-[#1565C0] transition-colors"
+                  />
+                </div>
+
+                <!-- 4. Password field with show/hide toggle -->
+                <div>
+                  <label for="s1-password" class="block text-xs font-semibold text-[#1C1E21] mb-1.5">
+                    Password
+                  </label>
+                  <div class="relative">
+                    <input
+                      type="password"
+                      id="s1-password"
+                      placeholder="At least 8 characters and 1 number"
+                      class="w-full h-[48px] pl-3.5 pr-12 bg-white text-[#1C1E21] text-base placeholder-[#65676B] border border-slate-300 rounded-[12px] focus:outline-none focus:border-[#1565C0] focus:ring-2 focus:ring-[#1565C0] transition-colors"
+                    />
+                    <!-- Show/hide toggle button (44x44 touch target) -->
+                    <button
+                      type="button"
+                      class="absolute right-1 top-0.5 w-[44px] h-[44px] flex items-center justify-center text-[#65676B] hover:text-[#1C1E21] focus:outline-none rounded-lg"
+                      aria-label="Show password"
+                    >
+                      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 5. Checkbox, unticked: “I confirm I am 18 or older” -->
+                <div class="pt-1">
+                  <label class="flex items-start gap-3 cursor-pointer min-h-[44px] py-1 select-none">
+                    <input
+                      type="checkbox"
+                      class="w-5 h-5 mt-0.5 text-[#1A6BD1] border-2 border-slate-400 rounded focus:ring-[#1565C0] flex-shrink-0 cursor-pointer"
+                    />
+                    <span class="text-sm text-[#1C1E21] leading-snug">
+                      I confirm I am 18 or older
+                    </span>
+                  </label>
+                </div>
+
+                <!-- 6. Checkbox, unticked: “I agree to the Privacy Notice”, where “Privacy Notice” is a link -->
+                <div>
+                  <label class="flex items-start gap-3 cursor-pointer min-h-[44px] py-1 select-none">
+                    <input
+                      type="checkbox"
+                      class="w-5 h-5 mt-0.5 text-[#1A6BD1] border-2 border-slate-400 rounded focus:ring-[#1565C0] flex-shrink-0 cursor-pointer"
+                    />
+                    <span class="text-sm text-[#1C1E21] leading-snug">
+                      I agree to the <a href="#" class="text-[#1A6BD1] underline font-semibold hover:text-[#1565C0]">Privacy Notice</a>
+                    </span>
+                  </label>
+                </div>
+
+                <!-- 7. Primary button “Create account” (48px high, #1A6BD1, 12px corners, 16px semi-bold) -->
+                <div class="pt-2">
+                  <button
+                    type="submit"
+                    class="w-full h-[48px] bg-[#1A6BD1] hover:bg-[#1565C0] active:bg-[#1565C0] text-white font-semibold text-base rounded-[12px] transition-colors flex items-center justify-center"
+                  >
+                    Create account
+                  </button>
+                </div>
+
+                <!-- 8. Link “Already have an account? Log in” (min 44px height touch target) -->
+                <div class="text-center pt-2 pb-1">
+                  <a href="#" class="inline-flex items-center justify-center min-h-[44px] px-3 text-sm text-[#1C1E21] hover:text-[#1565C0]">
+                    Already have an account?&nbsp;<span class="text-[#1A6BD1] font-semibold underline">Log in</span>
+                  </a>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+          <!-- Bottom micro-footer / Note: No Tab Bar Present -->
+          <div class="text-center py-4 text-xs text-[#65676B]">
+            Protected by Diabetes Companion SA
+          </div>
+        </main>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- STATE 2: FIELD ERRORS (ALL 4 REQUIRED ERRORS) -->
+    <!-- ========================================== -->
+    <div id="state-errors" class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="inline-block px-3 py-1 bg-red-100 text-[#B91C1C] text-xs font-bold rounded-full tracking-wide uppercase">State 2: Validation Errors</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">Four Field Errors + Sample Content</h3>
+      </div>
+
+      <!-- 360px Mobile Frame -->
+      <div class="w-[360px] min-h-[760px] bg-[#F0F2F5] text-[#1C1E21] rounded-[28px] overflow-hidden shadow-2xl border-[4px] border-slate-800 flex flex-col relative">
+        
+        <!-- Status Bar -->
+        <div class="w-full h-6 bg-transparent px-4 flex justify-between items-center text-xs font-medium text-[#1C1E21] select-none pt-1">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+            <span class="text-[10px]">98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-[56px] px-4 flex items-center justify-between border-b border-slate-200 bg-white sticky top-0 z-20">
+          <div class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white flex-shrink-0">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <button type="button" class="h-11 px-2.5 rounded-lg flex items-center gap-1.5 text-[#1C1E21]">
+              <svg class="w-4 h-4 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+              <span class="text-xs font-semibold">EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button type="button" class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1.5 text-xs font-semibold">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Warning signs</span>
+            </button>
+            <button type="button" class="h-11 px-2.5 bg-white border border-[#1A6BD1] text-[#1565C0] rounded-lg text-xs font-semibold">Log in</button>
+          </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 flex flex-col justify-between">
+          <div>
+            <div class="bg-white rounded-[12px] p-4 custom-shadow">
+              
+              <h2 class="text-[24px] leading-tight font-bold text-[#1C1E21] mb-5">
+                Create your free account
+              </h2>
+
+              <form class="space-y-4" onsubmit="return false;">
+                
+                <!-- Email field with ERROR + SAMPLE CONTENT -->
+                <div>
+                  <label for="s2-email" class="block text-xs font-semibold text-[#1C1E21] mb-1.5">
+                    Email address
+                  </label>
+                  <div class="relative">
+                    <input
+                      type="email"
+                      id="s2-email"
+                      value="thabo.test@example.co.za"
+                      class="w-full h-[48px] px-3.5 pr-10 bg-white text-[#1C1E21] text-base border-2 border-[#B91C1C] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-[#B91C1C]"
+                    />
+                    <div class="absolute right-3 top-3.5 text-[#B91C1C]">
+                      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    </div>
+                  </div>
+                  <!-- Error message sitting on white card -->
+                  <div class="flex items-center gap-1.5 mt-1.5 text-xs font-medium text-[#B91C1C]">
+                    <svg class="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span>This email is already registered. Try logging in.</span>
+                  </div>
+                </div>
+
+                <!-- Password field with ERROR + SAMPLE CONTENT (shown as dots) -->
+                <div>
+                  <label for="s2-password" class="block text-xs font-semibold text-[#1C1E21] mb-1.5">
+                    Password
+                  </label>
+                  <div class="relative">
+                    <input
+                      type="password"
+                      id="s2-password"
+                      value="simplepw"
+                      class="w-full h-[48px] pl-3.5 pr-20 bg-white text-[#1C1E21] text-base tracking-widest border-2 border-[#B91C1C] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-[#B91C1C]"
+                    />
+                    <!-- Password toggle & error icon -->
+                    <div class="absolute right-1 top-0.5 flex items-center">
+                      <button
+                        type="button"
+                        class="w-[44px] h-[44px] flex items-center justify-center text-[#65676B] hover:text-[#1C1E21] focus:outline-none"
+                        aria-label="Show password"
+                      >
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                          <line x1="1" y1="1" x2="23" y2="23"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Error message with icon -->
+                  <div class="flex items-center gap-1.5 mt-1.5 text-xs font-medium text-[#B91C1C]">
+                    <svg class="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span>Password must be at least 8 characters and include a number.</span>
+                  </div>
+                </div>
+
+                <!-- 18+ Checkbox with ERROR -->
+                <div class="pt-1">
+                  <div class="p-1 rounded-lg border border-red-200 bg-red-50/50">
+                    <label class="flex items-start gap-3 cursor-pointer min-h-[44px] py-1 select-none">
+                      <input
+                        type="checkbox"
+                        class="w-5 h-5 mt-0.5 border-2 border-[#B91C1C] rounded text-[#B91C1C] focus:ring-[#B91C1C] flex-shrink-0"
+                      />
+                      <span class="text-sm text-[#1C1E21] leading-snug">
+                        I confirm I am 18 or older
+                      </span>
+                    </label>
+                  </div>
+                  <div class="flex items-center gap-1.5 mt-1.5 text-xs font-medium text-[#B91C1C]">
+                    <svg class="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span>Please confirm you are 18 or older.</span>
+                  </div>
+                </div>
+
+                <!-- Privacy Notice Checkbox with ERROR -->
+                <div>
+                  <div class="p-1 rounded-lg border border-red-200 bg-red-50/50">
+                    <label class="flex items-start gap-3 cursor-pointer min-h-[44px] py-1 select-none">
+                      <input
+                        type="checkbox"
+                        class="w-5 h-5 mt-0.5 border-2 border-[#B91C1C] rounded text-[#B91C1C] focus:ring-[#B91C1C] flex-shrink-0"
+                      />
+                      <span class="text-sm text-[#1C1E21] leading-snug">
+                        I agree to the <a href="#" class="text-[#1A6BD1] underline font-semibold hover:text-[#1565C0]">Privacy Notice</a>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="flex items-center gap-1.5 mt-1.5 text-xs font-medium text-[#B91C1C]">
+                    <svg class="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span>Please agree to the Privacy Notice to continue.</span>
+                  </div>
+                </div>
+
+                <!-- Primary button -->
+                <div class="pt-2">
+                  <button
+                    type="submit"
+                    class="w-full h-[48px] bg-[#1A6BD1] hover:bg-[#1565C0] text-white font-semibold text-base rounded-[12px] flex items-center justify-center"
+                  >
+                    Create account
+                  </button>
+                </div>
+
+                <!-- Link -->
+                <div class="text-center pt-1 pb-1">
+                  <a href="#" class="inline-flex items-center justify-center min-h-[44px] px-3 text-sm text-[#1C1E21]">
+                    Already have an account?&nbsp;<span class="text-[#1A6BD1] font-semibold underline">Log in</span>
+                  </a>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+          <div class="text-center py-4 text-xs text-[#65676B]">
+            Protected by Diabetes Companion SA
+          </div>
+        </main>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- STATE 3: LOADING (BUTTON DISABLED + "Creating your account...") -->
+    <!-- ========================================== -->
+    <div id="state-loading" class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="inline-block px-3 py-1 bg-slate-200 text-slate-700 text-xs font-bold rounded-full tracking-wide uppercase">State 3: Loading</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">Button Disabled: "Creating your account…"</h3>
+      </div>
+
+      <!-- 360px Mobile Frame -->
+      <div class="w-[360px] min-h-[760px] bg-[#F0F2F5] text-[#1C1E21] rounded-[28px] overflow-hidden shadow-2xl border-[4px] border-slate-800 flex flex-col relative">
+        
+        <!-- Status Bar -->
+        <div class="w-full h-6 bg-transparent px-4 flex justify-between items-center text-xs font-medium text-[#1C1E21] select-none pt-1">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+            <span class="text-[10px]">98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-[56px] px-4 flex items-center justify-between border-b border-slate-200 bg-white sticky top-0 z-20">
+          <div class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white flex-shrink-0">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <button type="button" class="h-11 px-2.5 rounded-lg flex items-center gap-1.5 text-[#1C1E21]">
+              <svg class="w-4 h-4 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+              <span class="text-xs font-semibold">EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button type="button" class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1.5 text-xs font-semibold">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Warning signs</span>
+            </button>
+            <button type="button" class="h-11 px-2.5 bg-white border border-[#1A6BD1] text-[#1565C0] rounded-lg text-xs font-semibold">Log in</button>
+          </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 flex flex-col justify-between">
+          <div>
+            <div class="bg-white rounded-[12px] p-4 custom-shadow">
+              
+              <h2 class="text-[24px] leading-tight font-bold text-[#1C1E21] mb-5">
+                Create your free account
+              </h2>
+
+              <form class="space-y-4" onsubmit="return false;">
+                
+                <!-- Email field (filled and disabled during submit) -->
+                <div>
+                  <label for="s3-email" class="block text-xs font-semibold text-[#1C1E21] mb-1.5">
+                    Email address
+                  </label>
+                  <input
+                    type="email"
+                    id="s3-email"
+                    value="thabo.test@example.co.za"
+                    disabled
+                    class="w-full h-[48px] px-3.5 bg-slate-50 text-[#1C1E21] text-base border border-slate-300 rounded-[12px] opacity-80 cursor-not-allowed"
+                  />
+                </div>
+
+                <!-- Password field (dots, disabled) -->
+                <div>
+                  <label for="s3-password" class="block text-xs font-semibold text-[#1C1E21] mb-1.5">
+                    Password
+                  </label>
+                  <div class="relative">
+                    <input
+                      type="password"
+                      id="s3-password"
+                      value="HealthyLife2025"
+                      disabled
+                      class="w-full h-[48px] pl-3.5 pr-12 bg-slate-50 text-[#1C1E21] text-base tracking-widest border border-slate-300 rounded-[12px] opacity-80 cursor-not-allowed"
+                    />
+                    <button
+                      type="button"
+                      disabled
+                      class="absolute right-1 top-0.5 w-[44px] h-[44px] flex items-center justify-center text-[#65676B] opacity-50 cursor-not-allowed"
+                      aria-label="Show password"
+                    >
+                      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 18+ Checkbox (checked, disabled) -->
+                <div class="pt-1">
+                  <label class="flex items-start gap-3 cursor-not-allowed min-h-[44px] py-1 select-none opacity-80">
+                    <input
+                      type="checkbox"
+                      checked
+                      disabled
+                      class="w-5 h-5 mt-0.5 text-[#1A6BD1] border-2 border-slate-400 rounded cursor-not-allowed"
+                    />
+                    <span class="text-sm text-[#1C1E21] leading-snug">
+                      I confirm I am 18 or older
+                    </span>
+                  </label>
+                </div>
+
+                <!-- Privacy Checkbox (checked, disabled) -->
+                <div>
+                  <label class="flex items-start gap-3 cursor-not-allowed min-h-[44px] py-1 select-none opacity-80">
+                    <input
+                      type="checkbox"
+                      checked
+                      disabled
+                      class="w-5 h-5 mt-0.5 text-[#1A6BD1] border-2 border-slate-400 rounded cursor-not-allowed"
+                    />
+                    <span class="text-sm text-[#1C1E21] leading-snug">
+                      I agree to the <span class="text-[#1A6BD1] underline font-semibold">Privacy Notice</span>
+                    </span>
+                  </label>
+                </div>
+
+                <!-- Loading Button: disabled, reads “Creating your account…” -->
+                <div class="pt-2">
+                  <button
+                    type="button"
+                    disabled
+                    class="w-full h-[48px] bg-[#D0D5DD] text-[#65676B] font-semibold text-base rounded-[12px] flex items-center justify-center gap-2.5 cursor-not-allowed"
+                  >
+                    <!-- Accessible loading spinner -->
+                    <svg class="animate-spin w-4 h-4 text-[#65676B]" viewBox="0 0 24 24" fill="none">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                    <span>Creating your account…</span>
+                  </button>
+                </div>
+
+                <!-- Link (disabled styling) -->
+                <div class="text-center pt-2 pb-1">
+                  <span class="inline-flex items-center justify-center min-h-[44px] px-3 text-sm text-[#65676B] cursor-not-allowed">
+                    Already have an account?&nbsp;<span class="text-slate-500 font-semibold underline">Log in</span>
+                  </span>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+          <div class="text-center py-4 text-xs text-[#65676B]">
+            Protected by Diabetes Companion SA
+          </div>
+        </main>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- STATE 4: SERVER ERROR STATE -->
+    <!-- ========================================== -->
+    <div id="state-error" class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="inline-block px-3 py-1 bg-red-100 text-[#B91C1C] text-xs font-bold rounded-full tracking-wide uppercase">State 4: Server Error</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">Server Failure with "Try again"</h3>
+      </div>
+
+      <!-- 360px Mobile Frame -->
+      <div class="w-[360px] min-h-[760px] bg-[#F0F2F5] text-[#1C1E21] rounded-[28px] overflow-hidden shadow-2xl border-[4px] border-slate-800 flex flex-col relative">
+        
+        <!-- Status Bar -->
+        <div class="w-full h-6 bg-transparent px-4 flex justify-between items-center text-xs font-medium text-[#1C1E21] select-none pt-1">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+            <span class="text-[10px]">98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-[56px] px-4 flex items-center justify-between border-b border-slate-200 bg-white sticky top-0 z-20">
+          <div class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white flex-shrink-0">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <button type="button" class="h-11 px-2.5 rounded-lg flex items-center gap-1.5 text-[#1C1E21]">
+              <svg class="w-4 h-4 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+              <span class="text-xs font-semibold">EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button type="button" class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1.5 text-xs font-semibold">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Warning signs</span>
+            </button>
+            <button type="button" class="h-11 px-2.5 bg-white border border-[#1A6BD1] text-[#1565C0] rounded-lg text-xs font-semibold">Log in</button>
+          </div>
+        </header>
+
+        <!-- Main Content (Centered White Card with Error message & Try again button) -->
+        <main class="flex-1 p-4 flex flex-col justify-center">
+          <div class="bg-white rounded-[12px] p-6 custom-shadow text-center">
+            
+            <!-- Red alert icon inside white card surface -->
+            <div class="w-14 h-14 mx-auto rounded-full bg-red-50 flex items-center justify-center text-[#B91C1C] mb-4">
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            </div>
+
+            <!-- Exact specified text -->
+            <h3 class="text-[20px] font-bold text-[#1C1E21] mb-2">
+              Something went wrong
+            </h3>
+            
+            <p class="text-base text-[#65676B] mb-6 leading-relaxed">
+              Something went wrong on our side. Please try again.
+            </p>
+
+            <!-- Primary button “Try again” -->
+            <button
+              type="button"
+              class="w-full h-[48px] bg-[#1A6BD1] hover:bg-[#1565C0] text-white font-semibold text-base rounded-[12px] flex items-center justify-center gap-2 transition-colors mb-4"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 2v6h-6"/>
+                <path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
+                <path d="M3 22v-6h6"/>
+                <path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+              </svg>
+              <span>Try again</span>
+            </button>
+
+            <!-- Secondary return action -->
+            <button
+              type="button"
+              class="inline-flex items-center justify-center min-h-[44px] px-3 text-sm text-[#1A6BD1] font-semibold underline hover:text-[#1565C0]"
+            >
+              Back to registration form
+            </button>
+          </div>
+        </main>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- STATE 5: OFFLINE BANNER + DISABLED BUTTON -->
+    <!-- ========================================== -->
+    <div id="state-offline" class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="inline-block px-3 py-1 bg-neutral-800 text-white text-xs font-bold rounded-full tracking-wide uppercase">State 5: Offline</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">#1C1E21 Dark Banner + Disabled CTA</h3>
+      </div>
+
+      <!-- 360px Mobile Frame -->
+      <div class="w-[360px] min-h-[760px] bg-[#F0F2F5] text-[#1C1E21] rounded-[28px] overflow-hidden shadow-2xl border-[4px] border-slate-800 flex flex-col relative">
+        
+        <!-- Status Bar -->
+        <div class="w-full h-6 bg-transparent px-4 flex justify-between items-center text-xs font-medium text-[#1C1E21] select-none pt-1">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.58 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+            <span class="text-[10px]">Offline</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-[56px] px-4 flex items-center justify-between border-b border-slate-200 bg-white sticky top-0 z-20">
+          <div class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white flex-shrink-0">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <button type="button" class="h-11 px-2.5 rounded-lg flex items-center gap-1.5 text-[#1C1E21]">
+              <svg class="w-4 h-4 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+              <span class="text-xs font-semibold">EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button type="button" class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1.5 text-xs font-semibold">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Warning signs</span>
+            </button>
+            <button type="button" class="h-11 px-2.5 bg-white border border-[#1A6BD1] text-[#1565C0] rounded-lg text-xs font-semibold">Log in</button>
+          </div>
+        </header>
+
+        <!-- Component 18: Offline banner under the header, #1C1E21 background, white text -->
+        <div class="bg-[#1C1E21] text-white px-4 py-2.5 flex items-center gap-2.5 border-b border-slate-700">
+          <svg class="w-4 h-4 text-[#B45309] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="1" y1="1" x2="23" y2="23"/>
+            <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+            <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+            <path d="M10.71 5.05A16 16 0 0 1 22.58 9"/>
+            <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+            <line x1="12" y1="20" x2="12.01" y2="20"/>
+          </svg>
+          <p class="text-xs text-white leading-tight font-medium">
+            You’re offline. Some things may not work until you reconnect.
+          </p>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 flex flex-col justify-between">
+          <div>
+            <div class="bg-white rounded-[12px] p-4 custom-shadow">
+              
+              <h2 class="text-[24px] leading-tight font-bold text-[#1C1E21] mb-5">
+                Create your free account
+              </h2>
+
+              <form class="space-y-4" onsubmit="return false;">
+                
+                <!-- Email field -->
+                <div>
+                  <label for="s5-email" class="block text-xs font-semibold text-[#1C1E21] mb-1.5">
+                    Email address
+                  </label>
+                  <input
+                    type="email"
+                    id="s5-email"
+                    value="thabo.test@example.co.za"
+                    class="w-full h-[48px] px-3.5 bg-white text-[#1C1E21] text-base border border-slate-300 rounded-[12px] focus:outline-none"
+                  />
+                </div>
+
+                <!-- Password field -->
+                <div>
+                  <label for="s5-password" class="block text-xs font-semibold text-[#1C1E21] mb-1.5">
+                    Password
+                  </label>
+                  <div class="relative">
+                    <input
+                      type="password"
+                      id="s5-password"
+                      value="Password123"
+                      class="w-full h-[48px] pl-3.5 pr-12 bg-white text-[#1C1E21] text-base tracking-widest border border-slate-300 rounded-[12px] focus:outline-none"
+                    />
+                    <button
+                      type="button"
+                      class="absolute right-1 top-0.5 w-[44px] h-[44px] flex items-center justify-center text-[#65676B]"
+                      aria-label="Show password"
+                    >
+                      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 18+ Checkbox -->
+                <div class="pt-1">
+                  <label class="flex items-start gap-3 cursor-pointer min-h-[44px] py-1 select-none">
+                    <input
+                      type="checkbox"
+                      checked
+                      class="w-5 h-5 mt-0.5 text-[#1A6BD1] border-2 border-slate-400 rounded"
+                    />
+                    <span class="text-sm text-[#1C1E21] leading-snug">
+                      I confirm I am 18 or older
+                    </span>
+                  </label>
+                </div>
+
+                <!-- Privacy Notice Checkbox -->
+                <div>
+                  <label class="flex items-start gap-3 cursor-pointer min-h-[44px] py-1 select-none">
+                    <input
+                      type="checkbox"
+                      checked
+                      class="w-5 h-5 mt-0.5 text-[#1A6BD1] border-2 border-slate-400 rounded"
+                    />
+                    <span class="text-sm text-[#1C1E21] leading-snug">
+                      I agree to the <span class="text-[#1A6BD1] underline font-semibold">Privacy Notice</span>
+                    </span>
+                  </label>
+                </div>
+
+                <!-- Disabled button: internet connection required to sign up -->
+                <div class="pt-2">
+                  <button
+                    type="button"
+                    disabled
+                    class="w-full h-[48px] bg-[#D0D5DD] text-[#65676B] font-semibold text-base rounded-[12px] flex items-center justify-center gap-2 cursor-not-allowed"
+                  >
+                    <span>Create account (Offline)</span>
+                  </button>
+                  <p class="text-xs text-[#65676B] text-center mt-2">
+                    An internet connection is required to create your account.
+                  </p>
+                </div>
+
+                <!-- Link -->
+                <div class="text-center pt-1 pb-1">
+                  <span class="inline-flex items-center justify-center min-h-[44px] px-3 text-sm text-[#1C1E21]">
+                    Already have an account?&nbsp;<span class="text-[#1A6BD1] font-semibold underline">Log in</span>
+                  </span>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+          <div class="text-center py-4 text-xs text-[#65676B]">
+            Protected by Diabetes Companion SA
+          </div>
+        </main>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- STATE 6: SUCCESS (CARD REPLACES FORM) -->
+    <!-- ========================================== -->
+    <div id="state-success" class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="inline-block px-3 py-1 bg-emerald-100 text-[#15803D] text-xs font-bold rounded-full tracking-wide uppercase">State 6: Success</span>
+        <h3 class="text-sm font-semibold text-[#1C1E21] mt-1">Form Replaced by Confirmation Card</h3>
+      </div>
+
+      <!-- 360px Mobile Frame -->
+      <div class="w-[360px] min-h-[760px] bg-[#F0F2F5] text-[#1C1E21] rounded-[28px] overflow-hidden shadow-2xl border-[4px] border-slate-800 flex flex-col relative">
+        
+        <!-- Status Bar -->
+        <div class="w-full h-6 bg-transparent px-4 flex justify-between items-center text-xs font-medium text-[#1C1E21] select-none pt-1">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+            <span class="text-[10px]">98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-[56px] px-4 flex items-center justify-between border-b border-slate-200 bg-white sticky top-0 z-20">
+          <div class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-lg bg-[#1A6BD1] flex items-center justify-center text-white flex-shrink-0">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                <path d="M9.5 12.5l2 2 4-4" fill="none" stroke="#1A6BD1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <button type="button" class="h-11 px-2.5 rounded-lg flex items-center gap-1.5 text-[#1C1E21]">
+              <svg class="w-4 h-4 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+              <span class="text-xs font-semibold">EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button type="button" class="h-11 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1.5 text-xs font-semibold">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Warning signs</span>
+            </button>
+            <button type="button" class="h-11 px-2.5 bg-white border border-[#1A6BD1] text-[#1565C0] rounded-lg text-xs font-semibold">Log in</button>
+          </div>
+        </header>
+
+        <!-- Main Content: Form is completely replaced by a card with Success Message -->
+        <main class="flex-1 p-4 flex flex-col justify-center">
+          <div class="bg-white rounded-[12px] p-6 custom-shadow text-center">
+            
+            <!-- Success tick icon in #15803D (green tick inside subtle tint) -->
+            <div class="w-16 h-16 mx-auto rounded-full bg-emerald-50 flex items-center justify-center text-[#15803D] mb-4">
+              <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M8 12l2.5 2.5 5.5-5.5"/>
+              </svg>
+            </div>
+
+            <!-- Header -->
+            <h2 class="text-[20px] font-bold text-[#1C1E21] mb-2 leading-tight">
+              Account created
+            </h2>
+
+            <!-- Exact specified text: “Check your email to confirm your account.” -->
+            <p class="text-base text-[#1C1E21] font-normal mb-2 leading-relaxed">
+              Check your email to confirm your account.
+            </p>
+
+            <p class="text-xs text-[#65676B] mb-6">
+              We sent a verification link to <span class="font-semibold text-[#1C1E21]">thabo.test@example.co.za</span>.
+            </p>
+
+            <!-- Exact specified button: “Go to log in” (48px high, #1A6BD1, 12px corners) -->
+            <button
+              type="button"
+              class="w-full h-[48px] bg-[#1A6BD1] hover:bg-[#1565C0] text-white font-semibold text-base rounded-[12px] flex items-center justify-center transition-colors mb-3"
+            >
+              Go to log in
+            </button>
+
+            <!-- Secondary plain helper link -->
+            <div class="pt-2">
+              <a href="#" class="inline-flex items-center justify-center min-h-[44px] px-3 text-sm text-[#1A6BD1] font-semibold underline hover:text-[#1565C0]">
+                Didn't get the email? Send again
+              </a>
+            </div>
+
+          </div>
+        </main>
+
+        <div class="text-center py-4 text-xs text-[#65676B]">
+          Protected by Diabetes Companion SA
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

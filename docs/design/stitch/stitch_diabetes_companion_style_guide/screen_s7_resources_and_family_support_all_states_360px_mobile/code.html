@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screen S7 “Resources and Family Support” - All States (360px Mobile)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              primary: '#1A6BD1',
+              dark: '#1565C0',
+              tint: '#E7F0FD',
+              bg: '#F0F2F5',
+              surface: '#FFFFFF',
+              mainText: '#1C1E21',
+              subText: '#65676B',
+              warning: '#B45309',
+              danger: '#B91C1C',
+              success: '#15803D',
+              disabled: '#D0D5DD',
+              loading: '#E4E6EB',
+              border: '#E4E6EB'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F0F2F5;
+      color: #1C1E21;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Device frame styling */
+    .phone-viewport {
+      width: 360px;
+      height: 780px;
+      background-color: #F0F2F5;
+      position: relative;
+      border-radius: 36px;
+      box-shadow: 0 16px 40px -8px rgba(28, 30, 33, 0.15), 0 0 0 10px #1C1E21, 0 0 0 12px #94A3B8;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .scroll-content {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #CBD5E1 transparent;
+    }
+
+    .scroll-content::-webkit-scrollbar {
+      width: 4px;
+    }
+    .scroll-content::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+
+    /* Pulse animation for loading skeletons */
+    @keyframes shimmer {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+    .skeleton-box {
+      animation: shimmer 1.5s infinite ease-in-out;
+      background-color: #E4E6EB;
+    }
+  </style>
+</head>
+<body class="p-6 md:p-10 min-h-screen flex flex-col items-center justify-start bg-slate-100">
+
+  <!-- Overview Header & Specification Banner -->
+  <div class="w-full max-w-[1900px] mb-8 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+    <div class="flex flex-wrap items-center gap-3 mb-3">
+      <span class="px-3 py-1 bg-blue-100 text-[#1565C0] font-semibold text-xs rounded-full">Screen Specification • S7 “Resources &amp; Family Support”</span>
+      <span class="px-3 py-1 bg-emerald-100 text-[#15803D] font-semibold text-xs rounded-full">Public Access (Everyone)</span>
+      <span class="px-3 py-1 bg-amber-100 text-[#B45309] font-semibold text-xs rounded-full">Tab Bar: No Active Tab</span>
+      <span class="px-3 py-1 bg-purple-100 text-purple-800 font-semibold text-xs rounded-full">360 px Viewport • WCAG AAA Tokens</span>
+    </div>
+    <h1 class="text-2xl md:text-3xl font-bold text-[#1C1E21]">Screen S7 “Resources and Family Support” — Diabetes Companion SA</h1>
+    <p class="text-sm md:text-base text-[#65676B] mt-2 max-w-4xl leading-relaxed">
+      <strong>Purpose:</strong> Open trusted South African health links and read practical tips for family members and caregivers. Everyone can open it. Formatted strictly for a 360 px wide Android viewport with 16 px margins, 48 px high secondary buttons, 44×44 px minimum touch targets, and authentic operational states (Normal, Empty, Loading, Error, Offline).
+    </p>
+    <div class="flex flex-wrap gap-2 mt-4 text-xs font-medium">
+      <span class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md border border-slate-200">State 1: Normal (Full Content)</span>
+      <span class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md border border-slate-200">State 2: Empty ("No resources yet")</span>
+      <span class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md border border-slate-200">State 3: Loading (Grey Skeletons)</span>
+      <span class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md border border-slate-200">State 4: Error ("We couldn't load this page" + Retry)</span>
+      <span class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md border border-slate-200">State 5: Offline (Banner + Disabled Links + Offline Toast Notice)</span>
+    </div>
+  </div>
+
+  <!-- Multi-State Container Layout -->
+  <div class="w-full max-w-[1900px] flex flex-wrap justify-center gap-8 pb-12">
+
+    <!-- ========================================== -->
+    <!-- STATE 1: NORMAL STATE                     -->
+    <!-- ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">State 1: Normal</span>
+        <p class="text-xs text-[#65676B] mt-1 font-medium">Complete Resources &amp; Tips (Everyone Access)</p>
+      </div>
+
+      <div class="phone-viewport">
+        <!-- Status Bar -->
+        <div class="h-6 bg-[#FFFFFF] px-5 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-transparent select-none z-20">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25A9.97 9.97 0 0 1 2 12C2 6.48 6.48 2 12 2s10 4.48 10 10c0 2.32-.79 4.46-2.12 6.16l-.62-.62A8.96 8.96 0 0 0 21 12c0-4.97-4.03-9-9-9zm0 4a5 5 0 0 0-5 5c0 1.25.46 2.39 1.22 3.28l.71-.71A3.98 3.98 0 0 1 8 12a4 4 0 1 1 8 0c0 .98-.36 1.88-.95 2.57l.71.71A4.97 4.97 0 0 0 17 12a5 5 0 0 0-5-5z"/></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- 1. Header (56px) -->
+        <header class="h-14 bg-white border-b border-[#E4E6EB] px-4 flex items-center justify-between flex-shrink-0 z-20">
+          <!-- Logo Mark (Wordmark hidden under 400px per guide) -->
+          <div class="flex items-center">
+            <div class="w-9 h-9 bg-[#1A6BD1] rounded-xl flex items-center justify-center shadow-sm">
+              <!-- Water droplet with tick inside -->
+              <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+                <path d="M9 12.5l2 2 4.5-4.5" stroke="#1A6BD1" stroke-width="2.5" fill="none"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Header Right Actions: Language Selector, Warning signs Button, Secondary Login -->
+          <div class="flex items-center gap-1.5">
+            <!-- Language dropdown trigger (44px touch) -->
+            <button class="h-8 px-2 flex items-center gap-1 text-xs font-semibold text-[#1C1E21] bg-[#F0F2F5] hover:bg-slate-200 rounded-lg transition" aria-label="Select Language">
+              <svg class="w-3.5 h-3.5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span>EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+
+            <!-- Warning signs button (Red #B91C1C, min 44px touch target) -->
+            <a href="#" class="h-8 px-2.5 bg-[#B91C1C] hover:bg-red-800 text-white rounded-lg flex items-center gap-1 text-xs font-semibold shadow-sm transition" aria-label="Urgent Warning Signs">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Warning signs</span>
+            </a>
+
+            <!-- Visitor Header action (Login button) -->
+            <button class="h-8 px-2.5 border border-[#1A6BD1] text-[#1A6BD1] hover:bg-blue-50 text-xs font-semibold rounded-lg transition">
+              Log in
+            </button>
+          </div>
+        </header>
+
+        <!-- Scrollable Content Area -->
+        <main class="scroll-content p-4 space-y-5">
+          <!-- 2. Screen Title -->
+          <div class="pt-1">
+            <h1 class="text-[24px] font-bold text-[#1C1E21] leading-tight">Help and family support</h1>
+          </div>
+
+          <!-- 3. Section: Heading "Trusted organisations" + Three Resource Cards -->
+          <section class="space-y-3">
+            <h2 class="text-[20px] font-bold text-[#1565C0] leading-snug">Trusted organisations</h2>
+
+            <!-- Resource Card 1: Diabetes South Africa -->
+            <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm">
+              <h3 class="text-[17px] font-bold text-[#1C1E21] leading-tight">Diabetes South Africa</h3>
+              <p class="text-[14px] text-[#65676B] mt-1.5 leading-snug">
+                A non-profit that supports and speaks up for people with diabetes in South Africa
+              </p>
+              <div class="mt-3.5">
+                <!-- Secondary button 48px height, 12px corners, 2px border #1A6BD1 per style guide -->
+                <button class="w-full h-12 bg-white border-2 border-[#1A6BD1] text-[#1A6BD1] font-semibold text-[15px] rounded-xl flex items-center justify-center gap-1.5 active:bg-[#E7F0FD] transition hover:bg-blue-50/50">
+                  <span>Open website</span>
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Resource Card 2: SEMDSA -->
+            <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm">
+              <h3 class="text-[17px] font-bold text-[#1C1E21] leading-tight">SEMDSA</h3>
+              <p class="text-[14px] text-[#65676B] mt-1.5 leading-snug">
+                The Society for Endocrinology, Metabolism and Diabetes of South Africa: guidelines and news
+              </p>
+              <div class="mt-3.5">
+                <button class="w-full h-12 bg-white border-2 border-[#1A6BD1] text-[#1A6BD1] font-semibold text-[15px] rounded-xl flex items-center justify-center gap-1.5 active:bg-[#E7F0FD] transition hover:bg-blue-50/50">
+                  <span>Open website</span>
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Resource Card 3: National Department of Health -->
+            <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm">
+              <h3 class="text-[17px] font-bold text-[#1C1E21] leading-tight">National Department of Health</h3>
+              <p class="text-[14px] text-[#65676B] mt-1.5 leading-snug">
+                Public health services, clinic information and health campaigns
+              </p>
+              <div class="mt-3.5">
+                <button class="w-full h-12 bg-white border-2 border-[#1A6BD1] text-[#1A6BD1] font-semibold text-[15px] rounded-xl flex items-center justify-center gap-1.5 active:bg-[#E7F0FD] transition hover:bg-blue-50/50">
+                  <span>Open website</span>
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. Section: Heading "Tips for family and caregivers" + Five Tips List -->
+          <section class="space-y-3 pt-1">
+            <h2 class="text-[20px] font-bold text-[#1565C0] leading-snug">Tips for family and caregivers</h2>
+
+            <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm space-y-3.5">
+              <!-- Tip 1 -->
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-[#E7F0FD] text-[#1565C0] font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
+                  1
+                </div>
+                <p class="text-[15px] text-[#1C1E21] leading-snug">
+                  Learn the signs of low and high blood sugar so you can spot them early.
+                </p>
+              </div>
+
+              <div class="border-t border-slate-100"></div>
+
+              <!-- Tip 2 -->
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-[#E7F0FD] text-[#1565C0] font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
+                  2
+                </div>
+                <p class="text-[15px] text-[#1C1E21] leading-snug">
+                  Ask how you can help instead of taking over.
+                </p>
+              </div>
+
+              <div class="border-t border-slate-100"></div>
+
+              <!-- Tip 3 -->
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-[#E7F0FD] text-[#1565C0] font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
+                  3
+                </div>
+                <p class="text-[15px] text-[#1C1E21] leading-snug">
+                  Offer to go to clinic visits if they would like company.
+                </p>
+              </div>
+
+              <div class="border-t border-slate-100"></div>
+
+              <!-- Tip 4 -->
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-[#E7F0FD] text-[#1565C0] font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
+                  4
+                </div>
+                <p class="text-[15px] text-[#1C1E21] leading-snug">
+                  Plan meals together and keep healthy snacks at home.
+                </p>
+              </div>
+
+              <div class="border-t border-slate-100"></div>
+
+              <!-- Tip 5 -->
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-[#E7F0FD] text-[#1565C0] font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
+                  5
+                </div>
+                <p class="text-[15px] text-[#1C1E21] leading-snug">
+                  Know the emergency numbers: <strong>112</strong> from a cell phone and <strong>10177</strong> for an ambulance.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 5. Notice Card: "Always follow the advice of your own doctor or clinic." -->
+          <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm flex items-start gap-3">
+            <div class="w-6 h-6 text-[#1565C0] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+            </div>
+            <p class="text-[14px] text-[#1C1E21] font-medium leading-snug">
+              Always follow the advice of your own doctor or clinic.
+            </p>
+          </div>
+
+          <!-- Bottom padding spacer so nothing hides behind tab bar -->
+          <div class="h-4"></div>
+        </main>
+
+        <!-- 6. Bottom Tab Bar (56px) - NO TAB ACTIVE per specification -->
+        <nav class="h-14 bg-white border-t border-[#E4E6EB] grid grid-cols-5 flex-shrink-0 z-20">
+          <!-- Home Tab (Inactive #65676B) -->
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B] hover:text-[#1C1E21]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Home</span>
+          </a>
+
+          <!-- Learn Tab (Inactive #65676B) -->
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B] hover:text-[#1C1E21]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Learn</span>
+          </a>
+
+          <!-- Diary Tab (Inactive #65676B) -->
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B] hover:text-[#1C1E21]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Diary</span>
+          </a>
+
+          <!-- Checklist Tab (Inactive #65676B) -->
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B] hover:text-[#1C1E21]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Checklist</span>
+          </a>
+
+          <!-- Dashboard Tab (Inactive #65676B) -->
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B] hover:text-[#1C1E21]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Dashboard</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- STATE 2: EMPTY STATE                      -->
+    <!-- ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">State 2: Empty</span>
+        <p class="text-xs text-[#65676B] mt-1 font-medium">“No resources yet. Please check back soon.”</p>
+      </div>
+
+      <div class="phone-viewport">
+        <!-- Status Bar -->
+        <div class="h-6 bg-[#FFFFFF] px-5 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-transparent select-none z-20">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25A9.97 9.97 0 0 1 2 12C2 6.48 6.48 2 12 2s10 4.48 10 10c0 2.32-.79 4.46-2.12 6.16l-.62-.62A8.96 8.96 0 0 0 21 12c0-4.97-4.03-9-9-9zm0 4a5 5 0 0 0-5 5c0 1.25.46 2.39 1.22 3.28l.71-.71A3.98 3.98 0 0 1 8 12a4 4 0 1 1 8 0c0 .98-.36 1.88-.95 2.57l.71.71A4.97 4.97 0 0 0 17 12a5 5 0 0 0-5-5z"/></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-14 bg-white border-b border-[#E4E6EB] px-4 flex items-center justify-between flex-shrink-0 z-20">
+          <div class="w-9 h-9 bg-[#1A6BD1] rounded-xl flex items-center justify-center shadow-sm">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+              <path d="M9 12.5l2 2 4.5-4.5" stroke="#1A6BD1" stroke-width="2.5" fill="none"/>
+            </svg>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button class="h-8 px-2 flex items-center gap-1 text-xs font-semibold text-[#1C1E21] bg-[#F0F2F5] rounded-lg">
+              <svg class="w-3.5 h-3.5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+              <span>EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <a href="#" class="h-8 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1 text-xs font-semibold">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Warning signs</span>
+            </a>
+            <button class="h-8 px-2.5 border border-[#1A6BD1] text-[#1A6BD1] text-xs font-semibold rounded-lg">
+              Log in
+            </button>
+          </div>
+        </header>
+
+        <!-- Content Area: Title + Empty State Card -->
+        <main class="scroll-content p-4 flex flex-col justify-start space-y-4">
+          <div class="pt-1">
+            <h1 class="text-[24px] font-bold text-[#1C1E21] leading-tight">Help and family support</h1>
+          </div>
+
+          <div class="my-auto py-12 flex flex-col items-center justify-center bg-white rounded-2xl p-6 border border-[#E4E6EB] shadow-sm text-center">
+            <!-- Outline folder / links icon in brand neutral container -->
+            <div class="w-16 h-16 rounded-2xl bg-[#F0F2F5] text-[#65676B] flex items-center justify-center mb-4">
+              <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                <line x1="9" y1="9" x2="15" y2="9"/>
+                <line x1="9" y1="13" x2="13" y2="13"/>
+              </svg>
+            </div>
+            <!-- Exact empty string per spec -->
+            <h2 class="text-[17px] font-bold text-[#1C1E21]">No resources yet. Please check back soon.</h2>
+            <p class="text-[14px] text-[#65676B] mt-2 max-w-[240px] leading-relaxed">
+              We update verified community and support contacts regularly.
+            </p>
+          </div>
+
+          <!-- Bottom Notice Card remains for safety -->
+          <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm flex items-start gap-3 mt-auto">
+            <div class="w-6 h-6 text-[#1565C0] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            </div>
+            <p class="text-[14px] text-[#1C1E21] font-medium leading-snug">
+              Always follow the advice of your own doctor or clinic.
+            </p>
+          </div>
+        </main>
+
+        <!-- Tab Bar (No tab active) -->
+        <nav class="h-14 bg-white border-t border-[#E4E6EB] grid grid-cols-5 flex-shrink-0 z-20">
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Home</span>
+          </a>
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Learn</span>
+          </a>
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Diary</span>
+          </a>
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Checklist</span>
+          </a>
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Dashboard</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- STATE 3: LOADING STATE                    -->
+    <!-- ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-700 bg-slate-200 px-3 py-1 rounded-full border border-slate-300">State 3: Loading</span>
+        <p class="text-xs text-[#65676B] mt-1 font-medium">Grey Skeletons for Cards and Tips (#E4E6EB)</p>
+      </div>
+
+      <div class="phone-viewport">
+        <!-- Status Bar -->
+        <div class="h-6 bg-[#FFFFFF] px-5 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-transparent select-none z-20">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25A9.97 9.97 0 0 1 2 12C2 6.48 6.48 2 12 2s10 4.48 10 10c0 2.32-.79 4.46-2.12 6.16l-.62-.62A8.96 8.96 0 0 0 21 12c0-4.97-4.03-9-9-9zm0 4a5 5 0 0 0-5 5c0 1.25.46 2.39 1.22 3.28l.71-.71A3.98 3.98 0 0 1 8 12a4 4 0 1 1 8 0c0 .98-.36 1.88-.95 2.57l.71.71A4.97 4.97 0 0 0 17 12a5 5 0 0 0-5-5z"/></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-14 bg-white border-b border-[#E4E6EB] px-4 flex items-center justify-between flex-shrink-0 z-20">
+          <div class="w-9 h-9 bg-[#1A6BD1] rounded-xl flex items-center justify-center shadow-sm">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+              <path d="M9 12.5l2 2 4.5-4.5" stroke="#1A6BD1" stroke-width="2.5" fill="none"/>
+            </svg>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <div class="w-14 h-8 bg-[#F0F2F5] rounded-lg"></div>
+            <div class="w-24 h-8 bg-[#B91C1C]/40 rounded-lg"></div>
+            <div class="w-14 h-8 bg-slate-100 rounded-lg"></div>
+          </div>
+        </header>
+
+        <!-- Skeleton Content -->
+        <main class="scroll-content p-4 space-y-5">
+          <!-- Title Skeleton -->
+          <div class="pt-1">
+            <div class="w-64 h-7 skeleton-box rounded-md"></div>
+          </div>
+
+          <!-- Section 1 Skeletons: Trusted organisations -->
+          <div class="space-y-3">
+            <div class="w-48 h-6 skeleton-box rounded-md"></div>
+
+            <!-- Card 1 skeleton -->
+            <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm space-y-3">
+              <div class="w-40 h-5 skeleton-box rounded"></div>
+              <div class="w-full h-4 skeleton-box rounded"></div>
+              <div class="w-3/4 h-4 skeleton-box rounded"></div>
+              <div class="w-full h-12 skeleton-box rounded-xl mt-2"></div>
+            </div>
+
+            <!-- Card 2 skeleton -->
+            <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm space-y-3">
+              <div class="w-28 h-5 skeleton-box rounded"></div>
+              <div class="w-full h-4 skeleton-box rounded"></div>
+              <div class="w-2/3 h-4 skeleton-box rounded"></div>
+              <div class="w-full h-12 skeleton-box rounded-xl mt-2"></div>
+            </div>
+          </div>
+
+          <!-- Section 2 Skeletons: Tips -->
+          <div class="space-y-3 pt-1">
+            <div class="w-56 h-6 skeleton-box rounded-md"></div>
+            <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm space-y-3">
+              <div class="flex items-center gap-3">
+                <div class="w-6 h-6 skeleton-box rounded-full flex-shrink-0"></div>
+                <div class="w-full h-4 skeleton-box rounded"></div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-6 h-6 skeleton-box rounded-full flex-shrink-0"></div>
+                <div class="w-5/6 h-4 skeleton-box rounded"></div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-6 h-6 skeleton-box rounded-full flex-shrink-0"></div>
+                <div class="w-4/5 h-4 skeleton-box rounded"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notice Skeleton -->
+          <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm flex items-center gap-3">
+            <div class="w-6 h-6 skeleton-box rounded-full flex-shrink-0"></div>
+            <div class="w-full h-4 skeleton-box rounded"></div>
+          </div>
+        </main>
+
+        <!-- Tab Bar (No tab active) -->
+        <nav class="h-14 bg-white border-t border-[#E4E6EB] grid grid-cols-5 flex-shrink-0 z-20">
+          <div class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span class="text-[10px] font-medium mt-0.5 opacity-40">Home</span>
+          </div>
+          <div class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span class="text-[10px] font-medium mt-0.5 opacity-40">Learn</span>
+          </div>
+          <div class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+            <span class="text-[10px] font-medium mt-0.5 opacity-40">Diary</span>
+          </div>
+          <div class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span class="text-[10px] font-medium mt-0.5 opacity-40">Checklist</span>
+          </div>
+          <div class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span class="text-[10px] font-medium mt-0.5 opacity-40">Dashboard</span>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- STATE 4: ERROR STATE                      -->
+    <!-- ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="text-xs font-bold uppercase tracking-wider text-red-700 bg-red-50 px-3 py-1 rounded-full border border-red-200">State 4: Error</span>
+        <p class="text-xs text-[#65676B] mt-1 font-medium">“We couldn't load this page” + Try again button</p>
+      </div>
+
+      <div class="phone-viewport">
+        <!-- Status Bar -->
+        <div class="h-6 bg-[#FFFFFF] px-5 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-transparent select-none z-20">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25A9.97 9.97 0 0 1 2 12C2 6.48 6.48 2 12 2s10 4.48 10 10c0 2.32-.79 4.46-2.12 6.16l-.62-.62A8.96 8.96 0 0 0 21 12c0-4.97-4.03-9-9-9zm0 4a5 5 0 0 0-5 5c0 1.25.46 2.39 1.22 3.28l.71-.71A3.98 3.98 0 0 1 8 12a4 4 0 1 1 8 0c0 .98-.36 1.88-.95 2.57l.71.71A4.97 4.97 0 0 0 17 12a5 5 0 0 0-5-5z"/></svg>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-14 bg-white border-b border-[#E4E6EB] px-4 flex items-center justify-between flex-shrink-0 z-20">
+          <div class="w-9 h-9 bg-[#1A6BD1] rounded-xl flex items-center justify-center shadow-sm">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+              <path d="M9 12.5l2 2 4.5-4.5" stroke="#1A6BD1" stroke-width="2.5" fill="none"/>
+            </svg>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button class="h-8 px-2 flex items-center gap-1 text-xs font-semibold text-[#1C1E21] bg-[#F0F2F5] rounded-lg">
+              <svg class="w-3.5 h-3.5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+              <span>EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <a href="#" class="h-8 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1 text-xs font-semibold">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Warning signs</span>
+            </a>
+            <button class="h-8 px-2.5 border border-[#1A6BD1] text-[#1A6BD1] text-xs font-semibold rounded-lg">
+              Log in
+            </button>
+          </div>
+        </header>
+
+        <!-- Error State Layout -->
+        <main class="scroll-content p-4 flex flex-col justify-start space-y-4">
+          <div class="pt-1">
+            <h1 class="text-[24px] font-bold text-[#1C1E21] leading-tight">Help and family support</h1>
+          </div>
+
+          <div class="my-auto py-10 flex flex-col items-center justify-center bg-white rounded-2xl p-6 border border-[#E4E6EB] shadow-sm text-center">
+            <!-- Red alert circle icon -->
+            <div class="w-14 h-14 rounded-full bg-red-50 text-[#B91C1C] flex items-center justify-center mb-4 border border-red-100">
+              <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            </div>
+
+            <!-- Exact error copy per prompt -->
+            <h2 class="text-[18px] font-bold text-[#1C1E21]">We couldn’t load this page. Please try again.</h2>
+            <p class="text-[14px] text-[#65676B] mt-2 max-w-[240px] leading-snug">
+              There was an issue retrieving the verified organisations and tips.
+            </p>
+
+            <!-- 48px Primary "Try again" button with reload icon -->
+            <button class="w-full h-12 bg-[#1A6BD1] hover:bg-[#1565C0] text-white font-semibold text-[15px] rounded-xl flex items-center justify-center gap-2 mt-6 active:scale-[0.98] transition shadow-sm">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+              </svg>
+              <span>Try again</span>
+            </button>
+          </div>
+
+          <!-- Bottom Notice Card remains accessible -->
+          <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm flex items-start gap-3 mt-auto">
+            <div class="w-6 h-6 text-[#1565C0] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            </div>
+            <p class="text-[14px] text-[#1C1E21] font-medium leading-snug">
+              Always follow the advice of your own doctor or clinic.
+            </p>
+          </div>
+        </main>
+
+        <!-- Tab Bar (No tab active) -->
+        <nav class="h-14 bg-white border-t border-[#E4E6EB] grid grid-cols-5 flex-shrink-0 z-20">
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Home</span>
+          </a>
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Learn</span>
+          </a>
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Diary</span>
+          </a>
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Checklist</span>
+          </a>
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Dashboard</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- STATE 5: OFFLINE STATE                    -->
+    <!-- ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 text-center">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-900 bg-slate-300 px-3 py-1 rounded-full border border-slate-400">State 5: Offline</span>
+        <p class="text-xs text-[#65676B] mt-1 font-medium">Dark Banner + Disabled Buttons + Tap Feedback Toast</p>
+      </div>
+
+      <div class="phone-viewport">
+        <!-- Status Bar -->
+        <div class="h-6 bg-[#FFFFFF] px-5 flex items-center justify-between text-[11px] font-semibold text-[#1C1E21] border-b border-transparent select-none z-20">
+          <span>09:41</span>
+          <div class="flex items-center gap-1.5 text-[#65676B]">
+            <span class="text-[9px] uppercase font-bold text-amber-700 bg-amber-100 px-1 py-0.2 rounded">Offline</span>
+            <span>98%</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <header class="h-14 bg-white border-b border-[#E4E6EB] px-4 flex items-center justify-between flex-shrink-0 z-20">
+          <div class="w-9 h-9 bg-[#1A6BD1] rounded-xl flex items-center justify-center shadow-sm">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="white" stroke="none"/>
+              <path d="M9 12.5l2 2 4.5-4.5" stroke="#1A6BD1" stroke-width="2.5" fill="none"/>
+            </svg>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button class="h-8 px-2 flex items-center gap-1 text-xs font-semibold text-[#1C1E21] bg-[#F0F2F5] rounded-lg">
+              <svg class="w-3.5 h-3.5 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+              <span>EN</span>
+              <svg class="w-3 h-3 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <a href="#" class="h-8 px-2.5 bg-[#B91C1C] text-white rounded-lg flex items-center gap-1 text-xs font-semibold">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Warning signs</span>
+            </a>
+            <button class="h-8 px-2.5 border border-[#1A6BD1] text-[#1A6BD1] text-xs font-semibold rounded-lg">
+              Log in
+            </button>
+          </div>
+        </header>
+
+        <!-- Standard Offline Notice Banner (#1C1E21 background, component 18) -->
+        <div class="bg-[#1C1E21] text-white px-3.5 py-2.5 text-[12px] flex items-center gap-2.5 border-b border-black flex-shrink-0 z-20">
+          <svg class="w-4 h-4 text-amber-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="1" y1="1" x2="23" y2="23"/>
+            <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+            <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+            <path d="M10.71 5.05A16 16 0 0 1 22.58 9"/>
+            <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+            <line x1="12" y1="20" x2="12.01" y2="20"/>
+          </svg>
+          <span class="leading-tight font-medium">You’re offline. Some things may not work until you reconnect.</span>
+        </div>
+
+        <!-- Scrollable Content with Cached Cards + Disabled Buttons -->
+        <main class="scroll-content p-4 space-y-5 relative">
+          <div class="pt-1">
+            <h1 class="text-[24px] font-bold text-[#1C1E21] leading-tight">Help and family support</h1>
+          </div>
+
+          <!-- Cached Resource Cards with Disabled 'Open website' Buttons -->
+          <section class="space-y-3">
+            <h2 class="text-[20px] font-bold text-[#1565C0] leading-snug">Trusted organisations</h2>
+
+            <!-- Card 1: Cached with Disabled CTA -->
+            <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm">
+              <h3 class="text-[17px] font-bold text-[#1C1E21] leading-tight">Diabetes South Africa</h3>
+              <p class="text-[14px] text-[#65676B] mt-1.5 leading-snug">
+                A non-profit that supports and speaks up for people with diabetes in South Africa
+              </p>
+              <div class="mt-3.5">
+                <!-- Disabled button look: #D0D5DD background/border, text-slate-400 cursor-not-allowed -->
+                <button class="w-full h-12 bg-[#F0F2F5] border-2 border-[#D0D5DD] text-[#65676B] font-semibold text-[15px] rounded-xl flex items-center justify-center gap-1.5 cursor-not-allowed opacity-90" disabled>
+                  <span>Open website</span>
+                  <svg class="w-4 h-4 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="1" y1="1" x2="23" y2="23"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 2: SEMDSA Cached + Tapped Action Feedback Demonstration -->
+            <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm relative">
+              <h3 class="text-[17px] font-bold text-[#1C1E21] leading-tight">SEMDSA</h3>
+              <p class="text-[14px] text-[#65676B] mt-1.5 leading-snug">
+                The Society for Endocrinology, Metabolism and Diabetes of South Africa: guidelines and news
+              </p>
+              <div class="mt-3.5">
+                <button class="w-full h-12 bg-[#F0F2F5] border-2 border-[#D0D5DD] text-[#65676B] font-semibold text-[15px] rounded-xl flex items-center justify-center gap-1.5 cursor-not-allowed opacity-90" disabled>
+                  <span>Open website</span>
+                  <svg class="w-4 h-4 text-[#65676B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="1" y1="1" x2="23" y2="23"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Tapping one shows: “You’re offline. Reconnect to open this link.” tooltip/inline alert banner -->
+              <div class="mt-2.5 p-2.5 bg-amber-50 border border-amber-200 rounded-lg flex items-center gap-2 text-amber-900 text-[13px] font-medium animate-pulse">
+                <svg class="w-4 h-4 text-amber-700 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span class="leading-tight">You’re offline. Reconnect to open this link.</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Cached Tips section (still readable offline per authentic health app PWA pattern) -->
+          <section class="space-y-3 pt-1">
+            <h2 class="text-[20px] font-bold text-[#1565C0] leading-snug">Tips for family and caregivers</h2>
+
+            <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm space-y-3.5">
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-[#E7F0FD] text-[#1565C0] font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">1</div>
+                <p class="text-[15px] text-[#1C1E21] leading-snug">Learn the signs of low and high blood sugar so you can spot them early.</p>
+              </div>
+              <div class="border-t border-slate-100"></div>
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-[#E7F0FD] text-[#1565C0] font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">5</div>
+                <p class="text-[15px] text-[#1C1E21] leading-snug">Know the emergency numbers: <strong>112</strong> from a cell phone and <strong>10177</strong> for an ambulance.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Notice Card -->
+          <div class="bg-white rounded-xl p-4 border border-[#E4E6EB] shadow-sm flex items-start gap-3">
+            <div class="w-6 h-6 text-[#1565C0] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            </div>
+            <p class="text-[14px] text-[#1C1E21] font-medium leading-snug">
+              Always follow the advice of your own doctor or clinic.
+            </p>
+          </div>
+
+          <div class="h-4"></div>
+        </main>
+
+        <!-- Tab Bar (No tab active) -->
+        <nav class="h-14 bg-white border-t border-[#E4E6EB] grid grid-cols-5 flex-shrink-0 z-20">
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Home</span>
+          </a>
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Learn</span>
+          </a>
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Diary</span>
+          </a>
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Checklist</span>
+          </a>
+          <a href="#" class="flex flex-col items-center justify-center text-[#65676B]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span class="text-[10px] font-medium mt-0.5">Dashboard</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
