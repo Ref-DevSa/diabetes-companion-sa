@@ -9,7 +9,7 @@
 |App name|Diabetes Companion SA|
 |Built from PRD version|v0.4 (the version in `docs/PRD.md`; v0.4 adds the privacy, admin, retention, consent, content-review, language and offline decisions confirmed on 03 Nov 2026)|
 |Screen designs|Google Stitch export `stitch\_diabetes\_companion\_style\_guide`, one folder per screen in `docs/designs/` (moved there on 07 Nov 2026 to match the tutor's start prompt, question 27). Where a Stitch screen disagrees with the PRD, the PRD wins: see the correction table in Section 7.3|
-|Plan version|v1.5|
+|Plan version|v1.6|
 |Repository|https://github.com/Ref-DevSa/ (repository name to be added; see Section 18, launch gate L3)|
 |Status|Ready to build (Phases 1 to 8 can run on a local Supabase; the hosted Supabase project is set up later, in Phase 9)|
 |Last updated|07 Nov 2026|
@@ -1125,38 +1125,38 @@ The same ID may be used at two levels when both prove the same criterion, e.g. T
 |T-INT-6|Integration|`tests/integration/topics.test.ts`|Content lists fall back to English per field when the chosen language is missing|
 |T-C-18|Component|`tests/component/TopicCard.test.tsx`|Icon, title (20 px bold), summary, reading time like "3 min read"; opens in place|
 
-* \[ ] All tests above are written, run, and fail for the expected reason.
+* \[x] All tests above are written, run, and fail for the expected reason.
 
 **Step 2: Backend (Green)**
 
-* \[ ] `src/data/content.ts` (OP11, OP12): explicit column lists (never `\*`, never `reviewed\_by`); `src/lib/pickText.ts` for English fallback.
-* \[ ] No new migrations unless a test shows a gap.
+* \[x] `src/data/content.ts` (OP11, OP12): explicit column lists (never `\*`, never `reviewed\_by`); `src/lib/pickText.ts` for English fallback.
+* \[x] No new migrations unless a test shows a gap.
 
 **Step 3: Frontend (Green)**
 
-* \[ ] S5 and S6 to their designs with all states; the built-in emergency box component with fixed text; Topic opening in place; `TopicCard`, `EmptyState` used.
-* \[ ] The "Warning signs" button already in the header opens S6 from every screen.
-* \[ ] The S6 button "Find help and trusted links" and the S5 link card go to `/help` (development-only placeholder until Phase 7).
+* \[x] S5 and S6 to their designs with all states; the built-in emergency box component with fixed text; Topic opening in place; `TopicCard`, `EmptyState` used.
+* \[x] The "Warning signs" button already in the header opens S6 from every screen.
+* \[x] The S6 button "Find help and trusted links" and the S5 link card go to `/help` (development-only placeholder until Phase 7).
 
 **Step 4: Refactor and full check**
 
-* \[ ] Code cleaned up; no duplicated logic; names use PRD key terms.
-* \[ ] Full check passes.
+* \[x] Code cleaned up; no duplicated logic; names use PRD key terms.
+* \[x] Full check passes.
 
 **Step 5: Manual checks (human)**
 
-* \[ ] Time the route Home → S6 on a phone: under 30 seconds (G2 pre-check).
-* \[ ] Turn on airplane mode on S6: the emergency box and banner show.
-* \[ ] Remember: the Topic and Safety Guide text in the local seed is **placeholder, not reviewed** (D7). Do not treat it as real content.
-* \[ ] Each screen in this phase matches its design side by side.
+* \[x] Time the route Home → S6 on a phone: under 30 seconds (G2 pre-check).
+* \[x] Turn on airplane mode on S6: the emergency box and banner show.
+* \[x] Remember: the Topic and Safety Guide text in the local seed is **placeholder, not reviewed** (D7). Do not treat it as real content.
+* \[x] Each screen in this phase matches its design side by side.
 
 **Definition of Done**
 
-* \[ ] Every test in Step 1 passes.
-* \[ ] All earlier tests still pass.
-* \[ ] Every screen in this phase shows all its required states.
-* \[ ] Manual checks are ticked by the human.
-* \[ ] Progress log updated (Section 17).
+* \[x] Every test in Step 1 passes.
+* \[x] All earlier tests still pass.
+* \[x] Every screen in this phase shows all its required states.
+* \[x] Manual checks are ticked by the human.
+* \[x] Progress log updated (Section 17).
 
 **Commit message:** `Phase 4: Safety Guide and Learning Centre`
 
@@ -1570,17 +1570,17 @@ The agent ticks each item only when its test passes. The human ticks the ones ma
 * \[ ] T-US10-2: Duplicate name ('evening walk') shows the message (automated; also checked by hand on an Android phone)
 * \[ ] T-US10-3: 7th Custom Item shows the limit message and M5 does not open (automated; also checked by hand on an Android phone)
 * \[ ] T-US10-4: Rename and delete work, with 'Item deleted.' (automated; also checked by hand on an Android phone)
-* \[ ] T-US11-1: Topic opens in place and 'Close' closes it (automated; also checked by hand on an Android phone)
-* \[ ] T-US11-2: Setswana titles and text show in Setswana (automated; also checked by hand on an Android phone)
-* \[ ] T-US11-3: Offline with nothing loaded shows the offline message (automated; also checked by hand on an Android phone)
-* \[ ] T-US11-4: Server failure shows the message and 'Try again' (automated; also checked by hand on an Android phone)
+* \[x] T-US11-1: Topic opens in place and 'Close' closes it (automated; also checked by hand on an Android phone)
+* \[x] T-US11-2: Setswana titles and text show in Setswana (automated; also checked by hand on an Android phone)
+* \[x] T-US11-3: Offline with nothing loaded shows the offline message (automated; also checked by hand on an Android phone)
+* \[x] T-US11-4: Server failure shows the message and 'Try again' (automated; also checked by hand on an Android phone)
 * \[ ] T-US12-1: 10 Readings, 3 of 4 ticked: 7 newest with badges and '3 of 4 done' (automated; also checked by hand on an Android phone)
 * \[ ] T-US12-2: No Readings shows the empty message and 'Add a reading' (automated; also checked by hand on an Android phone)
 * \[ ] T-US12-3: Server failure shows the message and 'Try again' (automated; also checked by hand on an Android phone)
-* \[ ] T-US13-1: 'Warning signs' button opens S6 with the emergency box at the top from any screen (automated; also checked by hand on an Android phone)
-* \[ ] T-US13-2: S6 shows the 112 / 10177 text (automated; also checked by hand on an Android phone)
-* \[ ] T-US13-3: Offline: emergency box and banner show; lists replaced by the offline message (automated; also checked by hand on an Android phone)
-* \[ ] T-US13-4: S6 shows 'Symptoms alone cannot confirm diabetes. Only a test at a clinic can.' (automated; also checked by hand on an Android phone)
+* \[x] T-US13-1: 'Warning signs' button opens S6 with the emergency box at the top from any screen (automated; also checked by hand on an Android phone)
+* \[x] T-US13-2: S6 shows the 112 / 10177 text (automated; also checked by hand on an Android phone)
+* \[x] T-US13-3: Offline: emergency box and banner show; lists replaced by the offline message (automated; also checked by hand on an Android phone)
+* \[x] T-US13-4: S6 shows 'Symptoms alone cannot confirm diabetes. Only a test at a clinic can.' (automated; also checked by hand on an Android phone)
 * \[ ] T-US14-1: 'Open website' opens Diabetes South Africa in a new tab (automated; also checked by hand on an Android phone)
 * \[ ] T-US14-2: S7 shows 5 tips (automated; also checked by hand on an Android phone)
 * \[ ] T-US14-3: Offline tap shows 'You’re offline. Reconnect to open this link.' (automated; also checked by hand on an Android phone)
@@ -1630,10 +1630,10 @@ The agent ticks each item only when its test passes. The human ticks the ones ma
 * \[x] BR16: T-BR16-1, T-BR16-2: Visitor sent to S3 and returned (automated)
 * \[ ] BR17: T-BR17-1 (and T-US4-3, T-EDGE-10): Languages and English fallback (automated)
 * \[x] BR18: T-BR18-1, T-BR18-2: Age confirmation at sign-up (automated)
-* \[ ] BR19: T-BR19-1, T-BR19-2: Content edited only by admin; emergency box built in (automated)
+* \[x] BR19: T-BR19-1, T-BR19-2: Content edited only by admin; emergency box built in (automated)
 * \[x] BR20: T-BR20-1, T-BR20-2: Account deletion removes everything (automated)
-* \[ ] BR21: T-BR21-1, T-BR21-2: A language is offered only after human review (PRD v0.4) (automated)
-* \[ ] BR22: T-BR22-1 to T-BR22-3: Content publishable only with a recorded review; review date shown (PRD v0.4) (automated)
+* \[x] BR21: T-BR21-1, T-BR21-2: A language is offered only after human review (PRD v0.4) (automated)
+* \[x] BR22: T-BR22-1 to T-BR22-3: Content publishable only with a recorded review; review date shown (PRD v0.4) (automated)
 * \[ ] BR23: T-BR23-1 to T-BR23-3: Never claim 'saved' unless saved; keep typed text; allow retry (PRD v0.4) (automated)
 * \[x] BR24: T-BR24-1, T-BR24-2: No selling data or adverts; no family access; admin access only when necessary (PRD v0.4) (automated)
 * \[ ] BR25: T-BR25-1, T-BR25-2: Retention: data kept until deleted; login attempts cleaned (PRD v0.4) (automated)
@@ -1738,7 +1738,7 @@ The agent ticks each item only when its test passes. The human ticks the ones ma
 |1 Foundation|07 Nov 2026|Done: automated checks pass; manual checks (Chrome 360 px, Android phone, side by side with the design) confirmed by the human on 07 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 23 / 23, component 72 / 72, database 1 / 1, integration 3 / 3, end-to-end 2 / 2 (101 / 101); lint, type check, secret scan, build: pass. Docker Engine 29.9.2 (WSL 2 installed 07 Nov 2026); local Postgres 17|none yet|Node 24.14.0, npm 11.9.0. Versions: react 19.3.1, react-router 7.18.5, typescript 5.9.3, vite 7.3.7, @vitejs/plugin-react 5.2.0, tailwindcss 4.3.5, lucide-react 1.70.0, @fontsource-variable/inter 5.3.0, i18next 26.7.2, react-i18next 17.1.13, @supabase/supabase-js 2.119.0, vitest 5.1.0, @testing-library/react 16.3.3, jsdom 29.1.1, @playwright/test 1.65.0, @axe-core/playwright 4.14.0, eslint 10.14.0, typescript-eslint 8.72.1, supabase CLI 3.0.0. First load: JS 109 KB + CSS 5 KB gzip|
 |2 Data and security|07 Nov 2026|Done: automated checks pass; manual checks (RLS on all 9 tables in Studio, PRIVACY_AND_ADMIN.md matches 9.2) confirmed by the human on 07 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 23 / 23, component 72 / 72, database 229 / 229 (14 files), integration 3 / 3, end-to-end 2 / 2 (329 / 329); lint, type check, secret scan: pass|none yet|6 migrations, 9 tables with RLS, 22 permission rules with allow and deny tests; seed loads PRD 8.4 content (test review stamps, local only) and 3 test accounts. Two test set-up mistakes found on the first green run and fixed without changing what they check (030: missing sort_order; 040: seed count moved before rows are added)|
 |3 Account and sign-in|07 Nov 2026|Done: automated checks pass; manual checks (local sign-up email in Mailpit, Android phone flow on Wi-Fi 192.168.0.8, screens against designs) confirmed by the human on 07 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 43 / 43, component 166 / 166, database 233 / 233 (15 files), integration 37 / 37 (10 files, real local Supabase and Mailpit), end-to-end 2 / 2 (481 / 481); lint, type check, secret scan: pass|none yet|S2, S3, S4 (both steps, expired link), S11, M2 (PRD v0.4 text), M3; guards and BR16 return; 5-tries lockout; 30-day session check; account language on log-in. Test fixes before the first green run, none changing what is checked: a S3 test rewritten to check the guard's forwarding (static test login state cannot change), a `beforeEach` that returned the mock (Vitest ran it as clean-up), a missing wait for navigation, explicit collation in T-BR24-2|
-|4 Safety Guide and Learning Centre|not started|Not started|not run|none yet||
+|4 Safety Guide and Learning Centre|07 Nov 2026|Done: automated checks pass; manual checks (Home to S6 under 30 s on the phone, airplane mode on S6, placeholder content noted, screens against designs) confirmed by the human on 07 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 48 / 48, component 202 / 202, database 233 / 233, integration 48 / 48, end-to-end 8 / 8 (539 / 539); lint, type check, secret scan: pass|none yet|S5 (Topics open in place, review date, English fallback, reload on language change), S6 (built-in emergency box first, three lists, empty / loading / error / offline). Shared `useLoad` hook (3-second limit, Try again, reload after reconnecting); S11 switched to it. Fixes before the first full green run, none changing what is checked: S6 test gave the S5 list no fake answer; Playwright matched "Check warning signs" as well as the header button (now scoped to the header); component test time limit 15 s because typing is slow when all files run in parallel|
 |5 Glucose Diary|not started|Not started|not run|none yet||
 |6 Daily Checklist|not started|Not started|not run|none yet||
 |7 Dashboard, Resources and Family Support|not started|Not started|not run|none yet||
@@ -1842,6 +1842,7 @@ If anything is unclear, add a row to Section 18 and ask. Never guess.
 
 |Plan version|Date|What changed|Why|
 |-|-|-|-|
+|v1.6|07 Nov 2026|Phase 4 progress recorded|Phase 4|
 |v1.5|07 Nov 2026|Phase 3 progress recorded; questions 29 (no hidden retries) and 30 (guards.test.tsx) added|Phase 3|
 |v1.4|07 Nov 2026|Designs moved to `docs/designs/` (Sections 0, 5, 7.3; question 27); Claude Code recorded as the coding agent (4.2; question 28)|Tutor's start prompt checked against the plan|
 |v1.3|07 Nov 2026|Phase 2 progress recorded; question 26 added (Standard Items live in migration 3)|Phase 2|

@@ -1,12 +1,13 @@
-import { useEffect, useId, useState } from 'react';
+import { useId, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { ChevronRight, LogOut, ShieldCheck, Trash2 } from 'lucide-react';
 import { logOut } from '../data/auth';
-import { deleteMyAccount, getProfile, setLanguage, type Profile as ProfileData } from '../data/profile';
+import { deleteMyAccount, getProfile, setLanguage } from '../data/profile';
 import { chooseLanguage } from '../i18n';
 import { enabledLanguages, findLanguage, type LanguageCode } from '../i18n/languages';
 import { errorMessageKey } from '../lib/errors';
+import { useLoad } from '../hooks/useLoad';
 import { useOnline } from '../hooks/useOnline';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
@@ -16,7 +17,6 @@ import { Toast } from '../components/Toast';
 import { DeleteAccountDialog } from '../modals/DeleteAccountDialog';
 import { PrivacyNotice } from '../modals/PrivacyNotice';
 
-type Load = { status: 'loading' } | { status: 'error' } | { status: 'ready'; profile: ProfileData };
 type ToastState = { id: number; message: string; variant: 'success' | 'neutral' } | null;
 
 let toastCount = 0;
@@ -31,32 +31,15 @@ export function Profile() {
   const online = useOnline();
   const navigate = useNavigate();
   const languageHeadingId = useId();
-  const [load, setLoad] = useState<Load>({ status: 'loading' });
-  const [attempt, setAttempt] = useState(0);
+  const { state: load, retry, timeout, update } = useLoad(() => getProfile(), 'profile');
   const [toast, setToast] = useState<ToastState>(null);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [deleteFailed, setDeleteFailed] = useState(false);
 
-  useEffect(() => {
-    let active = true;
-    void getProfile().then((result) => {
-      if (!active) return;
-      setLoad(result.ok ? { status: 'ready', profile: result.data } : { status: 'error' });
-    });
-    return () => {
-      active = false;
-    };
-  }, [attempt]);
-
-  function retry() {
-    setLoad({ status: 'loading' });
-    setAttempt((count) => count + 1);
-  }
-
   async function onChooseLanguage(code: LanguageCode) {
-    if (load.status !== 'ready' || code === load.profile.language) return;
+    if (load.status !== 'ready' || code === load.data.language) return;
     if (!online) {
       setToast(makeToast(t('errors.offline'), 'neutral'));
       return;
@@ -67,7 +50,7 @@ export function Profile() {
       return;
     }
     await chooseLanguage(code);
-    setLoad({ status: 'ready', profile: { ...load.profile, language: code } });
+    update({ ...load.data, language: code });
     setToast(makeToast(t('profile.languageChanged'), 'success'));
   }
 
@@ -92,7 +75,7 @@ export function Profile() {
   let body;
   if (load.status === 'loading') {
     body = (
-      <LoadingPlaceholder onTimeout={() => setLoad({ status: 'error' })}>
+      <LoadingPlaceholder onTimeout={timeout}>
         <PlaceholderBlock className="h-20" />
         <PlaceholderBlock className="h-40" />
         <PlaceholderBlock className="h-12" />
@@ -101,7 +84,7 @@ export function Profile() {
   } else if (load.status === 'error') {
     body = <ErrorState message={t('errors.profileLoad')} onRetry={retry} />;
   } else {
-    const { profile } = load;
+    const profile = load.data;
     body = (
       <>
         <Card>

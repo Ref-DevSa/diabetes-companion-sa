@@ -22,6 +22,8 @@ export default defineConfig({
         extends: true,
         test: {
           name: 'component',
+          // Typing with user-event is slow when all files run in parallel; 15 s per test, same checks.
+          testTimeout: 15_000,
           include: ['tests/component/**/*.test.tsx'],
           environment: 'jsdom',
           setupFiles: ['tests/helpers/setupComponent.ts'],

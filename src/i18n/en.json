@@ -22,7 +22,8 @@
     "tryAgain": "Try again",
     "serverError": "Something went wrong on our side. Please try again.",
     "cancel": "Cancel",
-    "close": "Close"
+    "close": "Close",
+    "lastReviewed": "Content last reviewed: {{date}}"
   },
   "password": {
     "show": "Show password",
@@ -144,5 +145,26 @@
     "healthText": "Glucose readings are health information. By ticking \"I agree to the Privacy Notice\" you agree that we may store it for the reasons above.",
     "contactTitle": "Contact",
     "contactText": "Refilwe Segoe, Information Officer. Email address to be confirmed (see Section 13.3)."
+  },
+  "learn": {
+    "title": "Learn",
+    "intro": "Short Topics in plain words. Tap one to read it.",
+    "readingTime": "{{minutes}} min read",
+    "familyLink": "Help for family and caregivers",
+    "empty": "No topics yet. Please check back soon.",
+    "loadError": "We couldn't load the Topics. Please try again.",
+    "offline": "You're offline. Reconnect to read Topics."
+  },
+  "safety": {
+    "emergencyTitle": "In an emergency, get help now",
+    "emergencyText": "Call 112 from a cell phone or 10177 for an ambulance, or go to the nearest hospital. Do not wait for this app.",
+    "note": "Symptoms alone cannot confirm diabetes. Only a test at a clinic can.",
+    "lowTitle": "Signs of low blood sugar",
+    "highTitle": "Signs of high blood sugar",
+    "urgentTitle": "Get urgent medical help if…",
+    "findHelp": "Find help and trusted links",
+    "empty": "Safety information is being updated. If you are worried, call 112 or 10177.",
+    "loadError": "We couldn't load the lists. Please try again.",
+    "offline": "You're offline. The emergency numbers above still work."
   }
 }
