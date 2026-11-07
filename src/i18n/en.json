@@ -46,7 +46,15 @@
     "sessionEnded": "Your session has ended. Please log in again.",
     "loginRequired": "Log in to use this part of the app.",
     "profileLoad": "We couldn't load your profile. Please try again.",
-    "deleteAccount": "Couldn't delete your account. Check your connection and try again."
+    "deleteAccount": "Couldn't delete your account. Check your connection and try again.",
+    "readingValue": "Enter a number from 1.0 to 40.0.",
+    "readingWhen": "Choose when you took this reading.",
+    "readingFuture": "The date and time can't be in the future.",
+    "readingTooOld": "You can only add readings from the last 30 days.",
+    "readingDateTime": "The date and time can't be in the future.",
+    "noteTooLong": "Notes can be up to 200 characters.",
+    "dailyLimit": "You've reached today's limit of 30 readings. You can add more tomorrow.",
+    "deleteReading": "Couldn't delete this reading. Check your connection and try again."
   },
   "home": {
     "heroTitle": "Understand diabetes. Track your day.",
@@ -166,5 +174,58 @@
     "empty": "Safety information is being updated. If you are worried, call 112 or 10177.",
     "loadError": "We couldn't load the lists. Please try again.",
     "offline": "You're offline. The emergency numbers above still work."
+  },
+  "when": {
+    "fasting": "Fasting",
+    "before_meal": "Before a meal",
+    "after_meal": "After a meal",
+    "bedtime": "Bedtime",
+    "other": "Other"
+  },
+  "flag": {
+    "low": "Low",
+    "very_high": "Very high",
+    "lowMessage": "Your reading is low. Follow your care plan and talk to your clinic.",
+    "veryHighMessage": "Your reading is very high. Talk to your clinic today."
+  },
+  "friendly": {
+    "m1": "High five! Reading saved.",
+    "m2": "Nice one! Reading saved.",
+    "m3": "Saved! Your clinic will love this.",
+    "m4": "Got it! Reading saved.",
+    "m5": "Done! That's one more for your Diary."
+  },
+  "diary": {
+    "title": "My Diary",
+    "addReading": "Add reading",
+    "loadMore": "Load more",
+    "empty": "No readings yet. Tap “Add reading” to save your first one.",
+    "loadError": "We couldn't load your Diary. Please try again.",
+    "edit": "Edit",
+    "delete": "Delete",
+    "unit": "mmol/L",
+    "updated": "Reading updated.",
+    "deleted": "Reading deleted.",
+    "gone": "This reading no longer exists."
+  },
+  "reading": {
+    "addTitle": "Add a reading",
+    "editTitle": "Edit reading",
+    "value": "Reading (mmol/L)",
+    "valuePlaceholder": "e.g. 6.8",
+    "when": "When",
+    "whenPlaceholder": "Choose when",
+    "date": "Date",
+    "time": "Time",
+    "note": "Note",
+    "notePlaceholder": "Anything to remember? (optional)",
+    "save": "Save",
+    "saving": "Saving…"
+  },
+  "deleteReading": {
+    "title": "Delete this reading?",
+    "text": "{{dateTime}} · {{value}} mmol/L ({{when}}). This cannot be undone.",
+    "confirm": "Delete reading",
+    "deleting": "Deleting…"
   }
 }

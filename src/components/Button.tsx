@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { Link, type LinkProps } from 'react-router';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'danger';
+export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'dangerSecondary';
 
 const base =
   'focus-ring inline-flex h-button items-center justify-center gap-2 rounded-button px-4 text-body font-semibold transition-colors';
@@ -10,6 +10,8 @@ const variants: Record<ButtonVariant, string> = {
   primary: 'bg-primary text-white hover:bg-primary-dark active:bg-primary-dark',
   secondary: 'border-2 border-primary-dark bg-card text-primary-dark hover:bg-primary-tint active:bg-primary-tint',
   danger: 'bg-error text-white hover:brightness-90 active:brightness-90',
+  /** A smaller-looking destructive action next to others (e.g. Delete on a Reading card); opens a confirmation. */
+  dangerSecondary: 'border-2 border-error bg-card text-error hover:bg-background active:bg-background',
 };
 
 const disabledLook = 'cursor-not-allowed bg-disabled text-text-secondary';

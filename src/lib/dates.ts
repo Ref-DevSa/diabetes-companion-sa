@@ -16,3 +16,24 @@ export function latestDate(dates: Array<string | null | undefined>): string | nu
   const known = dates.filter((date): date is string => typeof date === 'string' && date !== '');
   return known.length === 0 ? null : known.reduce((latest, date) => (date > latest ? date : latest));
 }
+
+// ---------------------------------------------------------------- SAST (UTC+2, no daylight saving)
+const SAST_OFFSET_MS = 2 * 60 * 60 * 1000;
+
+/** The SAST date ("YYYY-MM-DD") and 24-hour time ("HH:MM") of a moment. */
+export function sastParts(moment: number | string): { date: string; time: string } {
+  const ms = typeof moment === 'number' ? moment : Date.parse(moment);
+  const iso = new Date(ms + SAST_OFFSET_MS).toISOString();
+  return { date: iso.slice(0, 10), time: iso.slice(11, 16) };
+}
+
+/** A SAST date and time as one moment, in UTC ISO form for the database. */
+export function sastDateTimeToIso(date: string, time: string): string {
+  return new Date(`${date}T${time}:00+02:00`).toISOString();
+}
+
+/** A saved moment written like "27 Oct 2026, 07:10" in SAST (PRD 12.1). */
+export function formatDateTime(moment: string): string {
+  const { date, time } = sastParts(moment);
+  return `${formatDay(date)}, ${time}`;
+}

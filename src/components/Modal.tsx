@@ -7,6 +7,8 @@ type ModalProps = {
   describedBy?: string;
   /** Called on Escape (like "Cancel" or "Close"); leave out to ignore Escape. */
   onEscape?: () => void;
+  /** 'center' for pop-ups (M2, M3, M4); 'bottom' for bottom sheets (M1, M5). */
+  placement?: 'center' | 'bottom';
   className?: string;
   children: ReactNode;
 };
@@ -15,7 +17,7 @@ type ModalProps = {
  * A centred pop-up over a dimmed page. Keyboard focus stays inside until it closes, then goes
  * back to what opened it (PRD 8.3). Used by the confirmation pop-ups (M3, M4) and M2.
  */
-export function Modal({ labelledBy, describedBy, onEscape, className, children }: ModalProps) {
+export function Modal({ labelledBy, describedBy, onEscape, placement = 'center', className, children }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -49,7 +51,12 @@ export function Modal({ labelledBy, describedBy, onEscape, className, children }
   }
 
   return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center bg-text/60 px-margin">
+    <div
+      className={[
+        'fixed inset-0 z-40 flex justify-center bg-text/60',
+        placement === 'bottom' ? 'items-end' : 'items-center px-margin',
+      ].join(' ')}
+    >
       <div
         ref={dialogRef}
         role="dialog"
@@ -57,7 +64,7 @@ export function Modal({ labelledBy, describedBy, onEscape, className, children }
         aria-labelledby={labelledBy}
         aria-describedby={describedBy}
         onKeyDown={onKeyDown}
-        className={['w-full rounded-card bg-card shadow-card', className].filter(Boolean).join(' ')}
+        className={['w-full bg-card shadow-card', placement === 'bottom' ? 'rounded-t-card' : 'rounded-card', className].filter(Boolean).join(' ')}
       >
         {children}
       </div>

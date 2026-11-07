@@ -11,7 +11,11 @@ export type ErrorCode =
   | 'wrong_credentials'
   | 'too_many_tries'
   | 'unconfirmed'
-  | 'link_expired';
+  | 'link_expired'
+  | 'reading_future'
+  | 'reading_too_old'
+  | 'daily_limit'
+  | 'not_found';
 
 export type Result<T = void> = { ok: true; data: T } | { ok: false; code: ErrorCode };
 
@@ -33,6 +37,10 @@ export const errorMessageKey: Record<ErrorCode, string> = {
   too_many_tries: 'errors.tooManyTries',
   unconfirmed: 'errors.unconfirmed',
   link_expired: 'errors.linkExpired',
+  reading_future: 'errors.readingFuture',
+  reading_too_old: 'errors.readingTooOld',
+  daily_limit: 'errors.dailyLimit',
+  not_found: 'diary.gone',
 };
 
 /** True when the browser already knows it has no internet (BR23). */

@@ -53,6 +53,18 @@
   --breakpoint-wordmark: 400px;
   --breakpoint-tablet: 640px;
   --breakpoint-desktop: 1024px;
+
+  /* Bottom sheets slide up (PRD 8.3); skipped when reduced motion is on (motion-safe:). */
+  --animate-sheet-up: sheet-up 200ms ease-out;
+
+  @keyframes sheet-up {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
 }
 
 /* Keyboard focus: 2 px #1565C0 outline with a 2 px gap (PRD 9.3). */
