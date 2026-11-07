@@ -9,7 +9,7 @@
 |App name|Diabetes Companion SA|
 |Built from PRD version|v0.4 (the version in `docs/PRD.md`; v0.4 adds the privacy, admin, retention, consent, content-review, language and offline decisions confirmed on 03 Nov 2026)|
 |Screen designs|Google Stitch export `stitch\_diabetes\_companion\_style\_guide` (folder in the repository at `docs/design/stitch/`). Where a Stitch screen disagrees with the PRD, the PRD wins: see the correction table in Section 7.3|
-|Plan version|v1.2|
+|Plan version|v1.3|
 |Repository|https://github.com/Ref-DevSa/ (repository name to be added; see Section 18, launch gate L3)|
 |Status|Ready to build (Phases 1 to 8 can run on a local Supabase; the hosted Supabase project is set up later, in Phase 9)|
 |Last updated|07 Nov 2026|
@@ -629,7 +629,7 @@ These are written into the PRD (BR24, BR25, 12.4) and the Privacy Notice (M2) an
 
 **Always-on security checks** (tested in the hardening phase):
 
-* \[ ] Every table has permission rules switched on (RLS enabled). A pgTAP test (T-SEC-23) fails if any table in `public` has RLS off.
+* \[x] Every table has permission rules switched on (RLS enabled). A pgTAP test (T-SEC-23) fails if any table in `public` has RLS off.
 * \[ ] Input is checked in the app **and** in the database (BR1 to BR4, BR9, BR11, password length).
 * \[ ] Rate limits from the PRD are enforced in the database: BR9 (30 Readings a day), BR11 (6 Custom Items), the 5-tries rule (functions `check\_login\_allowed` and `record\_failed\_login`). The 15-minute wait is a best-effort protection (Section 18, question 17).
 * \[ ] File uploads: none exist in v1. A test (T-NFR-9) checks there is no upload input in the app.
@@ -960,34 +960,34 @@ The same ID may be used at two levels when both prove the same criterion, e.g. T
 |T-SEC-21a to T-SEC-22b (login\_attempts and functions)|Database|`supabase/tests/database/070\_security\_functions.test.sql`|T-SEC-21a/21b: no direct access, functions work; T-SEC-22a/22b: delete\_my\_account and clear\_my\_login\_attempts act on the caller only and refuse anon|
 |T-SEC-23|Database|`…/079\_rls\_enabled.test.sql`|Every table in `public` has RLS enabled; the test fails if any has none|
 
-* \[ ] All tests above are written, run, and fail for the expected reason.
+* \[x] All tests above are written, run, and fail for the expected reason.
 
 **Step 2: Backend (Green)**
 
-* \[ ] Migrations 1 to 6 in Section 8.6, in order.
-* \[ ] `supabase/seed.sql` (Section 8.7) and `scripts/seed-users.mjs`; `npm run db:reset` works from a clean database.
-* \[ ] `docs/PRIVACY\_AND\_ADMIN.md` filled from Section 9.2.
+* \[x] Migrations 1 to 6 in Section 8.6, in order.
+* \[x] `supabase/seed.sql` (Section 8.7) and `scripts/seed-users.mjs`; `npm run db:reset` works from a clean database.
+* \[x] `docs/PRIVACY\_AND\_ADMIN.md` filled from Section 9.2.
 
 **Step 3: Frontend (Green)**
 
-* \[ ] Generate TypeScript types for the tables into `src/types/database.ts` (`npx supabase gen types typescript --local`) and add `npm run types` to regenerate them. No screen changes.
+* \[x] Generate TypeScript types for the tables into `src/types/database.ts` (`npx supabase gen types typescript --local`) and add `npm run types` to regenerate them. No screen changes.
 
 **Step 4: Refactor and full check**
 
-* \[ ] Migrations tidy; no duplicated SQL; policy and function names match Section 9.1.
-* \[ ] `npm run db:reset` then `npm run check` passes.
+* \[x] Migrations tidy; no duplicated SQL; policy and function names match Section 9.1.
+* \[x] `npm run db:reset` then `npm run check` passes.
 
 **Step 5: Manual checks (human)**
 
-* \[ ] In the local Supabase Studio, open each table: RLS is shown as enabled on all 9.
-* \[ ] Open `docs/PRIVACY\_AND\_ADMIN.md` and confirm it says what Section 9.2 says.
+* \[x] In the local Supabase Studio, open each table: RLS is shown as enabled on all 9.
+* \[x] Open `docs/PRIVACY\_AND\_ADMIN.md` and confirm it says what Section 9.2 says.
 
 **Definition of Done**
 
-* \[ ] Every test in Step 1 passes.
-* \[ ] All earlier tests still pass.
-* \[ ] Manual checks are ticked by the human.
-* \[ ] Progress log updated (Section 17).
+* \[x] Every test in Step 1 passes.
+* \[x] All earlier tests still pass.
+* \[x] Manual checks are ticked by the human.
+* \[x] Progress log updated (Section 17).
 
 **Commit message:** `Phase 2: Data and security`
 
@@ -1640,34 +1640,34 @@ The agent ticks each item only when its test passes. The human ticks the ones ma
 
 ### 15.5 Permissions (Section 9.1): allow and deny
 
-* \[ ] SEC1: T-SEC-1a (allow) and T-SEC-1b (deny) (automated)
-* \[ ] SEC2: T-SEC-2a (allow) and T-SEC-2b (deny) (automated)
-* \[ ] SEC3: T-SEC-3a (allow) and T-SEC-3b (deny) (automated)
-* \[ ] SEC4: T-SEC-4a (allow) and T-SEC-4b (deny) (automated)
-* \[ ] SEC5: T-SEC-5a (allow) and T-SEC-5b (deny) (automated)
-* \[ ] SEC6: T-SEC-6a (allow) and T-SEC-6b (deny) (automated)
-* \[ ] SEC7: T-SEC-7a (allow) and T-SEC-7b (deny) (automated)
-* \[ ] SEC8: T-SEC-8a (allow) and T-SEC-8b (deny) (automated)
-* \[ ] SEC9: T-SEC-9a (allow) and T-SEC-9b (deny) (automated)
-* \[ ] SEC10: T-SEC-10a (allow) and T-SEC-10b (deny) (automated)
-* \[ ] SEC11: T-SEC-11a (allow) and T-SEC-11b (deny) (automated)
-* \[ ] SEC12: T-SEC-12a (allow) and T-SEC-12b (deny) (automated)
-* \[ ] SEC13: T-SEC-13a (allow) and T-SEC-13b (deny) (automated)
-* \[ ] SEC14: T-SEC-14a (allow) and T-SEC-14b (deny) (automated)
-* \[ ] SEC15: T-SEC-15a (allow) and T-SEC-15b (deny) (automated)
-* \[ ] SEC16: T-SEC-16a (allow) and T-SEC-16b (deny) (automated)
-* \[ ] SEC17: T-SEC-17a (allow) and T-SEC-17b (deny) (automated)
-* \[ ] SEC18: T-SEC-18a (allow) and T-SEC-18b (deny) (automated)
-* \[ ] SEC19: T-SEC-19a (allow) and T-SEC-19b (deny) (automated)
-* \[ ] SEC20: T-SEC-20a (allow) and T-SEC-20b (deny) (automated)
-* \[ ] SEC21: T-SEC-21a (allow) and T-SEC-21b (deny) (automated)
-* \[ ] SEC22: T-SEC-22a (allow) and T-SEC-22b (deny) (automated)
-* \[ ] T-SEC-23: every table has RLS enabled (automated)
+* \[x] SEC1: T-SEC-1a (allow) and T-SEC-1b (deny) (automated)
+* \[x] SEC2: T-SEC-2a (allow) and T-SEC-2b (deny) (automated)
+* \[x] SEC3: T-SEC-3a (allow) and T-SEC-3b (deny) (automated)
+* \[x] SEC4: T-SEC-4a (allow) and T-SEC-4b (deny) (automated)
+* \[x] SEC5: T-SEC-5a (allow) and T-SEC-5b (deny) (automated)
+* \[x] SEC6: T-SEC-6a (allow) and T-SEC-6b (deny) (automated)
+* \[x] SEC7: T-SEC-7a (allow) and T-SEC-7b (deny) (automated)
+* \[x] SEC8: T-SEC-8a (allow) and T-SEC-8b (deny) (automated)
+* \[x] SEC9: T-SEC-9a (allow) and T-SEC-9b (deny) (automated)
+* \[x] SEC10: T-SEC-10a (allow) and T-SEC-10b (deny) (automated)
+* \[x] SEC11: T-SEC-11a (allow) and T-SEC-11b (deny) (automated)
+* \[x] SEC12: T-SEC-12a (allow) and T-SEC-12b (deny) (automated)
+* \[x] SEC13: T-SEC-13a (allow) and T-SEC-13b (deny) (automated)
+* \[x] SEC14: T-SEC-14a (allow) and T-SEC-14b (deny) (automated)
+* \[x] SEC15: T-SEC-15a (allow) and T-SEC-15b (deny) (automated)
+* \[x] SEC16: T-SEC-16a (allow) and T-SEC-16b (deny) (automated)
+* \[x] SEC17: T-SEC-17a (allow) and T-SEC-17b (deny) (automated)
+* \[x] SEC18: T-SEC-18a (allow) and T-SEC-18b (deny) (automated)
+* \[x] SEC19: T-SEC-19a (allow) and T-SEC-19b (deny) (automated)
+* \[x] SEC20: T-SEC-20a (allow) and T-SEC-20b (deny) (automated)
+* \[x] SEC21: T-SEC-21a (allow) and T-SEC-21b (deny) (automated)
+* \[x] SEC22: T-SEC-22a (allow) and T-SEC-22b (deny) (automated)
+* \[x] T-SEC-23: every table has RLS enabled (automated)
 
 ### 15.6 Database, integration, navigation and set-up tests
 
 * \[x] T-SETUP-1 to T-SETUP-10 (automated)
-* \[ ] T-DB-1 to T-DB-8 (automated)
+* \[x] T-DB-1 to T-DB-8 (automated)
 * \[ ] T-INT-1 to T-INT-8 (automated)
 * \[ ] T-NAV-1 to T-NAV-9 (automated)
 * \[ ] T-C-1 to T-C-22 (automated component tests)
@@ -1736,7 +1736,7 @@ The agent ticks each item only when its test passes. The human ticks the ones ma
 |Phase|Date|Status|Automated tests (passed / total)|Commit|Notes|
 |-|-|-|-|-|-|
 |1 Foundation|07 Nov 2026|Done: automated checks pass; manual checks (Chrome 360 px, Android phone, side by side with the design) confirmed by the human on 07 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 23 / 23, component 72 / 72, database 1 / 1, integration 3 / 3, end-to-end 2 / 2 (101 / 101); lint, type check, secret scan, build: pass. Docker Engine 29.9.2 (WSL 2 installed 07 Nov 2026); local Postgres 17|none yet|Node 24.14.0, npm 11.9.0. Versions: react 19.3.1, react-router 7.18.5, typescript 5.9.3, vite 7.3.7, @vitejs/plugin-react 5.2.0, tailwindcss 4.3.5, lucide-react 1.70.0, @fontsource-variable/inter 5.3.0, i18next 26.7.2, react-i18next 17.1.13, @supabase/supabase-js 2.119.0, vitest 5.1.0, @testing-library/react 16.3.3, jsdom 29.1.1, @playwright/test 1.65.0, @axe-core/playwright 4.14.0, eslint 10.14.0, typescript-eslint 8.72.1, supabase CLI 3.0.0. First load: JS 109 KB + CSS 5 KB gzip|
-|2 Data and security|not started|Not started|not run|none yet||
+|2 Data and security|07 Nov 2026|Done: automated checks pass; manual checks (RLS on all 9 tables in Studio, PRIVACY_AND_ADMIN.md matches 9.2) confirmed by the human on 07 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 23 / 23, component 72 / 72, database 229 / 229 (14 files), integration 3 / 3, end-to-end 2 / 2 (329 / 329); lint, type check, secret scan: pass|none yet|6 migrations, 9 tables with RLS, 22 permission rules with allow and deny tests; seed loads PRD 8.4 content (test review stamps, local only) and 3 test accounts. Two test set-up mistakes found on the first green run and fixed without changing what they check (030: missing sort_order; 040: seed count moved before rows are added)|
 |3 Account and sign-in|not started|Not started|not run|none yet||
 |4 Safety Guide and Learning Centre|not started|Not started|not run|none yet||
 |5 Glucose Diary|not started|Not started|not run|none yet||
@@ -1780,6 +1780,7 @@ Every answer below is also written into PRD v0.4 and its change log.
 |23|Node.js version: the computer has Node 24, the plan said 22|Sections 4.1, 4.2; T-SETUP-1|Accept Node 22 or 24 LTS (human, 07 Nov 2026).|Answered|
 |24|Wording the PRD does not give: the button text in the two system emails, and screen-reader labels for icon-only controls|`supabase/templates/*.html`; `src/i18n/en.json` (`password.show`, `password.hide`, `header.language`, `header.profile`)|Chosen in Phase 1 and confirmed by the human on 07 Nov 2026: email buttons "Confirm your email" and "Choose a new password"; toggle labels "Show password" / "Hide password"; language button label "Language" (S11 wording); profile icon label "My profile" (S11 title). The S1 hero illustration is decorative (`alt=""`).|Answered|
 |25|The test-only password from PRD 10.4 in `docs/PRD.md`|`docs/PRD.md` 10.4; Section 8.7|Left out of the Markdown copy of the PRD so the secret scan stays clean; it is read from the PRD PDF into `.env` only.|Answered|
+|26|Where do the four Standard Items come from: `seed.sql` (Section 8.7) or migration 3 (Section 8.6)?|Sections 8.6, 8.7; Phase 9 step 2|Migration 3 only, with fixed ids, so every database (local and hosted) has them; Phase 9 says "Standard Items come from the migration". `seed.sql` does not insert them again.|Answered (from the plan itself, 07 Nov 2026)|
 
 **Note on Phase 3 size (mentor feedback, 04 Nov 2026):** Phase 3 covers 5 stories, 6 screens and modals and many tests. It is kept as one phase so the phase numbers, test IDs and traceability stay unchanged. If it is too large for one session, the human may tell the agent to build it in two halves inside the same phase and stop between them: first S2, S3, S4 (sign-up, log-in, reset: US1 to US3), then S11, M2, M3 (profile, language, delete account: US4, US5). The Definition of Done still applies to the whole phase.
 
@@ -1837,6 +1838,7 @@ If anything is unclear, add a row to Section 18 and ask. Never guess.
 
 |Plan version|Date|What changed|Why|
 |-|-|-|-|
+|v1.3|07 Nov 2026|Phase 2 progress recorded; question 26 added (Standard Items live in migration 3)|Phase 2|
 |v1.2|07 Nov 2026|Node 22 or 24 accepted (4.1, 4.2, T-SETUP-1; question 23); supporting packages noted under 4.1; D14 and question 12 corrected (the Stitch pictures are real); questions 24 and 25 added; Phase 1 progress recorded|Phase 1 set-up with the human|
 |v1.1|04 Nov 2026|Tutor feedback: readings.value is now plain numeric with check value = round(value, 1) so 6.85 is rejected (8.1); navigation map confirmed in Section 11; every T-US test has its own row with Given/When/Then (Phases 3 to 7); one T-SEC row per table (Phase 2); Phase overview matches the phase tables; lockout weakness recorded as accepted risk (question 17)|Feedback from the Melsoft mentor; Phase 3 split not done (see Section 18.1 note)|
 |v1.0|03 Nov 2026|First version|Generated from PRD v0.4 and the Stitch screen export; Supabase (PostgreSQL, Auth, Row-Level Security) architecture; privacy, admin, retention, consent, content-review, language and offline decisions of 03 Nov 2026|
