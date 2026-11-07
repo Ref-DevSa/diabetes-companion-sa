@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { BookOpen, House, LayoutDashboard, ListChecks, NotebookPen, type LucideIcon } from 'lucide-react';
-import { useAuth } from '../auth/AuthContext';
+import { isSignedIn, useAuth } from '../auth/AuthContext';
 import { linkTarget } from '../auth/protectedLink';
 
 const tabs: Array<{ path: string; labelKey: string; icon: LucideIcon }> = [
@@ -19,7 +19,7 @@ const tabs: Array<{ path: string; labelKey: string; icon: LucideIcon }> = [
  */
 export function TabBar() {
   const { t } = useTranslation();
-  const { session } = useAuth();
+  const signedIn = isSignedIn(useAuth());
   const { pathname } = useLocation();
 
   return (
@@ -27,7 +27,7 @@ export function TabBar() {
       <ul className="mx-auto flex h-full w-full max-w-desktop items-stretch justify-around tablet:justify-center tablet:gap-2">
         {tabs.map(({ path, labelKey, icon: Icon }) => {
           const active = pathname === path;
-          const target = linkTarget(path, Boolean(session));
+          const target = linkTarget(path, signedIn);
           return (
             <li key={path} className="flex flex-1 tablet:flex-none">
               <Link

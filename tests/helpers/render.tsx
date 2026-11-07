@@ -16,6 +16,7 @@ export const fakeSession = {
     user_metadata: {},
     aud: 'authenticated',
     created_at: '2026-10-03T08:00:00Z',
+    last_sign_in_at: new Date().toISOString(),
   },
 } as unknown as Session;
 
@@ -29,18 +30,26 @@ function LocationProbe() {
   );
 }
 
-type Options = { route?: string; auth?: Partial<AuthState> };
+type Route = string | { pathname: string; state?: unknown };
+type Options = { route?: Route; auth?: Partial<AuthState> };
 
-export function renderWithProviders(ui: ReactElement, options: Options = {}) {
-  const auth: AuthState = {
+export function makeAuth(overrides: Partial<AuthState> = {}): AuthState {
+  return {
     session: null,
     loading: false,
     error: false,
     retry: () => undefined,
-    ...options.auth,
+    recovery: false,
+    linkExpired: false,
+    sessionEnded: false,
+    clearNotices: () => undefined,
+    ...overrides,
   };
+}
+
+export function renderWithProviders(ui: ReactElement, options: Options = {}) {
   return render(
-    <AuthContext.Provider value={auth}>
+    <AuthContext.Provider value={makeAuth(options.auth)}>
       <MemoryRouter initialEntries={[options.route ?? '/']}>
         {ui}
         <LocationProbe />

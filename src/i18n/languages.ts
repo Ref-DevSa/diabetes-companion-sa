@@ -29,6 +29,11 @@ export function isLanguageCode(value: unknown): value is LanguageCode {
   return languages.some((l) => l.code === value);
 }
 
+/** The language to show for a saved choice: the choice if it is switched on (BR21), else English. */
+export function appLanguageFor(code: string, enabled: readonly LanguageCode[] = enabledLanguages): LanguageCode {
+  return isLanguageCode(code) && enabled.includes(code) ? code : 'en';
+}
+
 export function findLanguage(code: string): Language {
   return languages.find((l) => l.code === code) ?? (languages[0] as Language);
 }

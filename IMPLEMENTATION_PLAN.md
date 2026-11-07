@@ -9,7 +9,7 @@
 |App name|Diabetes Companion SA|
 |Built from PRD version|v0.4 (the version in `docs/PRD.md`; v0.4 adds the privacy, admin, retention, consent, content-review, language and offline decisions confirmed on 03 Nov 2026)|
 |Screen designs|Google Stitch export `stitch\_diabetes\_companion\_style\_guide`, one folder per screen in `docs/designs/` (moved there on 07 Nov 2026 to match the tutor's start prompt, question 27). Where a Stitch screen disagrees with the PRD, the PRD wins: see the correction table in Section 7.3|
-|Plan version|v1.4|
+|Plan version|v1.5|
 |Repository|https://github.com/Ref-DevSa/ (repository name to be added; see Section 18, launch gate L3)|
 |Status|Ready to build (Phases 1 to 8 can run on a local Supabase; the hosted Supabase project is set up later, in Phase 9)|
 |Last updated|07 Nov 2026|
@@ -1054,39 +1054,39 @@ The same ID may be used at two levels when both prove the same criterion, e.g. T
 |T-INT-3|Integration|`tests/integration/profile.test.ts`|A User reads only their own profile|
 |T-INT-5|Integration|`tests/integration/deleteAccount.test.ts`|A Visitor (no session) cannot call `delete\_my\_account`|
 
-* \[ ] All tests above are written, run, and fail for the expected reason.
+* \[x] All tests above are written, run, and fail for the expected reason.
 
 **Step 2: Backend (Green)**
 
-* \[ ] No new tables. Confirm the functions from Phase 2 behave as the tests expect; fix only by a new migration if a test shows a gap.
-* \[ ] `src/data/auth.ts` (OP1 to OP7), `src/data/profile.ts` (OP8 to OP10); `src/lib/errors.ts` mapping codes to PRD texts; `src/lib/password.ts`.
-* \[ ] `src/auth/sessionAge.ts` (Section 10 session rule).
+* \[x] No new tables. Confirm the functions from Phase 2 behave as the tests expect; fix only by a new migration if a test shows a gap.
+* \[x] `src/data/auth.ts` (OP1 to OP7), `src/data/profile.ts` (OP8 to OP10); `src/lib/errors.ts` mapping codes to PRD texts; `src/lib/password.ts`.
+* \[x] `src/auth/sessionAge.ts` (Section 10 session rule).
 
 **Step 3: Frontend (Green)**
 
-* \[ ] `AuthProvider` completes sign-in state; route guards `RequireUser` and `RequireVisitor`; BR16 "return to wanted screen".
-* \[ ] S2, S3, S4 (both steps; reset link opens `/forgot-password` in recovery mode), S11, M2 (text per PRD M2 v0.4, built into the app), M3, with all states in Section 7.3. Header hides "Log in" on S2 to S4.
-* \[ ] Components `ConfirmDialog` (T-C-16) and the language list wired to the account (Visitor: device).
-* \[ ] The consent boxes send `age\_confirmed`, `privacy\_agreed` and `privacy\_notice\_version` as sign-up metadata (Section 8.5).
+* \[x] `AuthProvider` completes sign-in state; route guards `RequireUser` and `RequireVisitor`; BR16 "return to wanted screen".
+* \[x] S2, S3, S4 (both steps; reset link opens `/forgot-password` in recovery mode), S11, M2 (text per PRD M2 v0.4, built into the app), M3, with all states in Section 7.3. Header hides "Log in" on S2 to S4.
+* \[x] Components `ConfirmDialog` (T-C-16) and the language list wired to the account (Visitor: device).
+* \[x] The consent boxes send `age\_confirmed`, `privacy\_agreed` and `privacy\_notice\_version` as sign-up metadata (Section 8.5).
 
 **Step 4: Refactor and full check**
 
-* \[ ] Code cleaned up; no duplicated logic; names use PRD key terms.
-* \[ ] Full check passes (lint, type check, every automated test from every phase so far).
+* \[x] Code cleaned up; no duplicated logic; names use PRD key terms.
+* \[x] Full check passes (lint, type check, every automated test from every phase so far).
 
 **Step 5: Manual checks (human)**
 
-* \[ ] Sign up with a real email address against the **local** Supabase and read the email in the email catcher; it has the PRD wording.
-* \[ ] On a real phone: sign up, log in, wrong password five times, log out, delete the account.
-* \[ ] Each screen in this phase matches its design side by side: layout, text, colours, spacing.
+* \[x] Sign up with a real email address against the **local** Supabase and read the email in the email catcher; it has the PRD wording.
+* \[x] On a real phone: sign up, log in, wrong password five times, log out, delete the account.
+* \[x] Each screen in this phase matches its design side by side: layout, text, colours, spacing.
 
 **Definition of Done**
 
-* \[ ] Every test in Step 1 passes.
-* \[ ] All earlier tests still pass.
-* \[ ] Every screen in this phase shows all its required states.
-* \[ ] Manual checks are ticked by the human.
-* \[ ] Progress log updated (Section 17).
+* \[x] Every test in Step 1 passes.
+* \[x] All earlier tests still pass.
+* \[x] Every screen in this phase shows all its required states.
+* \[x] Manual checks are ticked by the human.
+* \[x] Progress log updated (Section 17).
 
 **Commit message:** `Phase 3: Account and sign-in`
 
@@ -1531,25 +1531,25 @@ The agent ticks each item only when its test passes. The human ticks the ones ma
 
 ### 15.1 Acceptance criteria (PRD 6.1): 53 tests
 
-* \[ ] T-US1-1: Sign up with valid details shows 'Check your email to confirm your account.' and the email arrives (automated; also checked by hand on an Android phone)
-* \[ ] T-US1-2: Unticked age box blocks sign-up (automated; also checked by hand on an Android phone)
-* \[ ] T-US1-3: Already-registered email shows the message under the email field (automated; also checked by hand on an Android phone)
-* \[ ] T-US1-4: Weak password shows the message and keeps typed text (automated; also checked by hand on an Android phone)
-* \[ ] T-US2-1: Log in with correct details goes to S1 'Welcome back!' (automated; also checked by hand on an Android phone)
-* \[ ] T-US2-2: Wrong password shows the message and keeps the email (automated; also checked by hand on an Android phone)
-* \[ ] T-US2-3: 6th try within 15 minutes shows the wait message and disables the button (automated; also checked by hand on an Android phone)
-* \[ ] T-US2-4: Unconfirmed email shows the message and 'Send the email again' (automated; also checked by hand on an Android phone)
-* \[ ] T-US3-1: Reset link request shows the neutral message and the email arrives (automated; also checked by hand on an Android phone)
-* \[ ] T-US3-2: New password saved, then 'Password changed. Please log in.' and S3 (automated; also checked by hand on an Android phone)
-* \[ ] T-US3-3: Expired link shows the message and 'Send a new link' (automated; also checked by hand on an Android phone)
-* \[ ] T-US3-4: Mismatched passwords show 'Passwords don’t match.' (automated; also checked by hand on an Android phone)
-* \[ ] T-US4-1: Choosing isiZulu changes all text and saves to the account (automated; also checked by hand on an Android phone)
-* \[ ] T-US4-2: Setswana choice follows the User to another phone (automated; also checked by hand on an Android phone)
-* \[ ] T-US4-3: Missing translation shows English (automated; also checked by hand on an Android phone)
-* \[ ] T-US5-1: Log out goes to S1 as a Visitor (automated; also checked by hand on an Android phone)
-* \[ ] T-US5-2: Delete account via M3 deletes everything and shows the message (automated; also checked by hand on an Android phone)
-* \[ ] T-US5-3: Cancel in M3 deletes nothing (automated; also checked by hand on an Android phone)
-* \[ ] T-US5-4: Offline delete shows the message and deletes nothing (automated; also checked by hand on an Android phone)
+* \[x] T-US1-1: Sign up with valid details shows 'Check your email to confirm your account.' and the email arrives (automated; also checked by hand on an Android phone)
+* \[x] T-US1-2: Unticked age box blocks sign-up (automated; also checked by hand on an Android phone)
+* \[x] T-US1-3: Already-registered email shows the message under the email field (automated; also checked by hand on an Android phone)
+* \[x] T-US1-4: Weak password shows the message and keeps typed text (automated; also checked by hand on an Android phone)
+* \[x] T-US2-1: Log in with correct details goes to S1 'Welcome back!' (automated; also checked by hand on an Android phone)
+* \[x] T-US2-2: Wrong password shows the message and keeps the email (automated; also checked by hand on an Android phone)
+* \[x] T-US2-3: 6th try within 15 minutes shows the wait message and disables the button (automated; also checked by hand on an Android phone)
+* \[x] T-US2-4: Unconfirmed email shows the message and 'Send the email again' (automated; also checked by hand on an Android phone)
+* \[x] T-US3-1: Reset link request shows the neutral message and the email arrives (automated; also checked by hand on an Android phone)
+* \[x] T-US3-2: New password saved, then 'Password changed. Please log in.' and S3 (automated; also checked by hand on an Android phone)
+* \[x] T-US3-3: Expired link shows the message and 'Send a new link' (automated; also checked by hand on an Android phone)
+* \[x] T-US3-4: Mismatched passwords show 'Passwords don’t match.' (automated; also checked by hand on an Android phone)
+* \[x] T-US4-1: Choosing isiZulu changes all text and saves to the account (automated; also checked by hand on an Android phone)
+* \[x] T-US4-2: Setswana choice follows the User to another phone (automated; also checked by hand on an Android phone)
+* \[x] T-US4-3: Missing translation shows English (automated; also checked by hand on an Android phone)
+* \[x] T-US5-1: Log out goes to S1 as a Visitor (automated; also checked by hand on an Android phone)
+* \[x] T-US5-2: Delete account via M3 deletes everything and shows the message (automated; also checked by hand on an Android phone)
+* \[x] T-US5-3: Cancel in M3 deletes nothing (automated; also checked by hand on an Android phone)
+* \[x] T-US5-4: Offline delete shows the message and deletes nothing (automated; also checked by hand on an Android phone)
 * \[ ] T-US6-1: Saving 6.8 Fasting closes M1, shows the Reading at the top and a BR14 message (automated; also checked by hand on an Android phone)
 * \[ ] T-US6-2: 45 shows 'Enter a number from 1.0 to 40.0.' (automated; also checked by hand on an Android phone)
 * \[ ] T-US6-3: Missing When shows 'Choose when you took this reading.' (automated; also checked by hand on an Android phone)
@@ -1600,15 +1600,15 @@ The agent ticks each item only when its test passes. The human ticks the ones ma
 
 ### 15.3 Account rules (PRD Section 5)
 
-* \[ ] T-AUTH-1: Email and password only (automated)
-* \[ ] T-AUTH-2: Email must be verified before log-in (automated)
-* \[ ] T-AUTH-3: Password rules (8+ characters with a number) (automated)
-* \[ ] T-AUTH-4: Reset link valid for 1 hour; email text matches PRD 4.5 (configuration test) (automated)
-* \[ ] T-AUTH-5: 5 wrong tries, then 15-minute wait (automated)
-* \[ ] T-AUTH-6: 30-day session (automated)
-* \[ ] T-AUTH-7: Log out needs no confirmation (automated)
-* \[ ] T-AUTH-8: Email is read-only (no change of email) (automated)
-* \[ ] T-AUTH-9: System email wording matches PRD 4.5 (automated)
+* \[x] T-AUTH-1: Email and password only (automated)
+* \[x] T-AUTH-2: Email must be verified before log-in (automated)
+* \[x] T-AUTH-3: Password rules (8+ characters with a number) (automated)
+* \[x] T-AUTH-4: Reset link valid for 1 hour; email text matches PRD 4.5 (configuration test) (automated)
+* \[x] T-AUTH-5: 5 wrong tries, then 15-minute wait (automated)
+* \[x] T-AUTH-6: 30-day session (automated)
+* \[x] T-AUTH-7: Log out needs no confirmation (automated)
+* \[x] T-AUTH-8: Email is read-only (no change of email) (automated)
+* \[x] T-AUTH-9: System email wording matches PRD 4.5 (automated)
 
 ### 15.4 Business rules (BR1 to BR25)
 
@@ -1627,15 +1627,15 @@ The agent ticks each item only when its test passes. The human ticks the ones ma
 * \[ ] BR13: T-BR13-1, T-BR13-2: 'X of Y done' and 'All done today. Nice work!' (automated)
 * \[ ] BR14: T-BR14-1, T-BR14-2: Five friendly messages, never the same twice in a row (automated)
 * \[ ] BR15: T-BR15-1, T-BR15-2: Playful wording only for saves, ticks and learning (automated)
-* \[ ] BR16: T-BR16-1, T-BR16-2: Visitor sent to S3 and returned (automated)
+* \[x] BR16: T-BR16-1, T-BR16-2: Visitor sent to S3 and returned (automated)
 * \[ ] BR17: T-BR17-1 (and T-US4-3, T-EDGE-10): Languages and English fallback (automated)
-* \[ ] BR18: T-BR18-1, T-BR18-2: Age confirmation at sign-up (automated)
+* \[x] BR18: T-BR18-1, T-BR18-2: Age confirmation at sign-up (automated)
 * \[ ] BR19: T-BR19-1, T-BR19-2: Content edited only by admin; emergency box built in (automated)
-* \[ ] BR20: T-BR20-1, T-BR20-2: Account deletion removes everything (automated)
+* \[x] BR20: T-BR20-1, T-BR20-2: Account deletion removes everything (automated)
 * \[ ] BR21: T-BR21-1, T-BR21-2: A language is offered only after human review (PRD v0.4) (automated)
 * \[ ] BR22: T-BR22-1 to T-BR22-3: Content publishable only with a recorded review; review date shown (PRD v0.4) (automated)
 * \[ ] BR23: T-BR23-1 to T-BR23-3: Never claim 'saved' unless saved; keep typed text; allow retry (PRD v0.4) (automated)
-* \[ ] BR24: T-BR24-1, T-BR24-2: No selling data or adverts; no family access; admin access only when necessary (PRD v0.4) (automated)
+* \[x] BR24: T-BR24-1, T-BR24-2: No selling data or adverts; no family access; admin access only when necessary (PRD v0.4) (automated)
 * \[ ] BR25: T-BR25-1, T-BR25-2: Retention: data kept until deleted; login attempts cleaned (PRD v0.4) (automated)
 
 ### 15.5 Permissions (Section 9.1): allow and deny
@@ -1737,7 +1737,7 @@ The agent ticks each item only when its test passes. The human ticks the ones ma
 |-|-|-|-|-|-|
 |1 Foundation|07 Nov 2026|Done: automated checks pass; manual checks (Chrome 360 px, Android phone, side by side with the design) confirmed by the human on 07 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 23 / 23, component 72 / 72, database 1 / 1, integration 3 / 3, end-to-end 2 / 2 (101 / 101); lint, type check, secret scan, build: pass. Docker Engine 29.9.2 (WSL 2 installed 07 Nov 2026); local Postgres 17|none yet|Node 24.14.0, npm 11.9.0. Versions: react 19.3.1, react-router 7.18.5, typescript 5.9.3, vite 7.3.7, @vitejs/plugin-react 5.2.0, tailwindcss 4.3.5, lucide-react 1.70.0, @fontsource-variable/inter 5.3.0, i18next 26.7.2, react-i18next 17.1.13, @supabase/supabase-js 2.119.0, vitest 5.1.0, @testing-library/react 16.3.3, jsdom 29.1.1, @playwright/test 1.65.0, @axe-core/playwright 4.14.0, eslint 10.14.0, typescript-eslint 8.72.1, supabase CLI 3.0.0. First load: JS 109 KB + CSS 5 KB gzip|
 |2 Data and security|07 Nov 2026|Done: automated checks pass; manual checks (RLS on all 9 tables in Studio, PRIVACY_AND_ADMIN.md matches 9.2) confirmed by the human on 07 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 23 / 23, component 72 / 72, database 229 / 229 (14 files), integration 3 / 3, end-to-end 2 / 2 (329 / 329); lint, type check, secret scan: pass|none yet|6 migrations, 9 tables with RLS, 22 permission rules with allow and deny tests; seed loads PRD 8.4 content (test review stamps, local only) and 3 test accounts. Two test set-up mistakes found on the first green run and fixed without changing what they check (030: missing sort_order; 040: seed count moved before rows are added)|
-|3 Account and sign-in|not started|Not started|not run|none yet||
+|3 Account and sign-in|07 Nov 2026|Done: automated checks pass; manual checks (local sign-up email in Mailpit, Android phone flow on Wi-Fi 192.168.0.8, screens against designs) confirmed by the human on 07 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 43 / 43, component 166 / 166, database 233 / 233 (15 files), integration 37 / 37 (10 files, real local Supabase and Mailpit), end-to-end 2 / 2 (481 / 481); lint, type check, secret scan: pass|none yet|S2, S3, S4 (both steps, expired link), S11, M2 (PRD v0.4 text), M3; guards and BR16 return; 5-tries lockout; 30-day session check; account language on log-in. Test fixes before the first green run, none changing what is checked: a S3 test rewritten to check the guard's forwarding (static test login state cannot change), a `beforeEach` that returned the mock (Vitest ran it as clean-up), a missing wait for navigation, explicit collation in T-BR24-2|
 |4 Safety Guide and Learning Centre|not started|Not started|not run|none yet||
 |5 Glucose Diary|not started|Not started|not run|none yet||
 |6 Daily Checklist|not started|Not started|not run|none yet||
@@ -1783,6 +1783,8 @@ Every answer below is also written into PRD v0.4 and its change log.
 |26|Where do the four Standard Items come from: `seed.sql` (Section 8.7) or migration 3 (Section 8.6)?|Sections 8.6, 8.7; Phase 9 step 2|Migration 3 only, with fixed ids, so every database (local and hosted) has them; Phase 9 says "Standard Items come from the migration". `seed.sql` does not insert them again.|Answered (from the plan itself, 07 Nov 2026)|
 |27|The tutor's start prompt (received 07 Nov 2026) says the screens are in `docs/designs/`; this plan (Sections 0, 5, 7.3) and the repository use `docs/design/stitch/stitch_diabetes_companion_style_guide/`|Sections 0, 5, 7.3; tutor prompt|Moved to `docs/designs/` (human, 07 Nov 2026): one folder per design, e.g. `docs/designs/screen\_s1\_home\_all\_states\_360px\_mobile/`. Sections 0, 5 and 7.3 and the README updated.|Answered|
 |28|Which coding agent builds the app? Section 4.2 and 18.3 name Google Antigravity|Sections 4.2, 18.3 item 4|Claude Code (VS Code extension) is used for all phases (human, 07 Nov 2026). `AGENTS.md` stays as the short pointer file.|Answered|
+|29|supabase-js now retries failed reads 3 times (about 7 seconds) by default; PRD 12.1 says show the error state after 3 seconds|`src/lib/supabase.ts`; Section 10|Automatic retries are switched off (`db: { retry: false }`); the screen shows its error and "Try again" instead, so nothing changes behind the person's back (BR23). Confirmed by the human on 07 Nov 2026: keep retries off.|Answered|
+|30|T-BR16-2 renders the real app, so it is `tests/integration/guards.test.tsx` (React needs .tsx), not `guards.test.ts`|Phase 3 test table; `vitest.config.ts`|Integration tests may be `.test.ts` or `.test.tsx`; the test itself is as planned.|Answered|
 
 **Note on Phase 3 size (mentor feedback, 04 Nov 2026):** Phase 3 covers 5 stories, 6 screens and modals and many tests. It is kept as one phase so the phase numbers, test IDs and traceability stay unchanged. If it is too large for one session, the human may tell the agent to build it in two halves inside the same phase and stop between them: first S2, S3, S4 (sign-up, log-in, reset: US1 to US3), then S11, M2, M3 (profile, language, delete account: US4, US5). The Definition of Done still applies to the whole phase.
 
@@ -1840,6 +1842,7 @@ If anything is unclear, add a row to Section 18 and ask. Never guess.
 
 |Plan version|Date|What changed|Why|
 |-|-|-|-|
+|v1.5|07 Nov 2026|Phase 3 progress recorded; questions 29 (no hidden retries) and 30 (guards.test.tsx) added|Phase 3|
 |v1.4|07 Nov 2026|Designs moved to `docs/designs/` (Sections 0, 5, 7.3; question 27); Claude Code recorded as the coding agent (4.2; question 28)|Tutor's start prompt checked against the plan|
 |v1.3|07 Nov 2026|Phase 2 progress recorded; question 26 added (Standard Items live in migration 3)|Phase 2|
 |v1.2|07 Nov 2026|Node 22 or 24 accepted (4.1, 4.2, T-SETUP-1; question 23); supporting packages noted under 4.1; D14 and question 12 corrected (the Stitch pictures are real); questions 24 and 25 added; Phase 1 progress recorded|Phase 1 set-up with the human|

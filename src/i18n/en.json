@@ -20,11 +20,32 @@
   },
   "common": {
     "tryAgain": "Try again",
-    "serverError": "Something went wrong on our side. Please try again."
+    "serverError": "Something went wrong on our side. Please try again.",
+    "cancel": "Cancel",
+    "close": "Close"
   },
   "password": {
     "show": "Show password",
     "hide": "Hide password"
+  },
+  "errors": {
+    "offline": "You're offline. Reconnect and try again.",
+    "server": "Something went wrong on our side. Please try again.",
+    "invalidEmail": "Enter a valid email address.",
+    "emailTaken": "This email is already registered. Try logging in.",
+    "weakPassword": "Password must be at least 8 characters and include a number.",
+    "ageRequired": "Please confirm you are 18 or older.",
+    "privacyRequired": "Please agree to the Privacy Notice to continue.",
+    "wrongCredentials": "Email or password is incorrect.",
+    "tooManyTries": "Too many tries. Please wait 15 minutes and try again.",
+    "unconfirmed": "Please confirm your email first. Check your inbox.",
+    "passwordRequired": "Enter your password.",
+    "linkExpired": "This link has expired. Ask for a new one.",
+    "passwordsDontMatch": "Passwords don't match.",
+    "sessionEnded": "Your session has ended. Please log in again.",
+    "loginRequired": "Log in to use this part of the app.",
+    "profileLoad": "We couldn't load your profile. Please try again.",
+    "deleteAccount": "Couldn't delete your account. Check your connection and try again."
   },
   "home": {
     "heroTitle": "Understand diabetes. Track your day.",
@@ -41,9 +62,87 @@
     "cardFamilyTitle": "Help for family",
     "cardFamilyText": "Tips and trusted links",
     "cardTrackTitle": "Track my day",
-    "cardTrackText": "Diary and Checklist"
+    "cardTrackText": "Diary and Checklist",
+    "accountDeleted": "Your account and data have been deleted."
   },
   "notice": {
     "disclaimer": "This app gives general information only. It does not diagnose or replace your clinic."
+  },
+  "signUp": {
+    "title": "Create your free account",
+    "email": "Email",
+    "emailPlaceholder": "you@example.co.za",
+    "password": "Password",
+    "passwordPlaceholder": "At least 8 characters and 1 number",
+    "age": "I confirm I am 18 or older",
+    "privacyBefore": "I agree to the",
+    "privacyLink": "Privacy Notice",
+    "submit": "Create account",
+    "submitting": "Creating your account…",
+    "haveAccount": "Already have an account?",
+    "logIn": "Log in",
+    "success": "Check your email to confirm your account.",
+    "goToLogIn": "Go to log in"
+  },
+  "logIn": {
+    "title": "Welcome back",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Log in",
+    "submitting": "Logging in…",
+    "forgot": "Forgot password?",
+    "createAccount": "Create an account",
+    "resend": "Send the email again",
+    "resent": "We've sent a new email.",
+    "passwordChanged": "Password changed. Please log in."
+  },
+  "forgot": {
+    "title": "Forgot your password?",
+    "text": "Enter your email and we'll send you a link to choose a new one.",
+    "email": "Email",
+    "submit": "Send reset link",
+    "submitting": "Sending…",
+    "back": "Back to log in",
+    "sent": "If this email is registered, we've sent a reset link.",
+    "newTitle": "Choose a new password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "save": "Save new password",
+    "saving": "Saving…",
+    "sendNewLink": "Send a new link"
+  },
+  "profile": {
+    "title": "My profile",
+    "email": "Email",
+    "language": "Language",
+    "privacy": "Privacy Notice",
+    "logOut": "Log out",
+    "deleteAccount": "Delete account",
+    "languageChanged": "Language changed."
+  },
+  "deleteAccount": {
+    "title": "Delete your account?",
+    "text": "This will permanently delete your account, all your readings and your checklist. This cannot be undone.",
+    "confirm": "Yes, delete everything",
+    "deleting": "Deleting…"
+  },
+  "privacy": {
+    "title": "Privacy Notice",
+    "collectTitle": "What we collect",
+    "collectText": "Your email address, the glucose readings, notes and checklist items you save, your language choice, and the dates you agreed to this notice and confirmed you are 18 or older.",
+    "whyTitle": "Why we collect it",
+    "whyText": "To let you log in and keep your own diary and checklist. We do not sell your information or use it for adverts.",
+    "whoTitle": "Who can see it",
+    "whoText": "Only you. The app's administrator can see your information in the database only when strictly needed to fix a fault, and each time is recorded. Family members and caregivers cannot see your information in this version.",
+    "whereTitle": "Where it is stored",
+    "whereText": "In a database run by Supabase in Frankfurt, Germany, which is outside South Africa. Sign-up emails are sent through Brevo.",
+    "howLongTitle": "How long we keep it",
+    "howLongText": "Until you delete a reading or your account. Copies in backups are removed when the backups expire (the number of days will be confirmed before launch).",
+    "deleteTitle": "How to delete it",
+    "deleteText": "Delete a reading in your Diary, or choose Delete account on your Profile screen to delete everything straight away. To ask for a copy of your information, email the contact below.",
+    "healthTitle": "Health information",
+    "healthText": "Glucose readings are health information. By ticking \"I agree to the Privacy Notice\" you agree that we may store it for the reasons above.",
+    "contactTitle": "Contact",
+    "contactText": "Refilwe Segoe, Information Officer. Email address to be confirmed (see Section 13.3)."
   }
 }

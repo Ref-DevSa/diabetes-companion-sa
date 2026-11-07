@@ -2,6 +2,10 @@ import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Globe } from 'lucide-react';
 import { chooseLanguage } from '../i18n';
+import { isSignedIn, useAuth } from '../auth/AuthContext';
+import { setLanguage } from '../data/profile';
+import { errorMessageKey } from '../lib/errors';
+import { Toast } from './Toast';
 import { enabledLanguages, findLanguage, type LanguageCode } from '../i18n/languages';
 
 type LanguageSelectorProps = {
@@ -14,6 +18,8 @@ export function LanguageSelector({ languages = enabledLanguages }: LanguageSelec
   const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const [focusIndex, setFocusIndex] = useState(0);
+  const [problem, setProblem] = useState<string | null>(null);
+  const signedIn = isSignedIn(useAuth());
   const buttonRef = useRef<HTMLButtonElement>(null);
   const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -43,9 +49,17 @@ export function LanguageSelector({ languages = enabledLanguages }: LanguageSelec
     buttonRef.current?.focus();
   }
 
+  /** A Visitor's choice stays on this device; a User's is saved to the account first (BR17, OP9). */
   async function select(code: LanguageCode) {
-    await chooseLanguage(code);
     close();
+    if (signedIn) {
+      const result = await setLanguage(code);
+      if (!result.ok) {
+        setProblem(t(errorMessageKey[result.code]));
+        return;
+      }
+    }
+    await chooseLanguage(code);
   }
 
   function onMenuKeyDown(event: KeyboardEvent) {
@@ -118,6 +132,7 @@ export function LanguageSelector({ languages = enabledLanguages }: LanguageSelec
           })}
         </ul>
       ) : null}
+      {problem ? <Toast key={problem} message={problem} onDone={() => setProblem(null)} /> : null}
     </div>
   );
 }

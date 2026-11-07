@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { BookOpen, CalendarCheck, ChevronRight, HeartHandshake, Plus, TriangleAlert, type LucideIcon } from 'lucide-react';
 import heroIllustration from '../assets/home-hero.svg';
-import { useAuth } from '../auth/AuthContext';
+import { isSignedIn, useAuth } from '../auth/AuthContext';
 import { linkTarget } from '../auth/protectedLink';
 import { ButtonLink } from '../components/Button';
 import { ErrorState } from '../components/ErrorState';
 import { LoadingPlaceholder, PlaceholderBlock } from '../components/LoadingPlaceholder';
 import { NoticeCard } from '../components/NoticeCard';
+import { Toast } from '../components/Toast';
 
 type FeatureCard = { path: string; titleKey: string; textKey: string; icon: LucideIcon; tone: 'primary' | 'error' };
 
@@ -23,9 +24,13 @@ const featureCards: FeatureCard[] = [
 /** S1 Home (PRD 8.2): Visitor and User views, Loading, Error; Offline via the banner. */
 export function Home() {
   const { t } = useTranslation();
-  const { session, loading, error, retry } = useAuth();
+  const auth = useAuth();
+  const { loading, error, retry } = auth;
+  const location = useLocation();
+  const navigate = useNavigate();
+  const accountDeleted = (location.state as { toast?: string } | null)?.toast === 'account_deleted';
   const [timedOut, setTimedOut] = useState(false);
-  const signedIn = Boolean(session);
+  const signedIn = isSignedIn(auth);
 
   if (error || timedOut) {
     return (
@@ -110,6 +115,9 @@ export function Home() {
       </section>
 
       <NoticeCard>{t('notice.disclaimer')}</NoticeCard>
+      {accountDeleted ? (
+        <Toast message={t('home.accountDeleted')} variant="success" onDone={() => navigate('.', { replace: true, state: null })} />
+      ) : null}
     </div>
   );
 }

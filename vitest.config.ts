@@ -32,7 +32,7 @@ export default defineConfig({
         extends: true,
         test: {
           name: 'integration',
-          include: ['tests/integration/**/*.test.ts'],
+          include: ['tests/integration/**/*.test.{ts,tsx}'],
           environment: 'node',
           setupFiles: ['tests/helpers/loadEnv.ts'],
         },

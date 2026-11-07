@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { CircleUserRound } from 'lucide-react';
-import { useAuth } from '../auth/AuthContext';
+import { isSignedIn, useAuth } from '../auth/AuthContext';
 import { LanguageSelector } from './LanguageSelector';
 import { Logo } from './Logo';
 import { WarningSignsButton } from './WarningSignsButton';
@@ -12,9 +12,9 @@ const NO_LOG_IN_BUTTON = ['/sign-up', '/log-in', '/forgot-password'];
 /** One header for every screen, 56 px, fixed at the top (PRD 8.3, design correction D10). */
 export function Header() {
   const { t } = useTranslation();
-  const { session } = useAuth();
+  const signedIn = isSignedIn(useAuth());
   const { pathname } = useLocation();
-  const showLogIn = !session && !NO_LOG_IN_BUTTON.includes(pathname);
+  const showLogIn = !signedIn && !NO_LOG_IN_BUTTON.includes(pathname);
 
   return (
     <header className="sticky top-0 z-20 h-header border-b border-placeholder bg-card">
@@ -25,7 +25,7 @@ export function Header() {
         <div className="flex items-center gap-1">
           <LanguageSelector />
           <WarningSignsButton />
-          {session ? (
+          {signedIn ? (
             <Link
               to="/profile"
               className="focus-ring inline-flex min-h-touch min-w-touch items-center justify-center rounded-button text-primary-dark hover:bg-primary-tint"
