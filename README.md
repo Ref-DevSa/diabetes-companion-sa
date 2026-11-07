@@ -4,7 +4,7 @@ A free, mobile-first web app that helps South African adults with Type 2 diabete
 
 * Requirements: [docs/PRD.md](docs/PRD.md) (v0.4)
 * Build plan and progress: [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md)
-* Screen designs: [docs/design/stitch/](docs/design/stitch/) (design reference; the PRD wins where they differ, see plan Section 7.3)
+* Screen designs: [docs/designs/](docs/designs/), one folder per screen or pop-up with `code.html` and `screen.png` (design reference; the PRD wins where they differ, see plan Section 7.3)
 
 **Stack:** React 19, TypeScript 5, Vite 7, React Router 7, Tailwind CSS 4, react-i18next, Supabase (PostgreSQL, Auth, Row-Level Security). Tests: Vitest, React Testing Library, pgTAP, Playwright with axe-core.
 

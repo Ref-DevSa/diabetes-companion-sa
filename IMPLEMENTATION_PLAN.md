@@ -8,8 +8,8 @@
 |-|-|
 |App name|Diabetes Companion SA|
 |Built from PRD version|v0.4 (the version in `docs/PRD.md`; v0.4 adds the privacy, admin, retention, consent, content-review, language and offline decisions confirmed on 03 Nov 2026)|
-|Screen designs|Google Stitch export `stitch\_diabetes\_companion\_style\_guide` (folder in the repository at `docs/design/stitch/`). Where a Stitch screen disagrees with the PRD, the PRD wins: see the correction table in Section 7.3|
-|Plan version|v1.3|
+|Screen designs|Google Stitch export `stitch\_diabetes\_companion\_style\_guide`, one folder per screen in `docs/designs/` (moved there on 07 Nov 2026 to match the tutor's start prompt, question 27). Where a Stitch screen disagrees with the PRD, the PRD wins: see the correction table in Section 7.3|
+|Plan version|v1.4|
 |Repository|https://github.com/Ref-DevSa/ (repository name to be added; see Section 18, launch gate L3)|
 |Status|Ready to build (Phases 1 to 8 can run on a local Supabase; the hosted Supabase project is set up later, in Phase 9)|
 |Last updated|07 Nov 2026|
@@ -169,7 +169,7 @@ Note on the language choice: the PRD (11.1) says TypeScript, so the app and test
 * \[x] Docker Desktop, running (needed for the local Supabase)
 * \[x] Supabase CLI (installed as a dev dependency in Phase 1, or globally; `npx supabase --version` works)
 * \[x] Playwright browsers (`npx playwright install chromium`, run in Phase 1)
-* \[ ] Google Antigravity, with this repository opened as the workspace
+* \[x] Claude Code (VS Code extension), with this repository opened as the workspace (replaces Google Antigravity; question 28)
 * \[ ] Accounts needed later (Phase 9, not before): Supabase (Frankfurt region), Vercel, Brevo. **Not needed for Phases 1 to 8.**
 
 ### 4.3 Commands
@@ -212,7 +212,7 @@ diabetes-companion-sa/                (repository root; the repository name is s
   vite.config.ts, tsconfig.json, eslint.config.js, playwright.config.ts, vitest.config.ts
   docs/
     PRD.md                            the PRD (v0.4)
-    design/stitch/                    the Stitch export (design reference; HTML and images)
+    designs/                          the screen designs: one folder per screen or pop-up (code.html and screen.png)
     PRIVACY\_AND\_ADMIN.md              admin access rules, deletion, retention, backups (Section 9.2)
     ADMIN\_ACCESS\_LOG.md               one row each time the admin opens a User's personal data
     CONTENT\_REVIEW\_LOG.md             who reviewed what and when (health content and translations)
@@ -355,7 +355,7 @@ Contrast pairs that must be checked by a unit test (T-NFR-7): text on page, seco
 
 ### 7.3 Screens
 
-**Design folders** are inside `docs/design/stitch/stitch\_diabetes\_companion\_style\_guide/`. Each folder has `code.html` and a `screen.png` picture of every state (checked 07 Nov 2026: the pictures are real; an earlier listing misread their size, see Section 18, question 12). Phone only (360 px); there are no tablet or desktop designs.
+**Design folders** are inside `docs/designs/` (one folder per design, named as in the table below). Each folder has `code.html` and a `screen.png` picture of every state (checked 07 Nov 2026: the pictures are real; an earlier listing misread their size, see Section 18, question 12). Phone only (360 px); there are no tablet or desktop designs.
 
 |ID|Screen|Route / file|Design (folder)|Who can open it (else redirect to)|Tab bar|Required states|Phase|
 |-|-|-|-|-|-|-|-|
@@ -891,7 +891,7 @@ The same ID may be used at two levels when both prove the same criterion, e.g. T
 * \[x] `AuthProvider` that exposes the session (no login screens yet), and `useOnline()`.
 * \[x] Router with all routes in Section 7.3; screens not yet built render the development-only placeholder (removed in Phase 7 for S7; others are replaced in their phase).
 * \[x] S1 Home to its design (Visitor and User views; Loading; Error; Offline).
-* \[x] `docs/PRD.md` and `docs/design/stitch/` copied into the repository; `README.md` with setup and commands; `AGENTS.md` as described in Section 18.3, item 4; `docs/PRIVACY\_AND\_ADMIN.md`, `docs/ADMIN\_ACCESS\_LOG.md`, `docs/CONTENT\_REVIEW\_LOG.md` and `docs/LAUNCH\_GATES.md` created from Sections 9.2, 18.2 and the templates they describe.
+* \[x] `docs/PRD.md` and the screen designs (now in `docs/designs/`, question 27) copied into the repository; `README.md` with setup and commands; `AGENTS.md` as described in Section 18.3, item 4; `docs/PRIVACY\_AND\_ADMIN.md`, `docs/ADMIN\_ACCESS\_LOG.md`, `docs/CONTENT\_REVIEW\_LOG.md` and `docs/LAUNCH\_GATES.md` created from Sections 9.2, 18.2 and the templates they describe.
 
 **Step 4: Refactor and full check**
 
@@ -1766,7 +1766,7 @@ Every answer below is also written into PRD v0.4 and its change log.
 |9|Delete inactive accounts automatically?|Section 9.2; BR25|No automatic deletion in v1. Reviewed 12 months after launch.|Answered|
 |10|Admin roles?|Section 9.2; PRD 2.5|One admin (Information Officer) using the Supabase dashboard; no admin screens or admin role in the app; content work uses the four content tables only.|Answered|
 |11|What happens to backups after deletion?|Section 9.2|Live data is deleted immediately. Supabase backups expire on their own schedule; the real number of days is checked and written in M2 at launch (L6).|Answered|
-|12|The Stitch `screen.png` files are empty placeholders ("image failed to fetch")|Section 7.3 D14|Corrected 07 Nov 2026: the export in `docs/design/stitch/` has a real picture for all 17 designs. Build from the PRD text, using `screen.png` and `code.html` for layout and look.|Answered|
+|12|The Stitch `screen.png` files are empty placeholders ("image failed to fetch")|Section 7.3 D14|Corrected 07 Nov 2026: the export in `docs/designs/` has a real picture for all 17 designs. Build from the PRD text, using `screen.png` and `code.html` for layout and look.|Answered|
 |13|Offline behaviour?|BR23; PRD 12.1|No offline mode. Show the clear message; never say "saved" unless the database confirmed it; keep typed text; allow retry.|Answered|
 |14|Consent record?|`users` columns; BR18|Both tick boxes required; times and Privacy Notice version stored; the database refuses an account without them.|Answered|
 |15|Medical disclaimer?|S1, S5, S6; D12|"This app gives general information only. It does not diagnose or replace your clinic." on S1, S5 and S6; the S7 and S9 notes stay.|Answered|
@@ -1781,6 +1781,8 @@ Every answer below is also written into PRD v0.4 and its change log.
 |24|Wording the PRD does not give: the button text in the two system emails, and screen-reader labels for icon-only controls|`supabase/templates/*.html`; `src/i18n/en.json` (`password.show`, `password.hide`, `header.language`, `header.profile`)|Chosen in Phase 1 and confirmed by the human on 07 Nov 2026: email buttons "Confirm your email" and "Choose a new password"; toggle labels "Show password" / "Hide password"; language button label "Language" (S11 wording); profile icon label "My profile" (S11 title). The S1 hero illustration is decorative (`alt=""`).|Answered|
 |25|The test-only password from PRD 10.4 in `docs/PRD.md`|`docs/PRD.md` 10.4; Section 8.7|Left out of the Markdown copy of the PRD so the secret scan stays clean; it is read from the PRD PDF into `.env` only.|Answered|
 |26|Where do the four Standard Items come from: `seed.sql` (Section 8.7) or migration 3 (Section 8.6)?|Sections 8.6, 8.7; Phase 9 step 2|Migration 3 only, with fixed ids, so every database (local and hosted) has them; Phase 9 says "Standard Items come from the migration". `seed.sql` does not insert them again.|Answered (from the plan itself, 07 Nov 2026)|
+|27|The tutor's start prompt (received 07 Nov 2026) says the screens are in `docs/designs/`; this plan (Sections 0, 5, 7.3) and the repository use `docs/design/stitch/stitch_diabetes_companion_style_guide/`|Sections 0, 5, 7.3; tutor prompt|Moved to `docs/designs/` (human, 07 Nov 2026): one folder per design, e.g. `docs/designs/screen\_s1\_home\_all\_states\_360px\_mobile/`. Sections 0, 5 and 7.3 and the README updated.|Answered|
+|28|Which coding agent builds the app? Section 4.2 and 18.3 name Google Antigravity|Sections 4.2, 18.3 item 4|Claude Code (VS Code extension) is used for all phases (human, 07 Nov 2026). `AGENTS.md` stays as the short pointer file.|Answered|
 
 **Note on Phase 3 size (mentor feedback, 04 Nov 2026):** Phase 3 covers 5 stories, 6 screens and modals and many tests. It is kept as one phase so the phase numbers, test IDs and traceability stay unchanged. If it is too large for one session, the human may tell the agent to build it in two halves inside the same phase and stop between them: first S2, S3, S4 (sign-up, log-in, reset: US1 to US3), then S11, M2, M3 (profile, language, delete account: US4, US5). The Definition of Done still applies to the whole phase.
 
@@ -1838,6 +1840,7 @@ If anything is unclear, add a row to Section 18 and ask. Never guess.
 
 |Plan version|Date|What changed|Why|
 |-|-|-|-|
+|v1.4|07 Nov 2026|Designs moved to `docs/designs/` (Sections 0, 5, 7.3; question 27); Claude Code recorded as the coding agent (4.2; question 28)|Tutor's start prompt checked against the plan|
 |v1.3|07 Nov 2026|Phase 2 progress recorded; question 26 added (Standard Items live in migration 3)|Phase 2|
 |v1.2|07 Nov 2026|Node 22 or 24 accepted (4.1, 4.2, T-SETUP-1; question 23); supporting packages noted under 4.1; D14 and question 12 corrected (the Stitch pictures are real); questions 24 and 25 added; Phase 1 progress recorded|Phase 1 set-up with the human|
 |v1.1|04 Nov 2026|Tutor feedback: readings.value is now plain numeric with check value = round(value, 1) so 6.85 is rejected (8.1); navigation map confirmed in Section 11; every T-US test has its own row with Given/When/Then (Phases 3 to 7); one T-SEC row per table (Phase 2); Phase overview matches the phase tables; lockout weakness recorded as accepted risk (question 17)|Feedback from the Melsoft mentor; Phase 3 split not done (see Section 18.1 note)|
