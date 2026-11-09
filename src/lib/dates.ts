@@ -59,3 +59,8 @@ export function formatWeekday(date: string): string {
   const weekday = WEEKDAYS[new Date(`${date.slice(0, 10)}T00:00:00Z`).getUTCDay()];
   return `${weekday} ${day}`;
 }
+
+/** A saved moment as a short SAST date like "27 Oct" (S10). */
+export function formatShortDate(moment: string): string {
+  return formatDay(sastParts(moment).date).slice(0, 6);
+}

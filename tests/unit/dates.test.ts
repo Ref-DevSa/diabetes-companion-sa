@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatDateTime, formatDay, formatWeekday, latestDate, msUntilSastMidnight, sastDateTimeToIso, sastToday } from '../../src/lib/dates';
+import { formatDateTime, formatDay, formatShortDate, formatWeekday, latestDate, msUntilSastMidnight, sastDateTimeToIso, sastToday } from '../../src/lib/dates';
 
 describe('BR12: a tick belongs to one SAST calendar day', () => {
   it('T-BR12-1: the day changes at 00:00 SAST (22:00 UTC), not at midnight UTC', () => {
@@ -45,5 +45,13 @@ describe('Dates written like 27 Oct 2026 (PRD 12.1)', () => {
   it('T-BR22-3: the latest of several review dates is chosen', () => {
     expect(latestDate(['2026-10-01', null, '2026-11-03', '2026-02-14'])).toBe('2026-11-03');
     expect(latestDate([null, null])).toBeNull();
+  });
+});
+
+describe('S10 short dates (PRD 8.2 S10)', () => {
+  it('T-S10-1: a Reading moment is written as a short SAST date like "27 Oct"', () => {
+    expect(formatShortDate('2026-10-27T05:10:00Z')).toBe('27 Oct');
+    expect(formatShortDate('2026-10-26T22:30:00Z')).toBe('27 Oct'); // 00:30 SAST
+    expect(formatShortDate('2026-11-01T08:00:00Z')).toBe('01 Nov');
   });
 });

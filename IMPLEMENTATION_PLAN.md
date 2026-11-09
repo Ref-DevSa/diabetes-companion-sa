@@ -9,7 +9,7 @@
 |App name|Diabetes Companion SA|
 |Built from PRD version|v0.4 (the version in `docs/PRD.md`; v0.4 adds the privacy, admin, retention, consent, content-review, language and offline decisions confirmed on 03 Nov 2026)|
 |Screen designs|Google Stitch export `stitch\_diabetes\_companion\_style\_guide`, one folder per screen in `docs/designs/` (moved there on 07 Nov 2026 to match the tutor's start prompt, question 27). Where a Stitch screen disagrees with the PRD, the PRD wins: see the correction table in Section 7.3|
-|Plan version|v1.8|
+|Plan version|v1.9|
 |Repository|https://github.com/Ref-DevSa/ (repository name to be added; see Section 18, launch gate L3)|
 |Status|Ready to build (Phases 1 to 8 can run on a local Supabase; the hosted Supabase project is set up later, in Phase 9)|
 |Last updated|09 Nov 2026|
@@ -1331,33 +1331,33 @@ The same ID may be used at two levels when both prove the same criterion, e.g. T
 |T-NAV-9|Component|`tests/component/navigation.test.tsx`|The development-only placeholder route for `/help` no longer exists; S6 and S5 links open S7|
 |T-INT-8|Integration|`tests/integration/dashboard.test.ts`|The Dashboard returns only the caller's 7 newest Readings and today's progress|
 
-* \[ ] All tests above are written, run, and fail for the expected reason.
+* \[x] All tests above are written, run, and fail for the expected reason.
 
 **Step 2: Backend (Green)**
 
-* \[ ] `src/data/content.ts` additions (OP13, OP14); `src/data/dashboard.ts` (OP19).
+* \[x] `src/data/content.ts` additions (OP13, OP14); `src/data/dashboard.ts` (OP19).
 
 **Step 3: Frontend (Green)**
 
-* \[ ] S10 and S7 to their designs with all states; remove the development-only placeholder.
+* \[x] S10 and S7 to their designs with all states; remove the development-only placeholder.
 
 **Step 4: Refactor and full check**
 
-* \[ ] Code cleaned up; no duplicated logic; names use PRD key terms.
-* \[ ] Full check passes.
+* \[x] Code cleaned up; no duplicated logic; names use PRD key terms.
+* \[x] Full check passes.
 
 **Step 5: Manual checks (human)**
 
-* \[ ] On a real phone: S10 as thabo.test; S7 opens each link (when online).
-* \[ ] Each screen in this phase matches its design side by side.
+* \[x] On a real phone: S10 as thabo.test; S7 opens each link (when online).
+* \[x] Each screen in this phase matches its design side by side.
 
 **Definition of Done**
 
-* \[ ] Every test in Step 1 passes.
-* \[ ] All earlier tests still pass.
-* \[ ] Every screen in this phase shows all its required states.
-* \[ ] Manual checks are ticked by the human.
-* \[ ] Progress log updated (Section 17).
+* \[x] Every test in Step 1 passes.
+* \[x] All earlier tests still pass.
+* \[x] Every screen in this phase shows all its required states.
+* \[x] Manual checks are ticked by the human.
+* \[x] Progress log updated (Section 17).
 
 **Commit message:** `Phase 7: Dashboard, Resources and Family Support`
 
@@ -1741,7 +1741,7 @@ The agent ticks each item only when its test passes. The human ticks the ones ma
 |4 Safety Guide and Learning Centre|07 Nov 2026|Done: automated checks pass; manual checks (Home to S6 under 30 s on the phone, airplane mode on S6, placeholder content noted, screens against designs) confirmed by the human on 07 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 48 / 48, component 202 / 202, database 233 / 233, integration 48 / 48, end-to-end 8 / 8 (539 / 539); lint, type check, secret scan: pass|none yet|S5 (Topics open in place, review date, English fallback, reload on language change), S6 (built-in emergency box first, three lists, empty / loading / error / offline). Shared `useLoad` hook (3-second limit, Try again, reload after reconnecting); S11 switched to it. Fixes before the first full green run, none changing what is checked: S6 test gave the S5 list no fake answer; Playwright matched "Check warning signs" as well as the header button (now scoped to the header); component test time limit 15 s because typing is slow when all files run in parallel|
 |5 Glucose Diary|07 Nov 2026|Done: automated checks pass; manual checks (6.8 / 3.6 / 14.6 with badges and messages, edit and delete on the phone, airplane mode in M1, screens against designs) confirmed by the human on 07 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 85 / 85, component 252 / 252, database 233 / 233, integration 64 / 64, end-to-end 8 / 8 (642 / 642); lint, type check, secret scan: pass. Coverage of `src/lib/`: 98.7 % of lines|none yet|S8 (newest first, 20 at a time, Load more, sticky Add reading, Flags with messages, offline disables Add/Edit/Delete), M1 (five fields, every PRD error, Saving..., offline, deleted-elsewhere), M4. BR1 to BR9 and BR14 as pure functions; OP15 to OP18. Shared field parts (FieldMessage, SelectField, TextAreaField); Modal can now be a bottom sheet. Fixes before the first full green run, none changing what is checked: offline save test now logs in first then drops the connection (the real case); 25-Reading fixture values made unique; a "missing date" test asks only for some date error until question 31 is answered|
 |6 Daily Checklist|09 Nov 2026|Done: automated checks pass; manual checks (ticks, add / rename / delete "Evening walk" and "All done today. Nice work!" on the phone at 192.168.0.9, screens against designs) confirmed by the human on 09 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 96 / 96, component 286 / 286, database 233 / 233, integration 78 / 78, end-to-end 8 / 8 (701 / 701); lint, type check, secret scan: pass. Coverage of `src/lib/`: 98 % of lines|none yet|S9 (title "Today" and the SAST date, progress card with the ring, Standard then Custom Items, ticks shown only after the database confirms, "All done today. Nice work!", limit message, offline tick message, midnight watcher with the new-day toast, also on waking after midnight), M5 (add and rename, every PRD error, Saving..., offline with Save disabled), ProgressRing. BR10 to BR13 as pure functions; OP20 to OP25; error codes `custom_item_limit` and `item_name_taken`. `useLoad` `update` can now take a function of the latest data. Fixes before the first full green run, none changing what is checked: offline tick test now logs in first then drops the connection (as in Phase 5); T-BR16-2 now waits for the real S9 title "Today" instead of the old placeholder text "S9". The end-to-end dev server could not reach Supabase because the computer's Wi-Fi address changed from 192.168.0.8 to 192.168.0.9; the git-ignored `.env.development.local` was updated. Questions 33 and 34 added and answered (keep current)|
-|7 Dashboard, Resources and Family Support|not started|Not started|not run|none yet||
+|7 Dashboard, Resources and Family Support|09 Nov 2026|Done: automated checks pass; manual checks (S10 as thabo.test on the phone at 192.168.0.9, S7 opens each link, screens against designs) confirmed by the human on 09 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 97 / 97, component 308 / 308, database 233 / 233, integration 89 / 89, end-to-end 8 / 8 (735 / 735); lint, type check, secret scan: pass. Coverage of `src/lib/`: 98 % of lines|none yet|S10 ("My Dashboard", "Last 7 readings" with value, When, short SAST date and Flag badge, "See all in my Diary", "Today's checklist" with the ring and "Go to Checklist", empty with "Add a reading", loading, error; offline keeps the loaded data), S7 ("Help and family support", three Resource cards opening in a new tab, five tips, the notice; empty, loading, error; offline tap shows "You're offline. Reconnect to open this link." and does not open). OP13, OP14 (published rows only, English fallback) and OP19 (7 newest Readings plus today's progress, reusing OP20). The development-only placeholder is removed (T-NAV-9). Design corrections: no subtitles, no "5 shown", no "%", no "Keep up your daily care routine", no invented S7 empty or error sub-text. Every test passed on the first full run. During the manual check the phone still held a session from before a test database reset, so its saves were refused (old user id); logging in again fixed it|
 |8 Hardening|not started|Not started|not run|none yet||
 |9 Release|not started|Not started|not run|none yet||
 
@@ -1846,6 +1846,7 @@ If anything is unclear, add a row to Section 18 and ask. Never guess.
 
 |Plan version|Date|What changed|Why|
 |-|-|-|-|
+|v1.9|09 Nov 2026|Phase 7 progress recorded|Phase 7|
 |v1.8|09 Nov 2026|Phase 6 progress recorded; questions 33 (M5 titles) and 34 (tick messages) added and answered|Phase 6|
 |v1.7|07 Nov 2026|Phase 5 progress recorded; questions 31 (cleared date or time) and 32 (phone date and time boxes) added|Phase 5|
 |v1.6|07 Nov 2026|Phase 4 progress recorded|Phase 4|

@@ -4,6 +4,12 @@ import userEvent from '@testing-library/user-event';
 import { AppRoutes } from '../../src/App';
 import { fakeSession, renderWithProviders } from '../helpers/render';
 
+vi.mock('../../src/data/content', async (importOriginal) => {
+  const original = await importOriginal<typeof import('../../src/data/content')>();
+  const pending = () => new Promise<never>(() => undefined);
+  return { ...original, listTopics: vi.fn(pending), listSafetyItems: vi.fn(pending), listResources: vi.fn(pending), listFamilyTips: vi.fn(pending) };
+});
+
 vi.mock('../../src/data/profile', () => ({
   getProfile: vi.fn(() => new Promise(() => undefined)),
   setLanguage: vi.fn(),
@@ -51,5 +57,22 @@ describe('Navigation rules (Section 11)', () => {
     renderWithProviders(<AppRoutes />, { route: '/', auth: { session: fakeSession } });
     await userEvent.setup().click(screen.getByRole('link', { name: 'My profile' }));
     expect(screen.getByTestId('location')).toHaveTextContent('/profile');
+  });
+
+  it('T-NAV-9: /help is S7 itself, not the development-only placeholder', () => {
+    renderWithProviders(<AppRoutes />, { route: '/help' });
+    expect(screen.getByRole('heading', { level: 1, name: 'Help and family support' })).toBeInTheDocument();
+    expect(screen.queryByTestId('dev-placeholder')).not.toBeInTheDocument();
+  });
+
+  it.each([
+    ['/safety', 'Find help and trusted links'],
+    ['/learn', 'Help for family and caregivers'],
+    ['/', 'Help for family'],
+  ])('T-NAV-9: on %s, the link "%s" opens S7', async (path, name) => {
+    renderWithProviders(<AppRoutes />, { route: path });
+    await userEvent.setup().click(screen.getByRole('link', { name: new RegExp(name) }));
+    expect(screen.getByTestId('location')).toHaveTextContent('/help');
+    expect(screen.getByRole('heading', { level: 1, name: 'Help and family support' })).toBeInTheDocument();
   });
 });

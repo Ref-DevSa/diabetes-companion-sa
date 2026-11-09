@@ -18,9 +18,9 @@ export type ReadingInput = { value: number; when: ReadingWhen; takenAt: string; 
 /** BR7: the Diary shows 20 Readings at a time. */
 export const PAGE_SIZE = 20;
 
-const COLUMNS = 'id, value, reading_when, taken_at, note';
+export const READING_COLUMNS = 'id, value, reading_when, taken_at, note';
 
-function toReading(row: Record<string, unknown>): Reading {
+export function toReading(row: Record<string, unknown>): Reading {
   return {
     id: String(row.id),
     value: Number(row.value),
@@ -51,7 +51,7 @@ export async function listReadings(
   if (isOfflineNow()) return fail('offline');
   const { data, error } = await client
     .from('readings')
-    .select(COLUMNS)
+    .select(READING_COLUMNS)
     .order('taken_at', { ascending: false })
     .order('id', { ascending: false })
     .range(offset, offset + PAGE_SIZE);
@@ -67,7 +67,7 @@ export async function addReading(input: ReadingInput, client: SupabaseClient = g
   if (authError && isNetworkError(authError)) return fail('offline');
   const userId = auth.session?.user.id;
   if (!userId) return fail('server');
-  const { data, error } = await client.from('readings').insert({ user_id: userId, ...toRow(input) }).select(COLUMNS).single();
+  const { data, error } = await client.from('readings').insert({ user_id: userId, ...toRow(input) }).select(READING_COLUMNS).single();
   if (error) return fail(codeFor(error));
   return ok(toReading(data));
 }
@@ -75,7 +75,7 @@ export async function addReading(input: ReadingInput, client: SupabaseClient = g
 /** OP17: saves changes to a Reading; "not_found" when it no longer exists (deleted on another phone). */
 export async function updateReading(id: string, input: ReadingInput, client: SupabaseClient = getSupabase()): Promise<Result<Reading>> {
   if (isOfflineNow()) return fail('offline');
-  const { data, error } = await client.from('readings').update(toRow(input)).eq('id', id).select(COLUMNS).maybeSingle();
+  const { data, error } = await client.from('readings').update(toRow(input)).eq('id', id).select(READING_COLUMNS).maybeSingle();
   if (error) return fail(codeFor(error));
   if (!data) return fail('not_found');
   return ok(toReading(data));

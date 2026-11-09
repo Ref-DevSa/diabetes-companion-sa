@@ -1,4 +1,4 @@
-// Content operations OP11 and OP12 (IMPLEMENTATION_PLAN.md Section 10).
+// Content operations OP11 to OP14 (IMPLEMENTATION_PLAN.md Section 10).
 // Explicit column lists: never "*" and never reviewed_by (SEC16 to SEC19). RLS returns published rows only.
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { getSupabase } from '../lib/supabase';
@@ -68,4 +68,34 @@ export async function listSafetyItems(language: LanguageCode, client: SupabaseCl
   const { data, error } = await client.from('safety_items').select(SAFETY_COLUMNS).order('sort_order');
   if (error) return fail(isNetworkError(error) ? 'offline' : 'server');
   return ok((data ?? []).map((row) => localizeSafetyItem(row, language)));
+}
+
+export type Resource = { id: string; name: string; description: string; url: string };
+
+export type FamilyTip = { id: string; text: string };
+
+const RESOURCE_COLUMNS = 'id, name, description_en, description_zu, description_tn, url, sort_order';
+const TIP_COLUMNS = 'id, text_en, text_zu, text_tn, sort_order';
+
+/** OP14: published Resources, lowest sort order first; the name is the organisation's own (not translated). */
+export async function listResources(language: LanguageCode, client: SupabaseClient = getSupabase()): Promise<Result<Resource[]>> {
+  if (isOfflineNow()) return fail('offline');
+  const { data, error } = await client.from('resources').select(RESOURCE_COLUMNS).order('sort_order');
+  if (error) return fail(isNetworkError(error) ? 'offline' : 'server');
+  return ok(
+    (data ?? []).map((row) => ({
+      id: String(row.id),
+      name: String(row.name),
+      description: pickText(row, 'description', language),
+      url: String(row.url),
+    })),
+  );
+}
+
+/** OP13: published family tips, lowest sort order first. */
+export async function listFamilyTips(language: LanguageCode, client: SupabaseClient = getSupabase()): Promise<Result<FamilyTip[]>> {
+  if (isOfflineNow()) return fail('offline');
+  const { data, error } = await client.from('family_tips').select(TIP_COLUMNS).order('sort_order');
+  if (error) return fail(isNetworkError(error) ? 'offline' : 'server');
+  return ok((data ?? []).map((row) => ({ id: String(row.id), text: pickText(row, 'text', language) })));
 }

@@ -1,5 +1,5 @@
 // Fake content from PRD 8.4 and S6 for component tests (no network).
-import type { SafetyItem, Topic } from '../../src/data/content';
+import type { FamilyTip, Resource, SafetyItem, Topic } from '../../src/data/content';
 
 const titles: Array<[string, string, string, number]> = [
   ['what-is-diabetes', 'What is diabetes?', 'The basics in plain words', 3],
@@ -43,3 +43,29 @@ export const fakeSafetyItems: SafetyItem[] = lists.flatMap(([section, texts]) =>
     reviewedAt: section === 'urgent' && index === 0 ? '2026-11-03' : '2026-10-27',
   })),
 );
+
+/** The three Resources from PRD 8.4. */
+export const fakeResources: Resource[] = [
+  {
+    id: 'res-1',
+    name: 'Diabetes South Africa',
+    description: 'A non-profit that supports and speaks up for people with diabetes in South Africa',
+    url: 'https://www.diabetessa.org.za',
+  },
+  {
+    id: 'res-2',
+    name: 'SEMDSA',
+    description: 'The Society for Endocrinology, Metabolism and Diabetes of South Africa: guidelines and news',
+    url: 'https://www.semdsa.org.za',
+  },
+  { id: 'res-3', name: 'National Department of Health', description: 'Public health services, clinic information and health campaigns', url: 'https://www.health.gov.za' },
+];
+
+/** The five family tips from PRD 8.4. */
+export const fakeTips: FamilyTip[] = [
+  'Learn the signs of low and high blood sugar so you can spot them early.',
+  'Ask how you can help instead of taking over.',
+  'Offer to go to clinic visits if they would like company.',
+  'Plan meals together and keep healthy snacks at home.',
+  'Know the emergency numbers: 112 from a cell phone and 10177 for an ambulance.',
+].map((text, index) => ({ id: `tip-${index + 1}`, text }));

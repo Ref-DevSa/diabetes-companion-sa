@@ -260,5 +260,25 @@
     "placeholder": "e.g. Evening walk",
     "save": "Save",
     "saving": "Saving…"
+  },
+  "dashboard": {
+    "title": "My Dashboard",
+    "lastReadings": "Last 7 readings",
+    "seeAll": "See all in my Diary",
+    "todayChecklist": "Today's checklist",
+    "goToChecklist": "Go to Checklist",
+    "empty": "No readings yet. Add your first one in the Diary.",
+    "addReading": "Add a reading",
+    "loadError": "We couldn't load your Dashboard. Please try again."
+  },
+  "help": {
+    "title": "Help and family support",
+    "trusted": "Trusted organisations",
+    "openWebsite": "Open website",
+    "tips": "Tips for family and caregivers",
+    "notice": "Always follow the advice of your own doctor or clinic.",
+    "empty": "No resources yet. Please check back soon.",
+    "loadError": "We couldn't load this page. Please try again.",
+    "offlineLink": "You're offline. Reconnect to open this link."
   }
 }

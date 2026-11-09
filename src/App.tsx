@@ -1,21 +1,21 @@
 import { Route, Routes } from 'react-router';
 import { RequireUser, RequireVisitor } from './auth/guards';
 import { AppLayout } from './components/AppLayout';
-import { DevPlaceholder } from './components/DevPlaceholder';
 import { DailyChecklist } from './screens/DailyChecklist';
+import { Dashboard } from './screens/Dashboard';
 import { ForgotPassword } from './screens/ForgotPassword';
 import { GlucoseDiary } from './screens/GlucoseDiary';
 import { Home } from './screens/Home';
 import { LearningCentre } from './screens/LearningCentre';
 import { LogIn } from './screens/LogIn';
 import { Profile } from './screens/Profile';
+import { Resources } from './screens/Resources';
 import { SafetyGuide } from './screens/SafetyGuide';
 import { SignUp } from './screens/SignUp';
 
 /**
  * Routes from Section 7.3 and PRD 7.2, with the guards from Section 11 (BR16).
- * Screens not built yet show a development-only placeholder and are replaced in their phase
- * (S7 and S10 in Phase 7).
+ * Every screen is built; the development-only placeholder was removed in Phase 7 (T-NAV-9).
  */
 export function AppRoutes() {
   return (
@@ -24,11 +24,11 @@ export function AppRoutes() {
         <Route index element={<Home />} />
         <Route path="learn" element={<LearningCentre />} />
         <Route path="safety" element={<SafetyGuide />} />
-        <Route path="help" element={<DevPlaceholder screen="S7" />} />
+        <Route path="help" element={<Resources />} />
         <Route element={<RequireUser />}>
           <Route path="diary" element={<GlucoseDiary />} />
           <Route path="checklist" element={<DailyChecklist />} />
-          <Route path="dashboard" element={<DevPlaceholder screen="S10" />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="*" element={<Home />} />
