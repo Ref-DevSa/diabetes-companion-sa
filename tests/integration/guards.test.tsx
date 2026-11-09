@@ -39,7 +39,7 @@ describe('T-BR16-2: after logging in, the User lands on the screen they wanted',
     await person.type(screen.getByLabelText('Password'), user.password);
     await person.click(screen.getByRole('button', { name: 'Log in' }));
 
-    await screen.findByText('S9', {}, { timeout: 10_000 });
+    await screen.findByRole('heading', { level: 1, name: 'Today' }, { timeout: 10_000 });
     expect(screen.getByTestId('location')).toHaveTextContent('/checklist');
   }, 20_000);
 });

@@ -54,7 +54,11 @@
     "readingDateTime": "The date and time can't be in the future.",
     "noteTooLong": "Notes can be up to 200 characters.",
     "dailyLimit": "You've reached today's limit of 30 readings. You can add more tomorrow.",
-    "deleteReading": "Couldn't delete this reading. Check your connection and try again."
+    "deleteReading": "Couldn't delete this reading. Check your connection and try again.",
+    "itemNameRequired": "Enter a name for your item.",
+    "itemNameTooLong": "Item names can be up to 60 characters.",
+    "itemNameTaken": "You already have an item with this name.",
+    "customItemLimit": "You can add up to 6 of your own items."
   },
   "home": {
     "heroTitle": "Understand diabetes. Track your day.",
@@ -227,5 +231,34 @@
     "text": "{{dateTime}} · {{value}} mmol/L ({{when}}). This cannot be undone.",
     "confirm": "Delete reading",
     "deleting": "Deleting…"
+  },
+  "checklist": {
+    "title": "Today",
+    "progress": "{{done}} of {{total}} done",
+    "ring": "{{done}} of {{total}}",
+    "allDone": "All done today. Nice work!",
+    "standard": {
+      "medication": "Take my medication as prescribed",
+      "glucose_check": "Check my glucose if my care plan says so",
+      "water": "Drink water",
+      "activity": "Do suitable physical activity"
+    },
+    "addItem": "Add my own item",
+    "edit": "Edit",
+    "delete": "Delete",
+    "note": "This is your own routine. Always follow the care plan from your clinic.",
+    "loadError": "We couldn't load your Checklist. Please try again.",
+    "offlineTicks": "You're offline. Reconnect to save your ticks.",
+    "newDay": "It's a new day! Your checklist has been reset.",
+    "saved": "Item saved.",
+    "deleted": "Item deleted."
+  },
+  "customItem": {
+    "addTitle": "Add my own item",
+    "editTitle": "Edit",
+    "name": "Item name",
+    "placeholder": "e.g. Evening walk",
+    "save": "Save",
+    "saving": "Saving…"
   }
 }

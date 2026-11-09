@@ -15,7 +15,9 @@ export type ErrorCode =
   | 'reading_future'
   | 'reading_too_old'
   | 'daily_limit'
-  | 'not_found';
+  | 'not_found'
+  | 'custom_item_limit'
+  | 'item_name_taken';
 
 export type Result<T = void> = { ok: true; data: T } | { ok: false; code: ErrorCode };
 
@@ -41,6 +43,8 @@ export const errorMessageKey: Record<ErrorCode, string> = {
   reading_too_old: 'errors.readingTooOld',
   daily_limit: 'errors.dailyLimit',
   not_found: 'diary.gone',
+  custom_item_limit: 'errors.customItemLimit',
+  item_name_taken: 'errors.itemNameTaken',
 };
 
 /** True when the browser already knows it has no internet (BR23). */

@@ -1,4 +1,4 @@
-// Dates written like "27 Oct 2026" (PRD 12.1). More SAST helpers arrive with the Diary (Phase 5).
+// Dates written like "27 Oct 2026" (PRD 12.1) and SAST (UTC+2) helpers for the Diary and Checklist.
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -36,4 +36,26 @@ export function sastDateTimeToIso(date: string, time: string): string {
 export function formatDateTime(moment: string): string {
   const { date, time } = sastParts(moment);
   return `${formatDay(date)}, ${time}`;
+}
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+/** BR12: today's SAST calendar date ("YYYY-MM-DD"); the day changes at 00:00 SAST. */
+export function sastToday(now: number = Date.now()): string {
+  return sastParts(now).date;
+}
+
+/** BR12: milliseconds from `now` until the next 00:00 SAST. */
+export function msUntilSastMidnight(now: number = Date.now()): number {
+  const sinceMidnight = (now + SAST_OFFSET_MS) % DAY_MS;
+  return DAY_MS - sinceMidnight;
+}
+
+/** A calendar date written like "Tue 27 Oct 2026" (S9 title). */
+export function formatWeekday(date: string): string {
+  const day = formatDay(date);
+  if (!day) return '';
+  const weekday = WEEKDAYS[new Date(`${date.slice(0, 10)}T00:00:00Z`).getUTCDay()];
+  return `${weekday} ${day}`;
 }

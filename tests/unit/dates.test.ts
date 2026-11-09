@@ -1,5 +1,22 @@
 import { describe, expect, it } from 'vitest';
-import { formatDateTime, formatDay, latestDate, sastDateTimeToIso } from '../../src/lib/dates';
+import { formatDateTime, formatDay, formatWeekday, latestDate, msUntilSastMidnight, sastDateTimeToIso, sastToday } from '../../src/lib/dates';
+
+describe('BR12: a tick belongs to one SAST calendar day', () => {
+  it('T-BR12-1: the day changes at 00:00 SAST (22:00 UTC), not at midnight UTC', () => {
+    expect(sastToday(Date.parse('2026-10-27T21:59:00Z'))).toBe('2026-10-27'); // 23:59 SAST
+    expect(sastToday(Date.parse('2026-10-27T22:00:00Z'))).toBe('2026-10-28'); // 00:00 SAST
+  });
+
+  it('T-BR12-1: the time left until the next 00:00 SAST', () => {
+    expect(msUntilSastMidnight(Date.parse('2026-10-27T21:59:00Z'))).toBe(60 * 1000);
+    expect(msUntilSastMidnight(Date.parse('2026-10-27T22:00:00Z'))).toBe(24 * 60 * 60 * 1000);
+  });
+
+  it('T-BR12-2: the S9 date is written like "Tue 27 Oct 2026"', () => {
+    expect(formatWeekday('2026-10-27')).toBe('Tue 27 Oct 2026');
+    expect(formatWeekday('2026-11-01')).toBe('Sun 01 Nov 2026');
+  });
+});
 
 describe('SAST date and time for Readings (PRD 12.1, BR2)', () => {
   it('T-BR2-1: a SAST date and 24-hour time become one moment (UTC+2)', () => {

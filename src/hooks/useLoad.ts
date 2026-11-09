@@ -58,8 +58,16 @@ export function useLoad<T>(load: () => Promise<Result<T>>, key: string) {
     return () => window.removeEventListener('online', onOnline);
   }, [retry]);
 
-  /** Replaces the loaded data after a confirmed save (for example a new language). */
-  const update = useCallback((data: T) => setState({ status: 'ready', data }), []);
+  /**
+   * Replaces the loaded data after a confirmed save (for example a new language). Pass a function
+   * to change the latest data, when several saves can finish in any order (Checklist ticks).
+   */
+  const update = useCallback((next: T | ((current: T) => T)) => {
+    setState((current) => {
+      if (typeof next !== 'function') return { status: 'ready', data: next };
+      return current.status === 'ready' ? { status: 'ready', data: (next as (current: T) => T)(current.data) } : current;
+    });
+  }, []);
 
   return { state, retry, timeout, update };
 }

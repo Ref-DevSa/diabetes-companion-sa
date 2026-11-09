@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router';
 import { RequireUser, RequireVisitor } from './auth/guards';
 import { AppLayout } from './components/AppLayout';
 import { DevPlaceholder } from './components/DevPlaceholder';
+import { DailyChecklist } from './screens/DailyChecklist';
 import { ForgotPassword } from './screens/ForgotPassword';
 import { GlucoseDiary } from './screens/GlucoseDiary';
 import { Home } from './screens/Home';
@@ -14,7 +15,7 @@ import { SignUp } from './screens/SignUp';
 /**
  * Routes from Section 7.3 and PRD 7.2, with the guards from Section 11 (BR16).
  * Screens not built yet show a development-only placeholder and are replaced in their phase
- * (S9 in Phase 6; S7, S10 in Phase 7).
+ * (S7 and S10 in Phase 7).
  */
 export function AppRoutes() {
   return (
@@ -26,7 +27,7 @@ export function AppRoutes() {
         <Route path="help" element={<DevPlaceholder screen="S7" />} />
         <Route element={<RequireUser />}>
           <Route path="diary" element={<GlucoseDiary />} />
-          <Route path="checklist" element={<DevPlaceholder screen="S9" />} />
+          <Route path="checklist" element={<DailyChecklist />} />
           <Route path="dashboard" element={<DevPlaceholder screen="S10" />} />
           <Route path="profile" element={<Profile />} />
         </Route>
