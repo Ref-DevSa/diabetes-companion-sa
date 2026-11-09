@@ -4,7 +4,7 @@ import { ShieldCheck } from 'lucide-react';
 import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
 
-/** The sections of PRD 8.2 M2 (v0.4), in order. The text is built in, so it works offline. */
+/** The sections of PRD 8.2 M2 (v0.5: backup sentence, question 40), in order. The text is built in, so it works offline. */
 const sections = ['collect', 'why', 'who', 'where', 'howLong', 'delete', 'health', 'contact'] as const;
 
 /** M2 Privacy Notice: a scrollable modal with a "Close" button (opens from S2 and S11). */

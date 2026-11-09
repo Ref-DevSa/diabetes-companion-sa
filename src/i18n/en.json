@@ -150,7 +150,7 @@
     "whereTitle": "Where it is stored",
     "whereText": "In a database run by Supabase in Frankfurt, Germany, which is outside South Africa. Sign-up emails are sent through Brevo.",
     "howLongTitle": "How long we keep it",
-    "howLongText": "Until you delete a reading or your account. Copies in backups are removed when the backups expire (the number of days will be confirmed before launch).",
+    "howLongText": "Until you delete a reading or your account. The app keeps no backup copies, so deleted information is gone for good and cannot be brought back.",
     "deleteTitle": "How to delete it",
     "deleteText": "Delete a reading in your Diary, or choose Delete account on your Profile screen to delete everything straight away. To ask for a copy of your information, email the contact below.",
     "healthTitle": "Health information",

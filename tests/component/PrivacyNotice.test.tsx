@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { PrivacyNotice } from '../../src/modals/PrivacyNotice';
 import { PRIVACY_NOTICE_VERSION } from '../../src/lib/privacyNotice';
 
-// PRD 8.2 M2 (v0.4), exact text.
+// PRD 8.2 M2, exact text (v0.5: the backup sentence changed for the Free plan, Section 18 question 40).
 const sections: Array<[string, string]> = [
   [
     'What we collect',
@@ -21,7 +21,7 @@ const sections: Array<[string, string]> = [
   ],
   [
     'How long we keep it',
-    'Until you delete a reading or your account. Copies in backups are removed when the backups expire (the number of days will be confirmed before launch).',
+    'Until you delete a reading or your account. The app keeps no backup copies, so deleted information is gone for good and cannot be brought back.',
   ],
   [
     'How to delete it',
@@ -37,7 +37,7 @@ const sections: Array<[string, string]> = [
 describe('M2 Privacy Notice', () => {
   afterEach(() => vi.restoreAllMocks());
 
-  it('T-M2-1: shows every heading and text in PRD M2 (v0.4), in order', () => {
+  it('T-M2-1: shows every heading and text in PRD M2 (v0.5), in order', () => {
     render(<PrivacyNotice onClose={vi.fn()} />);
     const dialog = screen.getByRole('dialog', { name: 'Privacy Notice' });
     const headings = within(dialog).getAllByRole('heading', { level: 3 }).map((h) => h.textContent);
@@ -47,8 +47,8 @@ describe('M2 Privacy Notice', () => {
     }
   });
 
-  it('T-M2-1: the notice version stored at sign-up is v0.4', () => {
-    expect(PRIVACY_NOTICE_VERSION).toBe('v0.4');
+  it('T-M2-1: the notice version stored at sign-up is v0.5', () => {
+    expect(PRIVACY_NOTICE_VERSION).toBe('v0.5');
   });
 
   it('T-M2-1: "Close" closes it; Escape closes it too', async () => {

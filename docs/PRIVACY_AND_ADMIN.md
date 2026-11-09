@@ -27,10 +27,11 @@ This file is the working rule book for the admin. If it and the PRD ever disagre
 
 ## Backups
 
-* Deleted data can remain in Supabase's own backups until they expire.
-* The free plan does not give the admin access to backups.
-* The number of days is checked when the hosted project is created (launch gate L6) and stated in the Privacy Notice (M2).
-* **Backup period:** to be confirmed at launch gate L6.
+* The hosted project (region Central EU, Frankfurt) is on the Supabase **Free plan**, which keeps **no backups** (Supabase documentation, checked 09 Nov 2026: daily backups are for the Pro, Team and Enterprise plans only).
+* So deletion is final: a deleted Reading, Item or account cannot be restored by anyone. The Privacy Notice (M2, version v0.5) says so.
+* If a copy is ever needed (for example before a risky change), the admin exports the data by hand with `npx supabase db dump --remote`, keeps it encrypted, and deletes it when no longer needed; each export is written in `ADMIN_ACCESS_LOG.md`.
+* If the project later moves to a paid plan, the backup period changes and M2 must be updated first.
+* **Backup period:** none (Free plan), confirmed at launch gate L6 on 09 Nov 2026.
 
 ## Retention
 

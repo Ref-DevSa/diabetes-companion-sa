@@ -19,6 +19,7 @@
     "test:db": "supabase test db",
     "test:int": "vitest run --project integration",
     "test:e2e": "playwright test",
+    "test:live": "playwright test -c playwright.live.config.ts",
     "test:coverage": "vitest run --project unit --project component --coverage",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",

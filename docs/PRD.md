@@ -662,7 +662,7 @@ The lists are Safety Guide items kept in the database and reviewed by a qualifie
 * Why we collect it: "To let you log in and keep your own diary and checklist. We do not sell your information or use it for adverts."
 * Who can see it: "Only you. The app's administrator can see your information in the database only when strictly needed to fix a fault, and each time is recorded. Family members and caregivers cannot see your information in this version."
 * Where it is stored: "In a database run by Supabase in Frankfurt, Germany, which is outside South Africa. Sign-up emails are sent through Brevo."
-* How long we keep it: "Until you delete a reading or your account. Copies in backups are removed when the backups expire (the number of days will be confirmed before launch)."
+* How long we keep it: "Until you delete a reading or your account. The app keeps no backup copies, so deleted information is gone for good and cannot be brought back." (Changed 09 Nov 2026, IMPLEMENTATION_PLAN.md Section 18 question 40: the hosted project is on the Supabase Free plan, which keeps no backups. Notice version v0.5.)
 * How to delete it: "Delete a reading in your Diary, or choose Delete account on your Profile screen to delete everything straight away. To ask for a copy of your information, email the contact below."
 * Health information: "Glucose readings are health information. By ticking "I agree to the Privacy Notice" you agree that we may store it for the reasons above."
 * Contact: "Refilwe Segoe, Information Officer. Email address to be confirmed (see Section 13.3)."
@@ -1099,7 +1099,7 @@ Visitors have no access to any table that holds personal data. Standard Items ca
 * **Information Officer:** Refilwe Segoe. The contact email is to be confirmed (13.3).
 * **Access by the admin:** Only strictly when needed to fix a fault; each time is written in an access log (date, reason, table, action). No family or caregiver access in v1 (BR24).
 * **Sale and advertising:** Personal information is never sold or used for adverts (BR24).
-* **Deletion and backups:** Deleting a reading or the account removes it from the live database at once (BR20). Copies in Supabase backups disappear when the backups expire; the number of days is checked when the live project is created and written in M2.
+* **Deletion and backups:** Deleting a reading or the account removes it from the live database at once (BR20). The hosted project is on the Supabase Free plan, which keeps no backups (checked 09 Nov 2026 at launch gate L6), so deleted data cannot be restored; M2 says so.
 * **Retention:** Kept until the User deletes it or the account (BR25). Failed log-in tries are removed after 24 hours. No automatic deletion of inactive accounts in v1.
 * **Access to your own information:** A User can ask for a copy by emailing the Information Officer; the admin exports it and records the access.
 * **Consent record:** The times of both tickboxes and the Privacy Notice version are saved, and the database refuses an account without them.

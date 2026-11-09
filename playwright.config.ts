@@ -9,6 +9,8 @@ const baseURL = process.env.E2E_BASE_URL ?? `http://localhost:${port}`;
 
 export default defineConfig({
   testDir: 'tests/e2e',
+  // The live checks run only against the deployed app (playwright.live.config.ts, npm run test:live).
+  testIgnore: /live.spec.ts/,
   fullyParallel: true,
   retries: 0,
   reporter: 'list',

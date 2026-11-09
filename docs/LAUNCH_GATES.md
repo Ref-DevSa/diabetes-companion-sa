@@ -10,7 +10,7 @@ Tick each one (`[x]`) only when it is done, and write the date and evidence. The
 | [ ] | L3 | GitHub repository name, and the concept document link | Refilwe | Added to PRD Document details and the plan's Section 0 | |
 | [ ] | L4 | Legal review of the Privacy Notice and the transfer of health data to Frankfurt under POPIA | Facilitator or a legal adviser | Written outcome saved in `docs/`, M2 updated | |
 | [ ] | L5 | Information Officer contact email | Refilwe | Added to M2 and the PRD (Open question Q6) | |
-| [ ] | L6 | Hosted Supabase project created in Frankfurt; backup period checked | Refilwe | Region confirmed; days written in M2 and `PRIVACY_AND_ADMIN.md` | |
+| [ ] | L6 | Hosted Supabase project created in Frankfurt; backup period checked | Refilwe | Region confirmed; days written in M2 and `PRIVACY_AND_ADMIN.md` | 09 Nov 2026: project `hlzfnfrxawujgofitgfc`, region Central EU (Frankfurt); no African region offered. 6 migrations pushed (`db push --remote`); RLS on all 9 tables (T-REL-5 query). Free plan: no backups; M2 v0.5 and `PRIVACY_AND_ADMIN.md` updated (question 40). Waiting for the human to tick. |
 | [ ] | L7 | Brevo account and SMTP connected; real email delivered to inbox | Refilwe | T-REL-3 passes | |
 | [ ] | L8 | Every Resource link opened and correct (A9) | Refilwe | Ticked | |
 | [ ] | L9 | Facilitator accepts Frankfurt as the data region (Q9) | Facilitator | Recorded | |

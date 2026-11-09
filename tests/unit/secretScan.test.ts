@@ -46,10 +46,11 @@ describe('T-SETUP-9: secret scan', () => {
     const result = scan([]);
     expect(result.stdout + result.stderr).not.toContain('Possible secret');
     expect(result.status).toBe(0);
-  });
+  }, 30_000); // the whole repository and its Git history are read
 });
 
-describe('Phase 8 Step 2: the secret scan also checks Git history', () => {
+// Each test makes a small Git repository, so it needs more than the 5-second default when all tests run at once.
+describe('Phase 8 Step 2: the secret scan also checks Git history', { timeout: 30_000 }, () => {
   const script = resolve('scripts/scan-secrets.mjs');
   const git = (cwd: string, ...args: string[]) => spawnSync('git', args, { cwd, encoding: 'utf8' });
 

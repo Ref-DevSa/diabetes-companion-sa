@@ -34,7 +34,7 @@ export function uniqueEmail(tag: string): string {
   return `it-${tag}-${randomUUID().slice(0, 8)}@example.co.za`.toLowerCase();
 }
 
-export const consent = { age_confirmed: 'true', privacy_agreed: 'true', privacy_notice_version: 'v0.4' };
+export const consent = { age_confirmed: 'true', privacy_agreed: 'true', privacy_notice_version: 'v0.5' };
 
 /** Creates a confirmed account with the test password. */
 export async function createUser(tag: string, options: { confirmed?: boolean } = {}) {

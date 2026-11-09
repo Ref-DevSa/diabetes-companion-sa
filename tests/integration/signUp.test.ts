@@ -1,5 +1,6 @@
 import { afterAll, describe, expect, it } from 'vitest';
 import { signUp } from '../../src/data/auth';
+import { PRIVACY_NOTICE_VERSION } from '../../src/lib/privacyNotice';
 import { admin, anonClient, createUser, findAuthUser, removeCreatedUsers, testPassword, track, uniqueEmail, waitForEmail } from '../helpers/supabaseTest';
 
 afterAll(removeCreatedUsers);
@@ -18,7 +19,7 @@ describe('OP1 Sign up (US1)', () => {
       .select('email, language, privacy_notice_version, age_confirmed_at, privacy_agreed_at')
       .eq('email', email)
       .single();
-    expect(profile).toMatchObject({ email, language: 'en', privacy_notice_version: 'v0.4' });
+    expect(profile).toMatchObject({ email, language: 'en', privacy_notice_version: PRIVACY_NOTICE_VERSION });
     expect(profile?.age_confirmed_at).toBeTruthy();
     expect(profile?.privacy_agreed_at).toBeTruthy();
 
@@ -32,7 +33,7 @@ describe('OP1 Sign up (US1)', () => {
     const { error } = await anonClient().auth.signUp({
       email,
       password: testPassword,
-      options: { data: { privacy_agreed: 'true', privacy_notice_version: 'v0.4' } },
+      options: { data: { privacy_agreed: 'true', privacy_notice_version: PRIVACY_NOTICE_VERSION } },
     });
     expect(error).not.toBeNull();
     expect(await findAuthUser(email)).toBeNull();
