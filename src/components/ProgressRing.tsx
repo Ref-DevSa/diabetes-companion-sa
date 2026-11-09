@@ -22,6 +22,7 @@ export function ProgressRing({ done, total, complete = false }: ProgressRingProp
       aria-valuemin={0}
       aria-valuemax={total}
       aria-valuenow={done}
+      aria-label={t('checklist.progress', { done, total })}
       aria-valuetext={t('checklist.progress', { done, total })}
       className="relative size-ring shrink-0"
     >

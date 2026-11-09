@@ -12,6 +12,7 @@ import { Card } from '../components/Card';
 import { ErrorState } from '../components/ErrorState';
 import { FlagBadge } from '../components/FlagBadge';
 import { LoadingPlaceholder, PlaceholderBlock } from '../components/LoadingPlaceholder';
+import { formatGlucose } from '../lib/readingRules';
 import { ProgressRing } from '../components/ProgressRing';
 
 /** A titled card that is its own landmark region, so each can be found by its title. */
@@ -34,7 +35,7 @@ function ReadingRow({ reading }: { reading: Reading }) {
     <li className="flex items-center justify-between gap-2 border-b border-placeholder py-3 first:pt-0 last:border-b-0 last:pb-0">
       <div className="flex flex-col">
         <p className="text-text">
-          <span className="text-heading font-bold">{reading.value.toFixed(1)}</span>{' '}
+          <span className="text-heading font-bold">{formatGlucose(reading.value)}</span>{' '}
           <span className="text-small text-text-secondary">{t('diary.unit')}</span>
         </p>
         <p className="text-small text-text-secondary">

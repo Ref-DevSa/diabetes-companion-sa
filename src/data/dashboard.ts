@@ -2,7 +2,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { getSupabase } from '../lib/supabase';
 import { checklistProgress } from '../lib/checklistRules';
-import { fail, isNetworkError, isOfflineNow, ok, type Result } from '../lib/errors';
+import { databaseErrorCode, fail, isOfflineNow, ok, type Result } from '../lib/errors';
 import { getTodayChecklist } from './checklist';
 import { READING_COLUMNS, toReading, type Reading } from './readings';
 
@@ -28,7 +28,7 @@ export async function getDashboard(client: SupabaseClient = getSupabase()): Prom
       .limit(DASHBOARD_READINGS),
     getTodayChecklist(client),
   ]);
-  if (readings.error) return fail(isNetworkError(readings.error) ? 'offline' : 'server');
+  if (readings.error) return fail(databaseErrorCode(readings.error));
   if (!today.ok) return today;
   return ok({
     readings: (readings.data ?? []).map(toReading),

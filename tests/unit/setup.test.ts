@@ -78,7 +78,7 @@ describe('T-SETUP-1: project setup', () => {
       expect(pkg.scripts[script], script).toBeTruthy();
     }
     expect(pkg.scripts.check).toBe(
-      'npm run lint && npm run typecheck && npm run scan:secrets && npm run test:unit && npm run test:component && npm run test:db && npm run test:int && npm run test:e2e',
+      'npm run lint && npm run typecheck && npm run scan:secrets && npm run build && npm run test:unit && npm run test:component && npm run test:db && npm run test:int && npm run test:e2e',
     );
   });
 });

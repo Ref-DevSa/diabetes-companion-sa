@@ -9,7 +9,7 @@
 |App name|Diabetes Companion SA|
 |Built from PRD version|v0.4 (the version in `docs/PRD.md`; v0.4 adds the privacy, admin, retention, consent, content-review, language and offline decisions confirmed on 03 Nov 2026)|
 |Screen designs|Google Stitch export `stitch\_diabetes\_companion\_style\_guide`, one folder per screen in `docs/designs/` (moved there on 07 Nov 2026 to match the tutor's start prompt, question 27). Where a Stitch screen disagrees with the PRD, the PRD wins: see the correction table in Section 7.3|
-|Plan version|v1.9|
+|Plan version|v2.0|
 |Repository|https://github.com/Ref-DevSa/ (repository name to be added; see Section 18, launch gate L3)|
 |Status|Ready to build (Phases 1 to 8 can run on a local Supabase; the hosted Supabase project is set up later, in Phase 9)|
 |Last updated|09 Nov 2026|
@@ -192,7 +192,7 @@ Everything in Phases 1 to 8 runs on the **local** Supabase. Before the full chec
 |Type check|`npm run typecheck`|
 |Secret scan|`npm run scan:secrets` (runs `node scripts/scan-secrets.mjs`)|
 |Coverage for business-rule code|`npm run test:coverage`|
-|**Full check (run before every "done")**|`npm run check` (runs lint, type check, secret scan, unit, component, database, integration and end-to-end tests, in that order, and stops at the first failure)|
+|**Full check (run before every "done")**|`npm run check` (runs lint, type check, secret scan, build, unit, component, database, integration and end-to-end tests, in that order, and stops at the first failure; build added in Phase 8, question 37)|
 |Build for release|`npm run build`|
 
 \---
@@ -1407,36 +1407,36 @@ The same ID may be used at two levels when both prove the same criterion, e.g. T
 |T-E2E-1 to T-E2E-8|E2E|`tests/e2e/flow1.spec.ts` … `flow8.spec.ts`|Flows 1 to 8 in PRD 7.1, step by step, including the unhappy branches|
 |T-SEC-23|Database|(Phase 2 test, re-run)|RLS enabled on every table|
 
-* \[ ] All tests above are written, run, and fail (or are confirmed passing) for the expected reason.
+* \[x] All tests above are written, run, and fail (or are confirmed passing) for the expected reason.
 
 **Step 2: Backend (Green)**
 
-* \[ ] Fix any gap found by the tests above with a new migration, never by editing an old one.
-* \[ ] `scripts/scan-secrets.mjs` also scans git history.
+* \[x] Fix any gap found by the tests above with a new migration, never by editing an old one.
+* \[x] `scripts/scan-secrets.mjs` also scans git history.
 
 **Step 3: Frontend (Green)**
 
-* \[ ] Central handling of offline and errors in `src/lib/errors.ts` and `src/hooks/`; focus management and keyboard use on sheets and dialogs; reduced motion; 3-second loading limit; session ended handling.
-* \[ ] Fix every accessibility finding.
+* \[x] Central handling of offline and errors in `src/lib/errors.ts` and `src/hooks/`; focus management and keyboard use on sheets and dialogs; reduced motion; 3-second loading limit; session ended handling.
+* \[x] Fix every accessibility finding.
 
 **Step 4: Refactor and full check**
 
-* \[ ] Code cleaned up; no duplicated logic.
-* \[ ] Full check passes; coverage for `src/lib/` at least 80%.
+* \[x] Code cleaned up; no duplicated logic.
+* \[x] Full check passes; coverage for `src/lib/` at least 80%.
 
 **Step 5: Manual checks (human)**
 
-* \[ ] Walk through every screen on a real Android phone in Chrome and in Samsung Internet.
-* \[ ] Walk through the five-minute demo script (PRD 11.7) on the local app.
-* \[ ] Test with a screen reader on one screen (TalkBack).
+* \[x] Walk through every screen on a real Android phone in Chrome and in Samsung Internet.
+* \[x] Walk through the five-minute demo script (PRD 11.7) on the local app.
+* \[x] Test with a screen reader on one screen (TalkBack).
 
 **Definition of Done**
 
-* \[ ] Every test in Step 1 passes.
-* \[ ] All earlier tests still pass.
-* \[ ] Every screen shows all its required states.
-* \[ ] Manual checks are ticked by the human.
-* \[ ] Progress log updated (Section 17).
+* \[x] Every test in Step 1 passes.
+* \[x] All earlier tests still pass.
+* \[x] Every screen shows all its required states.
+* \[x] Manual checks are ticked by the human.
+* \[x] Progress log updated (Section 17).
 
 **Commit message:** `Phase 8: Hardening`
 
@@ -1742,7 +1742,7 @@ The agent ticks each item only when its test passes. The human ticks the ones ma
 |5 Glucose Diary|07 Nov 2026|Done: automated checks pass; manual checks (6.8 / 3.6 / 14.6 with badges and messages, edit and delete on the phone, airplane mode in M1, screens against designs) confirmed by the human on 07 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 85 / 85, component 252 / 252, database 233 / 233, integration 64 / 64, end-to-end 8 / 8 (642 / 642); lint, type check, secret scan: pass. Coverage of `src/lib/`: 98.7 % of lines|none yet|S8 (newest first, 20 at a time, Load more, sticky Add reading, Flags with messages, offline disables Add/Edit/Delete), M1 (five fields, every PRD error, Saving..., offline, deleted-elsewhere), M4. BR1 to BR9 and BR14 as pure functions; OP15 to OP18. Shared field parts (FieldMessage, SelectField, TextAreaField); Modal can now be a bottom sheet. Fixes before the first full green run, none changing what is checked: offline save test now logs in first then drops the connection (the real case); 25-Reading fixture values made unique; a "missing date" test asks only for some date error until question 31 is answered|
 |6 Daily Checklist|09 Nov 2026|Done: automated checks pass; manual checks (ticks, add / rename / delete "Evening walk" and "All done today. Nice work!" on the phone at 192.168.0.9, screens against designs) confirmed by the human on 09 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 96 / 96, component 286 / 286, database 233 / 233, integration 78 / 78, end-to-end 8 / 8 (701 / 701); lint, type check, secret scan: pass. Coverage of `src/lib/`: 98 % of lines|none yet|S9 (title "Today" and the SAST date, progress card with the ring, Standard then Custom Items, ticks shown only after the database confirms, "All done today. Nice work!", limit message, offline tick message, midnight watcher with the new-day toast, also on waking after midnight), M5 (add and rename, every PRD error, Saving..., offline with Save disabled), ProgressRing. BR10 to BR13 as pure functions; OP20 to OP25; error codes `custom_item_limit` and `item_name_taken`. `useLoad` `update` can now take a function of the latest data. Fixes before the first full green run, none changing what is checked: offline tick test now logs in first then drops the connection (as in Phase 5); T-BR16-2 now waits for the real S9 title "Today" instead of the old placeholder text "S9". The end-to-end dev server could not reach Supabase because the computer's Wi-Fi address changed from 192.168.0.8 to 192.168.0.9; the git-ignored `.env.development.local` was updated. Questions 33 and 34 added and answered (keep current)|
 |7 Dashboard, Resources and Family Support|09 Nov 2026|Done: automated checks pass; manual checks (S10 as thabo.test on the phone at 192.168.0.9, S7 opens each link, screens against designs) confirmed by the human on 09 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 97 / 97, component 308 / 308, database 233 / 233, integration 89 / 89, end-to-end 8 / 8 (735 / 735); lint, type check, secret scan: pass. Coverage of `src/lib/`: 98 % of lines|none yet|S10 ("My Dashboard", "Last 7 readings" with value, When, short SAST date and Flag badge, "See all in my Diary", "Today's checklist" with the ring and "Go to Checklist", empty with "Add a reading", loading, error; offline keeps the loaded data), S7 ("Help and family support", three Resource cards opening in a new tab, five tips, the notice; empty, loading, error; offline tap shows "You're offline. Reconnect to open this link." and does not open). OP13, OP14 (published rows only, English fallback) and OP19 (7 newest Readings plus today's progress, reusing OP20). The development-only placeholder is removed (T-NAV-9). Design corrections: no subtitles, no "5 shown", no "%", no "Keep up your daily care routine", no invented S7 empty or error sub-text. Every test passed on the first full run. During the manual check the phone still held a session from before a test database reset, so its saves were refused (old user id); logging in again fixed it|
-|8 Hardening|not started|Not started|not run|none yet||
+|8 Hardening|09 Nov 2026|Done: automated checks pass; manual checks (every screen on an Android phone in Chrome and Samsung Internet, the five-minute demo script without step 1 because isiZulu stays off until reviewed (BR21, launch gate L2), TalkBack on one screen) confirmed by the human on 09 Nov 2026|`npm run db:reset` then `npm run check`: pass. Unit 142 / 142, component 330 / 330, database 233 / 233, integration 90 / 90, end-to-end 56 / 56 (Pixel 5 for every spec; desktop Chromium, Firefox and WebKit for the key flows) (851 / 851); lint, type check, secret scan (files and Git history), build: pass. Coverage of `src/lib/`: 98.3 % of lines. First load about 191 KB gzip plus one font file|none yet|Gaps found by the new tests and fixed: (1) S2, S3, S4 now show "You're offline. Reconnect and try again." (they only disabled the button); (2) a server error on M1, M5, S2, S3, S4 and S9 now offers "Try again" (shared `FormStatus`, `Banner` action); (3) an account deleted on another phone: the app checks the account on opening and on returning to the tab, and a save refused for a missing owner ends the session with "Your session has ended. Please log in again." (central `databaseErrorCode` and `onSessionEnded` in `src/lib/errors.ts`; all data modules use it); (4) a race after logging in: a late redirect could pull the person back to S1 after they had tapped another tab (S3 now redirects only while it is on screen); (5) accessibility: header logo link and S9 Edit/Delete widened to 44 px, the "Privacy Notice" link in S2 made 44 px high, the progress ring named, the M2 text area reachable by keyboard, and the S6 emergency title is now the page heading (h1; no new words); (6) `formatGlucose` replaces four copies of `toFixed(1)`; (7) `scripts/scan-secrets.mjs` also scans Git history. Test set-up: end-to-end tests now build the app and serve it on port 5174 against the local Supabase (`E2E_BASE_URL` in `.env` and `.env.example` changed from 5173 to 5174), so they no longer depend on the Wi-Fi address or a running dev server; Firefox and WebKit installed (question 35); `npm run check` builds first (question 37); `supabase/config.toml` allows email links back to port 5174 and to 192.168.0.9. Fixes to new tests before the first green run, none changing what is checked: Flow 8 uses the S11 language radio group (not a list box); the bundle test looks for real key values (the Supabase library names the "sb_secret_" prefix and the Privacy Notice names Brevo); the leak test's pattern no longer matches `.test(error.message)`. The Phase 1 test of the exact `check` command was updated for question 37. Already covered by earlier tests and re-run: T-EDGE-4, T-EDGE-5, T-EDGE-6, T-EDGE-7, T-NFR-13, T-SEC-23. Questions 35 to 37 added and answered.|
 |9 Release|not started|Not started|not run|none yet||
 
 \---
@@ -1789,6 +1789,9 @@ Every answer below is also written into PRD v0.4 and its change log.
 |32|M1 uses the phone's own date and time boxes, which show the date order and 12- or 24-hour clock of the phone's language settings; PRD 12.1 asks for a 24-hour clock|`src/modals/ReadingSheet.tsx`; PRD 12.1|On a phone set to English (South Africa) Chrome shows 24-hour time. The values saved and shown everywhere else are SAST, 24-hour ("27 Oct 2026, 07:10"). Options: keep the phone's own boxes (easier to use, recommended), or replace them with plain text boxes typed as DD/MM/YYYY and HH:MM. Decided by the human on 07 Nov 2026: keep the phone's own pickers.|Answered|
 |33|M5 titles: the PRD names the sheet "Add or edit Custom Item" but gives no title text to show|PRD 8.2 M5; `src/modals/CustomItemSheet.tsx`, `src/i18n/en.json` (`customItem.addTitle`, `customItem.editTitle`)|For now the sheet shows "Add my own item" when adding (the PRD button that opens it) and "Edit" when renaming (the PRD button that opens it), so no new words are invented. Decided by the human on 09 Nov 2026: keep these titles.|Answered|
 |34|F3 says "a friendly message with every tick", but BR14 gives friendly messages only for saved Readings and the PRD gives no tick wording|PRD 4.1 F3, 9 (interactive touches), BR14, BR15; `src/screens/DailyChecklist.tsx`|For now every tick fills the ring and updates "X of Y done" at once (PRD 9: "Ticking an Item plays a short tick animation, fills a progress ring and shows X of Y done"), and "All done today. Nice work!" shows when all are ticked. No extra tick messages were invented. Decided by the human on 09 Nov 2026: keep this; no extra tick messages.|Answered|
+|35|T-NFR-4 needs the Firefox and WebKit browsers for Playwright (a one-time download outside the project; no new npm library)|Phase 8 test table; `playwright.config.ts`|Decided by the human on 09 Nov 2026: download them (`npx playwright install firefox webkit`).|Answered|
+|36|T-NFR-5 says the three language files have "the same keys", but `zu.json` and `tn.json` stay empty until a qualified person translates and reviews them (BR21); translations must not be invented|Phase 8 test table; `src/i18n/`; BR17, BR21|Decided by the human on 09 Nov 2026: the test checks that every isiZulu and Setswana key also exists in English, no value is empty, and any missing key shows English. The files stay empty until the translators fill them (launch gate).|Answered|
+|37|T-NFR-2 and T-NFR-11 read the built `dist` folder, but `npm run check` did not build the app|`package.json` (`check`); Phase 8 test table|Decided by the human on 09 Nov 2026: `npm run check` now runs `npm run build` before the unit tests.|Answered|
 
 **Note on Phase 3 size (mentor feedback, 04 Nov 2026):** Phase 3 covers 5 stories, 6 screens and modals and many tests. It is kept as one phase so the phase numbers, test IDs and traceability stay unchanged. If it is too large for one session, the human may tell the agent to build it in two halves inside the same phase and stop between them: first S2, S3, S4 (sign-up, log-in, reset: US1 to US3), then S11, M2, M3 (profile, language, delete account: US4, US5). The Definition of Done still applies to the whole phase.
 
@@ -1846,6 +1849,7 @@ If anything is unclear, add a row to Section 18 and ask. Never guess.
 
 |Plan version|Date|What changed|Why|
 |-|-|-|-|
+|v2.0|09 Nov 2026|Phase 8 progress recorded; questions 35 (Firefox and WebKit), 36 (language files) and 37 (build in the check) added and answered; the full-check command now includes the build|Phase 8|
 |v1.9|09 Nov 2026|Phase 7 progress recorded|Phase 7|
 |v1.8|09 Nov 2026|Phase 6 progress recorded; questions 33 (M5 titles) and 34 (tick messages) added and answered|Phase 6|
 |v1.7|07 Nov 2026|Phase 5 progress recorded; questions 31 (cleared date or time) and 32 (phone date and time boxes) added|Phase 5|

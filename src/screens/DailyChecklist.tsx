@@ -25,7 +25,8 @@ import { Toast } from '../components/Toast';
 import { CustomItemSheet } from '../modals/CustomItemSheet';
 
 type Sheet = { mode: 'add' } | { mode: 'edit'; item: ChecklistItem } | null;
-type Notice = { text: string; variant: 'info' | 'error' } | null;
+/** A message above the Items; a server error offers "Try again" to repeat the action (PRD 6.2). */
+type Notice = { text: string; variant: 'info' | 'error'; retry?: () => void } | null;
 type ToastState = { id: number; message: string; variant: 'success' | 'neutral' } | null;
 
 /** S9 Daily Checklist (PRD 8.2): today's Items with their ticks, progress, and Custom Items. */
@@ -45,8 +46,12 @@ export function DailyChecklist() {
     setToast({ id: toastCount.current, message, variant });
   }
 
-  function showError(code: ErrorCode) {
-    setNotice({ text: t(code === 'offline' ? 'checklist.offlineTicks' : errorMessageKey[code]), variant: 'error' });
+  function showError(code: ErrorCode, retry?: () => void) {
+    setNotice({
+      text: t(code === 'offline' ? 'checklist.offlineTicks' : errorMessageKey[code]),
+      variant: 'error',
+      retry: code === 'server' ? retry : undefined,
+    });
   }
 
   // BR12 and edge case 7: at 00:00 SAST a new day starts, so say so and load it with every Item unticked.
@@ -91,7 +96,7 @@ export function DailyChecklist() {
     const result = ticked ? await untickItem(item.id) : await tickItem(item.id);
     setSaving((ids) => ids.filter((id) => id !== item.id));
     if (!result.ok) {
-      showError(result.code);
+      showError(result.code, () => void onToggle(item, ticked));
       return;
     }
     update((current: TodayChecklist) => ({
@@ -124,7 +129,8 @@ export function DailyChecklist() {
     const result = await deleteCustomItem(item.id);
     setDeleting(null);
     if (!result.ok && result.code !== 'not_found') {
-      setNotice({ text: t(errorMessageKey[result.code === 'offline' ? 'offline' : 'server']), variant: 'error' });
+      const code = result.code === 'offline' ? 'offline' : 'server';
+      setNotice({ text: t(errorMessageKey[code]), variant: 'error', retry: code === 'server' ? () => void onDelete(item) : undefined });
       return;
     }
     update((current: TodayChecklist) => ({
@@ -172,7 +178,11 @@ export function DailyChecklist() {
             ) : null}
           </div>
         </Card>
-        {notice ? <Banner variant={notice.variant}>{notice.text}</Banner> : null}
+        {notice ? (
+          <Banner variant={notice.variant} action={notice.retry ? { label: t('common.tryAgain'), onClick: notice.retry } : undefined}>
+            {notice.text}
+          </Banner>
+        ) : null}
         <ul className="flex flex-col gap-2">
           {items.map((item) => (
             <ChecklistItemRow

@@ -5,6 +5,7 @@ import { formatDateTime } from '../lib/dates';
 import { getFlag } from '../lib/flag';
 import { Button } from './Button';
 import { FlagBadge } from './FlagBadge';
+import { formatGlucose } from '../lib/readingRules';
 import { FlagMessage } from './FlagMessage';
 
 type ReadingCardProps = {
@@ -24,7 +25,7 @@ export function ReadingCard({ reading, disabled = false, onEdit, onDelete }: Rea
       <div className="flex items-start justify-between gap-2">
         <p className="text-text">
           <span data-part="value" className="text-heading font-bold">
-            {reading.value.toFixed(1)}
+            {formatGlucose(reading.value)}
           </span>{' '}
           <span className="text-small text-text-secondary">{t('diary.unit')}</span>
         </p>

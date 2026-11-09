@@ -1,8 +1,8 @@
 import { afterAll, describe, expect, it } from 'vitest';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 
 const tempDir = mkdtempSync(join(tmpdir(), 'dcsa-scan-'));
 
@@ -45,6 +45,39 @@ describe('T-SETUP-9: secret scan', () => {
   it('T-SETUP-9: passes on the clean repository', () => {
     const result = scan([]);
     expect(result.stdout + result.stderr).not.toContain('Possible secret');
+    expect(result.status).toBe(0);
+  });
+});
+
+describe('Phase 8 Step 2: the secret scan also checks Git history', () => {
+  const script = resolve('scripts/scan-secrets.mjs');
+  const git = (cwd: string, ...args: string[]) => spawnSync('git', args, { cwd, encoding: 'utf8' });
+
+  function repoWithHistory(secretLine: string) {
+    const repo = join(tempDir, `repo-${Math.random().toString(36).slice(2, 8)}`);
+    mkdirSync(repo);
+    git(repo, 'init', '-q');
+    git(repo, 'config', 'user.email', 'scan-test@example.co.za');
+    git(repo, 'config', 'user.name', 'Scan test');
+    git(repo, 'config', 'commit.gpgsign', 'false');
+    writeFileSync(join(repo, 'old.ts'), secretLine);
+    git(repo, 'add', '.');
+    git(repo, 'commit', '-q', '-m', 'first');
+    writeFileSync(join(repo, 'old.ts'), 'export const clean = true;\n');
+    git(repo, 'commit', '-q', '-am', 'removed');
+    return repo;
+  }
+
+  it('T-SETUP-9: a secret removed in a later commit is still found in history', () => {
+    const repo = repoWithHistory(`const key = '${'sb_' + 'secret_' + 'A1b2C3d4E5f6G7h8I9j0K1l2M3n4'}';\n`);
+    const result = spawnSync(process.execPath, [script], { cwd: repo, encoding: 'utf8' });
+    expect(result.status).toBe(1);
+    expect(result.stdout + result.stderr).toMatch(/history/i);
+  });
+
+  it('T-SETUP-9: clean history passes', () => {
+    const repo = repoWithHistory('export const first = 1;\n');
+    const result = spawnSync(process.execPath, [script], { cwd: repo, encoding: 'utf8' });
     expect(result.status).toBe(0);
   });
 });

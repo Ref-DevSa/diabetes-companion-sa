@@ -1,6 +1,7 @@
 // Secret scan (IMPLEMENTATION_PLAN.md Sections 2 and 9.2).
 // Usage:
-//   node scripts/scan-secrets.mjs            scan every file Git tracks or would track (ignored files skipped)
+//   node scripts/scan-secrets.mjs            scan every file Git tracks or would track (ignored files skipped),
+//                                            then every line ever added in Git history (Phase 8)
 //   node scripts/scan-secrets.mjs <file>...  scan only the given files
 // Exits with 1 and prints where a possible secret was found, otherwise exits with 0.
 import { execFileSync } from 'node:child_process';
@@ -36,7 +37,8 @@ function listRepositoryFiles() {
   return output.split('\0').filter(Boolean);
 }
 
-const files = process.argv.length > 2 ? process.argv.slice(2) : listRepositoryFiles();
+const scanAll = process.argv.length <= 2;
+const files = scanAll ? listRepositoryFiles() : process.argv.slice(2);
 const testPassword = readTestPassword();
 const findings = [];
 
@@ -54,9 +56,43 @@ for (const file of files) {
   });
 }
 
+/** Every line ever added in any commit, so a secret that was committed and later removed is still found. */
+function scanHistory() {
+  let log;
+  try {
+    log = execFileSync('git', ['log', '--all', '-p', '--no-color', '--no-ext-diff', '--format=commit %H'], {
+      encoding: 'utf8',
+      maxBuffer: 512 * 1024 * 1024,
+      stdio: ['ignore', 'pipe', 'ignore'],
+    });
+  } catch {
+    return 0; // not a Git repository, or no commits yet
+  }
+  let commit = '';
+  let file = '';
+  let commits = 0;
+  for (const line of log.split(/\r?\n/)) {
+    if (line.startsWith('commit ')) {
+      commit = line.slice(7, 15);
+      commits += 1;
+    } else if (line.startsWith('+++ ')) {
+      file = line.replace(/^\+\+\+ (b\/)?/, '');
+    } else if (line.startsWith('+') && !binaryExtensions.has(extname(file).toLowerCase())) {
+      const added = line.slice(1);
+      for (const rule of rules) {
+        if (rule.pattern.test(added)) findings.push(`history: commit ${commit}, ${file} (${rule.name})`);
+      }
+      if (testPassword && added.includes(testPassword)) findings.push(`history: commit ${commit}, ${file} (test-only password)`);
+    }
+  }
+  return commits;
+}
+
+const commitsScanned = scanAll ? scanHistory() : 0;
+
 if (findings.length > 0) {
   for (const finding of findings) console.error(`Possible secret in ${finding}`);
   console.error(`Secret scan failed: ${findings.length} finding(s). Remove the value and use .env instead.`);
   process.exit(1);
 }
-console.log(`Secret scan passed: ${files.length} file(s) checked, no secrets found.`);
+console.log(`Secret scan passed: ${files.length} file(s) and ${commitsScanned} commit(s) of Git history checked, no secrets found.`);

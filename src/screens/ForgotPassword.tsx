@@ -1,15 +1,15 @@
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { Clock, MailCheck } from 'lucide-react';
 import { requestPasswordReset, saveNewPassword } from '../data/auth';
-import { errorMessageKey, type ErrorCode } from '../lib/errors';
+import type { ErrorCode } from '../lib/errors';
 import { checkNewPassword, isValidEmail } from '../lib/password';
 import { useAuth } from '../auth/AuthContext';
 import type { LogInState } from '../auth/guards';
 import { useOnline } from '../hooks/useOnline';
-import { Banner } from '../components/Banner';
 import { Button } from '../components/Button';
+import { FormStatus } from '../components/FormStatus';
 import { Card } from '../components/Card';
 import { PasswordField } from '../components/PasswordField';
 import { TextField } from '../components/TextField';
@@ -23,6 +23,7 @@ function RequestLink() {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState<string>();
   const [failure, setFailure] = useState<ErrorCode | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
@@ -59,8 +60,8 @@ function RequestLink() {
     <Card className="flex flex-col gap-4">
       <h1 className="text-title font-bold text-text">{t('forgot.title')}</h1>
       <p className="text-body text-text-secondary">{t('forgot.text')}</p>
-      {failure ? <Banner variant="error">{t(errorMessageKey[failure])}</Banner> : null}
-      <form noValidate onSubmit={onSubmit} className="flex flex-col gap-4">
+      <FormStatus online={online} failure={failure} onRetry={() => formRef.current?.requestSubmit()} />
+      <form ref={formRef} noValidate onSubmit={onSubmit} className="flex flex-col gap-4">
         <TextField
           label={t('forgot.email')}
           type="email"
@@ -90,6 +91,7 @@ function ChooseNewPassword({ onExpired }: { onExpired: () => void }) {
   const [confirmation, setConfirmation] = useState('');
   const [problem, setProblem] = useState<'weak' | 'mismatch' | null>(null);
   const [failure, setFailure] = useState<ErrorCode | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [saving, setSaving] = useState(false);
 
   async function onSubmit(event: FormEvent) {
@@ -116,8 +118,8 @@ function ChooseNewPassword({ onExpired }: { onExpired: () => void }) {
   return (
     <Card className="flex flex-col gap-4">
       <h1 className="text-title font-bold text-text">{t('forgot.newTitle')}</h1>
-      {failure ? <Banner variant="error">{t(errorMessageKey[failure])}</Banner> : null}
-      <form noValidate onSubmit={onSubmit} className="flex flex-col gap-4">
+      <FormStatus online={online} failure={failure} onRetry={() => formRef.current?.requestSubmit()} />
+      <form ref={formRef} noValidate onSubmit={onSubmit} className="flex flex-col gap-4">
         <PasswordField
           label={t('forgot.newPassword')}
           autoComplete="new-password"

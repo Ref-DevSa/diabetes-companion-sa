@@ -47,7 +47,7 @@ export function ChecklistItemRow({ item, ticked, saving = false, actionsDisabled
             type="button"
             disabled={actionsDisabled}
             onClick={() => onEdit(item)}
-            className="focus-ring min-h-touch rounded-button px-2 text-small font-semibold text-primary disabled:text-disabled"
+            className="focus-ring min-h-touch min-w-touch rounded-button px-2 text-small font-semibold text-primary disabled:text-disabled"
           >
             {t('checklist.edit')}
           </button>
@@ -55,7 +55,7 @@ export function ChecklistItemRow({ item, ticked, saving = false, actionsDisabled
             type="button"
             disabled={actionsDisabled}
             onClick={() => onDelete(item)}
-            className="focus-ring min-h-touch rounded-button px-2 text-small font-semibold text-error disabled:text-disabled"
+            className="focus-ring min-h-touch min-w-touch rounded-button px-2 text-small font-semibold text-error disabled:text-disabled"
           >
             {t('checklist.delete')}
           </button>

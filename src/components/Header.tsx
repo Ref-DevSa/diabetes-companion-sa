@@ -19,7 +19,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-20 h-header border-b border-placeholder bg-card">
       <div className="mx-auto flex h-full w-full max-w-desktop items-center justify-between gap-2 px-3">
-        <Link to="/" className="focus-ring inline-flex min-h-touch items-center rounded-button">
+        <Link to="/" className="focus-ring inline-flex min-h-touch min-w-touch items-center rounded-button">
           <Logo />
         </Link>
         <div className="flex items-center gap-1">

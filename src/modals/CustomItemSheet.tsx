@@ -1,12 +1,12 @@
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { addCustomItem, renameCustomItem, type ChecklistItem } from '../data/checklist';
 import { validateItemName, type ItemNameError } from '../lib/checklistRules';
-import { errorMessageKey, type ErrorCode } from '../lib/errors';
+import type { ErrorCode } from '../lib/errors';
 import { useOnline } from '../hooks/useOnline';
-import { Banner } from '../components/Banner';
 import { BottomSheet } from '../components/BottomSheet';
 import { Button } from '../components/Button';
+import { FormStatus } from '../components/FormStatus';
 import { TextField } from '../components/TextField';
 
 type CustomItemSheetProps = {
@@ -27,6 +27,7 @@ export function CustomItemSheet({ item, existingNames, onClose, onSaved }: Custo
   const [error, setError] = useState<ItemNameError | null>(null);
   const [failure, setFailure] = useState<ErrorCode | null>(null);
   const [saving, setSaving] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
@@ -46,9 +47,8 @@ export function CustomItemSheet({ item, existingNames, onClose, onSaved }: Custo
 
   return (
     <BottomSheet title={t(item ? 'customItem.editTitle' : 'customItem.addTitle')} onCancel={onClose}>
-      {!online ? <Banner variant="error">{t('errors.offline')}</Banner> : null}
-      {failure && online ? <Banner variant="error">{t(errorMessageKey[failure])}</Banner> : null}
-      <form noValidate onSubmit={onSubmit} className="flex flex-col gap-4">
+      <FormStatus online={online} failure={failure} onRetry={() => formRef.current?.requestSubmit()} />
+      <form ref={formRef} noValidate onSubmit={onSubmit} className="flex flex-col gap-4">
         <TextField
           label={t('customItem.name')}
           placeholder={t('customItem.placeholder')}

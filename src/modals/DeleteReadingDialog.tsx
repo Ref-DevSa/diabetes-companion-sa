@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { ConfirmDialog } from '../components/ConfirmDialog';
 import type { Reading } from '../data/readings';
+import { formatGlucose } from '../lib/readingRules';
 import { formatDateTime } from '../lib/dates';
 
 type DeleteReadingDialogProps = {
@@ -20,7 +21,7 @@ export function DeleteReadingDialog({ reading, loading = false, failed = false, 
       title={t('deleteReading.title')}
       text={t('deleteReading.text', {
         dateTime: formatDateTime(reading.takenAt),
-        value: reading.value.toFixed(1),
+        value: formatGlucose(reading.value),
         when: t(`when.${reading.when}`),
       })}
       confirmLabel={t('deleteReading.confirm')}

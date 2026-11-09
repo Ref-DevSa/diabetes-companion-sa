@@ -17,7 +17,8 @@ export type ErrorCode =
   | 'daily_limit'
   | 'not_found'
   | 'custom_item_limit'
-  | 'item_name_taken';
+  | 'item_name_taken'
+  | 'session_ended';
 
 export type Result<T = void> = { ok: true; data: T } | { ok: false; code: ErrorCode };
 
@@ -45,6 +46,7 @@ export const errorMessageKey: Record<ErrorCode, string> = {
   not_found: 'diary.gone',
   custom_item_limit: 'errors.customItemLimit',
   item_name_taken: 'errors.itemNameTaken',
+  session_ended: 'errors.sessionEnded',
 };
 
 /** True when the browser already knows it has no internet (BR23). */
@@ -59,4 +61,48 @@ export function isNetworkError(error: unknown): boolean {
   if (name === 'AuthRetryableFetchError') return true;
   if (status === 0) return true;
   return /failed to fetch|fetch failed|networkerror|load failed|network request failed/i.test(message ?? '');
+}
+
+// ---------------------------------------------------------------- session ended (PRD 6.2, edge cases 3 and 9)
+const sessionEndedListeners = new Set<() => void>();
+
+/** AuthProvider listens here: when a save shows the account is gone, it signs the person out. */
+export function onSessionEnded(listener: () => void): () => void {
+  sessionEndedListeners.add(listener);
+  return () => {
+    sessionEndedListeners.delete(listener);
+  };
+}
+
+type DatabaseError = { code?: string; message?: string; name?: string; status?: number };
+
+/**
+ * True when the database refused a request because the account behind the session no longer exists
+ * (deleted on another phone: the owner link fails) or the login token was rejected.
+ */
+function isSessionGone(error: DatabaseError): boolean {
+  if (error.code === 'PGRST301' || error.code === 'PGRST303') return true;
+  return error.code === '23503' && /_user_id_fkey/.test(error.message ?? '');
+}
+
+/**
+ * One place that turns a database error into the PRD message code (Phase 8 Step 3):
+ * no network → offline; account gone → session_ended (and the session is ended);
+ * a rule of the calling screen → its own code; anything else → server.
+ */
+export function databaseErrorCode(error: DatabaseError, specific?: (error: DatabaseError) => ErrorCode | undefined): ErrorCode {
+  if (isNetworkError(error)) return 'offline';
+  if (isSessionGone(error)) {
+    for (const listener of sessionEndedListeners) listener();
+    return 'session_ended';
+  }
+  return specific?.(error) ?? 'server';
+}
+
+/** True when Supabase Auth says the signed-in account or its session no longer exists (not for network or server faults). */
+export function isAccountGone(error: unknown): boolean {
+  if (!error || typeof error !== 'object' || isNetworkError(error)) return false;
+  const { status, code } = error as { status?: number; code?: string };
+  if (code === 'user_not_found' || code === 'session_not_found' || code === 'bad_jwt') return true;
+  return status === 401 || status === 403;
 }

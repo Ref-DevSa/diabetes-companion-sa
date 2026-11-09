@@ -161,4 +161,25 @@ describe('S5 Learning Centre', () => {
     expect(screen.getByRole('heading', { name: 'What is diabetes?' })).toBeInTheDocument();
     expect(within(screen.getByRole('main')).queryByText("You're offline. Reconnect to read Topics.")).not.toBeInTheDocument();
   });
+
+  it('T-EDGE-10: a Topic with no text in the chosen language shows the English text, with no message about it', async () => {
+    const row = {
+      id: 'zu-missing',
+      slug: 'what-is-diabetes',
+      title_en: 'What is diabetes?',
+      summary_en: 'The basics in plain words',
+      body_en: 'Body text for What is diabetes?',
+      title_zu: null,
+      summary_zu: null,
+      body_zu: null,
+      reading_minutes: 3,
+      reviewed_at: '2026-10-27',
+    };
+    listTopics.mockResolvedValue(ok([content.localizeTopic(row, 'zu')]));
+    const user = userEvent.setup();
+    openLearn();
+    await user.click(await screen.findByRole('button', { name: /What is diabetes?/ }));
+    expect(screen.getByText('Body text for What is diabetes?')).toBeInTheDocument();
+    expect(screen.getByRole('main').textContent).not.toMatch(/translat|not available|English only/i);
+  });
 });

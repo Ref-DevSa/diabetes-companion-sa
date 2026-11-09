@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { MailCheck } from 'lucide-react';
@@ -6,7 +6,7 @@ import { signUp } from '../data/auth';
 import { errorMessageKey, type ErrorCode } from '../lib/errors';
 import { isValidEmail, isValidPassword } from '../lib/password';
 import { useOnline } from '../hooks/useOnline';
-import { Banner } from '../components/Banner';
+import { FormStatus } from '../components/FormStatus';
 import { Button, ButtonLink } from '../components/Button';
 import { Card } from '../components/Card';
 import { Checkbox } from '../components/Checkbox';
@@ -29,6 +29,7 @@ export function SignUp() {
   const [saving, setSaving] = useState(false);
   const [done, setDone] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
@@ -71,8 +72,8 @@ export function SignUp() {
     <>
       <Card className="flex flex-col gap-4">
         <h1 className="text-title font-bold text-text">{t('signUp.title')}</h1>
-        {serverError ? <Banner variant="error">{t(errorMessageKey[serverError])}</Banner> : null}
-        <form noValidate onSubmit={onSubmit} className="flex flex-col gap-4">
+        <FormStatus online={online} failure={serverError} onRetry={() => formRef.current?.requestSubmit()} />
+        <form ref={formRef} noValidate onSubmit={onSubmit} className="flex flex-col gap-4">
           <TextField
             label={t('signUp.email')}
             type="email"
@@ -102,7 +103,7 @@ export function SignUp() {
                 <button
                   type="button"
                   onClick={() => setShowPrivacy(true)}
-                  className="focus-ring rounded-button font-semibold text-primary-dark underline"
+                  className="focus-ring inline-flex min-h-touch items-center rounded-button align-middle font-semibold text-primary-dark underline"
                 >
                   {t('signUp.privacyLink')}
                 </button>

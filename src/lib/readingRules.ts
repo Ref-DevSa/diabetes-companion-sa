@@ -55,3 +55,8 @@ export function validateReading(form: ReadingForm, now: number = Date.now()): Re
   if (form.note.length > NOTE_MAX) errors.note = 'errors.noteTooLong';
   return errors;
 }
+
+/** PRD 12.1: glucose in mmol/L with a full stop and one decimal, like "6.8". */
+export function formatGlucose(value: number): string {
+  return value.toFixed(1);
+}

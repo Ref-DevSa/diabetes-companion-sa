@@ -159,6 +159,13 @@ describe('OP17, OP18 Edit and delete (US8, BR8)', () => {
     await admin.from('readings').delete().eq('id', added.data.id);
     expect(await updateReading(added.data.id, input(), client)).toEqual({ ok: false, code: 'not_found' });
   });
+
+  it('T-EDGE-9: saving after the account was deleted on another phone gives "session_ended" and nothing is saved', async () => {
+    const { user, client } = await userClient('deleted-elsewhere');
+    await admin.auth.admin.deleteUser(user.id);
+    expect(await addReading(input(), client)).toEqual({ ok: false, code: 'session_ended' });
+    expect(await countFor(user.id)).toBe(0);
+  });
 });
 
 describe('T-INT-7: another User\'s Reading cannot be touched through the operations', () => {

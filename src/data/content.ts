@@ -2,7 +2,7 @@
 // Explicit column lists: never "*" and never reviewed_by (SEC16 to SEC19). RLS returns published rows only.
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { getSupabase } from '../lib/supabase';
-import { fail, isNetworkError, isOfflineNow, ok, type Result } from '../lib/errors';
+import { databaseErrorCode, fail, isOfflineNow, ok, type Result } from '../lib/errors';
 import { pickText } from '../lib/pickText';
 import type { LanguageCode } from '../i18n/languages';
 
@@ -58,7 +58,7 @@ export function localizeSafetyItem(row: Row, language: LanguageCode): SafetyItem
 export async function listTopics(language: LanguageCode, client: SupabaseClient = getSupabase()): Promise<Result<Topic[]>> {
   if (isOfflineNow()) return fail('offline');
   const { data, error } = await client.from('topics').select(TOPIC_COLUMNS).order('sort_order');
-  if (error) return fail(isNetworkError(error) ? 'offline' : 'server');
+  if (error) return fail(databaseErrorCode(error));
   return ok((data ?? []).map((row) => localizeTopic(row, language)));
 }
 
@@ -66,7 +66,7 @@ export async function listTopics(language: LanguageCode, client: SupabaseClient 
 export async function listSafetyItems(language: LanguageCode, client: SupabaseClient = getSupabase()): Promise<Result<SafetyItem[]>> {
   if (isOfflineNow()) return fail('offline');
   const { data, error } = await client.from('safety_items').select(SAFETY_COLUMNS).order('sort_order');
-  if (error) return fail(isNetworkError(error) ? 'offline' : 'server');
+  if (error) return fail(databaseErrorCode(error));
   return ok((data ?? []).map((row) => localizeSafetyItem(row, language)));
 }
 
@@ -81,7 +81,7 @@ const TIP_COLUMNS = 'id, text_en, text_zu, text_tn, sort_order';
 export async function listResources(language: LanguageCode, client: SupabaseClient = getSupabase()): Promise<Result<Resource[]>> {
   if (isOfflineNow()) return fail('offline');
   const { data, error } = await client.from('resources').select(RESOURCE_COLUMNS).order('sort_order');
-  if (error) return fail(isNetworkError(error) ? 'offline' : 'server');
+  if (error) return fail(databaseErrorCode(error));
   return ok(
     (data ?? []).map((row) => ({
       id: String(row.id),
@@ -96,6 +96,6 @@ export async function listResources(language: LanguageCode, client: SupabaseClie
 export async function listFamilyTips(language: LanguageCode, client: SupabaseClient = getSupabase()): Promise<Result<FamilyTip[]>> {
   if (isOfflineNow()) return fail('offline');
   const { data, error } = await client.from('family_tips').select(TIP_COLUMNS).order('sort_order');
-  if (error) return fail(isNetworkError(error) ? 'offline' : 'server');
+  if (error) return fail(databaseErrorCode(error));
   return ok((data ?? []).map((row) => ({ id: String(row.id), text: pickText(row, 'text', language) })));
 }

@@ -1,7 +1,7 @@
 // Checklist operations OP20 to OP25 (IMPLEMENTATION_PLAN.md Section 10). RLS keeps Custom Items and ticks to their owner.
 import type { PostgrestError, SupabaseClient } from '@supabase/supabase-js';
 import { getSupabase } from '../lib/supabase';
-import { fail, isNetworkError, isOfflineNow, ok, type ErrorCode, type Result } from '../lib/errors';
+import { databaseErrorCode, fail, isNetworkError, isOfflineNow, ok, type ErrorCode, type Result } from '../lib/errors';
 import { isStandardKey, type StandardKey } from '../lib/checklistRules';
 import { sastToday } from '../lib/dates';
 
@@ -36,10 +36,11 @@ function toItem(row: Record<string, unknown>): ChecklistItem {
 
 /** Database refusals (Section 8.6 triggers and the unique index) become the matching PRD message. */
 function codeFor(error: PostgrestError): ErrorCode {
-  if (isNetworkError(error)) return 'offline';
-  if (error.message === 'custom_item_limit') return 'custom_item_limit';
-  if (error.code === UNIQUE_VIOLATION) return 'item_name_taken';
-  return 'server';
+  return databaseErrorCode(error, ({ code, message }) => {
+    if (message === 'custom_item_limit') return 'custom_item_limit';
+    if (code === UNIQUE_VIOLATION) return 'item_name_taken';
+    return undefined;
+  });
 }
 
 async function currentUserId(client: SupabaseClient): Promise<Result<string>> {
@@ -72,7 +73,7 @@ export async function tickItem(itemId: string, client: SupabaseClient = getSupab
   const user = await currentUserId(client);
   if (!user.ok) return user;
   const { error } = await client.from('checklist_ticks').insert({ user_id: user.data, item_id: itemId });
-  if (error && error.code !== UNIQUE_VIOLATION) return fail(isNetworkError(error) ? 'offline' : 'server');
+  if (error && error.code !== UNIQUE_VIOLATION) return fail(databaseErrorCode(error));
   return ok(undefined);
 }
 
@@ -80,7 +81,7 @@ export async function tickItem(itemId: string, client: SupabaseClient = getSupab
 export async function untickItem(itemId: string, client: SupabaseClient = getSupabase()): Promise<Result> {
   if (isOfflineNow()) return fail('offline');
   const { error } = await client.from('checklist_ticks').delete().eq('item_id', itemId).eq('tick_date', sastToday());
-  if (error) return fail(isNetworkError(error) ? 'offline' : 'server');
+  if (error) return fail(databaseErrorCode(error));
   return ok(undefined);
 }
 

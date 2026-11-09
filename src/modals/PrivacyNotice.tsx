@@ -19,7 +19,8 @@ export function PrivacyNotice({ onClose }: { onClose: () => void }) {
           {t('privacy.title')}
         </h2>
       </div>
-      <div data-testid="privacy-notice-body" className="flex flex-col gap-4 overflow-y-auto p-4">
+      {/* Focusable so the long text can be scrolled with a keyboard (WCAG 2.1.1). */}
+      <div data-testid="privacy-notice-body" tabIndex={0} aria-labelledby={titleId} role="region" className="focus-ring flex flex-col gap-4 overflow-y-auto p-4">
         {sections.map((section) => (
           <section key={section} className="flex flex-col gap-1">
             <h3 className="text-body font-semibold text-text">{t(`privacy.${section}Title`)}</h3>

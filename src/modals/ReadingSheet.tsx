@@ -1,4 +1,4 @@
-import { useId, useState, type FormEvent } from 'react';
+import { useId, useRef, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { addReading, updateReading, type Reading } from '../data/readings';
 import { errorMessageKey, type ErrorCode } from '../lib/errors';
@@ -6,6 +6,7 @@ import { sastDateTimeToIso, sastParts } from '../lib/dates';
 import {
   READING_WHEN,
   defaultDateTime,
+  formatGlucose,
   noteCounter,
   parseReadingValue,
   validateReading,
@@ -14,9 +15,9 @@ import {
   type ReadingWhen,
 } from '../lib/readingRules';
 import { useOnline } from '../hooks/useOnline';
-import { Banner } from '../components/Banner';
 import { BottomSheet } from '../components/BottomSheet';
 import { Button } from '../components/Button';
+import { FormStatus } from '../components/FormStatus';
 import { FieldMessage, fieldClasses } from '../components/FieldMessage';
 import { SelectField } from '../components/SelectField';
 import { TextAreaField } from '../components/TextAreaField';
@@ -34,7 +35,7 @@ type ReadingSheetProps = {
 
 function startingForm(reading?: Reading): ReadingForm {
   if (!reading) return { value: '', when: '', ...defaultDateTime(), note: '' };
-  return { value: reading.value.toFixed(1), when: reading.when, ...sastParts(reading.takenAt), note: reading.note ?? '' };
+  return { value: formatGlucose(reading.value), when: reading.when, ...sastParts(reading.takenAt), note: reading.note ?? '' };
 }
 
 /** M1 Add or edit Reading (PRD 8.2 M1): checks BR1 to BR4 here and again in the database. */
@@ -46,6 +47,7 @@ export function ReadingSheet({ reading, onClose, onSaved, onGone }: ReadingSheet
   const [errors, setErrors] = useState<ReadingErrors>({});
   const [failure, setFailure] = useState<ErrorCode | null>(null);
   const [saving, setSaving] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   function set<K extends keyof ReadingForm>(key: K, value: ReadingForm[K]) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -83,9 +85,8 @@ export function ReadingSheet({ reading, onClose, onSaved, onGone }: ReadingSheet
 
   return (
     <BottomSheet title={t(reading ? 'reading.editTitle' : 'reading.addTitle')} onCancel={onClose}>
-      {!online ? <Banner variant="error">{t('errors.offline')}</Banner> : null}
-      {failure && online ? <Banner variant="error">{t(errorMessageKey[failure])}</Banner> : null}
-      <form noValidate onSubmit={onSubmit} className="flex flex-col gap-4">
+      <FormStatus online={online} failure={failure} onRetry={() => formRef.current?.requestSubmit()} />
+      <form ref={formRef} noValidate onSubmit={onSubmit} className="flex flex-col gap-4">
         <TextField
           label={t('reading.value')}
           inputMode="decimal"

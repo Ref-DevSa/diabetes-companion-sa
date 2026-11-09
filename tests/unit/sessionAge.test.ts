@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import en from '../../src/i18n/en.json';
 import { isSessionTooOld, SESSION_MAX_DAYS } from '../../src/auth/sessionAge';
 
 const day = 24 * 60 * 60 * 1000;
@@ -25,5 +26,13 @@ describe('T-AUTH-6: 30-day session (PRD Section 5)', () => {
   it('T-AUTH-6: an unknown sign-in time is not treated as too old', () => {
     expect(isSessionTooOld(undefined, now)).toBe(false);
     expect(isSessionTooOld('not a date', now)).toBe(false);
+  });
+});
+
+describe('T-EDGE-3: a session older than 30 days, or ended', () => {
+  it('T-EDGE-3: 31 days after the last sign-in the session is ended, with the PRD message', () => {
+    const now = Date.parse('2026-11-09T08:00:00Z');
+    expect(isSessionTooOld('2026-10-09T07:59:00Z', now)).toBe(true);
+    expect(en.errors.sessionEnded).toBe('Your session has ended. Please log in again.');
   });
 });

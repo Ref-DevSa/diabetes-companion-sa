@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { screen, waitFor, within } from '@testing-library/react';
+import { act, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AppRoutes } from '../../src/App';
 import * as authData from '../../src/data/auth';
@@ -49,6 +49,17 @@ describe('S3 Log in', () => {
     await submit();
     expect(logIn).toHaveBeenCalledWith('thabo.test@example.co.za', 'abcdefg1');
     await waitFor(() => expect(screen.getByTestId('location')).toHaveTextContent(/^\/$/));
+  });
+
+  it('T-US2-1: if the person has already left S3 when the log-in finishes, the app does not pull them back', async () => {
+    let finish: (value: Awaited<ReturnType<typeof authData.logIn>>) => void = () => undefined;
+    logIn.mockReturnValue(new Promise((resolve) => (finish = resolve)));
+    renderWithProviders(<AppRoutes />, { route: '/log-in' });
+    const user = await submit();
+    await user.click(within(screen.getByRole('banner')).getByRole('link', { name: /^Warning signs$/ }));
+    expect(screen.getByTestId('location')).toHaveTextContent('/safety');
+    await act(async () => finish({ ok: true, data: undefined }));
+    expect(screen.getByTestId('location')).toHaveTextContent('/safety');
   });
 
   it('T-US2-1 / BR16: once logged in, S3 sends the User on to the screen they wanted', () => {

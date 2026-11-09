@@ -1,7 +1,7 @@
 // Diary operations OP15 to OP18 (IMPLEMENTATION_PLAN.md Section 10). RLS keeps every Reading to its owner.
 import type { PostgrestError, SupabaseClient } from '@supabase/supabase-js';
 import { getSupabase } from '../lib/supabase';
-import { fail, isNetworkError, isOfflineNow, ok, type ErrorCode, type Result } from '../lib/errors';
+import { databaseErrorCode, fail, isNetworkError, isOfflineNow, ok, type ErrorCode, type Result } from '../lib/errors';
 import { isReadingWhen, type ReadingWhen } from '../lib/readingRules';
 
 export type Reading = {
@@ -32,11 +32,9 @@ export function toReading(row: Record<string, unknown>): Reading {
 
 /** Database refusals (Section 8.5 triggers) become the matching PRD message. */
 function codeFor(error: PostgrestError): ErrorCode {
-  if (isNetworkError(error)) return 'offline';
-  if (error.message === 'reading_future') return 'reading_future';
-  if (error.message === 'reading_too_old') return 'reading_too_old';
-  if (error.message === 'daily_limit') return 'daily_limit';
-  return 'server';
+  return databaseErrorCode(error, ({ message }) =>
+    message === 'reading_future' || message === 'reading_too_old' || message === 'daily_limit' ? message : undefined,
+  );
 }
 
 function toRow(input: ReadingInput) {

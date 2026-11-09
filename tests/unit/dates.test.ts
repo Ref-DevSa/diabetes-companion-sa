@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { formatGlucose } from '../../src/lib/readingRules';
 import { formatDateTime, formatDay, formatShortDate, formatWeekday, latestDate, msUntilSastMidnight, sastDateTimeToIso, sastToday } from '../../src/lib/dates';
 
 describe('BR12: a tick belongs to one SAST calendar day', () => {
@@ -53,5 +54,19 @@ describe('S10 short dates (PRD 8.2 S10)', () => {
     expect(formatShortDate('2026-10-27T05:10:00Z')).toBe('27 Oct');
     expect(formatShortDate('2026-10-26T22:30:00Z')).toBe('27 Oct'); // 00:30 SAST
     expect(formatShortDate('2026-11-01T08:00:00Z')).toBe('01 Nov');
+  });
+});
+
+describe('T-NFR-6: dates, times and numbers (PRD 12.1)', () => {
+  it('T-NFR-6: dates like "27 Oct 2026", a 24-hour clock, in SAST', () => {
+    expect(formatDateTime('2026-10-27T17:45:00Z')).toBe('27 Oct 2026, 19:45');
+    expect(formatDateTime('2026-10-27T22:05:00Z')).toBe('28 Oct 2026, 00:05');
+  });
+
+  it('T-NFR-6: glucose has a full stop and one decimal, like 6.8', () => {
+    expect(formatGlucose(6.8)).toBe('6.8');
+    expect(formatGlucose(6)).toBe('6.0');
+    expect(formatGlucose(14.6)).toBe('14.6');
+    expect(formatGlucose(5.25)).not.toContain(',');
   });
 });

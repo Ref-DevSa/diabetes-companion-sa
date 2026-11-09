@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { logIn, resendConfirmation } from '../data/auth';
@@ -8,6 +8,7 @@ import { useAuth } from '../auth/AuthContext';
 import type { LogInState } from '../auth/guards';
 import { useOnline } from '../hooks/useOnline';
 import { Banner } from '../components/Banner';
+import { FormStatus } from '../components/FormStatus';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
 import { PasswordField } from '../components/PasswordField';
@@ -30,6 +31,16 @@ export function LogIn() {
   const [toast, setToast] = useState<string | null>(null);
 
   const locked = lockedEmail !== null && lockedEmail === email.trim().toLowerCase();
+  // True while S3 is on screen. The app may already have moved on (the sign-in changes the session
+  // before logIn() finishes its last step); then a late redirect must not pull the person back.
+  const onScreen = useRef(true);
+  const formRef = useRef<HTMLFormElement>(null);
+  useEffect(() => {
+    onScreen.current = true;
+    return () => {
+      onScreen.current = false;
+    };
+  }, []);
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
@@ -45,7 +56,7 @@ export function LogIn() {
     setWorking(false);
     if (result.ok) {
       auth.clearNotices();
-      navigate(state.from ?? '/', { replace: true });
+      if (onScreen.current) navigate(state.from ?? '/', { replace: true });
       return;
     }
     setFailure(result.code);
@@ -58,9 +69,14 @@ export function LogIn() {
   }
 
   let banner = null;
-  if (failure) {
+  if (!online) {
+    banner = <FormStatus online={online} failure={null} />;
+  } else if (failure) {
     banner = (
-      <Banner variant="error">
+      <Banner
+        variant="error"
+        action={failure === 'server' ? { label: t('common.tryAgain'), onClick: () => formRef.current?.requestSubmit() } : undefined}
+      >
         <p>{t(errorMessageKey[failure])}</p>
         {failure === 'unconfirmed' ? (
           <button
@@ -87,7 +103,7 @@ export function LogIn() {
         {banner}
         <Card className="flex flex-col gap-4">
           <h1 className="text-title font-bold text-text">{t('logIn.title')}</h1>
-          <form noValidate onSubmit={onSubmit} className="flex flex-col gap-4">
+          <form ref={formRef} noValidate onSubmit={onSubmit} className="flex flex-col gap-4">
             <TextField
               label={t('logIn.email')}
               type="email"
