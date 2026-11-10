@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import en from '../../src/i18n/en.json';
-import { databaseErrorCode, errorMessageKey, isAccountGone, onSessionEnded } from '../../src/lib/errors';
+import { databaseErrorCode, errorMessageKey, isAccountGone, isNetworkError, onSessionEnded } from '../../src/lib/errors';
 
 function t(key: string): string {
   return key.split('.').reduce<unknown>((node, part) => (node as Record<string, unknown>)[part], en) as string;
@@ -70,5 +70,18 @@ describe('T-EDGE-9: checking the account with Supabase Auth', () => {
     [null, false],
   ])('isAccountGone(%j) is %s', (error, expected) => {
     expect(isAccountGone(error)).toBe(expected);
+  });
+});
+
+describe('BR23 / T-EDGE-2: "offline" only when there was no answer at all', () => {
+  it('no connection (no answer, status 0) is offline', () => {
+    expect(isNetworkError({ name: 'AuthRetryableFetchError', status: 0, message: 'Failed to fetch' })).toBe(true);
+    expect(isNetworkError({ name: 'TypeError', message: 'Failed to fetch' })).toBe(true);
+  });
+
+  it('a server answer such as 500, 502, 503 or 504 is not offline (live sign-up, 09 Nov 2026: a 500 was shown as "offline")', () => {
+    for (const status of [500, 502, 503, 504]) {
+      expect(isNetworkError({ name: 'AuthRetryableFetchError', status, message: '525 "5.7.1 Unauthorized IP address"' }), String(status)).toBe(false);
+    }
   });
 });

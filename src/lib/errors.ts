@@ -54,10 +54,15 @@ export function isOfflineNow(): boolean {
   return typeof navigator !== 'undefined' && navigator.onLine === false;
 }
 
-/** True when a Supabase call failed because the network could not be reached. */
+/**
+ * True when a Supabase call failed because the network could not be reached (no answer at all).
+ * Supabase Auth also uses AuthRetryableFetchError for server answers such as 500 or 504; those are
+ * server errors ("Something went wrong on our side"), not "offline".
+ */
 export function isNetworkError(error: unknown): boolean {
   if (!error || typeof error !== 'object') return false;
   const { name, message, status } = error as { name?: string; message?: string; status?: number };
+  if (typeof status === 'number' && status >= 400) return false;
   if (name === 'AuthRetryableFetchError') return true;
   if (status === 0) return true;
   return /failed to fetch|fetch failed|networkerror|load failed|network request failed/i.test(message ?? '');
